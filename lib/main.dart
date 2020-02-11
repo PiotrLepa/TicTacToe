@@ -42,8 +42,8 @@ class TestPage extends StatelessWidget {
   }
 
   Future<String> fetch() async {
-    final posts = await NetworkService().getPost();
-    return posts.toString();
+    final posts = await NetworkService().getPosts();
+    return posts.join();
   }
 
   Future<String> fetchPost() async {
