@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'core/network/network_service.dart';
+import 'core/network/service/network_service.dart';
 
 void main() => runApp(MyApp());
 
@@ -26,7 +26,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: fetch(),
+        future: _fetchAllPosts(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -41,13 +41,13 @@ class TestPage extends StatelessWidget {
     );
   }
 
-  Future<String> fetch() async {
+  Future<String> _fetchAllPosts() async {
     final posts = await NetworkService().getPosts();
-    return posts.data.join();
+    return posts.data.map((post) => post.title).join("\n\n");
   }
 
-  Future<String> fetchPost() async {
-    final post = await NetworkService().getPost();
+  Future<String> _fetchPost() async {
+    final post = await NetworkService().getPost(1);
     return post.data.title;
   }
 }
