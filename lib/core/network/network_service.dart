@@ -1,48 +1,46 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:tictactoe/core/network/json_decoder.dart';
 import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/post.dart';
-import 'package:tictactoe/core/network/serializers.dart';
 
 class NetworkService {
-  final _dio = Dio();
+  // TODO implement DI
+  Dio _dio = _createDio();
 
-  Future<BuiltList<Post>> getPosts() async {
-    try {
-      final response = await _dio.get(BASE_URL + "/posts");
-      return await _decodeJson<Post>(response.data);
-    } catch (e) {
-      print("getPost" + e.toString());
-    }
+  JsonDecoder _jsonDecoder = JsonDecoder();
+
+  static Dio _createDio() => Dio()..options.baseUrl = BASE_URL;
+
+  Future<Response<BuiltList<Post>>> getPosts() async =>
+      decodeJsonList<Post>(_dio.get("/posts"));
+
+  Future<Response<Post>> getPost() async => decodeJson(_dio.get("/posts/1"));
+
+  Future<Response<T>> decodeJson<T>(Future<Response> futureResponse) async {
+    final response = await futureResponse;
+    return Response<T>(
+        data: await _jsonDecoder.decodeJson<T>(response.data),
+        headers: response.headers,
+        request: response.request,
+        isRedirect: response.isRedirect,
+        statusCode: response.statusCode,
+        statusMessage: response.statusMessage,
+        redirects: response.redirects,
+        extra: response.extra);
   }
 
-  Future<Post> getPost() async {
-    try {
-      final response = await _dio.get(BASE_URL + "/posts/1");
-      return await _decodeJson<Post>(response.data);
-    } catch (e) {
-      print("getPost" + e.toString());
-    }
-  }
-
-  T _deserialize<T>(dynamic value) => serializers.deserializeWith<T>(
-        serializers.serializerForType(T),
-        value,
-      );
-
-  BuiltList<T> _deserializeListOf<T>(Iterable list) => BuiltList(
-        list.map((value) => _deserialize<T>(value)).toList(growable: false),
-      );
-
-  dynamic _decodeJson<T>(entity) {
-    if (entity is T) return entity;
-
-    try {
-      if (entity is List) return _deserializeListOf<T>(entity);
-      return _deserialize<T>(entity);
-    } catch (e) {
-      print("_decode" + e);
-      return null;
-    }
+  Future<Response<BuiltList<T>>> decodeJsonList<T>(
+      Future<Response> futureResponse) async {
+    final response = await futureResponse;
+    return Response<BuiltList<T>>(
+        data: await _jsonDecoder.decodeJson<T>(response.data),
+        headers: response.headers,
+        request: response.request,
+        isRedirect: response.isRedirect,
+        statusCode: response.statusCode,
+        statusMessage: response.statusMessage,
+        redirects: response.redirects,
+        extra: response.extra);
   }
 }
