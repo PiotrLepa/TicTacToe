@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
 
@@ -10,7 +11,9 @@ abstract class BaseNetworkService {
   Dio dio = _createDio();
   ResponseConverter _responseConverter = ResponseConverter();
 
-  static Dio _createDio() => Dio()..options.baseUrl = baseUrl;
+  static Dio _createDio() => Dio()
+    ..options.baseUrl = baseUrl
+    ..interceptors.add(BearerTokenInterceptor());
 
   Future<Response<T>> get<T>(
     String path, {
@@ -98,13 +101,13 @@ abstract class BaseNetworkService {
           queryParameters: queryParameters,
           options: Options(
             method: method,
-            headers: _addSecuredHeader(headers, secured),
+            headers: _addSecuredHeader(headers ?? {}, secured),
             contentType: contentType,
           ));
 
   Map<String, dynamic> _addSecuredHeader(
       Map<String, dynamic> headers, bool secured) {
-    headers.putIfAbsent(securedHeader, secured as dynamic);
+    headers[securedHeader] = secured;
     return headers;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:tictactoe/core/network/model/game_response.dart';
 import 'package:tictactoe/core/network/model/post.dart';
 import 'package:tictactoe/core/network/model/token/login_request.dart';
 import 'package:tictactoe/core/network/model/token/token_response.dart';
@@ -11,6 +12,9 @@ class NetworkService extends BaseNetworkService {
   Future<Response<BuiltList<Post>>> getPosts() => getList("/posts");
 
   Future<Response<Post>> getPost(int postId) => get("/posts/$postId");
+
+  Future<Response<BuiltList<GameResponse>>> getGames() =>
+      getList("/game/results", secured: true);
 
   Future<Response<TokenResponse>> login(LoginRequest request) => post(
         "/oauth/token",

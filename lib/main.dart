@@ -27,7 +27,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _fetchAllPosts(),
+        future: _fetchGamesSecured(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -47,6 +47,7 @@ class TestPage extends StatelessWidget {
       final posts = await NetworkService().getPosts();
       return posts.data.map((post) => post.title).join("\n\n");
     } catch (e) {
+      print(e);
       return e.toString();
     }
   }
@@ -56,6 +57,17 @@ class TestPage extends StatelessWidget {
       final post = await NetworkService().getPost(1);
       return post.data.title;
     } catch (e) {
+      print(e);
+      return e.toString();
+    }
+  }
+
+  Future<String> _fetchGamesSecured() async {
+    try {
+      final games = await NetworkService().getGames();
+      return games.data.map((post) => post).join("\n\n");
+    } catch (e) {
+      print(e);
       return e.toString();
     }
   }
@@ -70,7 +82,7 @@ class TestPage extends StatelessWidget {
       final response = await NetworkService().login(request);
       return response.data.toString();
     } catch (e) {
-      print("main error: $e");
+      print(e);
       return e.toString();
     }
   }
