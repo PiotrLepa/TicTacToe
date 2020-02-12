@@ -1,13 +1,11 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 
+import 'json_factories.dart';
+
 typedef T JsonFactory<T>(Map<String, dynamic> json);
 
 class ResponseConverter {
-  final Map<Type, JsonFactory> factories;
-
-  ResponseConverter(this.factories);
-
   Future<Response<T>> decodeResponse<T>(Future<Response> futureResponse) async {
     final response = await futureResponse;
     final data = _decodeJson<T>(response.data);
@@ -44,10 +42,10 @@ class ResponseConverter {
       values.where((v) => v != null).map<T>((v) => _decodeJson<T>(v)).toList();
 
   T _decodeMap<T>(Map<String, dynamic> values) {
-    final jsonFactory = factories[T];
+    final jsonFactory = jsonFactories[T];
     if (jsonFactory == null || jsonFactory is! JsonFactory<T>) {
       throw Exception(
-          "Json factory for type ${T.runtimeType} not found. Check if class is added to converters.");
+          "Json factory for type $T not found. Check if class is added to converters.");
     }
     return jsonFactory(values);
   }

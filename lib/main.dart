@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/network/model/token/login_request.dart';
 
 import 'core/network/service/network_service.dart';
 
@@ -26,7 +27,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _fetchAllPosts(),
+        future: _login(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -49,5 +50,20 @@ class TestPage extends StatelessWidget {
   Future<String> _fetchPost() async {
     final post = await NetworkService().getPost(1);
     return post.data.title;
+  }
+
+  Future<String> _login() async {
+    final request = LoginRequest(
+      email: "piotrlepadev@gmail.com",
+      password: "dev12",
+      grantType: "password",
+    );
+    try {
+      final response = await NetworkService().login(request);
+      return response.data.toString();
+    } catch (e) {
+      print("main error: $e");
+      return e.toString();
+    }
   }
 }

@@ -13,9 +13,7 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 abstract class _$Post {
   int get id;
-
   String get title;
-
   String get body;
 
   Post copyWith({int id, String title, String body});
@@ -90,10 +88,8 @@ abstract class _Post implements Post {
 
   @override
   int get id;
-
   @override
   String get title;
-
   @override
   String get body;
 
