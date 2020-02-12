@@ -14,10 +14,8 @@ class NetworkService extends BaseNetworkService {
 
   Future<Response<TokenResponse>> login(LoginRequest request) => post(
         "/oauth/token",
-        data: request.toJson(),
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers: {"Authorization": "Basic $SERVER_BASIC"},
-        ),
+        data: request,
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {authorizationHeader: basicKey},
       );
 }

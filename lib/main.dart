@@ -27,7 +27,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _login(),
+        future: _fetchAllPosts(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -43,13 +43,21 @@ class TestPage extends StatelessWidget {
   }
 
   Future<String> _fetchAllPosts() async {
-    final posts = await NetworkService().getPosts();
-    return posts.data.map((post) => post.title).join("\n\n");
+    try {
+      final posts = await NetworkService().getPosts();
+      return posts.data.map((post) => post.title).join("\n\n");
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   Future<String> _fetchPost() async {
-    final post = await NetworkService().getPost(1);
-    return post.data.title;
+    try {
+      final post = await NetworkService().getPost(1);
+      return post.data.title;
+    } catch (e) {
+      return e.toString();
+    }
   }
 
   Future<String> _login() async {
