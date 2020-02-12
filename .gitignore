@@ -30,10 +30,6 @@
 .pub/
 /build/
 
-# Dart generated files
-*.g.dart
-*.chopper.dart
-
 # Web related
 lib/generated_plugin_registrant.dart
 

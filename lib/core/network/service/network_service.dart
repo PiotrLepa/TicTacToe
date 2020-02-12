@@ -1,6 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
-import 'package:tictactoe/core/network/post.dart';
+import 'package:tictactoe/core/network/model/post.dart';
 
 import 'base_network_service.dart';
 
