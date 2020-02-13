@@ -27,7 +27,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _fetchGamesSecured(),
+        future: _login(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
