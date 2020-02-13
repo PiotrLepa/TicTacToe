@@ -12,11 +12,11 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 }
 
 abstract class _$ErrorResponse {
-  int get code;
+  String get code;
   String get exception;
   String get message;
 
-  ErrorResponse copyWith({int code, String exception, String message});
+  ErrorResponse copyWith({String code, String exception, String message});
 
   Map<String, dynamic> toJson();
 }
@@ -29,7 +29,7 @@ class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
       _$_$_ErrorResponseFromJson(json);
 
   @override
-  final int code;
+  final String code;
   @override
   final String exception;
   @override
@@ -73,7 +73,7 @@ class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
     Object message = immutable,
   }) {
     return _$_ErrorResponse(
-      code == immutable ? this.code : code as int,
+      code == immutable ? this.code : code as String,
       exception == immutable ? this.exception : exception as String,
       message == immutable ? this.message : message as String,
     );
@@ -86,19 +86,19 @@ class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
 }
 
 abstract class _ErrorResponse implements ErrorResponse {
-  const factory _ErrorResponse(int code, String exception, String message) =
+  const factory _ErrorResponse(String code, String exception, String message) =
       _$_ErrorResponse;
 
   factory _ErrorResponse.fromJson(Map<String, dynamic> json) =
       _$_ErrorResponse.fromJson;
 
   @override
-  int get code;
+  String get code;
   @override
   String get exception;
   @override
   String get message;
 
   @override
-  _ErrorResponse copyWith({int code, String exception, String message});
+  _ErrorResponse copyWith({String code, String exception, String message});
 }
