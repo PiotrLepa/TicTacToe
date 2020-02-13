@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/error_interceptor.dart';
+import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
 
@@ -15,6 +16,7 @@ abstract class BaseNetworkService {
 
   static Dio _createDio() => Dio()
     ..options.baseUrl = baseUrl
+    ..interceptors.add(LoggerInterceptor())
     ..interceptors.add(ConnectionInterceptor())
     ..interceptors.add(BearerTokenInterceptor())
     ..interceptors.add(ErrorInterceptor());

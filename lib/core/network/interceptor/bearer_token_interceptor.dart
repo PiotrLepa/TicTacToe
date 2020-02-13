@@ -9,22 +9,24 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
     final headers = options.headers;
 
     if (accessToken != null && _isRequestSecure(headers)) {
-      options.headers = addAuthorizationHeader(headers, accessToken);
+      _removeInternalSecuredHeader(headers);
+      _addAuthorizationHeader(headers, accessToken);
     }
 
     return super.onRequest(options);
   }
 
-  static Map<String, dynamic> addAuthorizationHeader(
-    Map<String, dynamic> oldHeaders,
-    String accessToken,
-  ) {
-    final newHeaders = new Map<String, dynamic>.from(oldHeaders);
-    newHeaders.remove(securedHeader);
-    newHeaders[authorizationHeader] = '$bearerPrefix $accessToken';
-    return newHeaders;
-  }
-
   static bool _isRequestSecure(Map<String, dynamic> headers) =>
       headers[securedHeader] == true;
+
+  void _addAuthorizationHeader(
+    Map<String, dynamic> headers,
+    String accessToken,
+  ) =>
+      headers[authorizationHeader] = '$bearerPrefix $accessToken';
+
+  void _removeInternalSecuredHeader(
+    Map<String, dynamic> headers,
+  ) =>
+      headers..remove(securedHeader);
 }
