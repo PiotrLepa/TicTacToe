@@ -1,7 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 
-import '../api_exceptions.dart';
+import '../exception/api_exception.dart';
 
 class ConnectionInterceptor extends InterceptorsWrapper {
   @override
@@ -9,7 +9,7 @@ class ConnectionInterceptor extends InterceptorsWrapper {
     bool hasConnection = await DataConnectionChecker().hasConnection;
 
     if (!hasConnection) {
-      throw NoConnectionException(-1, "No internet connection", "");
+      throw ApiException.noConnection(-1, "No internet connection");
     }
 
     return super.onRequest(options);

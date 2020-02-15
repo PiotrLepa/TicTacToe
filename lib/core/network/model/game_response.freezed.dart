@@ -13,9 +13,7 @@ GameResponse _$GameResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$GameResponse {
   int get gameId;
-
   int get startDate;
-
   int get endData;
 
   GameResponse copyWith({int gameId, int startDate, int endData});

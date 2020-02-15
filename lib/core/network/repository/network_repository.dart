@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:tictactoe/core/logger/logger.dart';
 import 'package:tictactoe/core/network/model/error/error_response.dart';
 
-import '../api_exceptions.dart';
+import '../exception/api_exception.dart';
 
 class NetworkRepository {
   Future<T> call<T>(Future<Response<T>> call) async {
@@ -23,28 +23,24 @@ class NetworkRepository {
       return _mapToApiException(statusCode, errorResponse);
     } on TypeError catch (e) {
       logger.e(e);
-      return UnknownErrorException(
-          statusCode, e.message, e.runtimeType.toString());
+      return ApiException.unknownError(statusCode, e.message);
     } catch (e) {
       logger.e(e);
-      return UnknownErrorException(statusCode, "", "");
+      return ApiException.unknownError(statusCode, "");
     }
   }
 
   ApiException _mapToApiException(int statusCode, ErrorResponse errorResponse) {
     switch (statusCode) {
       case 400:
-        return DefaultException(
-            statusCode, errorResponse.message, errorResponse.exception);
+        return ApiException.badRequest(statusCode, errorResponse.message);
       case 401:
-        return UnauthorizedException(
-            statusCode, errorResponse.message, errorResponse.exception);
+        return ApiException.unauthorized(statusCode, errorResponse.message);
       case 500:
-        return InternalServerException(
-            statusCode, errorResponse.message, errorResponse.exception);
+        return ApiException.internalServerError(
+            statusCode, errorResponse.message);
       default:
-        return UnknownErrorException(
-            statusCode, errorResponse.message, errorResponse.exception);
+        return ApiException.unknownError(statusCode, errorResponse.message);
     }
   }
 }
