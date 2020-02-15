@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/core/network/api_exceptions.dart';
 import 'package:tictactoe/core/network/model/token/login_request.dart';
 
+import 'core/network/repository/test_repository.dart';
 import 'core/network/service/network_service.dart';
 
 void main() => runApp(MyApp());
@@ -29,7 +30,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _fetchGamesSecured(),
+        future: _login(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -82,8 +83,8 @@ class TestPage extends StatelessWidget {
       grantType: "password",
     );
     try {
-      final response = await NetworkService().login(request);
-      return response.data.toString();
+      final response = await TestRepository().login(request);
+      return response.toString();
     } catch (e) {
       print(e);
       return e.toString();
