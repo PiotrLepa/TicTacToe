@@ -11,7 +11,7 @@ TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) {
   return _TokenResponse.fromJson(json);
 }
 
-abstract class _$TokenResponse {
+mixin _$TokenResponse {
   @JsonKey(name: 'access_token')
   String get accessToken;
 
@@ -37,13 +37,18 @@ abstract class _$TokenResponse {
 }
 
 @JsonSerializable()
-class _$_TokenResponse with DiagnosticableTreeMixin implements _TokenResponse {
+class _$_TokenResponse implements _TokenResponse {
   const _$_TokenResponse(
       @JsonKey(name: 'access_token') this.accessToken,
       @JsonKey(name: 'token_type') this.tokenType,
       @JsonKey(name: 'refresh_token') this.refreshToken,
       @JsonKey(name: 'expires_in') this.expiresIn,
-      this.scope);
+      this.scope)
+      : assert(accessToken != null),
+        assert(tokenType != null),
+        assert(refreshToken != null),
+        assert(expiresIn != null),
+        assert(scope != null);
 
   factory _$_TokenResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_TokenResponseFromJson(json);
@@ -64,34 +69,28 @@ class _$_TokenResponse with DiagnosticableTreeMixin implements _TokenResponse {
   final String scope;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
+  String toString() {
     return 'TokenResponse(accessToken: $accessToken, tokenType: $tokenType, refreshToken: $refreshToken, expiresIn: $expiresIn, scope: $scope)';
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TokenResponse'))
-      ..add(DiagnosticsProperty('accessToken', accessToken))
-      ..add(DiagnosticsProperty('tokenType', tokenType))
-      ..add(DiagnosticsProperty('refreshToken', refreshToken))
-      ..add(DiagnosticsProperty('expiresIn', expiresIn))
-      ..add(DiagnosticsProperty('scope', scope));
-  }
-
-  @override
   bool operator ==(dynamic other) {
-    return other is _TokenResponse &&
-        (identical(other.accessToken, accessToken) ||
-            other.accessToken == accessToken) &&
-        (identical(other.tokenType, tokenType) ||
-            other.tokenType == tokenType) &&
-        (identical(other.refreshToken, refreshToken) ||
-            other.refreshToken == refreshToken) &&
-        (identical(other.expiresIn, expiresIn) ||
-            other.expiresIn == expiresIn) &&
-        (identical(other.scope, scope) || other.scope == scope);
+    return identical(this, other) ||
+        (other is _TokenResponse &&
+            (identical(other.accessToken, accessToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.accessToken, accessToken)) &&
+            (identical(other.tokenType, tokenType) ||
+                const DeepCollectionEquality()
+                    .equals(other.tokenType, tokenType)) &&
+            (identical(other.refreshToken, refreshToken) ||
+                const DeepCollectionEquality()
+                    .equals(other.refreshToken, refreshToken)) &&
+            (identical(other.expiresIn, expiresIn) ||
+                const DeepCollectionEquality()
+                    .equals(other.expiresIn, expiresIn)) &&
+            (identical(other.scope, scope) ||
+                const DeepCollectionEquality().equals(other.scope, scope)));
   }
 
   @override
@@ -105,18 +104,23 @@ class _$_TokenResponse with DiagnosticableTreeMixin implements _TokenResponse {
 
   @override
   _$_TokenResponse copyWith({
-    Object accessToken = immutable,
-    Object tokenType = immutable,
-    Object refreshToken = immutable,
-    Object expiresIn = immutable,
-    Object scope = immutable,
+    Object accessToken = freezed,
+    Object tokenType = freezed,
+    Object refreshToken = freezed,
+    Object expiresIn = freezed,
+    Object scope = freezed,
   }) {
+    assert(accessToken != null);
+    assert(tokenType != null);
+    assert(refreshToken != null);
+    assert(expiresIn != null);
+    assert(scope != null);
     return _$_TokenResponse(
-      accessToken == immutable ? this.accessToken : accessToken as String,
-      tokenType == immutable ? this.tokenType : tokenType as String,
-      refreshToken == immutable ? this.refreshToken : refreshToken as String,
-      expiresIn == immutable ? this.expiresIn : expiresIn as int,
-      scope == immutable ? this.scope : scope as String,
+      accessToken == freezed ? this.accessToken : accessToken as String,
+      tokenType == freezed ? this.tokenType : tokenType as String,
+      refreshToken == freezed ? this.refreshToken : refreshToken as String,
+      expiresIn == freezed ? this.expiresIn : expiresIn as int,
+      scope == freezed ? this.scope : scope as String,
     );
   }
 
@@ -140,19 +144,15 @@ abstract class _TokenResponse implements TokenResponse {
   @override
   @JsonKey(name: 'access_token')
   String get accessToken;
-
   @override
   @JsonKey(name: 'token_type')
   String get tokenType;
-
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @override
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   @override
   String get scope;
 

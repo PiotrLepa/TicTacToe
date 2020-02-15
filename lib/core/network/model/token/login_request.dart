@@ -1,13 +1,12 @@
 library login_request;
 
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
 
 part 'login_request.freezed.dart';
 part 'login_request.g.dart';
 
-@immutable
+@freezed
 abstract class LoginRequest extends Serializable with _$LoginRequest {
   const factory LoginRequest({
     @JsonKey(name: "username") @required String email,

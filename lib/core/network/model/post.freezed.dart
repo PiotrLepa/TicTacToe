@@ -11,9 +11,11 @@ Post _$PostFromJson(Map<String, dynamic> json) {
   return _Post.fromJson(json);
 }
 
-abstract class _$Post {
+mixin _$Post {
   int get id;
+
   String get title;
+
   String get body;
 
   Post copyWith({int id, String title, String body});
@@ -22,8 +24,11 @@ abstract class _$Post {
 }
 
 @JsonSerializable()
-class _$_Post with DiagnosticableTreeMixin implements _Post {
-  const _$_Post(this.id, this.title, this.body);
+class _$_Post implements _Post {
+  const _$_Post(this.id, this.title, this.body)
+      : assert(id != null),
+        assert(title != null),
+        assert(body != null);
 
   factory _$_Post.fromJson(Map<String, dynamic> json) =>
       _$_$_PostFromJson(json);
@@ -36,26 +41,20 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
   final String body;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
+  String toString() {
     return 'Post(id: $id, title: $title, body: $body)';
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Post'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('body', body));
-  }
-
-  @override
   bool operator ==(dynamic other) {
-    return other is _Post &&
-        (identical(other.id, id) || other.id == id) &&
-        (identical(other.title, title) || other.title == title) &&
-        (identical(other.body, body) || other.body == body);
+    return identical(this, other) ||
+        (other is _Post &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.body, body) ||
+                const DeepCollectionEquality().equals(other.body, body)));
   }
 
   @override
@@ -64,14 +63,17 @@ class _$_Post with DiagnosticableTreeMixin implements _Post {
 
   @override
   _$_Post copyWith({
-    Object id = immutable,
-    Object title = immutable,
-    Object body = immutable,
+    Object id = freezed,
+    Object title = freezed,
+    Object body = freezed,
   }) {
+    assert(id != null);
+    assert(title != null);
+    assert(body != null);
     return _$_Post(
-      id == immutable ? this.id : id as int,
-      title == immutable ? this.title : title as String,
-      body == immutable ? this.body : body as String,
+      id == freezed ? this.id : id as int,
+      title == freezed ? this.title : title as String,
+      body == freezed ? this.body : body as String,
     );
   }
 

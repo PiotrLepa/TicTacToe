@@ -1,12 +1,11 @@
 library error_response;
 
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'error_response.freezed.dart';
 part 'error_response.g.dart';
 
-@immutable
+@freezed
 abstract class ErrorResponse with _$ErrorResponse {
   const factory ErrorResponse(
     String code,

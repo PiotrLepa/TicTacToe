@@ -11,9 +11,11 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
   return _ErrorResponse.fromJson(json);
 }
 
-abstract class _$ErrorResponse {
+mixin _$ErrorResponse {
   String get code;
+
   String get exception;
+
   String get message;
 
   ErrorResponse copyWith({String code, String exception, String message});
@@ -22,8 +24,11 @@ abstract class _$ErrorResponse {
 }
 
 @JsonSerializable()
-class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
-  const _$_ErrorResponse(this.code, this.exception, this.message);
+class _$_ErrorResponse implements _ErrorResponse {
+  const _$_ErrorResponse(this.code, this.exception, this.message)
+      : assert(code != null),
+        assert(exception != null),
+        assert(message != null);
 
   factory _$_ErrorResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_ErrorResponseFromJson(json);
@@ -36,27 +41,21 @@ class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
   final String message;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.debug}) {
+  String toString() {
     return 'ErrorResponse(code: $code, exception: $exception, message: $message)';
   }
 
   @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ErrorResponse'))
-      ..add(DiagnosticsProperty('code', code))
-      ..add(DiagnosticsProperty('exception', exception))
-      ..add(DiagnosticsProperty('message', message));
-  }
-
-  @override
   bool operator ==(dynamic other) {
-    return other is _ErrorResponse &&
-        (identical(other.code, code) || other.code == code) &&
-        (identical(other.exception, exception) ||
-            other.exception == exception) &&
-        (identical(other.message, message) || other.message == message);
+    return identical(this, other) ||
+        (other is _ErrorResponse &&
+            (identical(other.code, code) ||
+                const DeepCollectionEquality().equals(other.code, code)) &&
+            (identical(other.exception, exception) ||
+                const DeepCollectionEquality()
+                    .equals(other.exception, exception)) &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
   }
 
   @override
@@ -68,14 +67,17 @@ class _$_ErrorResponse with DiagnosticableTreeMixin implements _ErrorResponse {
 
   @override
   _$_ErrorResponse copyWith({
-    Object code = immutable,
-    Object exception = immutable,
-    Object message = immutable,
+    Object code = freezed,
+    Object exception = freezed,
+    Object message = freezed,
   }) {
+    assert(code != null);
+    assert(exception != null);
+    assert(message != null);
     return _$_ErrorResponse(
-      code == immutable ? this.code : code as String,
-      exception == immutable ? this.exception : exception as String,
-      message == immutable ? this.message : message as String,
+      code == freezed ? this.code : code as String,
+      exception == freezed ? this.exception : exception as String,
+      message == freezed ? this.message : message as String,
     );
   }
 

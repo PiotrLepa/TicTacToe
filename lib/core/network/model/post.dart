@@ -1,12 +1,11 @@
 library post;
 
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'post.freezed.dart';
 part 'post.g.dart';
 
-@immutable
+@freezed
 abstract class Post with _$Post {
   const factory Post(
     int id,

@@ -1,13 +1,11 @@
 library network_token;
 
-import 'package:flutter/foundation.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'token_response.freezed.dart';
-
 part 'token_response.g.dart';
 
-@immutable
+@freezed
 abstract class TokenResponse with _$TokenResponse {
   const factory TokenResponse(
     @JsonKey(name: "access_token") String accessToken,
