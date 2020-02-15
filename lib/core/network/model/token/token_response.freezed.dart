@@ -14,16 +14,12 @@ TokenResponse _$TokenResponseFromJson(Map<String, dynamic> json) {
 mixin _$TokenResponse {
   @JsonKey(name: 'access_token')
   String get accessToken;
-
   @JsonKey(name: 'token_type')
   String get tokenType;
-
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   String get scope;
 
   TokenResponse copyWith(

@@ -1,9 +1,9 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/network/api_exceptions.dart';
+import 'package:tictactoe/core/network/exception/api_exception.dart';
 import 'package:tictactoe/core/network/model/token/login_request.dart';
 
+import 'core/error/error_translator.dart';
 import 'core/network/repository/test_repository.dart';
 import 'core/network/service/network_service.dart';
 
@@ -30,7 +30,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: FutureBuilder(
-        future: _login(),
+        future: _fetchGamesSecured(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final data = snapshot.data;
@@ -67,12 +67,11 @@ class TestPage extends StatelessWidget {
 
   Future<String> _fetchGamesSecured() async {
     try {
-      final games = await NetworkService().getGames();
-      return games.data.map((post) => post).join("\n\n");
-    } on DioError catch (e) {
+      final games = await TestRepository().fetchGames();
+      return games.map((post) => post).join("\n\n");
+    } on ApiException catch (e) {
       print(e);
-      final apiException = e.error as ApiException;
-      return apiException.toString();
+      return ErrorTranslator().translate(e);
     }
   }
 
