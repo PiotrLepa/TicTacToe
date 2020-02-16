@@ -9,7 +9,6 @@ part of api_exception;
 
 mixin _$ApiException {
   int get code;
-
   String get message;
 
   ApiException copyWith({int code, String message});
@@ -178,7 +177,6 @@ abstract class _NoConnection implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
@@ -307,7 +305,6 @@ abstract class _BadRequest implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
@@ -436,7 +433,6 @@ abstract class _Unauthorized implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
@@ -565,7 +561,6 @@ abstract class _NotFound implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
@@ -695,7 +690,6 @@ abstract class _InternalServerError implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
@@ -824,7 +818,6 @@ abstract class _UnknownError implements ApiException {
 
   @override
   int get code;
-
   @override
   String get message;
 
