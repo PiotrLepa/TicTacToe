@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/network/exception/api_exception.dart';
-import 'package:tictactoe/core/network/model/token/login_request.dart';
-
-import 'core/error/error_translator.dart';
-import 'core/network/repository/test_repository.dart';
-import 'core/network/service/network_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/bloc/test_bloc.dart';
+import 'package:tictactoe/bloc/test_event.dart';
+import 'package:tictactoe/bloc/test_state.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,64 +27,22 @@ class TestPage extends StatelessWidget {
       appBar: AppBar(
         title: Text("Tic tac toe"),
       ),
-      body: FutureBuilder(
-        future: _fetchGamesSecured(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final data = snapshot.data;
-            return SingleChildScrollView(
-              child: Text(data),
-            );
-          } else {
-            return CircularProgressIndicator();
-          }
-        },
+      body: BlocProvider(
+        create: (context) => TestBloc()..add(TestEvent.login()),
+        child: BlocBuilder<TestBloc, TestState>(
+          builder: (context, state) => state.when(
+            progress: () => CircularProgressIndicator(),
+            success: (result) => Text(
+              result,
+              style: TextStyle(color: Colors.green),
+            ),
+            error: (message) => Text(
+              message,
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ),
       ),
     );
-  }
-
-  Future<String> _fetchAllPosts() async {
-    try {
-      final posts = await NetworkService().getPosts();
-      return posts.data.map((post) => post.title).join("\n\n");
-    } catch (e) {
-      print(e);
-      return e.toString();
-    }
-  }
-
-  Future<String> _fetchPost() async {
-    try {
-      final post = await NetworkService().getPost(1);
-      return post.data.title;
-    } catch (e) {
-      print(e);
-      return e.toString();
-    }
-  }
-
-  Future<String> _fetchGamesSecured() async {
-    try {
-      final games = await TestRepository().fetchGames();
-      return games.map((post) => post).join("\n\n");
-    } on ApiException catch (e) {
-      print(e);
-      return ErrorTranslator().translate(e);
-    }
-  }
-
-  Future<String> _login() async {
-    final request = LoginRequest(
-      email: "piotrlepadev@gmail.com",
-      password: "dev12",
-      grantType: "password",
-    );
-    try {
-      final response = await TestRepository().login(request);
-      return response.toString();
-    } catch (e) {
-      print(e);
-      return e.toString();
-    }
   }
 }

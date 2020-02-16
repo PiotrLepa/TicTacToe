@@ -7,9 +7,9 @@ part 'call_state.freezed.dart';
 
 @freezed
 abstract class CallState<T> with _$CallState {
-  const factory CallState.progress() = _Progress;
+  const factory CallState.progress() = _Progress<T>;
 
-  const factory CallState.success(T result) = _Success;
+  const factory CallState.success(T result) = _Success<T>;
 
-  const factory CallState.error(ApiException ex) = _Error;
+  const factory CallState.error(ApiException ex) = _Error<T>;
 }
