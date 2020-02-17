@@ -1,4 +1,4 @@
-import 'package:tictactoe/core/call_state.dart';
+import 'package:tictactoe/core/call_state/call_state.dart';
 import 'package:tictactoe/core/error/error_translator.dart';
 import 'package:tictactoe/core/logger/logger.dart';
 import 'package:tictactoe/core/network/exception/api_exception.dart';

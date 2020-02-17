@@ -8,7 +8,7 @@ part of error_response;
 
 _$_ErrorResponse _$_$_ErrorResponseFromJson(Map<String, dynamic> json) {
   return _$_ErrorResponse(
-    json['code'] as String,
+    json['code'] as int,
     json['exception'] as String,
     json['message'] as String,
   );

@@ -21,7 +21,9 @@ class NetworkRepository {
       return ApiException.unknownError(-1, error.message);
     }
     try {
-      var errorResponse = ErrorResponse.fromJson(response.data);
+      final data = response.data;
+      convertModelCodePropertyToInt(data);
+      var errorResponse = ErrorResponse.fromJson(data);
       return _mapToApiException(statusCode, errorResponse);
     } on TypeError catch (e) {
       logger.e(e);
@@ -29,6 +31,13 @@ class NetworkRepository {
     } catch (e) {
       logger.e(e);
       return ApiException.unknownError(statusCode, "");
+    }
+  }
+
+  dynamic convertModelCodePropertyToInt(data) {
+    final code = data["code"];
+    if (code is String) {
+      data["code"] = int.parse(data["code"]);
     }
   }
 

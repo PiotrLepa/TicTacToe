@@ -12,11 +12,12 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 }
 
 mixin _$ErrorResponse {
-  String get code;
+  int get code;
+
   String get exception;
   String get message;
 
-  ErrorResponse copyWith({String code, String exception, String message});
+  ErrorResponse copyWith({int code, String exception, String message});
 
   Map<String, dynamic> toJson();
 }
@@ -32,7 +33,7 @@ class _$_ErrorResponse implements _ErrorResponse {
       _$_$_ErrorResponseFromJson(json);
 
   @override
-  final String code;
+  final int code;
   @override
   final String exception;
   @override
@@ -73,7 +74,7 @@ class _$_ErrorResponse implements _ErrorResponse {
     assert(exception != null);
     assert(message != null);
     return _$_ErrorResponse(
-      code == freezed ? this.code : code as String,
+      code == freezed ? this.code : code as int,
       exception == freezed ? this.exception : exception as String,
       message == freezed ? this.message : message as String,
     );
@@ -86,19 +87,20 @@ class _$_ErrorResponse implements _ErrorResponse {
 }
 
 abstract class _ErrorResponse implements ErrorResponse {
-  const factory _ErrorResponse(String code, String exception, String message) =
+  const factory _ErrorResponse(int code, String exception, String message) =
       _$_ErrorResponse;
 
   factory _ErrorResponse.fromJson(Map<String, dynamic> json) =
       _$_ErrorResponse.fromJson;
 
   @override
-  String get code;
+  int get code;
+
   @override
   String get exception;
   @override
   String get message;
 
   @override
-  _ErrorResponse copyWith({String code, String exception, String message});
+  _ErrorResponse copyWith({int code, String exception, String message});
 }
