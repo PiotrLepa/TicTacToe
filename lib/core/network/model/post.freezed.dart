@@ -13,9 +13,7 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 
 mixin _$Post {
   int get id;
-
   String get title;
-
   String get body;
 
   Post copyWith({int id, String title, String body});

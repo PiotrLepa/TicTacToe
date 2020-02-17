@@ -14,9 +14,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) {
 mixin _$LoginRequest {
   @JsonKey(name: 'username')
   String get email;
-
   String get password;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
@@ -30,9 +28,10 @@ mixin _$LoginRequest {
 
 @JsonSerializable()
 class _$_LoginRequest implements _LoginRequest {
-  const _$_LoginRequest({@required @JsonKey(name: 'username') this.email,
-    @required this.password,
-    @required @JsonKey(name: 'grant_type') this.grantType})
+  const _$_LoginRequest(
+      {@required @JsonKey(name: 'username') this.email,
+      @required this.password,
+      @required @JsonKey(name: 'grant_type') this.grantType})
       : assert(email != null),
         assert(password != null),
         assert(grantType != null);

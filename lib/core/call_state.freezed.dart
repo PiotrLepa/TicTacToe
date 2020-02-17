@@ -12,35 +12,35 @@ mixin _$CallState<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(ApiException ex),
+    @required Result error(String message),
   });
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(ApiException ex),
+    Result error(String message),
     @required Result orElse(),
   });
 
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result progress(_Progress<T> value),
-    @required Result success(_Success<T> value),
-    @required Result error(_Error<T> value),
+    @required Result progress(Progress<T> value),
+    @required Result success(Success<T> value),
+    @required Result error(Error<T> value),
   });
 
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result progress(_Progress<T> value),
-    Result success(_Success<T> value),
-    Result error(_Error<T> value),
+    Result progress(Progress<T> value),
+    Result success(Success<T> value),
+    Result error(Error<T> value),
     @required Result orElse(),
   });
 }
 
-class _$_Progress<T> implements _Progress<T> {
-  const _$_Progress();
+class _$Progress<T> implements Progress<T> {
+  const _$Progress();
 
   @override
   String toString() {
@@ -49,7 +49,7 @@ class _$_Progress<T> implements _Progress<T> {
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Progress<T>);
+    return identical(this, other) || (other is Progress<T>);
   }
 
   @override
@@ -60,7 +60,7 @@ class _$_Progress<T> implements _Progress<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(ApiException ex),
+    @required Result error(String message),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -73,7 +73,7 @@ class _$_Progress<T> implements _Progress<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(ApiException ex),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -86,9 +86,9 @@ class _$_Progress<T> implements _Progress<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result progress(_Progress<T> value),
-    @required Result success(_Success<T> value),
-    @required Result error(_Error<T> value),
+    @required Result progress(Progress<T> value),
+    @required Result success(Success<T> value),
+    @required Result error(Error<T> value),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -99,9 +99,9 @@ class _$_Progress<T> implements _Progress<T> {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result progress(_Progress<T> value),
-    Result success(_Success<T> value),
-    Result error(_Error<T> value),
+    Result progress(Progress<T> value),
+    Result success(Success<T> value),
+    Result error(Error<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -112,12 +112,12 @@ class _$_Progress<T> implements _Progress<T> {
   }
 }
 
-abstract class _Progress<T> implements CallState<T> {
-  const factory _Progress() = _$_Progress<T>;
+abstract class Progress<T> implements CallState<T> {
+  const factory Progress() = _$Progress<T>;
 }
 
-class _$_Success<T> implements _Success<T> {
-  const _$_Success(this.result) : assert(result != null);
+class _$Success<T> implements Success<T> {
+  const _$Success(this.result) : assert(result != null);
 
   @override
   final T result;
@@ -130,7 +130,7 @@ class _$_Success<T> implements _Success<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Success<T> &&
+        (other is Success<T> &&
             (identical(other.result, result) ||
                 const DeepCollectionEquality().equals(other.result, result)));
   }
@@ -139,11 +139,11 @@ class _$_Success<T> implements _Success<T> {
   int get hashCode => runtimeType.hashCode ^ result.hashCode;
 
   @override
-  _$_Success<T> copyWith({
+  _$Success<T> copyWith({
     Object result = freezed,
   }) {
     assert(result != null);
-    return _$_Success<T>(
+    return _$Success<T>(
       result == freezed ? this.result : result as T,
     );
   }
@@ -153,7 +153,7 @@ class _$_Success<T> implements _Success<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(ApiException ex),
+    @required Result error(String message),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -166,7 +166,7 @@ class _$_Success<T> implements _Success<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(ApiException ex),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -179,9 +179,9 @@ class _$_Success<T> implements _Success<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result progress(_Progress<T> value),
-    @required Result success(_Success<T> value),
-    @required Result error(_Error<T> value),
+    @required Result progress(Progress<T> value),
+    @required Result success(Success<T> value),
+    @required Result error(Error<T> value),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -192,9 +192,9 @@ class _$_Success<T> implements _Success<T> {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result progress(_Progress<T> value),
-    Result success(_Success<T> value),
-    Result error(_Error<T> value),
+    Result progress(Progress<T> value),
+    Result success(Success<T> value),
+    Result error(Error<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -205,43 +205,43 @@ class _$_Success<T> implements _Success<T> {
   }
 }
 
-abstract class _Success<T> implements CallState<T> {
-  const factory _Success(T result) = _$_Success<T>;
+abstract class Success<T> implements CallState<T> {
+  const factory Success(T result) = _$Success<T>;
 
   T get result;
 
-  _Success<T> copyWith({T result});
+  Success<T> copyWith({T result});
 }
 
-class _$_Error<T> implements _Error<T> {
-  const _$_Error(this.ex) : assert(ex != null);
+class _$Error<T> implements Error<T> {
+  const _$Error(this.message) : assert(message != null);
 
   @override
-  final ApiException ex;
+  final String message;
 
   @override
   String toString() {
-    return 'CallState<$T>.error(ex: $ex)';
+    return 'CallState<$T>.error(message: $message)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Error<T> &&
-            (identical(other.ex, ex) ||
-                const DeepCollectionEquality().equals(other.ex, ex)));
+        (other is Error<T> &&
+            (identical(other.message, message) ||
+                const DeepCollectionEquality().equals(other.message, message)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ ex.hashCode;
+  int get hashCode => runtimeType.hashCode ^ message.hashCode;
 
   @override
-  _$_Error<T> copyWith({
-    Object ex = freezed,
+  _$Error<T> copyWith({
+    Object message = freezed,
   }) {
-    assert(ex != null);
-    return _$_Error<T>(
-      ex == freezed ? this.ex : ex as ApiException,
+    assert(message != null);
+    return _$Error<T>(
+      message == freezed ? this.message : message as String,
     );
   }
 
@@ -250,12 +250,12 @@ class _$_Error<T> implements _Error<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(ApiException ex),
+    @required Result error(String message),
   }) {
     assert(progress != null);
     assert(success != null);
     assert(error != null);
-    return error(ex);
+    return error(message);
   }
 
   @override
@@ -263,12 +263,12 @@ class _$_Error<T> implements _Error<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(ApiException ex),
+    Result error(String message),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error(ex);
+      return error(message);
     }
     return orElse();
   }
@@ -276,9 +276,9 @@ class _$_Error<T> implements _Error<T> {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result progress(_Progress<T> value),
-    @required Result success(_Success<T> value),
-    @required Result error(_Error<T> value),
+    @required Result progress(Progress<T> value),
+    @required Result success(Success<T> value),
+    @required Result error(Error<T> value),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -289,9 +289,9 @@ class _$_Error<T> implements _Error<T> {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result progress(_Progress<T> value),
-    Result success(_Success<T> value),
-    Result error(_Error<T> value),
+    Result progress(Progress<T> value),
+    Result success(Success<T> value),
+    Result error(Error<T> value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -302,10 +302,10 @@ class _$_Error<T> implements _Error<T> {
   }
 }
 
-abstract class _Error<T> implements CallState<T> {
-  const factory _Error(ApiException ex) = _$_Error<T>;
+abstract class Error<T> implements CallState<T> {
+  const factory Error(String message) = _$Error<T>;
 
-  ApiException get ex;
+  String get message;
 
-  _Error<T> copyWith({ApiException ex});
+  Error<T> copyWith({String message});
 }

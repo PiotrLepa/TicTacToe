@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
-import 'package:tictactoe/core/error/error_translator.dart';
-import 'package:tictactoe/core/network/exception/api_exception.dart';
+import 'package:tictactoe/core/future_dispatch.dart';
 import 'package:tictactoe/core/network/model/token/login_request.dart';
 import 'package:tictactoe/core/network/repository/test_repository.dart';
 import 'package:tictactoe/core/network/service/network_service.dart';
@@ -40,16 +39,16 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _fetchGamesSecured() async* {
-    try {
-      yield TestState.progress();
-      final games = await TestRepository().fetchGames();
-      final string = games.map((post) => post).join("\n\n");
-      yield TestState.success(string);
-    } on ApiException catch (e) {
-      print(e);
-      final errorMessage = ErrorTranslator().translate(e);
-      yield TestState.error(errorMessage);
-    }
+    yield* dispatch(TestRepository().fetchGames()).map(
+      (state) => state.map(
+        progress: (_) => TestState.progress(),
+        success: (success) {
+          final string = success.result.map((post) => post).join("\n\n");
+          return TestState.success(string);
+        },
+        error: (error) => TestState.error(error.message),
+      ),
+    );
   }
 
   Stream<TestState> _login() async* {
@@ -58,14 +57,13 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       password: "dev12",
       grantType: "password",
     );
-    try {
-      yield TestState.progress();
-      final response = await TestRepository().login(request);
-      yield TestState.success(response.toString());
-    } catch (e) {
-      print(e);
-      final errorMessage = ErrorTranslator().translate(e);
-      yield TestState.error(errorMessage);
-    }
+    yield* dispatch(TestRepository().login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) => TestState.success(success.result.toString()),
+            error: (error) => TestState.error(error.message),
+          ),
+    );
   }
 }

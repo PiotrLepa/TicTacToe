@@ -13,9 +13,7 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$ErrorResponse {
   String get code;
-
   String get exception;
-
   String get message;
 
   ErrorResponse copyWith({String code, String exception, String message});
