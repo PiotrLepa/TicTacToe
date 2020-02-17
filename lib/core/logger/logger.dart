@@ -4,7 +4,7 @@ import 'package:logger/logger.dart';
 
 final logger = Logger();
 
-String prettyJson(Map<String, dynamic> json) {
+String prettyJson(json) {
   JsonEncoder encoder = new JsonEncoder.withIndent('  ');
   return encoder.convert(json);
 }
