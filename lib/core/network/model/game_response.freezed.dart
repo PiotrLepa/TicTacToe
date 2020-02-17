@@ -14,19 +14,20 @@ GameResponse _$GameResponseFromJson(Map<String, dynamic> json) {
 mixin _$GameResponse {
   int get gameId;
   int get startDate;
-  int get endData;
 
-  GameResponse copyWith({int gameId, int startDate, int endData});
+  int get endDate;
+
+  GameResponse copyWith({int gameId, int startDate, int endDate});
 
   Map<String, dynamic> toJson();
 }
 
 @JsonSerializable()
 class _$_GameResponse implements _GameResponse {
-  const _$_GameResponse(this.gameId, this.startDate, this.endData)
+  const _$_GameResponse(this.gameId, this.startDate, this.endDate)
       : assert(gameId != null),
         assert(startDate != null),
-        assert(endData != null);
+        assert(endDate != null);
 
   factory _$_GameResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_GameResponseFromJson(json);
@@ -36,11 +37,11 @@ class _$_GameResponse implements _GameResponse {
   @override
   final int startDate;
   @override
-  final int endData;
+  final int endDate;
 
   @override
   String toString() {
-    return 'GameResponse(gameId: $gameId, startDate: $startDate, endData: $endData)';
+    return 'GameResponse(gameId: $gameId, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -52,8 +53,8 @@ class _$_GameResponse implements _GameResponse {
             (identical(other.startDate, startDate) ||
                 const DeepCollectionEquality()
                     .equals(other.startDate, startDate)) &&
-            (identical(other.endData, endData) ||
-                const DeepCollectionEquality().equals(other.endData, endData)));
+            (identical(other.endDate, endDate) ||
+                const DeepCollectionEquality().equals(other.endDate, endDate)));
   }
 
   @override
@@ -61,21 +62,21 @@ class _$_GameResponse implements _GameResponse {
       runtimeType.hashCode ^
       gameId.hashCode ^
       startDate.hashCode ^
-      endData.hashCode;
+      endDate.hashCode;
 
   @override
   _$_GameResponse copyWith({
     Object gameId = freezed,
     Object startDate = freezed,
-    Object endData = freezed,
+    Object endDate = freezed,
   }) {
     assert(gameId != null);
     assert(startDate != null);
-    assert(endData != null);
+    assert(endDate != null);
     return _$_GameResponse(
       gameId == freezed ? this.gameId : gameId as int,
       startDate == freezed ? this.startDate : startDate as int,
-      endData == freezed ? this.endData : endData as int,
+      endDate == freezed ? this.endDate : endDate as int,
     );
   }
 
@@ -86,7 +87,7 @@ class _$_GameResponse implements _GameResponse {
 }
 
 abstract class _GameResponse implements GameResponse {
-  const factory _GameResponse(int gameId, int startDate, int endData) =
+  const factory _GameResponse(int gameId, int startDate, int endDate) =
       _$_GameResponse;
 
   factory _GameResponse.fromJson(Map<String, dynamic> json) =
@@ -94,11 +95,13 @@ abstract class _GameResponse implements GameResponse {
 
   @override
   int get gameId;
-  @override
-  int get startDate;
-  @override
-  int get endData;
 
   @override
-  _GameResponse copyWith({int gameId, int startDate, int endData});
+  int get startDate;
+
+  @override
+  int get endDate;
+
+  @override
+  _GameResponse copyWith({int gameId, int startDate, int endDate});
 }

@@ -22,10 +22,16 @@ class LoggerInterceptor extends InterceptorsWrapper {
   @override
   Future onError(DioError err) {
     final response = err.response;
-    logger.d("Network error\n\n"
-        "${response.statusCode} ${response.request.method} ${response.request.uri}\n\n"
-        "Error: ${err.toString()}\n\n"
-        "Json: ${prettyJson(response.data)}");
+    if (response != null) {
+      logger.d("Network error\n\n"
+          "${response.statusCode} ${response.request.method} ${response.request.uri}\n\n"
+          "Error: ${err.toString()}\n\n"
+          "Json: ${prettyJson(response.data)}");
+    } else {
+      logger.d("Network error\n\n"
+          "Response: null\n\n"
+          "Error: ${err.toString()}\n\n");
+    }
     return super.onError(err);
   }
 }

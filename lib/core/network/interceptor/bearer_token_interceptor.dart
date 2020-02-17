@@ -5,7 +5,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) {
     final accessToken =
-        "76720471-e058-45e5-a396-59630432bf61"; // TODO get from prefs
+        "a4391f14-16ee-4df5-bcc1-312a9bd10210"; // TODO get from prefs
     final headers = options.headers;
 
     if (accessToken != null && _isRequestSecure(headers)) {

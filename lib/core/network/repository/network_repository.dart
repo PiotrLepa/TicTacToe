@@ -16,10 +16,12 @@ class NetworkRepository {
 
   ApiException _handleError(DioError error) {
     final response = error.response;
-    final statusCode = response.statusCode;
-    var errorResponse;
+    final statusCode = response?.statusCode;
+    if (statusCode == null) {
+      return ApiException.unknownError(-1, error.message);
+    }
     try {
-      errorResponse = ErrorResponse.fromJson(response.data);
+      var errorResponse = ErrorResponse.fromJson(response.data);
       return _mapToApiException(statusCode, errorResponse);
     } on TypeError catch (e) {
       logger.e(e);

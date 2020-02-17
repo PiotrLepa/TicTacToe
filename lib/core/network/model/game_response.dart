@@ -11,7 +11,7 @@ abstract class GameResponse extends Serializable with _$GameResponse {
   const factory GameResponse(
     int gameId,
     int startDate,
-    int endData,
+    int endDate,
   ) = _GameResponse;
 
   factory GameResponse.fromJson(Map<String, dynamic> json) =>

@@ -15,9 +15,9 @@ abstract class BaseNetworkService {
 
   static Dio _createDio() => Dio()
     ..options.baseUrl = baseUrl
+    ..interceptors.add(BearerTokenInterceptor())
     ..interceptors.add(LoggerInterceptor())
-    ..interceptors.add(ConnectionInterceptor())
-    ..interceptors.add(BearerTokenInterceptor());
+    ..interceptors.add(ConnectionInterceptor());
 
   Future<Response<T>> get<T>(
     String path, {

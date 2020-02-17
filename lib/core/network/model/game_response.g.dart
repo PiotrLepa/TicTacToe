@@ -10,7 +10,7 @@ _$_GameResponse _$_$_GameResponseFromJson(Map<String, dynamic> json) {
   return _$_GameResponse(
     json['gameId'] as int,
     json['startDate'] as int,
-    json['endData'] as int,
+    json['endDate'] as int,
   );
 }
 
@@ -18,5 +18,5 @@ Map<String, dynamic> _$_$_GameResponseToJson(_$_GameResponse instance) =>
     <String, dynamic>{
       'gameId': instance.gameId,
       'startDate': instance.startDate,
-      'endData': instance.endData,
+      'endDate': instance.endDate,
     };
