@@ -10,7 +10,10 @@ class NetworkRepository {
       final response = await call;
       return Future.value(response.data);
     } on DioError catch (e) {
-      return Future.error(_handleError(e));
+      if (e.response?.statusCode == 401) {
+      } else {
+        return Future.error(_handleError(e));
+      }
     }
   }
 
