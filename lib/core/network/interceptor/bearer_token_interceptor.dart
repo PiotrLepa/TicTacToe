@@ -11,9 +11,9 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
     final headers = options.headers;
 
     if (accessToken != null && _isRequestSecure(headers)) {
-      _removeInternalSecuredHeader(headers);
       _addAuthorizationHeader(headers, accessToken);
     }
+    _removeInternalSecuredHeader(headers);
 
     return super.onRequest(options);
   }

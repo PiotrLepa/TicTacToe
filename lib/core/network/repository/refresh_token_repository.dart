@@ -11,7 +11,7 @@ class RefreshTokenRepository extends NetworkRepository {
   Future<TokenResponse> refreshAccessToken(RefreshTokenRequest request) =>
       call(_service.refreshAccessToken(request));
 
-  Future<T> retryRequest<T>(RequestOptions request) => call(
+  Future retryRequest(RequestOptions request) => call(
         _service.createRequest(
           request.method,
           request.path,

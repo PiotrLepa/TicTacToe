@@ -12,7 +12,7 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
   @override
   Future onError(DioError err) async {
     if (err.response?.statusCode == 401) {
-      final retriedData = await refreshTokenAndRetry(err.response);
+      final retriedData = await refreshTokenAndRetry(err.response.request);
       final response = Response(
         data: retriedData,
       );
@@ -22,13 +22,13 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
     }
   }
 
-  Future<T> refreshTokenAndRetry<T>(Response response) async {
-    final tokenResponse = await _refreshAccessToken();
+  Future refreshTokenAndRetry(RequestOptions request) async {
+    final tokens = await _refreshAccessToken();
     _oauthTokensStorage.saveTokens(
-      tokenResponse.accessToken,
-      tokenResponse.refreshToken,
+      tokens.accessToken,
+      tokens.refreshToken,
     );
-    return _refreshTokenRepository.retryRequest<T>(response.request);
+    return _refreshTokenRepository.retryRequest(request);
   }
 
   Future<TokenResponse> _refreshAccessToken() async {
@@ -37,10 +37,6 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
       refreshToken: refreshToken,
       grantType: oauthGrantTypeRefreshToken,
     );
-    try {
-      return _refreshTokenRepository.refreshAccessToken(request);
-    } catch (e) {
-      return Future.error(e);
-    }
+    return _refreshTokenRepository.refreshAccessToken(request);
   }
 }
