@@ -10,6 +10,8 @@ import 'package:tictactoe/core/network/network_constant.dart';
 import 'base_network_service.dart';
 
 class NetworkService extends BaseNetworkService {
+  NetworkService({Dio client}) : super(client: client);
+
   Future<Response<TokenResponse>> login(LoginRequest request) => post(
         "/oauth/token",
         data: request,
@@ -18,9 +20,10 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<Response<TokenResponse>> refreshAccessToken(
-          RefreshTokenRequest request) =>
+    RefreshTokenRequest request,
+  ) =>
       post(
-        "/oauth/token#refresh",
+        "/oauth/token",
         data: request,
         contentType: Headers.formUrlEncodedContentType,
         headers: {authorizationHeader: basicKey},

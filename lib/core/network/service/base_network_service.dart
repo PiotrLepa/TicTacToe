@@ -1,8 +1,6 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
-import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
-import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
-import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
+import 'package:tictactoe/core/network/network_client.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
 
@@ -10,14 +8,12 @@ import '../network_constant.dart';
 
 abstract class BaseNetworkService {
   // TODO implement DI
-  Dio dio = _createDio();
+  Dio _dio;
   ResponseConverter _responseConverter = ResponseConverter();
 
-  static Dio _createDio() => Dio()
-    ..options.baseUrl = baseUrl
-    ..interceptors.add(BearerTokenInterceptor())
-    ..interceptors.add(LoggerInterceptor())
-    ..interceptors.add(ConnectionInterceptor());
+  BaseNetworkService({Dio client}) {
+    _dio = client ?? networkClient;
+  }
 
   Future<Response<T>> get<T>(
     String path, {
@@ -100,7 +96,7 @@ abstract class BaseNetworkService {
     String contentType,
     bool secured = false,
   }) =>
-      dio.request(path,
+      _dio.request(path,
           data: data?.toJson(),
           queryParameters: queryParameters,
           options: Options(
