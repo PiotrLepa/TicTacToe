@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:tictactoe/core/network/exception/api_exception.dart';
 import 'package:tictactoe/core/network/model/token/refresh_token_request/refresh_token_request.dart';
 import 'package:tictactoe/core/network/model/token/token_response.dart';
+import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 
@@ -33,15 +33,14 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
 
   Future<TokenResponse> _refreshAccessToken() async {
     final refreshToken = await _oauthTokensStorage.refreshToken;
-    if (refreshToken == null) {
-      throw ApiException.unauthorized(401,
-          'Attempted to refresh access token without actual refresh token');
-    }
-
     final request = RefreshTokenRequest(
-      refreshToken: "6d2a32a8-3dfe-406c-998f-1c534c281c71", //todo from storage
-      grantType: "refresh_token",
+      refreshToken: refreshToken,
+      grantType: oauthGrantTypeRefreshToken,
     );
-    return _refreshTokenRepository.refreshAccessToken(request);
+    try {
+      return _refreshTokenRepository.refreshAccessToken(request);
+    } catch (e) {
+      return Future.error(e);
+    }
   }
 }

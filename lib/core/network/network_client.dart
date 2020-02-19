@@ -6,14 +6,12 @@ import 'interceptor/logger_interceptor.dart';
 import 'interceptor/refresh_token_interceptor.dart';
 import 'network_constant.dart';
 
-final networkClient = Dio()
-  ..options.baseUrl = baseUrl
-  ..interceptors.add(RefreshTokenInterceptor())
-  ..interceptors.add(BearerTokenInterceptor())
-  ..interceptors.add(LoggerInterceptor())
-  ..interceptors.add(ConnectionInterceptor());
+final networkClient = _createDefaultClient()
+  ..interceptors.add(RefreshTokenInterceptor());
 
-final refreshTokenNetworkClient = Dio()
+final refreshTokenNetworkClient = _createDefaultClient();
+
+Dio _createDefaultClient() => Dio()
   ..options.baseUrl = baseUrl
   ..interceptors.add(BearerTokenInterceptor())
   ..interceptors.add(LoggerInterceptor())

@@ -3,6 +3,7 @@ import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
 import 'package:tictactoe/core/future_dispatch.dart';
 import 'package:tictactoe/core/network/model/token/login_request.dart';
+import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/repository/test_repository.dart';
 import 'package:tictactoe/core/network/service/network_service.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
@@ -58,7 +59,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
     final request = LoginRequest(
       email: "piotrlepadev@gmail.com",
       password: "dev12",
-      grantType: "password",
+      grantType: oauthGrantTypePassword,
     );
     yield* dispatch(TestRepository().login(request)).map(
       (state) => state.map(
