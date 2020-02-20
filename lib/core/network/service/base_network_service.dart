@@ -1,19 +1,15 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
-import 'package:tictactoe/core/network/network_client.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
 
 import '../network_constant.dart';
 
 abstract class BaseNetworkService {
-  // TODO implement DI
-  Dio _dio;
-  ResponseConverter _responseConverter = ResponseConverter();
+  final Dio _dio;
+  final ResponseConverter _responseConverter;
 
-  BaseNetworkService({Dio client}) {
-    _dio = client ?? networkClient;
-  }
+  BaseNetworkService(this._dio, this._responseConverter);
 
   Future<Response<T>> get<T>(
     String path, {

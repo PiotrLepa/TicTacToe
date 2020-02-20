@@ -5,9 +5,15 @@ import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 
+//@injectable // TODO
 class RefreshTokenInterceptor extends InterceptorsWrapper {
-  final _oauthTokensStorage = OauthTokensStorage();
-  final _refreshTokenRepository = RefreshTokenRepository();
+  final OauthTokensStorage _oauthTokensStorage;
+  final RefreshTokenRepository _refreshTokenRepository;
+
+  RefreshTokenInterceptor(
+    this._oauthTokensStorage,
+    this._refreshTokenRepository,
+  );
 
   @override
   Future onError(DioError err) async {

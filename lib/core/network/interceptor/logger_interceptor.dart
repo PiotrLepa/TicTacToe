@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/logger/logger.dart';
 
+@injectable
 class LoggerInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) {

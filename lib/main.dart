@@ -4,8 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/bloc/test_bloc.dart';
 import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
+import 'package:tictactoe/core/injection/injection.dart';
 
-void main() => runApp(MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureInjection(Env.dev);
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
@@ -28,7 +33,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: BlocProvider(
-        create: (context) => TestBloc()..add(TestEvent.fetchGames()),
+        create: (context) => g.get<TestBloc>()..add(TestEvent.login()),
         child: BlocBuilder<TestBloc, TestState>(
           builder: (context, state) => state.when(
             progress: () => CircularProgressIndicator(),

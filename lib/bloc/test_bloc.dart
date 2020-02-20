@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
 import 'package:tictactoe/core/future_dispatch.dart';
@@ -8,8 +9,14 @@ import 'package:tictactoe/core/network/repository/test_repository.dart';
 import 'package:tictactoe/core/network/service/network_service.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 
+@injectable
 class TestBloc extends Bloc<TestEvent, TestState> {
-  final _oauthTokensStorage = OauthTokensStorage();
+  final OauthTokensStorage _oauthTokensStorage;
+  final NetworkService _networkService;
+  final TestRepository _testRepository;
+
+  TestBloc(
+      this._oauthTokensStorage, this._networkService, this._testRepository);
 
   @override
   TestState get initialState => TestState.progress();
@@ -24,7 +31,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
 
   Future<String> _fetchAllPosts() async {
     try {
-      final posts = await NetworkService().getPosts();
+      final posts = await _networkService.getPosts();
       return posts.data.map((post) => post.title).join("\n\n");
     } catch (e) {
       print(e);
@@ -34,7 +41,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
 
   Future<String> _fetchPost() async {
     try {
-      final post = await NetworkService().getPost(1);
+      final post = await _networkService.getPost(1);
       return post.data.title;
     } catch (e) {
       print(e);
@@ -43,15 +50,16 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _fetchGamesSecured() async* {
-    yield* dispatch(TestRepository().fetchGames()).map(
-          (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final string = success.result.map((post) => post).join("\n\n");
-          return TestState.success(string);
-        },
-        error: (error) => TestState.error(error.message),
-      ),
+    yield* dispatch(_testRepository.fetchGames()).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final string = success.result.map((post) => post).join("\n\n");
+              return TestState.success(string);
+            },
+            error: (error) => TestState.error(error.message),
+          ),
     );
   }
 
@@ -61,19 +69,20 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       password: "dev12",
       grantType: oauthGrantTypePassword,
     );
-    yield* dispatch(TestRepository().login(request)).map(
-      (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final tokens = success.result;
-          _oauthTokensStorage.saveTokens(
-            tokens.accessToken,
-            tokens.refreshToken,
-          );
-          return TestState.success(tokens.toString());
-        },
-        error: (error) => TestState.error(error.message),
-      ),
+    yield* dispatch(_testRepository.login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final tokens = success.result;
+              _oauthTokensStorage.saveTokens(
+                tokens.accessToken,
+                tokens.refreshToken,
+              );
+              return TestState.success(tokens.toString());
+            },
+            error: (error) => TestState.error(error.message),
+          ),
     );
   }
 }
