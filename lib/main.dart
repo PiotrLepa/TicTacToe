@@ -4,11 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/bloc/test_bloc.dart';
 import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
+import 'package:tictactoe/core/bloc/error_logger_bloc_delegate.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await configureInjection(Env.dev);
+  BlocSupervisor.delegate = ErrorLoggerBlocDelegate();
   runApp(MyApp());
 }
 
