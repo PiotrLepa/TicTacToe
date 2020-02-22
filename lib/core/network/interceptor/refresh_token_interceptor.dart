@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/network/model/token/refresh_token_request/refresh_token_request.dart';
 import 'package:tictactoe/core/network/model/token/token_response.dart';
 import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 
-//@injectable // TODO
+@injectable
 class RefreshTokenInterceptor extends InterceptorsWrapper {
   final OauthTokensStorage _oauthTokensStorage;
   final RefreshTokenRepository _refreshTokenRepository;

@@ -1,9 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:tictactoe/core/network/network_constant.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/serializer/serializable.dart';
-
-import '../network_constant.dart';
 
 abstract class BaseNetworkService {
   final Dio _dio;
