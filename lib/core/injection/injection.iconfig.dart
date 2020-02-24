@@ -5,12 +5,12 @@
 // **************************************************************************
 
 import 'package:dio/dio.dart';
+import 'package:tictactoe/core/injection/register_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/service/network_service.dart';
-import 'package:dio/src/dio.dart';
 import 'package:tictactoe/core/network/service/refresh_token_network_service.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
@@ -21,23 +21,12 @@ import 'package:tictactoe/core/network/interceptor/refresh_token_interceptor.dar
 import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
-  g.registerLazySingleton<Dio>(
-      () => Dio()
-        ..options.baseUrl =
-            "https://piotrlepa-tictactoe.herokuapp.com" // TODO library bug? generated file doesn't import base url from network constant file
-        ..interceptors.add(g.get<BearerTokenInterceptor>()) // TODO better way?
-        ..interceptors.add(g.get<LoggerInterceptor>())
-        ..interceptors.add(g.get<ConnectionInterceptor>())
-        ..interceptors.add(g.get<RefreshTokenInterceptor>()),
+  final networkClient = _$NetworkClient();
+  g.registerLazySingleton<Dio>(() => networkClient.dioDefault,
       instanceName: 'defaultNetworkClient');
-  g.registerLazySingleton<Dio>(
-      () => Dio()
-        ..options.baseUrl = "https://piotrlepa-tictactoe.herokuapp.com"
-        ..interceptors.add(g.get<BearerTokenInterceptor>())
-        ..interceptors.add(g.get<LoggerInterceptor>())
-        ..interceptors.add(g.get<ConnectionInterceptor>()),
+  g.registerLazySingleton<Dio>(() => networkClient.dioRefreshToken,
       instanceName: 'refreshTokenNetworkClient');
-  final sharedPreferences = await SharedPreferences.getInstance();
+  final sharedPreferences = await networkClient.sharedPreferences;
   g.registerFactory<SharedPreferences>(() => sharedPreferences);
   g.registerFactory<ConnectionInterceptor>(() => ConnectionInterceptor());
   g.registerFactory<LoggerInterceptor>(() => LoggerInterceptor());
@@ -73,3 +62,5 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<RefreshTokenRepository>(),
       ));
 }
+
+class _$NetworkClient extends NetworkClient {}

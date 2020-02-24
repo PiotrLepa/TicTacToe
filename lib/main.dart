@@ -35,7 +35,7 @@ class TestPage extends StatelessWidget {
         title: Text("Tic tac toe"),
       ),
       body: BlocProvider(
-        create: (context) => g.get<TestBloc>()..add(TestEvent.fetchGames()),
+        create: (context) => getIt.get<TestBloc>()..add(TestEvent.fetchGames()),
         child: BlocBuilder<TestBloc, TestState>(
           builder: (context, state) => state.when(
             progress: () => CircularProgressIndicator(),
