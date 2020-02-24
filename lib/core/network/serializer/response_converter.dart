@@ -1,10 +1,12 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
 
 import 'json_factories.dart';
 
 typedef T JsonFactory<T>(Map<String, dynamic> json);
 
+@injectable
 class ResponseConverter {
   Future<Response<T>> decodeResponse<T>(Future<Response> futureResponse) async {
     final response = await futureResponse;
@@ -12,8 +14,7 @@ class ResponseConverter {
     return _createResponse<T>(data, response);
   }
 
-  Future<Response<BuiltList<T>>> decodeResponseList<T>(
-      Future<Response> futureResponse) async {
+  Future<Response<BuiltList<T>>> decodeResponseList<T>(Future<Response> futureResponse) async {
     final response = await futureResponse;
     final data = _decodeJson<T>(response.data);
     return _createResponse<BuiltList<T>>(BuiltList<T>(data), response);

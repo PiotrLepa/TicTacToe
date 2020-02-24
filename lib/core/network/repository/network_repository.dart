@@ -1,8 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:tictactoe/core/logger/logger.dart';
+import 'package:tictactoe/core/network/exception/api_exception.dart';
 import 'package:tictactoe/core/network/model/error/error_response.dart';
-
-import '../exception/api_exception.dart';
 
 class NetworkRepository {
   Future<T> call<T>(Future<Response<T>> call) async {

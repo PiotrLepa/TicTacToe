@@ -13,7 +13,6 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$ErrorResponse {
   int get code;
-
   String get exception;
   String get message;
 
@@ -95,7 +94,6 @@ abstract class _ErrorResponse implements ErrorResponse {
 
   @override
   int get code;
-
   @override
   String get exception;
   @override

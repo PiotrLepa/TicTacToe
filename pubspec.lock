@@ -120,13 +120,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.0.9"
-  built_value_generator:
-    dependency: "direct dev"
-    description:
-      name: built_value_generator
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.0.9"
   charcode:
     dependency: transitive
     description:
@@ -303,6 +296,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.4"
+  injectable:
+    dependency: "direct main"
+    description:
+      name: injectable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
+  injectable_generator:
+    dependency: "direct dev"
+    description:
+      name: injectable_generator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
   io:
     dependency: transitive
     description:

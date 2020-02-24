@@ -1,8 +1,9 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
+import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/network/exception/api_exception.dart';
 
-import '../exception/api_exception.dart';
-
+@injectable
 class ConnectionInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) async {
