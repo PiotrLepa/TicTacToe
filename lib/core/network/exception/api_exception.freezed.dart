@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package
+// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const
 
 part of api_exception;
 
@@ -82,15 +82,16 @@ class _$_NoConnection implements _NoConnection {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_NoConnection copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_NoConnection(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
@@ -210,15 +211,16 @@ class _$_BadRequest implements _BadRequest {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_BadRequest copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_BadRequest(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
@@ -338,15 +340,16 @@ class _$_Unauthorized implements _Unauthorized {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_Unauthorized copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_Unauthorized(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
@@ -466,15 +469,16 @@ class _$_NotFound implements _NotFound {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_NotFound copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_NotFound(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
@@ -594,15 +598,16 @@ class _$_InternalServerError implements _InternalServerError {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_InternalServerError copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_InternalServerError(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
@@ -723,15 +728,16 @@ class _$_UnknownError implements _UnknownError {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ code.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_UnknownError copyWith({
     Object code = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(message != null);
     return _$_UnknownError(
       code == freezed ? this.code : code as int,
       message == freezed ? this.message : message as String,
