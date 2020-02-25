@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package
+// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const
 
 part of test_state;
 
@@ -136,13 +136,13 @@ class _$_Success implements _Success {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ result.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
 
   @override
   _$_Success copyWith({
     Object result = freezed,
   }) {
-    assert(result != null);
     return _$_Success(
       result == freezed ? this.result : result as String,
     );
@@ -233,13 +233,13 @@ class _$_Error implements _Error {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
 
   @override
   _$_Error copyWith({
     Object message = freezed,
   }) {
-    assert(message != null);
     return _$_Error(
       message == freezed ? this.message : message as String,
     );

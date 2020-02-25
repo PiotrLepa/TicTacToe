@@ -7,6 +7,7 @@
 import 'package:dio/dio.dart';
 import 'package:tictactoe/core/injection/register_module.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tictactoe/core/internationalization/locale_provider.dart';
 import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
@@ -28,6 +29,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       instanceName: 'refreshTokenNetworkClient');
   final sharedPreferences = await networkClient.sharedPreferences;
   g.registerFactory<SharedPreferences>(() => sharedPreferences);
+  g.registerFactory<LocaleProvider>(() => LocaleProvider());
   g.registerFactory<ConnectionInterceptor>(() => ConnectionInterceptor());
   g.registerFactory<LoggerInterceptor>(() => LoggerInterceptor());
   g.registerFactory<ResponseConverter>(() => ResponseConverter());

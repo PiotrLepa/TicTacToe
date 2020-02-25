@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package
+// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const
 
 part of error_response;
 
@@ -59,9 +59,9 @@ class _$_ErrorResponse implements _ErrorResponse {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      code.hashCode ^
-      exception.hashCode ^
-      message.hashCode;
+      const DeepCollectionEquality().hash(code) ^
+      const DeepCollectionEquality().hash(exception) ^
+      const DeepCollectionEquality().hash(message);
 
   @override
   _$_ErrorResponse copyWith({
@@ -69,9 +69,6 @@ class _$_ErrorResponse implements _ErrorResponse {
     Object exception = freezed,
     Object message = freezed,
   }) {
-    assert(code != null);
-    assert(exception != null);
-    assert(message != null);
     return _$_ErrorResponse(
       code == freezed ? this.code : code as int,
       exception == freezed ? this.exception : exception as String,

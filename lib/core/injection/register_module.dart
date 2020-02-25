@@ -14,8 +14,7 @@ abstract class NetworkClient {
   @lazySingleton
   @Named(defaultNetworkClient)
   Dio get dioDefault => Dio()
-    ..options.baseUrl =
-        baseUrl // TODO library bug? generated file doesn't import base url from network constant file
+    ..options.baseUrl = baseUrl
     ..interceptors.add(getIt.get<BearerTokenInterceptor>()) // TODO better way?
     ..interceptors.add(getIt.get<LoggerInterceptor>())
     ..interceptors.add(getIt.get<ConnectionInterceptor>())
@@ -23,12 +22,11 @@ abstract class NetworkClient {
 
   @lazySingleton
   @Named(refreshTokenNetworkClient)
-  Dio get dioRefreshToken =>
-      Dio()
-        ..options.baseUrl = baseUrl
-        ..interceptors.add(getIt.get<BearerTokenInterceptor>())
-        ..interceptors.add(getIt.get<LoggerInterceptor>())
-        ..interceptors.add(getIt.get<ConnectionInterceptor>());
+  Dio get dioRefreshToken => Dio()
+    ..options.baseUrl = baseUrl
+    ..interceptors.add(getIt.get<BearerTokenInterceptor>())
+    ..interceptors.add(getIt.get<LoggerInterceptor>())
+    ..interceptors.add(getIt.get<ConnectionInterceptor>());
 
   Future<SharedPreferences> get sharedPreferences =>
       SharedPreferences.getInstance();
