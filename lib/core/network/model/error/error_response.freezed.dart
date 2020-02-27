@@ -13,20 +13,25 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$ErrorResponse {
   int get code;
-  String get exception;
-  String get message;
 
-  ErrorResponse copyWith({int code, String exception, String message});
+  String get developerMessage;
+
+  String get printableMessage;
+
+  ErrorResponse copyWith(
+      {int code, String developerMessage, String printableMessage});
 
   Map<String, dynamic> toJson();
 }
 
 @JsonSerializable()
 class _$_ErrorResponse implements _ErrorResponse {
-  const _$_ErrorResponse(this.code, this.exception, this.message)
+  const _$_ErrorResponse(
+      {@required this.code,
+      @required this.developerMessage,
+      this.printableMessage})
       : assert(code != null),
-        assert(exception != null),
-        assert(message != null);
+        assert(developerMessage != null);
 
   factory _$_ErrorResponse.fromJson(Map<String, dynamic> json) =>
       _$_$_ErrorResponseFromJson(json);
@@ -34,13 +39,13 @@ class _$_ErrorResponse implements _ErrorResponse {
   @override
   final int code;
   @override
-  final String exception;
+  final String developerMessage;
   @override
-  final String message;
+  final String printableMessage;
 
   @override
   String toString() {
-    return 'ErrorResponse(code: $code, exception: $exception, message: $message)';
+    return 'ErrorResponse(code: $code, developerMessage: $developerMessage, printableMessage: $printableMessage)';
   }
 
   @override
@@ -49,30 +54,35 @@ class _$_ErrorResponse implements _ErrorResponse {
         (other is _ErrorResponse &&
             (identical(other.code, code) ||
                 const DeepCollectionEquality().equals(other.code, code)) &&
-            (identical(other.exception, exception) ||
+            (identical(other.developerMessage, developerMessage) ||
                 const DeepCollectionEquality()
-                    .equals(other.exception, exception)) &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+                    .equals(other.developerMessage, developerMessage)) &&
+            (identical(other.printableMessage, printableMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.printableMessage, printableMessage)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(code) ^
-      const DeepCollectionEquality().hash(exception) ^
-      const DeepCollectionEquality().hash(message);
+      const DeepCollectionEquality().hash(developerMessage) ^
+      const DeepCollectionEquality().hash(printableMessage);
 
   @override
   _$_ErrorResponse copyWith({
     Object code = freezed,
-    Object exception = freezed,
-    Object message = freezed,
+    Object developerMessage = freezed,
+    Object printableMessage = freezed,
   }) {
     return _$_ErrorResponse(
-      code == freezed ? this.code : code as int,
-      exception == freezed ? this.exception : exception as String,
-      message == freezed ? this.message : message as String,
+      code: code == freezed ? this.code : code as int,
+      developerMessage: developerMessage == freezed
+          ? this.developerMessage
+          : developerMessage as String,
+      printableMessage: printableMessage == freezed
+          ? this.printableMessage
+          : printableMessage as String,
     );
   }
 
@@ -83,19 +93,23 @@ class _$_ErrorResponse implements _ErrorResponse {
 }
 
 abstract class _ErrorResponse implements ErrorResponse {
-  const factory _ErrorResponse(int code, String exception, String message) =
-      _$_ErrorResponse;
+  const factory _ErrorResponse({@required int code,
+    @required String developerMessage,
+    String printableMessage}) = _$_ErrorResponse;
 
   factory _ErrorResponse.fromJson(Map<String, dynamic> json) =
-      _$_ErrorResponse.fromJson;
+  _$_ErrorResponse.fromJson;
 
   @override
   int get code;
-  @override
-  String get exception;
-  @override
-  String get message;
 
   @override
-  _ErrorResponse copyWith({int code, String exception, String message});
+  String get developerMessage;
+
+  @override
+  String get printableMessage;
+
+  @override
+  _ErrorResponse copyWith(
+      {int code, String developerMessage, String printableMessage});
 }

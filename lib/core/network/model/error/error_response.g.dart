@@ -8,15 +8,15 @@ part of error_response;
 
 _$_ErrorResponse _$_$_ErrorResponseFromJson(Map<String, dynamic> json) {
   return _$_ErrorResponse(
-    json['code'] as int,
-    json['exception'] as String,
-    json['message'] as String,
+    code: json['code'] as int,
+    developerMessage: json['developerMessage'] as String,
+    printableMessage: json['printableMessage'] as String,
   );
 }
 
 Map<String, dynamic> _$_$_ErrorResponseToJson(_$_ErrorResponse instance) =>
     <String, dynamic>{
       'code': instance.code,
-      'exception': instance.exception,
-      'message': instance.message,
+      'developerMessage': instance.developerMessage,
+      'printableMessage': instance.printableMessage,
     };

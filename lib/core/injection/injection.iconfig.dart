@@ -5,21 +5,21 @@
 // **************************************************************************
 
 import 'package:dio/dio.dart';
-import 'package:tictactoe/core/injection/register_module.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tictactoe/bloc/test_bloc.dart';
+import 'package:tictactoe/core/injection/register_module.dart';
 import 'package:tictactoe/core/internationalization/locale_provider.dart';
+import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
+import 'package:tictactoe/core/network/interceptor/refresh_token_interceptor.dart';
+import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
+import 'package:tictactoe/core/network/repository/test_repository.dart';
 import 'package:tictactoe/core/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/network/service/network_service.dart';
 import 'package:tictactoe/core/network/service/refresh_token_network_service.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
-import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
-import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
-import 'package:tictactoe/core/network/repository/test_repository.dart';
-import 'package:tictactoe/bloc/test_bloc.dart';
-import 'package:tictactoe/core/network/interceptor/refresh_token_interceptor.dart';
-import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();

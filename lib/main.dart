@@ -44,20 +44,25 @@ class TestPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).hello), // TODO harcoded?
+        title: Text(AppLocalizations.of(context).hello),
       ),
       body: BlocProvider(
-        create: (context) => getIt.get<TestBloc>()..add(TestEvent.fetchGames()),
+        create: (context) =>
+        getIt.get<TestBloc>()
+          ..add(TestEvent.login()),
         child: BlocBuilder<TestBloc, TestState>(
-          builder: (context, state) => state.when(
-            progress: () => CircularProgressIndicator(),
-            success: (result) => Text(
-              result,
-              style: TextStyle(color: Colors.green),
-            ),
-            error: (message) => Text(
-              message,
-              style: TextStyle(color: Colors.red),
+          builder: (context, state) =>
+              state.when(
+                progress: () => CircularProgressIndicator(),
+                success: (result) =>
+                    Text(
+                      result,
+                      style: TextStyle(color: Colors.green),
+                    ),
+                error: (message) =>
+                    Text(
+                      message,
+                      style: TextStyle(color: Colors.red),
             ),
           ),
         ),

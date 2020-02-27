@@ -17,7 +17,7 @@ class NetworkRepository {
     final response = error.response;
     final statusCode = response?.statusCode;
     if (statusCode == null) {
-      return ApiException.unknownError(-1, error.message);
+      return ApiException.unknownError(-1, null);
     }
     try {
       final data = response.data;
@@ -26,10 +26,10 @@ class NetworkRepository {
       return _mapToApiException(statusCode, errorResponse);
     } on TypeError catch (e) {
       logger.e(e);
-      return ApiException.unknownError(statusCode, e.message);
+      return ApiException.unknownError(statusCode, null);
     } catch (e) {
       logger.e(e);
-      return ApiException.unknownError(statusCode, "");
+      return ApiException.unknownError(statusCode, null);
     }
   }
 
@@ -43,14 +43,17 @@ class NetworkRepository {
   ApiException _mapToApiException(int statusCode, ErrorResponse errorResponse) {
     switch (statusCode) {
       case 400:
-        return ApiException.badRequest(statusCode, errorResponse.message);
+        return ApiException.badRequest(
+            statusCode, errorResponse.printableMessage);
       case 401:
-        return ApiException.unauthorized(statusCode, errorResponse.message);
+        return ApiException.unauthorized(
+            statusCode, errorResponse.printableMessage);
       case 500:
         return ApiException.internalServerError(
-            statusCode, errorResponse.message);
+            statusCode, errorResponse.printableMessage);
       default:
-        return ApiException.unknownError(statusCode, errorResponse.message);
+        return ApiException.unknownError(
+            statusCode, errorResponse.printableMessage);
     }
   }
 }
