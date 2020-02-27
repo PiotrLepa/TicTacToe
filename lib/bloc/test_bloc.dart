@@ -54,12 +54,12 @@ class TestBloc extends Bloc<TestEvent, TestState> {
           (state) =>
           state.map(
             progress: (_) => TestState.progress(),
-            success: (success) {
-              final string = success.result.map((post) => post).join("\n\n");
-              return TestState.success(string);
-            },
-            error: (error) => TestState.error(error.message),
-          ),
+        success: (success) {
+          final string = success.result.map((post) => post).join("\n\n");
+          return TestState.success(string);
+        },
+        error: (error) => TestState.error(error.errorMessage),
+      ),
     );
   }
 
@@ -81,7 +81,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
               );
               return TestState.success(tokens.toString());
             },
-            error: (error) => TestState.error(error.message),
+            error: (error) => TestState.error(error.errorMessage),
           ),
     );
   }

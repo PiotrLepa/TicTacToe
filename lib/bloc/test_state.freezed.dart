@@ -12,14 +12,14 @@ mixin _$TestState {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(String result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   });
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(String result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   });
 
@@ -60,7 +60,7 @@ class _$_Progress implements _Progress {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(String result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -73,7 +73,7 @@ class _$_Progress implements _Progress {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(String result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -153,7 +153,7 @@ class _$_Success implements _Success {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(String result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -166,7 +166,7 @@ class _$_Success implements _Success {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(String result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -214,34 +214,37 @@ abstract class _Success implements TestState {
 }
 
 class _$_Error implements _Error {
-  const _$_Error(this.message) : assert(message != null);
+  const _$_Error(this.errorMessage) : assert(errorMessage != null);
 
   @override
-  final String message;
+  final RawKeyString errorMessage;
 
   @override
   String toString() {
-    return 'TestState.error(message: $message)';
+    return 'TestState.error(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Error &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(message);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
 
   @override
   _$_Error copyWith({
-    Object message = freezed,
+    Object errorMessage = freezed,
   }) {
     return _$_Error(
-      message == freezed ? this.message : message as String,
+      errorMessage == freezed
+          ? this.errorMessage
+          : errorMessage as RawKeyString,
     );
   }
 
@@ -250,12 +253,12 @@ class _$_Error implements _Error {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(String result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
     assert(error != null);
-    return error(message);
+    return error(errorMessage);
   }
 
   @override
@@ -263,12 +266,12 @@ class _$_Error implements _Error {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(String result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error(message);
+      return error(errorMessage);
     }
     return orElse();
   }
@@ -303,9 +306,9 @@ class _$_Error implements _Error {
 }
 
 abstract class _Error implements TestState {
-  const factory _Error(String message) = _$_Error;
+  const factory _Error(RawKeyString errorMessage) = _$_Error;
 
-  String get message;
+  RawKeyString get errorMessage;
 
-  _Error copyWith({String message});
+  _Error copyWith({RawKeyString errorMessage});
 }

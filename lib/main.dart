@@ -7,8 +7,8 @@ import 'package:tictactoe/bloc/test_event.dart';
 import 'package:tictactoe/bloc/test_state.dart';
 import 'package:tictactoe/core/bloc/error_logger_bloc_delegate.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/internationalization/app_localizations.dart';
-import 'package:tictactoe/core/internationalization/locale_provider.dart';
+import 'package:tictactoe/core/localization/app_localizations.dart';
+import 'package:tictactoe/core/localization/locale_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,22 +47,17 @@ class TestPage extends StatelessWidget {
         title: Text(AppLocalizations.of(context).hello),
       ),
       body: BlocProvider(
-        create: (context) =>
-        getIt.get<TestBloc>()
-          ..add(TestEvent.login()),
+        create: (context) => getIt.get<TestBloc>()..add(TestEvent.fetchGames()),
         child: BlocBuilder<TestBloc, TestState>(
-          builder: (context, state) =>
-              state.when(
-                progress: () => CircularProgressIndicator(),
-                success: (result) =>
-                    Text(
-                      result,
-                      style: TextStyle(color: Colors.green),
-                    ),
-                error: (message) =>
-                    Text(
-                      message,
-                      style: TextStyle(color: Colors.red),
+          builder: (context, state) => state.when(
+            progress: () => CircularProgressIndicator(),
+            success: (result) => Text(
+              result,
+              style: TextStyle(color: Colors.green),
+            ),
+            error: (errorMessage) => Text(
+              AppLocalizations.of(context).get(errorMessage),
+              style: TextStyle(color: Colors.red),
             ),
           ),
         ),

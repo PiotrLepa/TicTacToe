@@ -13,9 +13,7 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$ErrorResponse {
   int get code;
-
   String get developerMessage;
-
   String get printableMessage;
 
   ErrorResponse copyWith(
@@ -93,12 +91,13 @@ class _$_ErrorResponse implements _ErrorResponse {
 }
 
 abstract class _ErrorResponse implements ErrorResponse {
-  const factory _ErrorResponse({@required int code,
-    @required String developerMessage,
-    String printableMessage}) = _$_ErrorResponse;
+  const factory _ErrorResponse(
+      {@required int code,
+      @required String developerMessage,
+      String printableMessage}) = _$_ErrorResponse;
 
   factory _ErrorResponse.fromJson(Map<String, dynamic> json) =
-  _$_ErrorResponse.fromJson;
+      _$_ErrorResponse.fromJson;
 
   @override
   int get code;

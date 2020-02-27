@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/internationalization/locale_provider.dart';
+import 'package:tictactoe/core/localization/locale_provider.dart';
+import 'package:tictactoe/raw_key_string.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -23,7 +24,9 @@ class AppLocalizations {
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String get(String key) => _localizedStrings[key];
+  String translate(String key) => _localizedStrings[key];
+
+  String get(RawKeyString rawKeyString) => rawKeyString.get(_localizedStrings);
 
   static LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();

@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package
+// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const
 
 part of call_state;
 
@@ -12,14 +12,14 @@ mixin _$CallState<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   });
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   });
 
@@ -60,7 +60,7 @@ class _$Progress<T> implements Progress<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -73,7 +73,7 @@ class _$Progress<T> implements Progress<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -136,13 +136,13 @@ class _$Success<T> implements Success<T> {
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ result.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
 
   @override
   _$Success<T> copyWith({
     Object result = freezed,
   }) {
-    assert(result != null);
     return _$Success<T>(
       result == freezed ? this.result : result as T,
     );
@@ -153,7 +153,7 @@ class _$Success<T> implements Success<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
@@ -166,7 +166,7 @@ class _$Success<T> implements Success<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -214,34 +214,37 @@ abstract class Success<T> implements CallState<T> {
 }
 
 class _$Error<T> implements Error<T> {
-  const _$Error(this.message) : assert(message != null);
+  const _$Error(this.errorMessage) : assert(errorMessage != null);
 
   @override
-  final String message;
+  final RawKeyString errorMessage;
 
   @override
   String toString() {
-    return 'CallState<$T>.error(message: $message)';
+    return 'CallState<$T>.error(errorMessage: $errorMessage)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Error<T> &&
-            (identical(other.message, message) ||
-                const DeepCollectionEquality().equals(other.message, message)));
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode ^ message.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
 
   @override
   _$Error<T> copyWith({
-    Object message = freezed,
+    Object errorMessage = freezed,
   }) {
-    assert(message != null);
     return _$Error<T>(
-      message == freezed ? this.message : message as String,
+      errorMessage == freezed
+          ? this.errorMessage
+          : errorMessage as RawKeyString,
     );
   }
 
@@ -250,12 +253,12 @@ class _$Error<T> implements Error<T> {
   Result when<Result extends Object>({
     @required Result progress(),
     @required Result success(T result),
-    @required Result error(String message),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(progress != null);
     assert(success != null);
     assert(error != null);
-    return error(message);
+    return error(errorMessage);
   }
 
   @override
@@ -263,12 +266,12 @@ class _$Error<T> implements Error<T> {
   Result maybeWhen<Result extends Object>({
     Result progress(),
     Result success(T result),
-    Result error(String message),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (error != null) {
-      return error(message);
+      return error(errorMessage);
     }
     return orElse();
   }
@@ -303,9 +306,9 @@ class _$Error<T> implements Error<T> {
 }
 
 abstract class Error<T> implements CallState<T> {
-  const factory Error(String message) = _$Error<T>;
+  const factory Error(RawKeyString errorMessage) = _$Error<T>;
 
-  String get message;
+  RawKeyString get errorMessage;
 
-  Error<T> copyWith({String message});
+  Error<T> copyWith({RawKeyString errorMessage});
 }
