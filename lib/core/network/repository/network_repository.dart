@@ -17,6 +17,9 @@ class NetworkRepository {
     final response = error.response;
     final statusCode = response?.statusCode;
     if (statusCode == null) {
+      if (error.error is ApiException) {
+        return error.error;
+      }
       return ApiException.unknownError(-1, null);
     }
     try {
