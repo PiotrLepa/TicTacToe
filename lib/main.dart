@@ -40,28 +40,59 @@ class MyApp extends StatelessWidget {
 }
 
 class TestPage extends StatelessWidget {
+  final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
+
+  final testBloc = getIt.get<TestBloc>();
+
   @override
   Widget build(BuildContext context) {
+    _localeProvider.currentLocale = Localizations.localeOf(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(AppLocalizations.of(context).hello),
       ),
       body: BlocProvider(
-        create: (context) => getIt.get<TestBloc>()..add(TestEvent.fetchGames()),
-        child: BlocBuilder<TestBloc, TestState>(
-          builder: (context, state) => state.when(
-            progress: () => CircularProgressIndicator(),
-            success: (result) => Text(
-              result,
-              style: TextStyle(color: Colors.green),
-            ),
-            error: (errorMessage) => Text(
-              AppLocalizations.of(context).get(errorMessage),
-              style: TextStyle(color: Colors.red),
-            ),
-          ),
+        create: (context) => testBloc,
+        child: Column(
+          children: [
+            buildButtons(),
+            buildNetworkResponse(testBloc),
+          ],
         ),
       ),
     );
   }
+
+  Widget buildButtons() => Row(
+        children: [
+          RaisedButton(
+            onPressed: () => testBloc.add(TestEvent.login()),
+            child: Text("Login"),
+          ),
+          RaisedButton(
+            onPressed: () => testBloc.add(TestEvent.fetchGames()),
+            child: Text("Fetch games"),
+          ),
+          RaisedButton(
+            onPressed: () => testBloc.add(TestEvent.makeError()),
+            child: Text("Make Network Error"),
+          ),
+        ],
+      );
+
+  Widget buildNetworkResponse(Bloc bloc) => BlocBuilder<TestBloc, TestState>(
+        bloc: bloc,
+        builder: (context, state) => state.when(
+          initial: () => Container(),
+          progress: () => CircularProgressIndicator(),
+          success: (result) => Text(
+            result,
+            style: TextStyle(color: Colors.green),
+          ),
+          error: (errorMessage) => Text(
+            AppLocalizations.of(context).get(errorMessage),
+            style: TextStyle(color: Colors.red),
+          ),
+        ),
+      );
 }

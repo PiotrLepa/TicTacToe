@@ -5,6 +5,7 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/connection_interceptor.dart';
+import 'package:tictactoe/core/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/logger_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/refresh_token_interceptor.dart';
 import 'package:tictactoe/core/network/network_constant.dart';
@@ -16,6 +17,7 @@ abstract class NetworkClient {
   Dio get dioDefault => Dio()
     ..options.baseUrl = baseUrl
     ..interceptors.add(getIt.get<BearerTokenInterceptor>()) // TODO better way?
+    ..interceptors.add(getIt.get<LanguageInterceptor>())
     ..interceptors.add(getIt.get<LoggerInterceptor>())
     ..interceptors.add(getIt.get<ConnectionInterceptor>())
     ..interceptors.add(getIt.get<RefreshTokenInterceptor>());
@@ -25,6 +27,7 @@ abstract class NetworkClient {
   Dio get dioRefreshToken => Dio()
     ..options.baseUrl = baseUrl
     ..interceptors.add(getIt.get<BearerTokenInterceptor>())
+    ..interceptors.add(getIt.get<LanguageInterceptor>())
     ..interceptors.add(getIt.get<LoggerInterceptor>())
     ..interceptors.add(getIt.get<ConnectionInterceptor>());
 

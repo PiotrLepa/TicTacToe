@@ -10,6 +10,7 @@ part of test_state;
 mixin _$TestState {
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result initial(),
     @required Result progress(),
     @required Result success(String result),
     @required Result error(RawKeyString errorMessage),
@@ -17,6 +18,7 @@ mixin _$TestState {
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result initial(),
     Result progress(),
     Result success(String result),
     Result error(RawKeyString errorMessage),
@@ -25,6 +27,7 @@ mixin _$TestState {
 
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result initial(_Initial value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
@@ -32,11 +35,95 @@ mixin _$TestState {
 
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
     Result progress(_Progress value),
     Result success(_Success value),
     Result error(_Error value),
     @required Result orElse(),
   });
+}
+
+class _$_Initial implements _Initial {
+  const _$_Initial();
+
+  @override
+  String toString() {
+    return 'TestState.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Initial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
+  }) {
+    assert(initial != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(_Initial value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
+  }) {
+    assert(initial != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initial implements TestState {
+  const factory _Initial() = _$_Initial;
 }
 
 class _$_Progress implements _Progress {
@@ -58,10 +145,12 @@ class _$_Progress implements _Progress {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result initial(),
     @required Result progress(),
     @required Result success(String result),
     @required Result error(RawKeyString errorMessage),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -71,6 +160,7 @@ class _$_Progress implements _Progress {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result initial(),
     Result progress(),
     Result success(String result),
     Result error(RawKeyString errorMessage),
@@ -86,10 +176,12 @@ class _$_Progress implements _Progress {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result initial(_Initial value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -99,6 +191,7 @@ class _$_Progress implements _Progress {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
     Result progress(_Progress value),
     Result success(_Success value),
     Result error(_Error value),
@@ -151,10 +244,12 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result initial(),
     @required Result progress(),
     @required Result success(String result),
     @required Result error(RawKeyString errorMessage),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -164,6 +259,7 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result initial(),
     Result progress(),
     Result success(String result),
     Result error(RawKeyString errorMessage),
@@ -179,10 +275,12 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result initial(_Initial value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -192,6 +290,7 @@ class _$_Success implements _Success {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
     Result progress(_Progress value),
     Result success(_Success value),
     Result error(_Error value),
@@ -251,10 +350,12 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
+    @required Result initial(),
     @required Result progress(),
     @required Result success(String result),
     @required Result error(RawKeyString errorMessage),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -264,6 +365,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
+    Result initial(),
     Result progress(),
     Result success(String result),
     Result error(RawKeyString errorMessage),
@@ -279,10 +381,12 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
+    @required Result initial(_Initial value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
   }) {
+    assert(initial != null);
     assert(progress != null);
     assert(success != null);
     assert(error != null);
@@ -292,6 +396,7 @@ class _$_Error implements _Error {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
     Result progress(_Progress value),
     Result success(_Success value),
     Result error(_Error value),

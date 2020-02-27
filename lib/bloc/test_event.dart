@@ -9,4 +9,6 @@ abstract class TestEvent with _$TestEvent {
   const factory TestEvent.login() = _Login;
 
   const factory TestEvent.fetchGames() = _FetchGames;
+
+  const factory TestEvent.makeError() = _MakeError;
 }

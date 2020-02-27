@@ -14,6 +14,7 @@ import 'package:tictactoe/core/network/service/network_service.dart';
 import 'package:tictactoe/core/network/service/refresh_token_network_service.dart';
 import 'package:tictactoe/core/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/localization/locale_provider.dart';
+import 'package:tictactoe/core/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/core/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/network/repository/refresh_token_repository.dart';
 import 'package:tictactoe/core/network/repository/test_repository.dart';
@@ -44,7 +45,10 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerFactory<OauthTokensStorage>(() => OauthTokensStorage(
         g<SharedPreferences>(),
       ));
-  g.registerFactory<LocaleProvider>(() => LocaleProvider());
+  g.registerLazySingleton<LocaleProvider>(() => LocaleProvider());
+  g.registerFactory<LanguageInterceptor>(() => LanguageInterceptor(
+        g<LocaleProvider>(),
+      ));
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
@@ -56,7 +60,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       ));
   g.registerFactory<TestBloc>(() => TestBloc(
         g<OauthTokensStorage>(),
-        g<NetworkService>(),
         g<TestRepository>(),
       ));
   g.registerFactory<RefreshTokenInterceptor>(() => RefreshTokenInterceptor(

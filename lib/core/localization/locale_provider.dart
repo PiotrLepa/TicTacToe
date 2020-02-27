@@ -3,7 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
+@lazySingleton
 class LocaleProvider {
+  Locale currentLocale; // set is main file
+
   BuiltList<Locale> getSupportedLocales() => BuiltList([
         const Locale('pl'),
         const Locale('en'),
