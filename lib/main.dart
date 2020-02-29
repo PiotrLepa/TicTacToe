@@ -2,13 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:tictactoe/bloc/test_bloc.dart';
-import 'package:tictactoe/bloc/test_event.dart';
-import 'package:tictactoe/bloc/test_state.dart';
-import 'package:tictactoe/core/bloc/error_logger_bloc_delegate.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/localization/app_localizations.dart';
-import 'package:tictactoe/core/localization/locale_provider.dart';
+import 'package:tictactoe/core/presentation/bloc/error_logger_bloc_delegate.dart';
+import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/util/locale_provider.dart';
+import 'package:tictactoe/presentation/test_bloc.dart';
+import 'package:tictactoe/presentation/test_event.dart';
+import 'package:tictactoe/presentation/test_state.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
