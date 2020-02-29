@@ -1,3 +1,9 @@
 {
-  "hello": "hello"
+  "hello": "hello",
+  "api_error_no_connection": "No internet connection",
+  "api_error_bad_request": "Something get wrong",
+  "api_error_unauthorized": "Lack of access",
+  "api_error_not_found": "Not found",
+  "api_error_internal_server_error": "Internal server error",
+  "api_error_unknown": "Unknown error"
 }
