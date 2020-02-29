@@ -1,8 +1,7 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-
-import 'json_factories.dart';
+import 'package:tictactoe/core/data/serializer/json_factories.dart';
 
 typedef T JsonFactory<T>(Map<String, dynamic> json);
 

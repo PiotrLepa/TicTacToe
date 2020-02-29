@@ -14,7 +14,6 @@ RefreshTokenRequest _$RefreshTokenRequestFromJson(Map<String, dynamic> json) {
 mixin _$RefreshTokenRequest {
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
@@ -111,7 +110,6 @@ abstract class _RefreshTokenRequest implements RefreshTokenRequest {
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;

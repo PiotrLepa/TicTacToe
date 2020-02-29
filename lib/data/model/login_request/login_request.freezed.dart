@@ -14,9 +14,7 @@ LoginRequest _$LoginRequestFromJson(Map<String, dynamic> json) {
 mixin _$LoginRequest {
   @JsonKey(name: 'username')
   String get email;
-
   String get password;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
@@ -125,10 +123,8 @@ abstract class _LoginRequest implements LoginRequest {
   @override
   @JsonKey(name: 'username')
   String get email;
-
   @override
   String get password;
-
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;

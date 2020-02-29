@@ -13,9 +13,7 @@ GameResponse _$GameResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$GameResponse {
   int get gameId;
-
   int get startDate;
-
   int get endDate;
 
   GameResponse copyWith({int gameId, int startDate, int endDate});
@@ -107,10 +105,8 @@ abstract class _GameResponse implements GameResponse {
 
   @override
   int get gameId;
-
   @override
   int get startDate;
-
   @override
   int get endDate;
 

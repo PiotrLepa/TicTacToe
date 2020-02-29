@@ -9,7 +9,6 @@ part of api_exception;
 
 mixin _$ApiException {
   int get code;
-
   @nullable
   String get printableMessage;
 
@@ -235,7 +234,6 @@ abstract class _NoConnection implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
@@ -371,7 +369,6 @@ abstract class _BadRequest implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
@@ -432,8 +429,8 @@ class _$_Unauthorized implements _Unauthorized {
     @required Result badRequest(int code, @nullable String printableMessage),
     @required Result unauthorized(int code, @nullable String printableMessage),
     @required Result notFound(int code, @nullable String printableMessage),
-    @required Result internalServerError(int code,
-        @nullable String printableMessage),
+    @required
+        Result internalServerError(int code, @nullable String printableMessage),
     @required Result unknownError(int code, @nullable String printableMessage),
   }) {
     assert(noConnection != null);
@@ -503,11 +500,10 @@ class _$_Unauthorized implements _Unauthorized {
 
 abstract class _Unauthorized implements ApiException {
   const factory _Unauthorized(int code, @nullable String printableMessage) =
-  _$_Unauthorized;
+      _$_Unauthorized;
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
@@ -643,7 +639,6 @@ abstract class _NotFound implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
@@ -915,7 +910,6 @@ abstract class _UnknownError implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;

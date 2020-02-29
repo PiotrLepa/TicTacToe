@@ -25,6 +25,8 @@ import 'package:tictactoe/presentation/test_bloc.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();
+  g.registerFactory<ConnectionInterceptor>(() => ConnectionInterceptor());
+  g.registerFactory<LoggerInterceptor>(() => LoggerInterceptor());
   g.registerFactory<ResponseConverter>(() => ResponseConverter());
   g.registerLazySingleton<Dio>(() => networkClient.dioDefault,
       instanceName: 'defaultNetworkClient');
@@ -33,6 +35,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   final sharedPreferences = await networkClient.sharedPreferences;
   g.registerFactory<SharedPreferences>(() => sharedPreferences);
   g.registerLazySingleton<ErrorTranslator>(() => ErrorTranslator());
+  g.registerLazySingleton<LocaleProvider>(() => LocaleProvider());
   g.registerFactory<OauthTokensStorage>(() => OauthTokensStorage(
         g<SharedPreferences>(),
       ));
@@ -48,9 +51,9 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
-  g.registerFactory<ConnectionInterceptor>(() => ConnectionInterceptor());
-  g.registerFactory<LoggerInterceptor>(() => LoggerInterceptor());
-  g.registerLazySingleton<LocaleProvider>(() => LocaleProvider());
+  g.registerFactory<LanguageInterceptor>(() => LanguageInterceptor(
+        g<LocaleProvider>(),
+      ));
   g.registerFactory<RefreshTokenRepository>(() => RefreshTokenRepository(
         g<RefreshTokenNetworkService>(),
       ));
@@ -60,9 +63,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerFactory<TestBloc>(() => TestBloc(
         g<OauthTokensStorage>(),
         g<TestRepository>(),
-      ));
-  g.registerFactory<LanguageInterceptor>(() => LanguageInterceptor(
-        g<LocaleProvider>(),
       ));
   g.registerFactory<RefreshTokenInterceptor>(() => RefreshTokenInterceptor(
         g<OauthTokensStorage>(),

@@ -4,8 +4,8 @@ import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/data/serializer/response_converter.dart';
 import 'package:tictactoe/core/data/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
+import 'package:tictactoe/data/model/login_response/login_response.dart';
 import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request.dart';
-import 'package:tictactoe/data/model/refresh_token_response/refresh_token_response.dart';
 
 @injectable
 class RefreshTokenNetworkService extends BaseNetworkService {
@@ -13,7 +13,7 @@ class RefreshTokenNetworkService extends BaseNetworkService {
       ResponseConverter responseConverter)
       : super(dio, responseConverter);
 
-  Future<Response<RefreshTokenResponse>> refreshAccessToken(
+  Future<Response<LoginResponse>> refreshAccessToken(
     RefreshTokenRequest request,
   ) =>
       post(
