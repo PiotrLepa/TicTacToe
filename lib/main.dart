@@ -6,7 +6,7 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/bloc/error_logger_bloc_delegate.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
-import 'package:tictactoe/presentation/pages/router/router.gr.dart';
+import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: Router.onGenerateRoute,
       navigatorKey: Router.navigator.key,
-      initialRoute: Router.startGamePage,
+      initialRoute: Router.homeScreen,
     );
   }
 }

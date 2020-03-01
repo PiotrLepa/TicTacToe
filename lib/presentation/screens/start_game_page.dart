@@ -3,12 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
-import 'package:tictactoe/presentation/pages/router/router.gr.dart';
+import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
 import 'package:tictactoe/presentation/test_event.dart';
 import 'package:tictactoe/presentation/test_state.dart';
 
-class StartGamePage extends StatelessWidget {
+class StartGamePage extends StatefulWidget {
+  @override
+  _StartGamePageState createState() => _StartGamePageState();
+}
+
+class _StartGamePageState extends State<StartGamePage> {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
 
   final testBloc = getIt.get<TestBloc>();
@@ -17,9 +22,6 @@ class StartGamePage extends StatelessWidget {
   Widget build(BuildContext context) {
     _localeProvider.currentLocale = Localizations.localeOf(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context).hello),
-      ),
       body: BlocProvider(
         create: (context) => testBloc,
         child: Column(

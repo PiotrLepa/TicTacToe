@@ -21,6 +21,7 @@ import 'package:tictactoe/data/repository/refresh_token_repository.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
+import 'package:tictactoe/presentation/bloc/bottom_navigation/BottomNavigationBloc.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
@@ -48,6 +49,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
             g('refreshTokenNetworkClient'),
             g<ResponseConverter>(),
           ));
+  g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
