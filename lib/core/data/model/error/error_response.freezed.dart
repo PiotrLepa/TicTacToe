@@ -13,7 +13,9 @@ ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
 
 mixin _$ErrorResponse {
   int get code;
+
   String get developerMessage;
+
   String get printableMessage;
 
   ErrorResponse copyWith(
@@ -118,8 +120,10 @@ abstract class _ErrorResponse implements ErrorResponse {
 
   @override
   int get code;
+
   @override
   String get developerMessage;
+
   @override
   String get printableMessage;
 

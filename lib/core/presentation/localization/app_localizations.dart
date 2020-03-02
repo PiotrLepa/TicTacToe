@@ -13,7 +13,26 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
-  String get hello => _localizedStrings["hello"];
+//  Errors
+  String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
+
+  String get apiErrorBadRequest => _localizedStrings["apiErrorBadRequest"];
+
+  String get apiErrorUnauthorized => _localizedStrings["apiErrorUnauthorized"];
+
+  String get apiErrorNotFound => _localizedStrings["apiErrorNotFound"];
+
+  String get apiErrorInternalServerError =>
+      _localizedStrings["apiErrorInternalServerError"];
+
+  String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
+
+//  Bottom Navigation
+  String get pagePlay => _localizedStrings["pagePlay"];
+
+  String get pageGameResults => _localizedStrings["pageGameResults"];
+
+  String get pageSettings => _localizedStrings["pageSettings"];
 
   Future load() async {
     final String jsonString =

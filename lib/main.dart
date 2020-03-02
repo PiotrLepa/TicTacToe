@@ -6,6 +6,7 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/bloc/error_logger_bloc_delegate.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
+import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
 Future<void> main() async {
@@ -20,20 +21,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<BottomNavigationBloc>(
+          create: (BuildContext context) => getIt.get<BottomNavigationBloc>(),
+        )
       ],
-      supportedLocales: _localeProvider.getSupportedLocales(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+      child: MaterialApp(
+        localizationsDelegates: [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: _localeProvider.getSupportedLocales(),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        onGenerateRoute: Router.onGenerateRoute,
+        navigatorKey: Router.navigator.key,
+        initialRoute: Router.homeScreen,
       ),
-      onGenerateRoute: Router.onGenerateRoute,
-      navigatorKey: Router.navigator.key,
-      initialRoute: Router.homeScreen,
     );
   }
 }

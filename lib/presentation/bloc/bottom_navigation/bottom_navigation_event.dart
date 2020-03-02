@@ -1,8 +1,4 @@
-library bottom_navigation_event;
-
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'bottom_navigation_event.freezed.dart';
+part of 'bottom_navigation_bloc.dart';
 
 @freezed
 abstract class BottomNavigationEvent with _$BottomNavigationEvent {

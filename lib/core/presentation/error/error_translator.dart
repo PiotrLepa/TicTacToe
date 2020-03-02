@@ -10,12 +10,12 @@ class ErrorTranslator {
       return RawString(exception.printableMessage);
     }
     final keyString = exception.map(
-      noConnection: (value) => "api_error_no_connection",
-      badRequest: (value) => "api_error_bad_request",
-      unauthorized: (value) => "api_error_unauthorized",
-      notFound: (value) => "api_error_not_found",
-      internalServerError: (value) => "api_error_internal_server_error",
-      unknownError: (value) => "api_error_unknown",
+      noConnection: (value) => "apiErrorNoConnection",
+      badRequest: (value) => "apiErrorBadRequest",
+      unauthorized: (value) => "apiErrorUnauthorized",
+      notFound: (value) => "apiErrorNotFound",
+      internalServerError: (value) => "apiErrorInternalServerError",
+      unknownError: (value) => "apiErrorUnknown",
     );
     return KeyString(keyString);
   }

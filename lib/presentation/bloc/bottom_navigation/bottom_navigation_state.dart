@@ -1,10 +1,9 @@
-library bottom_navigation_state;
-
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'bottom_navigation_state.freezed.dart';
+part of 'bottom_navigation_bloc.dart';
 
 @freezed
 abstract class BottomNavigationState with _$BottomNavigationState {
-  const factory BottomNavigationState.updatePage(int index) = _UpdatePage;
+  const factory BottomNavigationState.updatePage({
+    @required RawKeyString pageTitle,
+    @required int index,
+  }) = _UpdatePage;
 }

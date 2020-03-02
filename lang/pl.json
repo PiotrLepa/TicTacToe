@@ -1,9 +1,14 @@
 {
-  "hello": "cześć",
-  "api_error_no_connection": "Brak połączenia z internetem",
-  "api_error_bad_request": "Coś poszło nie tak",
-  "api_error_unauthorized": "Brak dostępu",
-  "api_error_not_found": "Nie znaleziono",
-  "api_error_internal_server_error": "Wewnętrzny błąd serwera",
-  "api_error_unknown": "Nieznany błąd"
+  "ERRORS": "",
+  "apiErrorNoConnection": "Brak połączenia z internetem",
+  "apiErrorBadRequest": "Coś poszło nie tak",
+  "apiErrorUnauthorized": "Brak dostępu",
+  "apiErrorNotFound": "Nie znaleziono",
+  "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
+  "apiErrorUnknown": "Nieznany błąd",
+
+  "BOTTOM_NAVIGATION": "",
+  "pagePlay": "Zagraj",
+  "pageGameResults": "Wyniki",
+  "pageSettings": "Ustawienia"
 }
