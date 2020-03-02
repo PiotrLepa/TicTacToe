@@ -155,7 +155,7 @@ abstract class _LoginResponse implements LoginResponse {
       String scope) = _$_LoginResponse;
 
   factory _LoginResponse.fromJson(Map<String, dynamic> json) =
-  _$_LoginResponse.fromJson;
+      _$_LoginResponse.fromJson;
 
   @override
   @JsonKey(name: 'access_token')
@@ -177,9 +177,10 @@ abstract class _LoginResponse implements LoginResponse {
   String get scope;
 
   @override
-  _LoginResponse copyWith({@JsonKey(name: 'access_token') String accessToken,
-    @JsonKey(name: 'token_type') String tokenType,
-    @JsonKey(name: 'refresh_token') String refreshToken,
-    @JsonKey(name: 'expires_in') int expiresIn,
-    String scope});
+  _LoginResponse copyWith(
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'token_type') String tokenType,
+      @JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'expires_in') int expiresIn,
+      String scope});
 }
