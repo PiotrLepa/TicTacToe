@@ -14,16 +14,12 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 mixin _$LoginResponse {
   @JsonKey(name: 'access_token')
   String get accessToken;
-
   @JsonKey(name: 'token_type')
   String get tokenType;
-
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   String get scope;
 
   LoginResponse copyWith(
@@ -160,19 +156,15 @@ abstract class _LoginResponse implements LoginResponse {
   @override
   @JsonKey(name: 'access_token')
   String get accessToken;
-
   @override
   @JsonKey(name: 'token_type')
   String get tokenType;
-
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @override
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   @override
   String get scope;
 

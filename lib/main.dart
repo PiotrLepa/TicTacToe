@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
         ],
         supportedLocales: _localeProvider.getSupportedLocales(),
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.amber,
+          fontFamily: 'Lato',
         ),
         onGenerateRoute: Router.onGenerateRoute,
         navigatorKey: Router.navigator.key,

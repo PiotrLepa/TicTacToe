@@ -28,7 +28,7 @@ class AppLocalizations {
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
 //  Bottom Navigation
-  String get pagePlay => _localizedStrings["pagePlay"];
+  String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
 

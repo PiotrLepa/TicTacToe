@@ -18,7 +18,6 @@ class Router {
   static const gameResultsPage = '/game-results-page';
   static const settingsPage = '/settings-page';
   static final navigator = ExtendedNavigator();
-
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {

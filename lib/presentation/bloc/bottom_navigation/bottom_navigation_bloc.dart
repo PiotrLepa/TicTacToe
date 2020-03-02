@@ -4,16 +4,14 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/util/raw_key_string.dart';
 
 part 'bottom_navigation_bloc.freezed.dart';
-
 part 'bottom_navigation_event.dart';
-
 part 'bottom_navigation_state.dart';
 
 @injectable
 class BottomNavigationBloc
     extends Bloc<BottomNavigationEvent, BottomNavigationState> {
   final pageTitles = [
-    KeyString("pagePlay"),
+    KeyString("pageStartGame"),
     KeyString("pageGameResults"),
     KeyString("pageSettings"),
   ];
