@@ -20,9 +20,7 @@ class HomeScreen extends StatelessWidget {
         builder: (BuildContext context, BottomNavigationState state) {
           return Scaffold(
             appBar: AppBar(
-              title: Text(
-                AppLocalizations.of(context).get(state.pageTitle),
-              ),
+              title: Text(AppLocalizations.of(context).get(state.pageTitle)),
             ),
             body: IndexedStack(
               index: state.index,
@@ -30,7 +28,6 @@ class HomeScreen extends StatelessWidget {
             ),
             bottomNavigationBar: BottomNavigationBar(
               items: buildBottomNavItems(context),
-              selectedItemColor: Colors.amber[800],
               currentIndex: state.index,
               onTap: (index) => BlocProvider.of<BottomNavigationBloc>(context)
                   .add(BottomNavigationEvent.onBottomNavigationTapped(index)),
@@ -42,9 +39,7 @@ class HomeScreen extends StatelessWidget {
   List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) => [
         BottomNavigationBarItem(
           icon: Icon(Icons.gamepad),
-          title: Text(AppLocalizations
-              .of(context)
-              .pageStartGame),
+          title: Text(AppLocalizations.of(context).pageStartGame),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),

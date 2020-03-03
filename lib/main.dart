@@ -35,13 +35,60 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: _localeProvider.getSupportedLocales(),
-        theme: ThemeData(
-          primarySwatch: Colors.amber,
-          fontFamily: 'Lato',
-        ),
+        theme: buildDefaultThemeData(),
+        darkTheme: buildDarkThemeData(),
         onGenerateRoute: Router.onGenerateRoute,
         navigatorKey: Router.navigator.key,
         initialRoute: Router.homeScreen,
+      ),
+    );
+  }
+
+  ThemeData buildDefaultThemeData() {
+    return ThemeData(
+      primarySwatch: Colors.amber,
+      accentColor: Colors.white,
+      fontFamily: 'Lato',
+      textTheme: TextTheme(
+        button: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      buttonTheme: ButtonThemeData(
+        textTheme: ButtonTextTheme.accent,
+        padding: EdgeInsets.all(12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
+      ),
+      appBarTheme: AppBarTheme(
+        textTheme: TextTheme(
+          title: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+
+  ThemeData buildDarkThemeData() {
+    final theme = buildDefaultThemeData();
+    final canvasColor = Colors.grey[850];
+    return theme.copyWith(
+      canvasColor: canvasColor,
+      scaffoldBackgroundColor: canvasColor,
+      textTheme: theme.textTheme.copyWith(
+        caption: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+        ),
+      ),
+      appBarTheme: theme.appBarTheme.copyWith(
+        color: canvasColor,
+        brightness: Brightness.dark,
       ),
     );
   }
