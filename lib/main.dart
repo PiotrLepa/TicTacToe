@@ -8,6 +8,7 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 import 'package:tictactoe/core/util/locale_provider.dart';
 import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
+import 'package:tictactoe/presentation/theme_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,6 +19,7 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
+  final ThemeProvider _themeProvider = getIt.get<ThemeProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,60 +37,11 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: _localeProvider.getSupportedLocales(),
-        theme: buildDefaultThemeData(),
-        darkTheme: buildDarkThemeData(),
+        theme: _themeProvider.getThemeData(),
+        darkTheme: _themeProvider.getDarkThemeData(),
         onGenerateRoute: Router.onGenerateRoute,
         navigatorKey: Router.navigator.key,
         initialRoute: Router.homeScreen,
-      ),
-    );
-  }
-
-  ThemeData buildDefaultThemeData() {
-    return ThemeData(
-      primarySwatch: Colors.amber,
-      accentColor: Colors.white,
-      fontFamily: 'Lato',
-      textTheme: TextTheme(
-        button: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      buttonTheme: ButtonThemeData(
-        textTheme: ButtonTextTheme.accent,
-        padding: EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-      ),
-      appBarTheme: AppBarTheme(
-        textTheme: TextTheme(
-          title: TextStyle(
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  ThemeData buildDarkThemeData() {
-    final theme = buildDefaultThemeData();
-    final canvasColor = Colors.grey[850];
-    return theme.copyWith(
-      canvasColor: canvasColor,
-      scaffoldBackgroundColor: canvasColor,
-      textTheme: theme.textTheme.copyWith(
-        caption: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-        ),
-      ),
-      appBarTheme: theme.appBarTheme.copyWith(
-        color: canvasColor,
-        brightness: Brightness.dark,
       ),
     );
   }

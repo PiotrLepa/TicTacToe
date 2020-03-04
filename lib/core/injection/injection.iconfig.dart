@@ -23,6 +23,7 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
+import 'package:tictactoe/presentation/theme_provider.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();
@@ -50,6 +51,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
             g<ResponseConverter>(),
           ));
   g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
+  g.registerFactory<ThemeProvider>(() => ThemeProvider());
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
