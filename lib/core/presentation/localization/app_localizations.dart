@@ -28,11 +28,14 @@ class AppLocalizations {
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
 //  Bottom Navigation
-  String get pagePlay => _localizedStrings["pagePlay"];
+  String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
 
   String get pageSettings => _localizedStrings["pageSettings"];
+
+  String get startGameGameWithComputer =>
+      _localizedStrings["startGameGameWithComputer"];
 
   Future load() async {
     final String jsonString =

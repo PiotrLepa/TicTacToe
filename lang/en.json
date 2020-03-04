@@ -8,7 +8,10 @@
   "apiErrorUnknown": "Unknown error",
 
   "BOTTOM_NAVIGATION": "",
-  "pagePlay": "Play",
+  "pageStartGame": "Play",
   "pageGameResults": "Results",
-  "pageSettings": "Settings"
+  "pageSettings": "Settings",
+
+  "START_GAME_PAGE": "",
+  "startGameGameWithComputer": "Game with computer"
 }
