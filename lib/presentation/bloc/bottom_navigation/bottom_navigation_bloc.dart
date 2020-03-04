@@ -17,8 +17,7 @@ class BottomNavigationBloc
   ];
 
   @override
-  BottomNavigationState get initialState =>
-      BottomNavigationState.updatePage(
+  BottomNavigationState get initialState => BottomNavigationState.updatePage(
         pageTitle: pageTitles[0],
         index: 0,
       );

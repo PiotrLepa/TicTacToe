@@ -7,6 +7,7 @@ import 'package:tictactoe/core/presentation/bloc/error_logger_bloc_delegate.dart
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
 import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:tictactoe/presentation/bloc/start_game/start_game_bloc.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 import 'package:tictactoe/presentation/theme_provider.dart';
 
@@ -26,8 +27,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<BottomNavigationBloc>(
-          create: (BuildContext context) => getIt.get<BottomNavigationBloc>(),
-        )
+          create: (context) => getIt.get<BottomNavigationBloc>(),
+        ),
+        BlocProvider<StartGameBloc>(
+          create: (context) => getIt.get<StartGameBloc>(),
+        ),
       ],
       child: MaterialApp(
         localizationsDelegates: [

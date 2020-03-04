@@ -4,26 +4,27 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/connection_interceptor.dart';
-import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/logger_interceptor.dart';
-import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
 import 'package:tictactoe/core/data/serializer/response_converter.dart';
+import 'package:dio/dio.dart';
 import 'package:tictactoe/core/injection/register_module.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/presentation/error/error_translator.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
 import 'package:tictactoe/core/util/oauth_tokens_storage.dart';
-import 'package:tictactoe/data/repository/refresh_token_repository.dart';
-import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
-import 'package:tictactoe/presentation/test_bloc.dart';
 import 'package:tictactoe/presentation/theme_provider.dart';
+import 'package:tictactoe/presentation/bloc/start_game/start_game_bloc.dart';
+import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
+import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
+import 'package:tictactoe/data/repository/refresh_token_repository.dart';
+import 'package:tictactoe/data/repository/test_repository.dart';
+import 'package:tictactoe/presentation/test_bloc.dart';
+import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
+import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();
@@ -52,6 +53,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
           ));
   g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
   g.registerFactory<ThemeProvider>(() => ThemeProvider());
+  g.registerFactory<StartGameBloc>(() => StartGameBloc());
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
