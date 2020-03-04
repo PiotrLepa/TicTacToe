@@ -19,12 +19,21 @@ class _$StartGameEventTearOff {
 
 const $StartGameEvent = _$StartGameEventTearOff();
 
-class _$_OnStartGameTapped implements _OnStartGameTapped {
+class _$_OnStartGameTapped
+    with DiagnosticableTreeMixin
+    implements _OnStartGameTapped {
   const _$_OnStartGameTapped();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'StartGameEvent.onStartGameTapped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'StartGameEvent.onStartGameTapped'));
   }
 
   @override
@@ -52,12 +61,18 @@ class _$StartGameStateTearOff {
 
 const $StartGameState = _$StartGameStateTearOff();
 
-class _$_Nothing implements _Nothing {
+class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   const _$_Nothing();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'StartGameState.nothing()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'StartGameState.nothing'));
   }
 
   @override
