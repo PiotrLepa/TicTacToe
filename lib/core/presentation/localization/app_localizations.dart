@@ -34,6 +34,9 @@ class AppLocalizations {
 
   String get pageSettings => _localizedStrings["pageSettings"];
 
+  String get startGameGameWithComputer =>
+      _localizedStrings["startGameGameWithComputer"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

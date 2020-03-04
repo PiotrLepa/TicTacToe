@@ -10,5 +10,8 @@
   "BOTTOM_NAVIGATION": "",
   "pageStartGame": "Play",
   "pageGameResults": "Results",
-  "pageSettings": "Settings"
+  "pageSettings": "Settings",
+
+  "START_GAME_PAGE": "",
+  "startGameGameWithComputer": "Game with computer"
 }
