@@ -5,7 +5,7 @@ class ThemeProvider {
 
   Color get primaryColor => Color(0xFFF6CD61);
 
-  Color get accentColor => Color(0xFF00D1FF);
+  Color get accentColor => Color(0xFF1E6874);
 
   Color get textColor => isDark ? Colors.white : Colors.black87;
 
@@ -55,35 +55,4 @@ class ThemeProvider {
       ),
     );
   }
-
-//  ThemeData getDarkThemeData() {
-//    final theme = getThemeData();
-//    return ThemeData(
-//      brightness: Brightness.dark,
-//      primaryColor: primaryColor,
-//      accentColor: accentColor,
-//      fontFamily: 'Lato',
-//      textTheme: theme.textTheme
-//          .copyWith(
-//            caption: TextStyle(
-//              color: darkThemeTextColor,
-//            ),
-//          )
-//          .apply(
-//            bodyColor: darkThemeTextColor,
-//          ),
-//      buttonTheme: theme.buttonTheme,
-//      appBarTheme: theme.appBarTheme.copyWith(
-//        brightness: Brightness.dark,
-//        iconTheme: theme.appBarTheme.iconTheme.copyWith(
-//          color: darkThemeTextColor,
-//        ),
-//        textTheme: theme.appBarTheme.textTheme.copyWith(
-//          title: theme.appBarTheme.textTheme.title.copyWith(
-//            color: darkThemeTextColor,
-//          ),
-//        ),
-//      ),
-//    );
-//  }
 }

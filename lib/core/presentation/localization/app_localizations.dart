@@ -37,6 +37,8 @@ class AppLocalizations {
 
   String get gameScreenTitle => _localizedStrings["gameScreenTitle"];
 
+  String get gameScreenPlayerMark => _localizedStrings["gameScreenPlayerMark"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

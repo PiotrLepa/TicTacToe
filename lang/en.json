@@ -1,5 +1,4 @@
 {
-  "ERRORS": "",
   "apiErrorNoConnection": "No internet connection",
   "apiErrorBadRequest": "Something get wrong",
   "apiErrorUnauthorized": "Lack of access",
@@ -7,11 +6,12 @@
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
 
-  "BOTTOM_NAVIGATION": "",
   "pageStartGame": "Play",
   "pageGameResults": "Results",
   "pageSettings": "Settings",
 
-  "START_GAME_PAGE": "",
-  "startGameGameWithComputer": "Game with computer"
+  "startGameGameWithComputer": "Game with computer",
+
+  "gameScreenTitle": "Game with computer",
+  "gameScreenPlayerMark": "You play as:"
 }

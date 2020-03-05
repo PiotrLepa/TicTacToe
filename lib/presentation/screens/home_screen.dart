@@ -43,25 +43,26 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) =>
-      [
+  List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) => [
         BottomNavigationBarItem(
           icon: Icon(Icons.gamepad),
-          title: Text(AppLocalizations
-              .of(context)
-              .pageStartGame),
+          title: Text(
+            AppLocalizations.of(context).pageStartGame,
+          ),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),
-          title: Text(AppLocalizations
-              .of(context)
-              .pageGameResults),
+          title: Text(
+            AppLocalizations.of(context).pageGameResults,
+          ),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          title: Text(AppLocalizations
-              .of(context)
-              .pageSettings),
+          title: Text(
+            AppLocalizations
+                .of(context)
+                .pageSettings,
+          ),
         ),
       ];
 }
