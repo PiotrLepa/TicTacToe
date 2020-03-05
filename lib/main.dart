@@ -20,7 +20,6 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
-  final ThemeProvider _themeProvider = getIt.get<ThemeProvider>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +40,8 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: _localeProvider.getSupportedLocales(),
-        theme: _themeProvider.getThemeData(),
-        darkTheme: _themeProvider.getDarkThemeData(),
+        theme: ThemeProvider(isDark: false).getThemeData(),
+        darkTheme: ThemeProvider(isDark: true).getThemeData(),
         onGenerateRoute: Router.onGenerateRoute,
         navigatorKey: Router.navigator.key,
         initialRoute: Router.homeScreen,

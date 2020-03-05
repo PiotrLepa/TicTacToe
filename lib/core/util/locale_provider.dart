@@ -2,7 +2,6 @@ import 'package:built_collection/built_collection.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
-@injectable
 @lazySingleton
 class LocaleProvider {
   Locale currentLocale; // set is main file

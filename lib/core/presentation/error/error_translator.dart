@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
 import 'package:tictactoe/core/util/raw_key_string.dart';
 
-@injectable
 @lazySingleton
 class ErrorTranslator {
   RawKeyString translate(ApiException exception) {

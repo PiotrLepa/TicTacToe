@@ -13,7 +13,6 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
-//  Errors
   String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
 
   String get apiErrorBadRequest => _localizedStrings["apiErrorBadRequest"];
@@ -27,7 +26,6 @@ class AppLocalizations {
 
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
-//  Bottom Navigation
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
@@ -36,6 +34,8 @@ class AppLocalizations {
 
   String get startGameGameWithComputer =>
       _localizedStrings["startGameGameWithComputer"];
+
+  String get gameScreenTitle => _localizedStrings["gameScreenTitle"];
 
   Future load() async {
     final String jsonString =
