@@ -39,6 +39,13 @@ class AppLocalizations {
 
   String get gameScreenPlayerMark => _localizedStrings["gameScreenPlayerMark"];
 
+  String get difficultyLevelEasy => _localizedStrings["difficultyLevelEasy"];
+
+  String get difficultyLevelMedium =>
+      _localizedStrings["difficultyLevelMedium"];
+
+  String get difficultyLevelHard => _localizedStrings["difficultyLevelHard"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

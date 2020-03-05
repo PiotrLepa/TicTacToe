@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/presentation/future_dispatch.dart';
+import 'package:tictactoe/core/presentation/bloc_helper.dart';
 import 'package:tictactoe/core/util/oauth_tokens_storage.dart';
 import 'package:tictactoe/data/model/login_request/login_request.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
@@ -28,7 +28,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _fetchGamesSecured() async* {
-    yield* dispatch(_testRepository.fetchGames()).map(
+    yield* fetch(_testRepository.fetchGames()).map(
       (state) => state.map(
         progress: (_) => TestState.progress(),
         success: (success) {
@@ -46,17 +46,18 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       password: "dev12",
       grantType: oauthGrantTypePassword,
     );
-    yield* dispatch(_testRepository.login(request)).map(
-      (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final tokens = success.result;
-          _oauthTokensStorage.saveTokens(
-            tokens.accessToken,
-            tokens.refreshToken,
-          );
-          return TestState.success(tokens.toString());
-        },
+    yield* fetch(_testRepository.login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final tokens = success.result;
+              _oauthTokensStorage.saveTokens(
+                tokens.accessToken,
+                tokens.refreshToken,
+              );
+              return TestState.success(tokens.toString());
+            },
         error: (error) => TestState.error(error.errorMessage),
       ),
     );
@@ -68,17 +69,18 @@ class TestBloc extends Bloc<TestEvent, TestState> {
       password: "312321",
       grantType: oauthGrantTypePassword,
     );
-    yield* dispatch(_testRepository.login(request)).map(
-      (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final tokens = success.result;
-          _oauthTokensStorage.saveTokens(
-            tokens.accessToken,
-            tokens.refreshToken,
-          );
-          return TestState.success(tokens.toString());
-        },
+    yield* fetch(_testRepository.login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final tokens = success.result;
+              _oauthTokensStorage.saveTokens(
+                tokens.accessToken,
+                tokens.refreshToken,
+              );
+              return TestState.success(tokens.toString());
+            },
         error: (error) => TestState.error(error.errorMessage),
       ),
     );

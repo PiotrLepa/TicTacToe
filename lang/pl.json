@@ -6,6 +6,10 @@
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
 
+  "difficultyLevelEasy": "Łatwy",
+  "difficultyLevelMedium": "Średni",
+  "difficultyLevelHard": "Trudny",
+
   "pageStartGame": "Zagraj",
   "pageGameResults": "Wyniki",
   "pageSettings": "Ustawienia",

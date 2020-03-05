@@ -5,6 +5,10 @@ class ThemeProvider {
 
   Color get primaryColor => Color(0xFFF6CD61);
 
+  Color get primaryColorLight => Color(0xFFFFEBA1);
+
+  Color get primaryColorDark => Color(0xFFC09C31);
+
   Color get accentColor => Color(0xFF1E6874);
 
   Color get textColor => isDark ? Colors.white : Colors.black87;
@@ -24,6 +28,8 @@ class ThemeProvider {
   ThemeData getThemeData() {
     return ThemeData(
       primaryColor: primaryColor,
+      primaryColorLight: primaryColorLight,
+      primaryColorDark: primaryColorDark,
       accentColor: accentColor,
       fontFamily: 'Lato',
       brightness: isDark ? Brightness.dark : Brightness.light,
