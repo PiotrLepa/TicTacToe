@@ -20,7 +20,8 @@ class StartGamePage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: RaisedButton(
-                  onPressed: () => BlocProvider.of<StartGameBloc>(context)
+                  onPressed: () => context
+                      .bloc<StartGameBloc>()
                       .add(StartGameEvent.onStartGameTapped()),
                   child: Text(
                     AppLocalizations.of(context).startGameGameWithComputer,
@@ -57,42 +58,74 @@ class StartGamePage extends StatelessWidget {
 
   Widget buildDifficultyLevelButtons(BuildContext context) {
     final buttonTitles = [
-      AppLocalizations.of(context).difficultyLevelEasy,
-      AppLocalizations.of(context).difficultyLevelMedium,
-      AppLocalizations.of(context).difficultyLevelHard,
+      AppLocalizations
+          .of(context)
+          .difficultyLevelEasy,
+      AppLocalizations
+          .of(context)
+          .difficultyLevelMedium,
+      AppLocalizations
+          .of(context)
+          .difficultyLevelHard,
     ];
     final buttonListeners = [
       StartGameEvent.onEasyTapped(),
       StartGameEvent.onMediumTapped(),
       StartGameEvent.onHardTapped(),
     ];
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: buttonTitles.length,
-        separatorBuilder: (context, index) {
-          return SizedBox(
-            height: 8,
-          );
-        },
-        itemBuilder: (context, index) {
-          return Align(
-            alignment: Alignment.center,
-            child: RaisedButton(
-              color: Theme.of(context).primaryColorDark,
-              onPressed: () =>
-                  context.bloc<StartGameBloc>().add(buttonListeners[index]),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  buttonTitles[index],
-                  style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15),
+    return Container(
+      color: Color(0xFF737373),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Theme
+                .of(context)
+                .canvasColor,
+            borderRadius: BorderRadius.only(
+              topLeft: const Radius.circular(16),
+              topRight: const Radius.circular(
+                  16), // TODO fix radius for dark mode
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: ListView.separated(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: buttonTitles.length,
+            separatorBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.all(8),
+                child: Divider(
+                  thickness: 1.5,
+                  color: Theme
+                      .of(context)
+                      .dividerColor,
                 ),
-              ),
-            ),
-          );
-        },
+              );
+            },
+            itemBuilder: (context, index) {
+              return Align(
+                alignment: Alignment.center,
+                child: InkWell(
+                  onTap: () =>
+                      context.bloc<StartGameBloc>().add(buttonListeners[index]),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Text(
+                      buttonTitles[index],
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 24,
+                        color: Theme
+                            .of(context)
+                            .primaryColor,
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }

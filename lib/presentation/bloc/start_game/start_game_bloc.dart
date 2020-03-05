@@ -20,15 +20,23 @@ class StartGameBloc extends Bloc<StartGameEvent, StartGameState> {
     StartGameEvent event,
   ) async* {
     final state = event.map(
-      onStartGameTapped: (_) => [
-        StartGameState.showDifficultyLevelButtons(),
-        StartGameState.nothing()
-      ],
-      onEasyTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
-      onMediumTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
-      onHardTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
+      onStartGameTapped: (_) async* {
+        yield StartGameState.showDifficultyLevelButtons();
+        yield StartGameState.nothing();
+      },
+      onEasyTapped: (_) {
+        Router.navigator.pop();
+        return Router.navigator.pushNamed(Router.gameScreen);
+      },
+      onMediumTapped: (_) {
+        Router.navigator.pop();
+        return Router.navigator.pushNamed(Router.gameScreen);
+      },
+      onHardTapped: (_) {
+        Router.navigator.pop();
+        return Router.navigator.pushNamed(Router.gameScreen);
+      },
     );
-
     yield* dispatchState(state);
   }
 }

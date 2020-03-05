@@ -521,8 +521,8 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);
@@ -603,8 +603,8 @@ class _$_ShowDifficultyLevelButtons
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);

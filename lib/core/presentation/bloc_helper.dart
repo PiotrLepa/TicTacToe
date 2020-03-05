@@ -20,15 +20,8 @@ Stream<CallState<T>> fetch<T>(
   }
 }
 
-Stream<T> dispatchState<T>(Object mappedState) async* {
-  if (mappedState is Iterable) {
-    yield* Stream.fromIterable(mappedState.where((e) => e is T));
-  }
-  if (mappedState is Stream<T>) {
-    yield* mappedState;
-  } else if (mappedState is Future<T>) {
-    yield* Stream.fromFuture(mappedState);
-  } else if (mappedState is T) {
-    yield* Stream.value(mappedState);
+Stream<T> dispatchState<T>(Object maybeState) async* {
+  if (maybeState is Stream<T>) {
+    yield* maybeState;
   }
 }
