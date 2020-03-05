@@ -81,8 +81,8 @@ class StartGamePage extends StatelessWidget {
             alignment: Alignment.center,
             child: RaisedButton(
               color: Theme.of(context).primaryColorDark,
-              onPressed: () => BlocProvider.of<StartGameBloc>(context)
-                  .add(buttonListeners[index]),
+              onPressed: () =>
+                  context.bloc<StartGameBloc>().add(buttonListeners[index]),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Text(

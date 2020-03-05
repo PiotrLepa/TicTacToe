@@ -17,18 +17,18 @@ class StartGameBloc extends Bloc<StartGameEvent, StartGameState> {
 
   @override
   Stream<StartGameState> mapEventToState(
-    StartGameEvent event,) async* {
+    StartGameEvent event,
+  ) async* {
     final state = event.map(
-      onStartGameTapped: (_) => StartGameState.showDifficultyLevelButtons(),
+      onStartGameTapped: (_) => [
+        StartGameState.showDifficultyLevelButtons(),
+        StartGameState.nothing()
+      ],
       onEasyTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
       onMediumTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
       onHardTapped: (_) => Router.navigator.pushNamed(Router.gameScreen),
     );
 
     yield* dispatchState(state);
-  }
-
-  Stream<StartGameState> t() {
-    return Stream.value(StartGameState.showDifficultyLevelButtons());
   }
 }

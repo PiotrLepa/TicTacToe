@@ -8,8 +8,11 @@ import 'package:tictactoe/core/util/raw_key_string.dart';
 
 class AppLocalizations {
   final Locale locale;
+  final LocaleProvider _localeProvider;
 
-  AppLocalizations(this.locale);
+  AppLocalizations(this.locale, this._localeProvider) {
+    _localeProvider.currentLocale = locale;
+  }
 
   Map<String, String> _localizedStrings;
 
@@ -78,7 +81,7 @@ class _AppLocalizationsDelegate
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale, _localeProvider);
     await localizations.load();
     return localizations;
   }
