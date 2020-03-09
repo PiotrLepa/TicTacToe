@@ -19,9 +19,3 @@ Stream<CallState<T>> fetch<T>(
     logger.e(e);
   }
 }
-
-Stream<T> dispatchState<T>(Object maybeState) async* {
-  if (maybeState is Stream<T>) {
-    yield* maybeState;
-  }
-}

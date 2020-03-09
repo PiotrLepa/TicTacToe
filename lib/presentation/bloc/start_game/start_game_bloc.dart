@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/presentation/bloc_helper.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
 part 'start_game_bloc.freezed.dart';
@@ -19,24 +18,31 @@ class StartGameBloc extends Bloc<StartGameEvent, StartGameState> {
   Stream<StartGameState> mapEventToState(
     StartGameEvent event,
   ) async* {
-    final state = event.map(
-      onStartGameTapped: (_) async* {
-        yield StartGameState.showDifficultyLevelButtons();
-        yield StartGameState.nothing();
-      },
-      onEasyTapped: (_) {
-        Router.navigator.pop();
-        return Router.navigator.pushNamed(Router.gameScreen);
-      },
-      onMediumTapped: (_) {
-        Router.navigator.pop();
-        return Router.navigator.pushNamed(Router.gameScreen);
-      },
-      onHardTapped: (_) {
-        Router.navigator.pop();
-        return Router.navigator.pushNamed(Router.gameScreen);
-      },
+    yield* event.map(
+      onStartGameTapped: onStartGameTapped,
+      onEasyTapped: onEasyTapped,
+      onMediumTapped: onMediumTapped,
+      onHardTapped: onHardTapped,
     );
-    yield* dispatchState(state);
+  }
+
+  Stream<StartGameState> onStartGameTapped(_OnStartGameTapped event) async* {
+    yield StartGameState.showDifficultyLevelButtons();
+    yield StartGameState.nothing();
+  }
+
+  Stream<StartGameState> onEasyTapped(_OnEasyTapped event) async* {
+    Router.navigator.pop();
+    Router.navigator.pushNamed(Router.gameScreen);
+  }
+
+  Stream<StartGameState> onMediumTapped(_OnMediumTapped event) async* {
+    Router.navigator.pop();
+    Router.navigator.pushNamed(Router.gameScreen);
+  }
+
+  Stream<StartGameState> onHardTapped(_OnHardTapped event) async* {
+    Router.navigator.pop();
+    Router.navigator.pushNamed(Router.gameScreen);
   }
 }
