@@ -1,17 +1,17 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of login_response;
+part of login_response_model;
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
-LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
-  return _LoginResponse.fromJson(json);
+LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) {
+  return _LoginResponseModel.fromJson(json);
 }
 
-mixin _$LoginResponse {
+mixin _$LoginResponseModel {
   @JsonKey(name: 'access_token')
   String get accessToken;
   @JsonKey(name: 'token_type')
@@ -22,7 +22,7 @@ mixin _$LoginResponse {
   int get expiresIn;
   String get scope;
 
-  LoginResponse copyWith(
+  LoginResponseModel copyWith(
       {@JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'token_type') String tokenType,
       @JsonKey(name: 'refresh_token') String refreshToken,
@@ -32,16 +32,16 @@ mixin _$LoginResponse {
   Map<String, dynamic> toJson();
 }
 
-class _$LoginResponseTearOff {
-  const _$LoginResponseTearOff();
+class _$LoginResponseModelTearOff {
+  const _$LoginResponseModelTearOff();
 
-  _LoginResponse call(
+  _LoginResponseModel call(
       @JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'token_type') String tokenType,
       @JsonKey(name: 'refresh_token') String refreshToken,
       @JsonKey(name: 'expires_in') int expiresIn,
       String scope) {
-    return _LoginResponse(
+    return _LoginResponseModel(
       accessToken,
       tokenType,
       refreshToken,
@@ -51,11 +51,11 @@ class _$LoginResponseTearOff {
   }
 }
 
-const $LoginResponse = _$LoginResponseTearOff();
+const $LoginResponseModel = _$LoginResponseModelTearOff();
 
 @JsonSerializable()
-class _$_LoginResponse implements _LoginResponse {
-  const _$_LoginResponse(
+class _$_LoginResponseModel implements _LoginResponseModel {
+  const _$_LoginResponseModel(
       @JsonKey(name: 'access_token') this.accessToken,
       @JsonKey(name: 'token_type') this.tokenType,
       @JsonKey(name: 'refresh_token') this.refreshToken,
@@ -67,8 +67,8 @@ class _$_LoginResponse implements _LoginResponse {
         assert(expiresIn != null),
         assert(scope != null);
 
-  factory _$_LoginResponse.fromJson(Map<String, dynamic> json) =>
-      _$_$_LoginResponseFromJson(json);
+  factory _$_LoginResponseModel.fromJson(Map<String, dynamic> json) =>
+      _$_$_LoginResponseModelFromJson(json);
 
   @override
   @JsonKey(name: 'access_token')
@@ -87,13 +87,13 @@ class _$_LoginResponse implements _LoginResponse {
 
   @override
   String toString() {
-    return 'LoginResponse(accessToken: $accessToken, tokenType: $tokenType, refreshToken: $refreshToken, expiresIn: $expiresIn, scope: $scope)';
+    return 'LoginResponseModel(accessToken: $accessToken, tokenType: $tokenType, refreshToken: $refreshToken, expiresIn: $expiresIn, scope: $scope)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _LoginResponse &&
+        (other is _LoginResponseModel &&
             (identical(other.accessToken, accessToken) ||
                 const DeepCollectionEquality()
                     .equals(other.accessToken, accessToken)) &&
@@ -120,14 +120,14 @@ class _$_LoginResponse implements _LoginResponse {
       const DeepCollectionEquality().hash(scope);
 
   @override
-  _$_LoginResponse copyWith({
+  _$_LoginResponseModel copyWith({
     Object accessToken = freezed,
     Object tokenType = freezed,
     Object refreshToken = freezed,
     Object expiresIn = freezed,
     Object scope = freezed,
   }) {
-    return _$_LoginResponse(
+    return _$_LoginResponseModel(
       accessToken == freezed ? this.accessToken : accessToken as String,
       tokenType == freezed ? this.tokenType : tokenType as String,
       refreshToken == freezed ? this.refreshToken : refreshToken as String,
@@ -138,20 +138,20 @@ class _$_LoginResponse implements _LoginResponse {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_LoginResponseToJson(this);
+    return _$_$_LoginResponseModelToJson(this);
   }
 }
 
-abstract class _LoginResponse implements LoginResponse {
-  const factory _LoginResponse(
+abstract class _LoginResponseModel implements LoginResponseModel {
+  const factory _LoginResponseModel(
       @JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'token_type') String tokenType,
       @JsonKey(name: 'refresh_token') String refreshToken,
       @JsonKey(name: 'expires_in') int expiresIn,
-      String scope) = _$_LoginResponse;
+      String scope) = _$_LoginResponseModel;
 
-  factory _LoginResponse.fromJson(Map<String, dynamic> json) =
-      _$_LoginResponse.fromJson;
+  factory _LoginResponseModel.fromJson(Map<String, dynamic> json) =
+      _$_LoginResponseModel.fromJson;
 
   @override
   @JsonKey(name: 'access_token')
@@ -169,7 +169,7 @@ abstract class _LoginResponse implements LoginResponse {
   String get scope;
 
   @override
-  _LoginResponse copyWith(
+  _LoginResponseModel copyWith(
       {@JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'token_type') String tokenType,
       @JsonKey(name: 'refresh_token') String refreshToken,

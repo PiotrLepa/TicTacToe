@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of refresh_token_request;
+part of refresh_token_request_model;
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_RefreshTokenRequest _$_$_RefreshTokenRequestFromJson(
+_$_RefreshTokenRequestModel _$_$_RefreshTokenRequestModelFromJson(
     Map<String, dynamic> json) {
-  return _$_RefreshTokenRequest(
+  return _$_RefreshTokenRequestModel(
     refreshToken: json['refresh_token'] as String,
     grantType: json['grant_type'] as String,
   );
 }
 
-Map<String, dynamic> _$_$_RefreshTokenRequestToJson(
-        _$_RefreshTokenRequest instance) =>
+Map<String, dynamic> _$_$_RefreshTokenRequestModelToJson(
+        _$_RefreshTokenRequestModel instance) =>
     <String, dynamic>{
       'refresh_token': instance.refreshToken,
       'grant_type': instance.grantType,

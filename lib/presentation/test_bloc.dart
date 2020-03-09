@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/presentation/bloc_helper.dart';
 import 'package:tictactoe/core/util/oauth_tokens_storage.dart';
-import 'package:tictactoe/data/model/login_request/login_request.dart';
+import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/presentation/test_event.dart';
 import 'package:tictactoe/presentation/test_state.dart';
@@ -41,7 +41,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _login() async* {
-    final request = LoginRequest(
+    final request = LoginRequestModel(
       email: "piotrlepadev@gmail.com",
       password: "dev12",
       grantType: oauthGrantTypePassword,
@@ -64,7 +64,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _makeError() async* {
-    final request = LoginRequest(
+    final request = LoginRequestModel(
       email: "312312",
       password: "312321",
       grantType: oauthGrantTypePassword,

@@ -1,13 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of login_response;
+part of login_response_model;
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LoginResponse _$_$_LoginResponseFromJson(Map<String, dynamic> json) {
-  return _$_LoginResponse(
+_$_LoginResponseModel _$_$_LoginResponseModelFromJson(
+    Map<String, dynamic> json) {
+  return _$_LoginResponseModel(
     json['access_token'] as String,
     json['token_type'] as String,
     json['refresh_token'] as String,
@@ -16,7 +17,8 @@ _$_LoginResponse _$_$_LoginResponseFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$_LoginResponseToJson(_$_LoginResponse instance) =>
+Map<String, dynamic> _$_$_LoginResponseModelToJson(
+        _$_LoginResponseModel instance) =>
     <String, dynamic>{
       'access_token': instance.accessToken,
       'token_type': instance.tokenType,

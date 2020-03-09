@@ -1,55 +1,55 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of refresh_token_request;
+part of refresh_token_request_model;
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
-RefreshTokenRequest _$RefreshTokenRequestFromJson(Map<String, dynamic> json) {
-  return _RefreshTokenRequest.fromJson(json);
+RefreshTokenRequestModel _$RefreshTokenRequestModelFromJson(
+    Map<String, dynamic> json) {
+  return _RefreshTokenRequestModel.fromJson(json);
 }
 
-mixin _$RefreshTokenRequest {
+mixin _$RefreshTokenRequestModel {
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
-  RefreshTokenRequest copyWith(
+  RefreshTokenRequestModel copyWith(
       {@JsonKey(name: 'refresh_token') String refreshToken,
       @JsonKey(name: 'grant_type') String grantType});
 
   Map<String, dynamic> toJson();
 }
 
-class _$RefreshTokenRequestTearOff {
-  const _$RefreshTokenRequestTearOff();
+class _$RefreshTokenRequestModelTearOff {
+  const _$RefreshTokenRequestModelTearOff();
 
-  _RefreshTokenRequest call(
+  _RefreshTokenRequestModel call(
       {@required @JsonKey(name: 'refresh_token') String refreshToken,
       @required @JsonKey(name: 'grant_type') String grantType}) {
-    return _RefreshTokenRequest(
+    return _RefreshTokenRequestModel(
       refreshToken: refreshToken,
       grantType: grantType,
     );
   }
 }
 
-const $RefreshTokenRequest = _$RefreshTokenRequestTearOff();
+const $RefreshTokenRequestModel = _$RefreshTokenRequestModelTearOff();
 
 @JsonSerializable()
-class _$_RefreshTokenRequest implements _RefreshTokenRequest {
-  const _$_RefreshTokenRequest(
+class _$_RefreshTokenRequestModel implements _RefreshTokenRequestModel {
+  const _$_RefreshTokenRequestModel(
       {@required @JsonKey(name: 'refresh_token') this.refreshToken,
       @required @JsonKey(name: 'grant_type') this.grantType})
       : assert(refreshToken != null),
         assert(grantType != null);
 
-  factory _$_RefreshTokenRequest.fromJson(Map<String, dynamic> json) =>
-      _$_$_RefreshTokenRequestFromJson(json);
+  factory _$_RefreshTokenRequestModel.fromJson(Map<String, dynamic> json) =>
+      _$_$_RefreshTokenRequestModelFromJson(json);
 
   @override
   @JsonKey(name: 'refresh_token')
@@ -60,13 +60,13 @@ class _$_RefreshTokenRequest implements _RefreshTokenRequest {
 
   @override
   String toString() {
-    return 'RefreshTokenRequest(refreshToken: $refreshToken, grantType: $grantType)';
+    return 'RefreshTokenRequestModel(refreshToken: $refreshToken, grantType: $grantType)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RefreshTokenRequest &&
+        (other is _RefreshTokenRequestModel &&
             (identical(other.refreshToken, refreshToken) ||
                 const DeepCollectionEquality()
                     .equals(other.refreshToken, refreshToken)) &&
@@ -82,11 +82,11 @@ class _$_RefreshTokenRequest implements _RefreshTokenRequest {
       const DeepCollectionEquality().hash(grantType);
 
   @override
-  _$_RefreshTokenRequest copyWith({
+  _$_RefreshTokenRequestModel copyWith({
     Object refreshToken = freezed,
     Object grantType = freezed,
   }) {
-    return _$_RefreshTokenRequest(
+    return _$_RefreshTokenRequestModel(
       refreshToken:
           refreshToken == freezed ? this.refreshToken : refreshToken as String,
       grantType: grantType == freezed ? this.grantType : grantType as String,
@@ -95,29 +95,28 @@ class _$_RefreshTokenRequest implements _RefreshTokenRequest {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_RefreshTokenRequestToJson(this);
+    return _$_$_RefreshTokenRequestModelToJson(this);
   }
 }
 
-abstract class _RefreshTokenRequest implements RefreshTokenRequest {
-  const factory _RefreshTokenRequest(
+abstract class _RefreshTokenRequestModel implements RefreshTokenRequestModel {
+  const factory _RefreshTokenRequestModel(
           {@required @JsonKey(name: 'refresh_token') String refreshToken,
           @required @JsonKey(name: 'grant_type') String grantType}) =
-      _$_RefreshTokenRequest;
+      _$_RefreshTokenRequestModel;
 
-  factory _RefreshTokenRequest.fromJson(Map<String, dynamic> json) =
-      _$_RefreshTokenRequest.fromJson;
+  factory _RefreshTokenRequestModel.fromJson(Map<String, dynamic> json) =
+      _$_RefreshTokenRequestModel.fromJson;
 
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;
 
   @override
-  _RefreshTokenRequest copyWith(
+  _RefreshTokenRequestModel copyWith(
       {@JsonKey(name: 'refresh_token') String refreshToken,
       @JsonKey(name: 'grant_type') String grantType});
 }

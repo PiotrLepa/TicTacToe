@@ -17,12 +17,19 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/bloc/start_game/start_game_bloc.dart';
+import 'package:tictactoe/data/mapper/entity/difficilty_level_entity_mapper.dart';
+import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
+import 'package:tictactoe/data/mapper/entity/game_status_entity_mapper.dart';
+import 'package:tictactoe/data/mapper/entity/game_mark_entity_mapper.dart';
+import 'package:tictactoe/data/mapper/entity/game_move_entity_mapper.dart';
 import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/data/repository/refresh_token_repository.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
+import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
+import 'package:tictactoe/data/repository/create_game_repository_impl.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
@@ -52,6 +59,16 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
           ));
   g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
   g.registerFactory<StartGameBloc>(() => StartGameBloc());
+  g.registerLazySingleton<DifficultyLevelEntityMapper>(
+      () => DifficultyLevelEntityMapper());
+  g.registerLazySingleton<DifficultyLevelModelMapper>(
+      () => DifficultyLevelModelMapper());
+  g.registerLazySingleton<GameStatusEntityMapper>(
+      () => GameStatusEntityMapper());
+  g.registerLazySingleton<GameMarkEntityMapper>(() => GameMarkEntityMapper());
+  g.registerLazySingleton<GameMoveEntityMapper>(() => GameMoveEntityMapper(
+        g<GameMarkEntityMapper>(),
+      ));
   g.registerFactory<BearerTokenInterceptor>(() => BearerTokenInterceptor(
         g<OauthTokensStorage>(),
       ));
@@ -68,9 +85,21 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<OauthTokensStorage>(),
         g<TestRepository>(),
       ));
+  g.registerLazySingleton<GameResponseEntityMapper>(
+      () => GameResponseEntityMapper(
+            g<GameStatusEntityMapper>(),
+            g<DifficultyLevelEntityMapper>(),
+            g<GameMarkEntityMapper>(),
+            g<GameMoveEntityMapper>(),
+          ));
   g.registerFactory<RefreshTokenInterceptor>(() => RefreshTokenInterceptor(
         g<OauthTokensStorage>(),
         g<RefreshTokenRepository>(),
+      ));
+  g.registerFactory<CreateGameRepositoryImpl>(() => CreateGameRepositoryImpl(
+        g<NetworkService>(),
+        g<DifficultyLevelModelMapper>(),
+        g<GameResponseEntityMapper>(),
       ));
 }
 

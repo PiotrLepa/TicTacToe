@@ -4,7 +4,9 @@ import 'package:tictactoe/core/data/network/exception/api_exception.dart';
 import 'package:tictactoe/core/util/logger/logger.dart';
 
 class NetworkRepository {
-  Future<T> call<T>(Future<Response<T>> call) async {
+  Future<T> call<T>(
+    Future<Response<T>> call,
+  ) async {
     try {
       final response = await call;
       return Future.value(response.data);

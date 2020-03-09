@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/repository/network_repository.dart';
-import 'package:tictactoe/data/model/login_response/login_response.dart';
-import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request.dart';
+import 'package:tictactoe/data/model/login_response/login_response_model.dart';
+import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request_model.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 
 @injectable
@@ -11,7 +11,8 @@ class RefreshTokenRepository extends NetworkRepository {
 
   RefreshTokenRepository(this._service);
 
-  Future<LoginResponse> refreshAccessToken(RefreshTokenRequest request) =>
+  Future<LoginResponseModel> refreshAccessToken(
+          RefreshTokenRequestModel request) =>
       call(_service.refreshAccessToken(request));
 
   Future retryRequest(RequestOptions request) => call(
