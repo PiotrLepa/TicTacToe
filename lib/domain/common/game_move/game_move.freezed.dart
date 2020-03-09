@@ -9,11 +9,8 @@ part of game_move;
 
 mixin _$GameMove {
   int get moveId;
-
   int get fieldIndex;
-
   int get counter;
-
   GameMark get mark;
 
   GameMove copyWith({int moveId, int fieldIndex, int counter, GameMark mark});
@@ -112,13 +109,10 @@ abstract class _GameMove implements GameMove {
 
   @override
   int get moveId;
-
   @override
   int get fieldIndex;
-
   @override
   int get counter;
-
   @override
   GameMark get mark;
 

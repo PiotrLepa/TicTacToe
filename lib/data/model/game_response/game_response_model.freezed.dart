@@ -18,7 +18,8 @@ mixin _$GameResponseModel {
   DifficultyLevelModel get difficultyLevel;
   GameMarkModel get playerMark;
   GameMarkModel get computerMark;
-  BuiltList<GameMoveModel> get moves;
+
+  List<GameMoveModel> get moves;
 
   GameResponseModel copyWith(
       {int gameId,
@@ -27,7 +28,7 @@ mixin _$GameResponseModel {
       DifficultyLevelModel difficultyLevel,
       GameMarkModel playerMark,
       GameMarkModel computerMark,
-      BuiltList<GameMoveModel> moves});
+      List<GameMoveModel> moves});
 
   Map<String, dynamic> toJson();
 }
@@ -35,14 +36,13 @@ mixin _$GameResponseModel {
 class _$GameResponseModelTearOff {
   const _$GameResponseModelTearOff();
 
-  _GameResponseModel call(
-      {@required int gameId,
-      @required int playerId,
-      @required GameStatusModel status,
-      @required DifficultyLevelModel difficultyLevel,
-      @required GameMarkModel playerMark,
-      @required GameMarkModel computerMark,
-      @required BuiltList<GameMoveModel> moves}) {
+  _GameResponseModel call({@required int gameId,
+    @required int playerId,
+    @required GameStatusModel status,
+    @required DifficultyLevelModel difficultyLevel,
+    @required GameMarkModel playerMark,
+    @required GameMarkModel computerMark,
+    @required List<GameMoveModel> moves}) {
     return _GameResponseModel(
       gameId: gameId,
       playerId: playerId,
@@ -91,7 +91,7 @@ class _$_GameResponseModel implements _GameResponseModel {
   @override
   final GameMarkModel computerMark;
   @override
-  final BuiltList<GameMoveModel> moves;
+  final List<GameMoveModel> moves;
 
   @override
   String toString() {
@@ -151,11 +151,11 @@ class _$_GameResponseModel implements _GameResponseModel {
           ? this.difficultyLevel
           : difficultyLevel as DifficultyLevelModel,
       playerMark:
-          playerMark == freezed ? this.playerMark : playerMark as GameMarkModel,
+      playerMark == freezed ? this.playerMark : playerMark as GameMarkModel,
       computerMark: computerMark == freezed
           ? this.computerMark
           : computerMark as GameMarkModel,
-      moves: moves == freezed ? this.moves : moves as BuiltList<GameMoveModel>,
+      moves: moves == freezed ? this.moves : moves as List<GameMoveModel>,
     );
   }
 
@@ -166,14 +166,13 @@ class _$_GameResponseModel implements _GameResponseModel {
 }
 
 abstract class _GameResponseModel implements GameResponseModel {
-  const factory _GameResponseModel(
-      {@required int gameId,
-      @required int playerId,
-      @required GameStatusModel status,
-      @required DifficultyLevelModel difficultyLevel,
-      @required GameMarkModel playerMark,
-      @required GameMarkModel computerMark,
-      @required BuiltList<GameMoveModel> moves}) = _$_GameResponseModel;
+  const factory _GameResponseModel({@required int gameId,
+    @required int playerId,
+    @required GameStatusModel status,
+    @required DifficultyLevelModel difficultyLevel,
+    @required GameMarkModel playerMark,
+    @required GameMarkModel computerMark,
+    @required List<GameMoveModel> moves}) = _$_GameResponseModel;
 
   factory _GameResponseModel.fromJson(Map<String, dynamic> json) =
       _$_GameResponseModel.fromJson;
@@ -188,18 +187,19 @@ abstract class _GameResponseModel implements GameResponseModel {
   DifficultyLevelModel get difficultyLevel;
   @override
   GameMarkModel get playerMark;
-  @override
-  GameMarkModel get computerMark;
-  @override
-  BuiltList<GameMoveModel> get moves;
 
   @override
-  _GameResponseModel copyWith(
-      {int gameId,
-      int playerId,
-      GameStatusModel status,
-      DifficultyLevelModel difficultyLevel,
-      GameMarkModel playerMark,
-      GameMarkModel computerMark,
-      BuiltList<GameMoveModel> moves});
+  GameMarkModel get computerMark;
+
+  @override
+  List<GameMoveModel> get moves;
+
+  @override
+  _GameResponseModel copyWith({int gameId,
+    int playerId,
+    GameStatusModel status,
+    DifficultyLevelModel difficultyLevel,
+    GameMarkModel playerMark,
+    GameMarkModel computerMark,
+    List<GameMoveModel> moves});
 }

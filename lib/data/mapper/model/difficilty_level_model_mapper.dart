@@ -7,9 +7,6 @@ import 'package:tictactoe/domain/common/difficulty_level/difficulty_level.dart';
 class DifficultyLevelModelMapper
     implements ModelMapper<DifficultyLevelModel, DifficultyLevel> {
   @override
-  DifficultyLevelModel toModel(DifficultyLevel entity) => entity.map(
-        easy: (_) => DifficultyLevelModel.easy(),
-        medium: (_) => DifficultyLevelModel.medium(),
-        hard: (_) => DifficultyLevelModel.hard(),
-      );
+  DifficultyLevelModel toModel(DifficultyLevel entity) =>
+      DifficultyLevelModel.values[entity.index];
 }

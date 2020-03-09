@@ -29,7 +29,10 @@ class NetworkService extends BaseNetworkService {
       post(
         "/game/create",
         queryParameters: {
-          "difficulty_level": difficultyLevel,
+          "difficulty_level": difficultyLevel
+              .toString()
+              .split(".")[1]
+              .toUpperCase(), // TODO server cannot convert lower case enum
         },
         secured: true,
       );

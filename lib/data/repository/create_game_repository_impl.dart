@@ -7,7 +7,8 @@ import 'package:tictactoe/domain/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
 
-@injectable
+@RegisterAs(CreateGameRepository)
+@lazySingleton
 class CreateGameRepositoryImpl extends NetworkRepository
     implements CreateGameRepository {
   final NetworkService _service;
@@ -23,9 +24,12 @@ class CreateGameRepositoryImpl extends NetworkRepository
 
   @override
   Future<GameResponse> createGame(DifficultyLevel difficultyLevel) {
-    final response = _service.createGame(
+    final request = _service.createGame(
       _difficultyLevelModelMapper.toModel(difficultyLevel),
     );
-    return call(_gameResponseEntityMapper.toEntity(response));
+    return call(
+      request: request,
+      mapper: _gameResponseEntityMapper.toEntity,
+    );
   }
 }

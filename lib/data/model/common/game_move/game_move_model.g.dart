@@ -11,9 +11,7 @@ _$_GameMoveModel _$_$_GameMoveModelFromJson(Map<String, dynamic> json) {
     moveId: json['moveId'] as int,
     fieldIndex: json['fieldIndex'] as int,
     counter: json['counter'] as int,
-    mark: json['mark'] == null
-        ? null
-        : GameMarkModel.fromJson(json['mark'] as Map<String, dynamic>),
+    mark: _$enumDecodeNullable(_$GameMarkModelEnumMap, json['mark']),
   );
 }
 
@@ -22,5 +20,42 @@ Map<String, dynamic> _$_$_GameMoveModelToJson(_$_GameMoveModel instance) =>
       'moveId': instance.moveId,
       'fieldIndex': instance.fieldIndex,
       'counter': instance.counter,
-      'mark': instance.mark,
+      'mark': _$GameMarkModelEnumMap[instance.mark],
     };
+
+T _$enumDecode<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
+
+  if (value == null && unknownValue == null) {
+    throw ArgumentError('`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return value ?? unknownValue;
+}
+
+T _$enumDecodeNullable<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$GameMarkModelEnumMap = {
+  GameMarkModel.X: 'X',
+  GameMarkModel.O: 'O',
+};

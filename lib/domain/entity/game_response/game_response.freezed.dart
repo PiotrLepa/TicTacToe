@@ -9,15 +9,10 @@ part of game_response;
 
 mixin _$GameResponse {
   int get gameId;
-
   GameStatus get status;
-
   DifficultyLevel get difficultyLevel;
-
   GameMark get playerMark;
-
   GameMark get computerMark;
-
   BuiltList<GameMove> get moves;
 
   GameResponse copyWith(
@@ -152,19 +147,14 @@ abstract class _GameResponse implements GameResponse {
 
   @override
   int get gameId;
-
   @override
   GameStatus get status;
-
   @override
   DifficultyLevel get difficultyLevel;
-
   @override
   GameMark get playerMark;
-
   @override
   GameMark get computerMark;
-
   @override
   BuiltList<GameMove> get moves;
 

@@ -1,6 +1,5 @@
 library game_response_model;
 
-import 'package:built_collection/built_collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
 import 'package:tictactoe/data/model/common/game_mark/game_mark_model.dart';
@@ -8,7 +7,6 @@ import 'package:tictactoe/data/model/common/game_move/game_move_model.dart';
 import 'package:tictactoe/data/model/common/game_status/game_status_model.dart';
 
 part 'game_response_model.freezed.dart';
-
 part 'game_response_model.g.dart';
 
 @freezed
@@ -20,7 +18,7 @@ abstract class GameResponseModel with _$GameResponseModel {
     @required DifficultyLevelModel difficultyLevel,
     @required GameMarkModel playerMark,
     @required GameMarkModel computerMark,
-    @required BuiltList<GameMoveModel> moves,
+    @required List<GameMoveModel> moves,
   }) = _GameResponseModel;
 
   factory GameResponseModel.fromJson(Map<String, dynamic> json) =>

@@ -37,6 +37,9 @@ class StartGamePage extends StatelessWidget {
                     showDifficultyLevelButtons: () {
                       _showDifficultyLevelButtonsModal(context);
                     },
+                    success: (String result) {},
+                    error: (errorMessage) {},
+                    progress: () {},
                   );
                 },
                 child: Container(),
@@ -64,15 +67,9 @@ class StartGamePage extends StatelessWidget {
 
   Widget buildDifficultyLevelButtons(BuildContext context) {
     final titles = [
-      AppLocalizations
-          .of(context)
-          .difficultyLevelEasy,
-      AppLocalizations
-          .of(context)
-          .difficultyLevelMedium,
-      AppLocalizations
-          .of(context)
-          .difficultyLevelHard,
+      AppLocalizations.of(context).difficultyLevelEasy,
+      AppLocalizations.of(context).difficultyLevelMedium,
+      AppLocalizations.of(context).difficultyLevelHard,
     ];
     final colors = [
       Color(0xFFFF7670),

@@ -432,12 +432,18 @@ mixin _$StartGameState {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
   });
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   });
 
@@ -446,12 +452,18 @@ mixin _$StartGameState {
     @required Result nothing(_Nothing value),
     @required
         Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
   });
 
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result nothing(_Nothing value),
     Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
     @required Result orElse(),
   });
 }
@@ -465,6 +477,22 @@ class _$StartGameStateTearOff {
 
   _ShowDifficultyLevelButtons showDifficultyLevelButtons() {
     return const _ShowDifficultyLevelButtons();
+  }
+
+  _Progress progress() {
+    return const _Progress();
+  }
+
+  _Success success(String result) {
+    return _Success(
+      result,
+    );
+  }
+
+  _Error error(RawKeyString errorMessage) {
+    return _Error(
+      errorMessage,
+    );
   }
 }
 
@@ -497,9 +525,15 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
     return nothing();
   }
 
@@ -508,6 +542,9 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -521,11 +558,17 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required
-        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    @required Result showDifficultyLevelButtons(
+        _ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
     return nothing(this);
   }
 
@@ -534,6 +577,9 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   Result maybeMap<Result extends Object>({
     Result nothing(_Nothing value),
     Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -579,9 +625,15 @@ class _$_ShowDifficultyLevelButtons
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
     return showDifficultyLevelButtons();
   }
 
@@ -590,6 +642,9 @@ class _$_ShowDifficultyLevelButtons
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -603,11 +658,17 @@ class _$_ShowDifficultyLevelButtons
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required
-        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    @required Result showDifficultyLevelButtons(
+        _ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
   }) {
     assert(nothing != null);
     assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
     return showDifficultyLevelButtons(this);
   }
 
@@ -616,6 +677,9 @@ class _$_ShowDifficultyLevelButtons
   Result maybeMap<Result extends Object>({
     Result nothing(_Nothing value),
     Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -628,4 +692,337 @@ class _$_ShowDifficultyLevelButtons
 
 abstract class _ShowDifficultyLevelButtons implements StartGameState {
   const factory _ShowDifficultyLevelButtons() = _$_ShowDifficultyLevelButtons;
+}
+
+class _$_Progress with DiagnosticableTreeMixin implements _Progress {
+  const _$_Progress();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'StartGameState.progress()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'StartGameState.progress'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _Progress);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return progress();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (progress != null) {
+      return progress();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(_Nothing value),
+    @required Result showDifficultyLevelButtons(
+        _ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return progress(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(_Nothing value),
+    Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (progress != null) {
+      return progress(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Progress implements StartGameState {
+  const factory _Progress() = _$_Progress;
+}
+
+class _$_Success with DiagnosticableTreeMixin implements _Success {
+  const _$_Success(this.result) : assert(result != null);
+
+  @override
+  final String result;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'StartGameState.success(result: $result)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'StartGameState.success'))..add(
+        DiagnosticsProperty('result', result));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Success &&
+            (identical(other.result, result) ||
+                const DeepCollectionEquality().equals(other.result, result)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
+
+  @override
+  _$_Success copyWith({
+    Object result = freezed,
+  }) {
+    return _$_Success(
+      result == freezed ? this.result : result as String,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return success(result);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (success != null) {
+      return success(result);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(_Nothing value),
+    @required Result showDifficultyLevelButtons(
+        _ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return success(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(_Nothing value),
+    Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (success != null) {
+      return success(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Success implements StartGameState {
+  const factory _Success(String result) = _$_Success;
+
+  String get result;
+
+  _Success copyWith({String result});
+}
+
+class _$_Error with DiagnosticableTreeMixin implements _Error {
+  const _$_Error(this.errorMessage) : assert(errorMessage != null);
+
+  @override
+  final RawKeyString errorMessage;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'StartGameState.error(errorMessage: $errorMessage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'StartGameState.error'))..add(
+        DiagnosticsProperty('errorMessage', errorMessage));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Error &&
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
+
+  @override
+  _$_Error copyWith({
+    Object errorMessage = freezed,
+  }) {
+    return _$_Error(
+      errorMessage == freezed
+          ? this.errorMessage
+          : errorMessage as RawKeyString,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result showDifficultyLevelButtons(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return error(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result showDifficultyLevelButtons(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(_Nothing value),
+    @required Result showDifficultyLevelButtons(
+        _ShowDifficultyLevelButtons value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
+  }) {
+    assert(nothing != null);
+    assert(showDifficultyLevelButtons != null);
+    assert(progress != null);
+    assert(success != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(_Nothing value),
+    Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Error implements StartGameState {
+  const factory _Error(RawKeyString errorMessage) = _$_Error;
+
+  RawKeyString get errorMessage;
+
+  _Error copyWith({RawKeyString errorMessage});
 }

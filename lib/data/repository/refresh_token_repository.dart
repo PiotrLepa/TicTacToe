@@ -12,18 +12,36 @@ class RefreshTokenRepository extends NetworkRepository {
   RefreshTokenRepository(this._service);
 
   Future<LoginResponseModel> refreshAccessToken(
-          RefreshTokenRequestModel request) =>
-      call(_service.refreshAccessToken(request));
-
-  Future retryRequest(RequestOptions request) => call(
-        _service.createRequest(
-          request.method,
-          request.path,
-          data: request.data,
-          queryParameters: request.queryParameters,
-          headers: request.headers,
-          contentType: request.contentType,
-          secured: true,
-        ),
+          RefreshTokenRequestModel requestData) =>
+      call(
+        request: _service.refreshAccessToken(requestData),
+        mapper: (data) => data,
       );
+
+  Future retryRequest(RequestOptions requestData) {
+    final request = _service.createRequest(
+      requestData.method,
+      requestData.path,
+      data: requestData.data,
+      queryParameters: requestData.queryParameters,
+      headers: requestData.headers,
+      contentType: requestData.contentType,
+      secured: true,
+    );
+    return call(
+      request: request,
+      mapper: (model) => model,
+    );
+//    call(
+//        _service.createRequest(
+//          request.method,
+//          request.path,
+//          data: request.data,
+//          queryParameters: request.queryParameters,
+//          headers: request.headers,
+//          contentType: request.contentType,
+//          secured: true,
+//        ),
+//      );
+  }
 }
