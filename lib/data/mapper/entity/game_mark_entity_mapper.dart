@@ -6,5 +6,13 @@ import 'package:tictactoe/domain/common/game_mark/game_mark.dart';
 @lazySingleton
 class GameMarkEntityMapper implements EntityMapper<GameMark, GameMarkModel> {
   @override
-  GameMark toEntity(GameMarkModel model) => GameMark.values[model.index];
+  // ignore: missing_return
+  GameMark toEntity(GameMarkModel model) {
+    switch (model) {
+      case GameMarkModel.X:
+        return GameMark.x;
+      case GameMarkModel.O:
+        return GameMark.o;
+    }
+  }
 }

@@ -558,8 +558,8 @@ class _$_Nothing with DiagnosticableTreeMixin implements _Nothing {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
@@ -658,8 +658,8 @@ class _$_ShowDifficultyLevelButtons
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
@@ -754,8 +754,8 @@ class _$_Progress with DiagnosticableTreeMixin implements _Progress {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
@@ -804,8 +804,9 @@ class _$_Success with DiagnosticableTreeMixin implements _Success {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'StartGameState.success'))..add(
-        DiagnosticsProperty('result', result));
+    properties
+      ..add(DiagnosticsProperty('type', 'StartGameState.success'))
+      ..add(DiagnosticsProperty('result', result));
   }
 
   @override
@@ -867,8 +868,8 @@ class _$_Success with DiagnosticableTreeMixin implements _Success {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),
@@ -921,8 +922,9 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties..add(DiagnosticsProperty('type', 'StartGameState.error'))..add(
-        DiagnosticsProperty('errorMessage', errorMessage));
+    properties
+      ..add(DiagnosticsProperty('type', 'StartGameState.error'))
+      ..add(DiagnosticsProperty('errorMessage', errorMessage));
   }
 
   @override
@@ -987,8 +989,8 @@ class _$_Error with DiagnosticableTreeMixin implements _Error {
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(_Nothing value),
-    @required Result showDifficultyLevelButtons(
-        _ShowDifficultyLevelButtons value),
+    @required
+        Result showDifficultyLevelButtons(_ShowDifficultyLevelButtons value),
     @required Result progress(_Progress value),
     @required Result success(_Success value),
     @required Result error(_Error value),

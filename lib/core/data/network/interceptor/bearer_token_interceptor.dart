@@ -23,7 +23,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   }
 
   static bool _isRequestSecure(Map<String, dynamic> headers) =>
-      headers[securedHeader] == true;
+      headers[securedHeaderKey] == securedHeaderKey;
 
   void _addAuthorizationHeader(
     Map<String, dynamic> headers,
@@ -34,5 +34,5 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   void _removeInternalSecuredHeader(
     Map<String, dynamic> headers,
   ) =>
-      headers..remove(securedHeader);
+      headers..remove(securedHeaderKey);
 }

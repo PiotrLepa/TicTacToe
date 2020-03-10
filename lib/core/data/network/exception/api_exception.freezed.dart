@@ -774,7 +774,6 @@ abstract class _InternalServerError implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
@@ -835,8 +834,8 @@ class _$_UnknownError implements _UnknownError {
     @required Result badRequest(int code, @nullable String printableMessage),
     @required Result unauthorized(int code, @nullable String printableMessage),
     @required Result notFound(int code, @nullable String printableMessage),
-    @required Result internalServerError(int code,
-        @nullable String printableMessage),
+    @required
+        Result internalServerError(int code, @nullable String printableMessage),
     @required Result unknownError(int code, @nullable String printableMessage),
   }) {
     assert(noConnection != null);
@@ -906,7 +905,7 @@ class _$_UnknownError implements _UnknownError {
 
 abstract class _UnknownError implements ApiException {
   const factory _UnknownError(int code, @nullable String printableMessage) =
-  _$_UnknownError;
+      _$_UnknownError;
 
   @override
   int get code;

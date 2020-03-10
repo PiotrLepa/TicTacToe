@@ -18,7 +18,6 @@ mixin _$GameResponseModel {
   DifficultyLevelModel get difficultyLevel;
   GameMarkModel get playerMark;
   GameMarkModel get computerMark;
-
   List<GameMoveModel> get moves;
 
   GameResponseModel copyWith(
@@ -36,13 +35,14 @@ mixin _$GameResponseModel {
 class _$GameResponseModelTearOff {
   const _$GameResponseModelTearOff();
 
-  _GameResponseModel call({@required int gameId,
-    @required int playerId,
-    @required GameStatusModel status,
-    @required DifficultyLevelModel difficultyLevel,
-    @required GameMarkModel playerMark,
-    @required GameMarkModel computerMark,
-    @required List<GameMoveModel> moves}) {
+  _GameResponseModel call(
+      {@required int gameId,
+      @required int playerId,
+      @required GameStatusModel status,
+      @required DifficultyLevelModel difficultyLevel,
+      @required GameMarkModel playerMark,
+      @required GameMarkModel computerMark,
+      @required List<GameMoveModel> moves}) {
     return _GameResponseModel(
       gameId: gameId,
       playerId: playerId,
@@ -175,22 +175,22 @@ abstract class _GameResponseModel implements GameResponseModel {
     @required List<GameMoveModel> moves}) = _$_GameResponseModel;
 
   factory _GameResponseModel.fromJson(Map<String, dynamic> json) =
-      _$_GameResponseModel.fromJson;
+  _$_GameResponseModel.fromJson;
 
   @override
   int get gameId;
+
   @override
   int get playerId;
+
   @override
   GameStatusModel get status;
   @override
   DifficultyLevelModel get difficultyLevel;
   @override
   GameMarkModel get playerMark;
-
   @override
   GameMarkModel get computerMark;
-
   @override
   List<GameMoveModel> get moves;
 

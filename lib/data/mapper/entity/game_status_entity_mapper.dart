@@ -7,5 +7,18 @@ import 'package:tictactoe/domain/common/game_status/game_status.dart';
 class GameStatusEntityMapper
     implements EntityMapper<GameStatus, GameStatusModel> {
   @override
-  GameStatus toEntity(GameStatusModel model) => GameStatus.values[model.index];
+  // ignore: missing_return
+  GameStatus toEntity(GameStatusModel model) {
+    switch (model) {
+      case GameStatusModel.ON_GOING:
+        return GameStatus.onGoing;
+      case GameStatusModel.PLAYER_WON:
+        return GameStatus.playerWon;
+      case GameStatusModel.COMPUTER_WON:
+        // TODO: Handle this case.
+        return GameStatus.computerWon;
+      case GameStatusModel.DRAW:
+        return GameStatus.draw;
+    }
+  }
 }

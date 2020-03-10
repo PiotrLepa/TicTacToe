@@ -6,13 +6,12 @@ import 'package:tictactoe/core/util/logger/logger.dart';
 
 class NetworkRepository {
   Future<E> call<E, M>({
-    @required Future<Response<M>> request,
+    @required Future<M> request,
     @required E mapper(M data),
   }) async {
     try {
-      final response = await request;
-      final data = response.data;
-      final mapped = mapper(data);
+      final responseData = await request;
+      final mapped = mapper(responseData);
       return Future.value(mapped);
     } on DioError catch (e, s) {
       logger.e("error", e, s);
