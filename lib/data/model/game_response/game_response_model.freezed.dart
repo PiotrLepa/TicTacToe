@@ -151,7 +151,7 @@ class _$_GameResponseModel implements _GameResponseModel {
           ? this.difficultyLevel
           : difficultyLevel as DifficultyLevelModel,
       playerMark:
-      playerMark == freezed ? this.playerMark : playerMark as GameMarkModel,
+          playerMark == freezed ? this.playerMark : playerMark as GameMarkModel,
       computerMark: computerMark == freezed
           ? this.computerMark
           : computerMark as GameMarkModel,
