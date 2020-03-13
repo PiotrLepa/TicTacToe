@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:tictactoe/presentation/screens/home_screen.dart';
 import 'package:tictactoe/presentation/screens/game_screen.dart';
+import 'package:tictactoe/domain/common/game_mark/game_mark.dart';
 
 class Router {
   static const homeScreen = '/';
@@ -23,12 +24,28 @@ class Router {
           settings: settings,
         );
       case Router.gameScreen:
+        if (hasInvalidArgs<GameScreenArguments>(args, isRequired: true)) {
+          return misTypedArgsRoute<GameScreenArguments>(args);
+        }
+        final typedArgs = args as GameScreenArguments;
         return MaterialPageRoute<dynamic>(
-          builder: (_) => GameScreen(),
+          builder: (_) => GameScreen(
+              gameId: typedArgs.gameId, playerMark: typedArgs.playerMark),
           settings: settings,
         );
       default:
         return unknownRoutePage(settings.name);
     }
   }
+}
+
+//**************************************************************************
+// Arguments holder classes
+//***************************************************************************
+
+//GameScreen arguments holder class
+class GameScreenArguments {
+  final int gameId;
+  final GameMark playerMark;
+  GameScreenArguments({@required this.gameId, @required this.playerMark});
 }

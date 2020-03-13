@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/util/logger/logger.dart';
 import 'package:tictactoe/presentation/theme_provider.dart';
 
 class GameBoard extends StatelessWidget {
@@ -19,7 +18,7 @@ class GameBoard extends StatelessWidget {
       (i) => Padding(
         padding: const EdgeInsets.all(8),
         child: GestureDetector(
-          onTap: () => logger.d("field: $i"),
+          onTap: () => {},
           child: Container(
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
@@ -27,7 +26,7 @@ class GameBoard extends StatelessWidget {
             ),
             child: FittedBox(
               child: Text(
-                i % 2 == 0 ? "X" : "O",
+                "",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: i % 2 == 0

@@ -24,7 +24,8 @@ class BottomNavigationBloc
 
   @override
   Stream<BottomNavigationState> mapEventToState(
-      BottomNavigationEvent event,) async* {
+    BottomNavigationEvent event,
+  ) async* {
     yield BottomNavigationState.updatePage(
       pageTitle: pageTitles[event.index],
       index: event.index,

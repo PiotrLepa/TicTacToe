@@ -16,8 +16,8 @@ mixin _$BottomNavigationEvent {
 class _$BottomNavigationEventTearOff {
   const _$BottomNavigationEventTearOff();
 
-  _OnBottomNavigationTapped onBottomNavigationTapped(int index) {
-    return _OnBottomNavigationTapped(
+  OnBottomNavigationTapped onBottomNavigationTapped(int index) {
+    return OnBottomNavigationTapped(
       index,
     );
   }
@@ -25,8 +25,8 @@ class _$BottomNavigationEventTearOff {
 
 const $BottomNavigationEvent = _$BottomNavigationEventTearOff();
 
-class _$_OnBottomNavigationTapped implements _OnBottomNavigationTapped {
-  const _$_OnBottomNavigationTapped(this.index) : assert(index != null);
+class _$OnBottomNavigationTapped implements OnBottomNavigationTapped {
+  const _$OnBottomNavigationTapped(this.index) : assert(index != null);
 
   @override
   final int index;
@@ -39,7 +39,7 @@ class _$_OnBottomNavigationTapped implements _OnBottomNavigationTapped {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _OnBottomNavigationTapped &&
+        (other is OnBottomNavigationTapped &&
             (identical(other.index, index) ||
                 const DeepCollectionEquality().equals(other.index, index)));
   }
@@ -49,24 +49,24 @@ class _$_OnBottomNavigationTapped implements _OnBottomNavigationTapped {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
 
   @override
-  _$_OnBottomNavigationTapped copyWith({
+  _$OnBottomNavigationTapped copyWith({
     Object index = freezed,
   }) {
-    return _$_OnBottomNavigationTapped(
+    return _$OnBottomNavigationTapped(
       index == freezed ? this.index : index as int,
     );
   }
 }
 
-abstract class _OnBottomNavigationTapped implements BottomNavigationEvent {
-  const factory _OnBottomNavigationTapped(int index) =
-      _$_OnBottomNavigationTapped;
+abstract class OnBottomNavigationTapped implements BottomNavigationEvent {
+  const factory OnBottomNavigationTapped(int index) =
+      _$OnBottomNavigationTapped;
 
   @override
   int get index;
 
   @override
-  _OnBottomNavigationTapped copyWith({int index});
+  OnBottomNavigationTapped copyWith({int index});
 }
 
 mixin _$BottomNavigationState {
@@ -79,9 +79,9 @@ mixin _$BottomNavigationState {
 class _$BottomNavigationStateTearOff {
   const _$BottomNavigationStateTearOff();
 
-  _UpdatePage updatePage(
+  UpdatePage updatePage(
       {@required RawKeyString pageTitle, @required int index}) {
-    return _UpdatePage(
+    return UpdatePage(
       pageTitle: pageTitle,
       index: index,
     );
@@ -90,8 +90,8 @@ class _$BottomNavigationStateTearOff {
 
 const $BottomNavigationState = _$BottomNavigationStateTearOff();
 
-class _$_UpdatePage implements _UpdatePage {
-  const _$_UpdatePage({@required this.pageTitle, @required this.index})
+class _$UpdatePage implements UpdatePage {
+  const _$UpdatePage({@required this.pageTitle, @required this.index})
       : assert(pageTitle != null),
         assert(index != null);
 
@@ -108,7 +108,7 @@ class _$_UpdatePage implements _UpdatePage {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _UpdatePage &&
+        (other is UpdatePage &&
             (identical(other.pageTitle, pageTitle) ||
                 const DeepCollectionEquality()
                     .equals(other.pageTitle, pageTitle)) &&
@@ -123,11 +123,11 @@ class _$_UpdatePage implements _UpdatePage {
       const DeepCollectionEquality().hash(index);
 
   @override
-  _$_UpdatePage copyWith({
+  _$UpdatePage copyWith({
     Object pageTitle = freezed,
     Object index = freezed,
   }) {
-    return _$_UpdatePage(
+    return _$UpdatePage(
       pageTitle:
           pageTitle == freezed ? this.pageTitle : pageTitle as RawKeyString,
       index: index == freezed ? this.index : index as int,
@@ -135,9 +135,9 @@ class _$_UpdatePage implements _UpdatePage {
   }
 }
 
-abstract class _UpdatePage implements BottomNavigationState {
-  const factory _UpdatePage(
-      {@required RawKeyString pageTitle, @required int index}) = _$_UpdatePage;
+abstract class UpdatePage implements BottomNavigationState {
+  const factory UpdatePage(
+      {@required RawKeyString pageTitle, @required int index}) = _$UpdatePage;
 
   @override
   RawKeyString get pageTitle;
@@ -145,5 +145,5 @@ abstract class _UpdatePage implements BottomNavigationState {
   int get index;
 
   @override
-  _UpdatePage copyWith({RawKeyString pageTitle, int index});
+  UpdatePage copyWith({RawKeyString pageTitle, int index});
 }

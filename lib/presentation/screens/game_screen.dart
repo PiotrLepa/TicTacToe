@@ -1,10 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/domain/common/game_mark/game_mark.dart';
 import 'package:tictactoe/presentation/theme_provider.dart';
 import 'package:tictactoe/presentation/widgets/game_board.dart';
 
 class GameScreen extends StatelessWidget {
+  final int gameId;
+  final GameMark playerMark;
+
+  const GameScreen({
+    @required this.gameId,
+    @required this.playerMark,
+  }) : super();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,12 +50,17 @@ class GameScreen extends StatelessWidget {
           height: 12,
         ),
         Text(
-          "X", // TODO get from api
+          playerMark == GameMark.x ? "X" : "O",
           style: TextStyle(
             fontSize: 84,
             fontWeight: FontWeight.bold,
-            color: ThemeProvider.of(context)
-                .markXColor, // TODO change color depending on mark
+            color: playerMark == GameMark.x
+                ? ThemeProvider
+                .of(context)
+                .markXColor
+                : ThemeProvider
+                .of(context)
+                .markOColor,
           ),
         ),
       ],

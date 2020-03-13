@@ -29,20 +29,16 @@ class StartGamePage extends StatelessWidget {
                   ),
                 ),
               ),
-              BlocListener<StartGameBloc, StartGameState>(
-                condition: (previousState, state) => true,
-                listener: (BuildContext context, StartGameState state) {
-                  state.when(
-                    nothing: () {},
-                    showDifficultyLevelButtons: () {
-                      _showDifficultyLevelButtonsModal(context);
-                    },
-                    success: (String result) {},
-                    error: (errorMessage) {},
-                    progress: () {},
-                  );
+              BlocConsumer<StartGameBloc, StartGameState>(
+                listener: (context, state) {
+                  if (state is ShowDifficultyLevelButtons) {
+                    _showDifficultyLevelButtonsModal(context);
+                  }
                 },
-                child: Container(),
+                builder: (context, state) => state.maybeMap(
+                  showLoading: (_) => CircularProgressIndicator(),
+                  orElse: () => Container(),
+                ),
               ),
             ],
           ),
