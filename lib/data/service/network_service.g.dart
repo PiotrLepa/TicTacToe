@@ -37,6 +37,26 @@ class _NetworkService implements NetworkService {
   }
 
   @override
+  setMove(gameId, fieldIndex) async {
+    ArgumentError.checkNotNull(gameId, 'gameId');
+    ArgumentError.checkNotNull(fieldIndex, 'fieldIndex');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/game/$gameId/move/$fieldIndex',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'PUT',
+            headers: <String, dynamic>{'secured': 'secured'},
+            extra: _extra,
+            baseUrl: baseUrl),
+        data: _data);
+    final value = GameResponseModel.fromJson(_result.data);
+    return Future.value(value);
+  }
+
+  @override
   login(request) async {
     ArgumentError.checkNotNull(request, 'request');
     const _extra = <String, dynamic>{};

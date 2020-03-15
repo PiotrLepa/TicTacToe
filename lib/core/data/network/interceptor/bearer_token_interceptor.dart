@@ -12,7 +12,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) async {
 //    final accessToken = await _oauthTokensStorage.accessToken; // TODO
-    final accessToken = "d502f4d9-e1c2-4f8b-b73d-2b4d4aa91ac2";
+    final accessToken = "768181e8-554c-44c5-a134-06b721a55cf0";
     final headers = options.headers;
 
     if (accessToken != null && _isRequestSecure(headers)) {

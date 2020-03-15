@@ -15,7 +15,15 @@ abstract class NetworkService {
   @POST("/game/create")
   @http.Headers(securedHeader)
   Future<GameResponseModel> createGame(
-      @Query("difficulty_level") String difficultyLevel);
+    @Query("difficulty_level") String difficultyLevel,
+  );
+
+  @PUT("/game/{gameId}/move/{fieldIndex}")
+  @http.Headers(securedHeader)
+  Future<GameResponseModel> setMove(
+    @Path("gameId") int gameId,
+    @Path("fieldIndex") int fieldIndex,
+  );
 
   @POST("/oauth/token")
   @http.FormUrlEncoded()

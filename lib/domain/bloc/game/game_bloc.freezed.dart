@@ -13,6 +13,7 @@ mixin _$GameEvent {
     @required Result onEasyTapped(),
     @required Result onMediumTapped(),
     @required Result onHardTapped(),
+    @required Result onFieldTapped(int index),
   });
 
   @optionalTypeArgs
@@ -20,6 +21,7 @@ mixin _$GameEvent {
     Result onEasyTapped(),
     Result onMediumTapped(),
     Result onHardTapped(),
+    Result onFieldTapped(int index),
     @required Result orElse(),
   });
 
@@ -28,6 +30,7 @@ mixin _$GameEvent {
     @required Result onEasyTapped(OnEasyTapped value),
     @required Result onMediumTapped(OnMediumTapped value),
     @required Result onHardTapped(OnHardTapped value),
+    @required Result onFieldTapped(OnFieldTapped value),
   });
 
   @optionalTypeArgs
@@ -35,6 +38,7 @@ mixin _$GameEvent {
     Result onEasyTapped(OnEasyTapped value),
     Result onMediumTapped(OnMediumTapped value),
     Result onHardTapped(OnHardTapped value),
+    Result onFieldTapped(OnFieldTapped value),
     @required Result orElse(),
   });
 }
@@ -52,6 +56,12 @@ class _$GameEventTearOff {
 
   OnHardTapped onHardTapped() {
     return const OnHardTapped();
+  }
+
+  OnFieldTapped onFieldTapped(int index) {
+    return OnFieldTapped(
+      index,
+    );
   }
 }
 
@@ -85,10 +95,12 @@ class _$OnEasyTapped with DiagnosticableTreeMixin implements OnEasyTapped {
     @required Result onEasyTapped(),
     @required Result onMediumTapped(),
     @required Result onHardTapped(),
+    @required Result onFieldTapped(int index),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onEasyTapped();
   }
 
@@ -98,6 +110,7 @@ class _$OnEasyTapped with DiagnosticableTreeMixin implements OnEasyTapped {
     Result onEasyTapped(),
     Result onMediumTapped(),
     Result onHardTapped(),
+    Result onFieldTapped(int index),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -113,10 +126,12 @@ class _$OnEasyTapped with DiagnosticableTreeMixin implements OnEasyTapped {
     @required Result onEasyTapped(OnEasyTapped value),
     @required Result onMediumTapped(OnMediumTapped value),
     @required Result onHardTapped(OnHardTapped value),
+    @required Result onFieldTapped(OnFieldTapped value),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onEasyTapped(this);
   }
 
@@ -126,6 +141,7 @@ class _$OnEasyTapped with DiagnosticableTreeMixin implements OnEasyTapped {
     Result onEasyTapped(OnEasyTapped value),
     Result onMediumTapped(OnMediumTapped value),
     Result onHardTapped(OnHardTapped value),
+    Result onFieldTapped(OnFieldTapped value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -168,10 +184,12 @@ class _$OnMediumTapped with DiagnosticableTreeMixin implements OnMediumTapped {
     @required Result onEasyTapped(),
     @required Result onMediumTapped(),
     @required Result onHardTapped(),
+    @required Result onFieldTapped(int index),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onMediumTapped();
   }
 
@@ -181,6 +199,7 @@ class _$OnMediumTapped with DiagnosticableTreeMixin implements OnMediumTapped {
     Result onEasyTapped(),
     Result onMediumTapped(),
     Result onHardTapped(),
+    Result onFieldTapped(int index),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -196,10 +215,12 @@ class _$OnMediumTapped with DiagnosticableTreeMixin implements OnMediumTapped {
     @required Result onEasyTapped(OnEasyTapped value),
     @required Result onMediumTapped(OnMediumTapped value),
     @required Result onHardTapped(OnHardTapped value),
+    @required Result onFieldTapped(OnFieldTapped value),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onMediumTapped(this);
   }
 
@@ -209,6 +230,7 @@ class _$OnMediumTapped with DiagnosticableTreeMixin implements OnMediumTapped {
     Result onEasyTapped(OnEasyTapped value),
     Result onMediumTapped(OnMediumTapped value),
     Result onHardTapped(OnHardTapped value),
+    Result onFieldTapped(OnFieldTapped value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -251,10 +273,12 @@ class _$OnHardTapped with DiagnosticableTreeMixin implements OnHardTapped {
     @required Result onEasyTapped(),
     @required Result onMediumTapped(),
     @required Result onHardTapped(),
+    @required Result onFieldTapped(int index),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onHardTapped();
   }
 
@@ -264,6 +288,7 @@ class _$OnHardTapped with DiagnosticableTreeMixin implements OnHardTapped {
     Result onEasyTapped(),
     Result onMediumTapped(),
     Result onHardTapped(),
+    Result onFieldTapped(int index),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -279,10 +304,12 @@ class _$OnHardTapped with DiagnosticableTreeMixin implements OnHardTapped {
     @required Result onEasyTapped(OnEasyTapped value),
     @required Result onMediumTapped(OnMediumTapped value),
     @required Result onHardTapped(OnHardTapped value),
+    @required Result onFieldTapped(OnFieldTapped value),
   }) {
     assert(onEasyTapped != null);
     assert(onMediumTapped != null);
     assert(onHardTapped != null);
+    assert(onFieldTapped != null);
     return onHardTapped(this);
   }
 
@@ -292,6 +319,7 @@ class _$OnHardTapped with DiagnosticableTreeMixin implements OnHardTapped {
     Result onEasyTapped(OnEasyTapped value),
     Result onMediumTapped(OnMediumTapped value),
     Result onHardTapped(OnHardTapped value),
+    Result onFieldTapped(OnFieldTapped value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -306,12 +334,125 @@ abstract class OnHardTapped implements GameEvent {
   const factory OnHardTapped() = _$OnHardTapped;
 }
 
+class _$OnFieldTapped with DiagnosticableTreeMixin implements OnFieldTapped {
+  const _$OnFieldTapped(this.index) : assert(index != null);
+
+  @override
+  final int index;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameEvent.onFieldTapped(index: $index)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'GameEvent.onFieldTapped'))
+      ..add(DiagnosticsProperty('index', index));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is OnFieldTapped &&
+            (identical(other.index, index) ||
+                const DeepCollectionEquality().equals(other.index, index)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
+
+  @override
+  _$OnFieldTapped copyWith({
+    Object index = freezed,
+  }) {
+    return _$OnFieldTapped(
+      index == freezed ? this.index : index as int,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result onEasyTapped(),
+    @required Result onMediumTapped(),
+    @required Result onHardTapped(),
+    @required Result onFieldTapped(int index),
+  }) {
+    assert(onEasyTapped != null);
+    assert(onMediumTapped != null);
+    assert(onHardTapped != null);
+    assert(onFieldTapped != null);
+    return onFieldTapped(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result onEasyTapped(),
+    Result onMediumTapped(),
+    Result onHardTapped(),
+    Result onFieldTapped(int index),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (onFieldTapped != null) {
+      return onFieldTapped(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result onEasyTapped(OnEasyTapped value),
+    @required Result onMediumTapped(OnMediumTapped value),
+    @required Result onHardTapped(OnHardTapped value),
+    @required Result onFieldTapped(OnFieldTapped value),
+  }) {
+    assert(onEasyTapped != null);
+    assert(onMediumTapped != null);
+    assert(onHardTapped != null);
+    assert(onFieldTapped != null);
+    return onFieldTapped(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result onEasyTapped(OnEasyTapped value),
+    Result onMediumTapped(OnMediumTapped value),
+    Result onHardTapped(OnHardTapped value),
+    Result onFieldTapped(OnFieldTapped value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (onFieldTapped != null) {
+      return onFieldTapped(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class OnFieldTapped implements GameEvent {
+  const factory OnFieldTapped(int index) = _$OnFieldTapped;
+
+  int get index;
+
+  OnFieldTapped copyWith({int index});
+}
+
 mixin _$GameState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
-    @required Result gameCreated(int gameId, GameMark playerMark),
+    @required
+        Result gameCreated(@required int gameId, @required GameMark playerMark,
+            @required BuiltList<GameMove> moves),
     @required Result error(RawKeyString errorMessage),
   });
 
@@ -319,7 +460,8 @@ mixin _$GameState {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(int gameId, GameMark playerMark),
+    Result gameCreated(@required int gameId, @required GameMark playerMark,
+        @required BuiltList<GameMove> moves),
     Result error(RawKeyString errorMessage),
     @required Result orElse(),
   });
@@ -353,10 +495,14 @@ class _$GameStateTearOff {
     return const Loading();
   }
 
-  GameCreated gameCreated(int gameId, GameMark playerMark) {
+  GameCreated gameCreated(
+      {@required int gameId,
+      @required GameMark playerMark,
+      @required BuiltList<GameMove> moves}) {
     return GameCreated(
-      gameId,
-      playerMark,
+      gameId: gameId,
+      playerMark: playerMark,
+      moves: moves,
     );
   }
 
@@ -396,7 +542,9 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
-    @required Result gameCreated(int gameId, GameMark playerMark),
+    @required
+        Result gameCreated(@required int gameId, @required GameMark playerMark,
+            @required BuiltList<GameMove> moves),
     @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
@@ -411,7 +559,8 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(int gameId, GameMark playerMark),
+    Result gameCreated(@required int gameId, @required GameMark playerMark,
+        @required BuiltList<GameMove> moves),
     Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
@@ -485,7 +634,9 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
-    @required Result gameCreated(int gameId, GameMark playerMark),
+    @required
+        Result gameCreated(@required int gameId, @required GameMark playerMark,
+            @required BuiltList<GameMove> moves),
     @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
@@ -500,7 +651,8 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(int gameId, GameMark playerMark),
+    Result gameCreated(@required int gameId, @required GameMark playerMark,
+        @required BuiltList<GameMove> moves),
     Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
@@ -548,18 +700,22 @@ abstract class Loading implements GameState {
 }
 
 class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
-  const _$GameCreated(this.gameId, this.playerMark)
+  const _$GameCreated(
+      {@required this.gameId, @required this.playerMark, @required this.moves})
       : assert(gameId != null),
-        assert(playerMark != null);
+        assert(playerMark != null),
+        assert(moves != null);
 
   @override
   final int gameId;
   @override
   final GameMark playerMark;
+  @override
+  final BuiltList<GameMove> moves;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'GameState.gameCreated(gameId: $gameId, playerMark: $playerMark)';
+    return 'GameState.gameCreated(gameId: $gameId, playerMark: $playerMark, moves: $moves)';
   }
 
   @override
@@ -568,7 +724,8 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
     properties
       ..add(DiagnosticsProperty('type', 'GameState.gameCreated'))
       ..add(DiagnosticsProperty('gameId', gameId))
-      ..add(DiagnosticsProperty('playerMark', playerMark));
+      ..add(DiagnosticsProperty('playerMark', playerMark))
+      ..add(DiagnosticsProperty('moves', moves));
   }
 
   @override
@@ -579,23 +736,29 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
                 const DeepCollectionEquality().equals(other.gameId, gameId)) &&
             (identical(other.playerMark, playerMark) ||
                 const DeepCollectionEquality()
-                    .equals(other.playerMark, playerMark)));
+                    .equals(other.playerMark, playerMark)) &&
+            (identical(other.moves, moves) ||
+                const DeepCollectionEquality().equals(other.moves, moves)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(gameId) ^
-      const DeepCollectionEquality().hash(playerMark);
+      const DeepCollectionEquality().hash(playerMark) ^
+      const DeepCollectionEquality().hash(moves);
 
   @override
   _$GameCreated copyWith({
     Object gameId = freezed,
     Object playerMark = freezed,
+    Object moves = freezed,
   }) {
     return _$GameCreated(
-      gameId == freezed ? this.gameId : gameId as int,
-      playerMark == freezed ? this.playerMark : playerMark as GameMark,
+      gameId: gameId == freezed ? this.gameId : gameId as int,
+      playerMark:
+          playerMark == freezed ? this.playerMark : playerMark as GameMark,
+      moves: moves == freezed ? this.moves : moves as BuiltList<GameMove>,
     );
   }
 
@@ -604,14 +767,16 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
-    @required Result gameCreated(int gameId, GameMark playerMark),
+    @required
+        Result gameCreated(@required int gameId, @required GameMark playerMark,
+            @required BuiltList<GameMove> moves),
     @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(loading != null);
     assert(gameCreated != null);
     assert(error != null);
-    return gameCreated(gameId, playerMark);
+    return gameCreated(gameId, playerMark, moves);
   }
 
   @override
@@ -619,13 +784,14 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(int gameId, GameMark playerMark),
+    Result gameCreated(@required int gameId, @required GameMark playerMark,
+        @required BuiltList<GameMove> moves),
     Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (gameCreated != null) {
-      return gameCreated(gameId, playerMark);
+      return gameCreated(gameId, playerMark, moves);
     }
     return orElse();
   }
@@ -663,12 +829,17 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
 }
 
 abstract class GameCreated implements GameState {
-  const factory GameCreated(int gameId, GameMark playerMark) = _$GameCreated;
+  const factory GameCreated(
+      {@required int gameId,
+      @required GameMark playerMark,
+      @required BuiltList<GameMove> moves}) = _$GameCreated;
 
   int get gameId;
   GameMark get playerMark;
+  BuiltList<GameMove> get moves;
 
-  GameCreated copyWith({int gameId, GameMark playerMark});
+  GameCreated copyWith(
+      {int gameId, GameMark playerMark, BuiltList<GameMove> moves});
 }
 
 class _$Error with DiagnosticableTreeMixin implements Error {
@@ -719,7 +890,9 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
-    @required Result gameCreated(int gameId, GameMark playerMark),
+    @required
+        Result gameCreated(@required int gameId, @required GameMark playerMark,
+            @required BuiltList<GameMove> moves),
     @required Result error(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
@@ -734,7 +907,8 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(int gameId, GameMark playerMark),
+    Result gameCreated(@required int gameId, @required GameMark playerMark,
+        @required BuiltList<GameMove> moves),
     Result error(RawKeyString errorMessage),
     @required Result orElse(),
   }) {

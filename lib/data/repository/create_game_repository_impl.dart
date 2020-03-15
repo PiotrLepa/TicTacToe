@@ -35,4 +35,12 @@ class CreateGameRepositoryImpl extends NetworkRepository
       mapper: _gameResponseEntityMapper.toEntity,
     );
   }
+
+  @override
+  Future<GameResponse> setMove(int gameId, int fieldIndex) {
+    return call(
+      request: _service.setMove(gameId, fieldIndex),
+      mapper: _gameResponseEntityMapper.toEntity,
+    );
+  }
 }

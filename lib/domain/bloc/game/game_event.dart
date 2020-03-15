@@ -7,4 +7,6 @@ abstract class GameEvent with _$GameEvent {
   const factory GameEvent.onMediumTapped() = OnMediumTapped;
 
   const factory GameEvent.onHardTapped() = OnHardTapped;
+
+  const factory GameEvent.onFieldTapped(int index) = OnFieldTapped;
 }

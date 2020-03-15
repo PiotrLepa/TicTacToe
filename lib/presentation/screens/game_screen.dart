@@ -46,7 +46,11 @@ class GameScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           _buildPlayerMark(context, state),
-          GameBoard(),
+          GameBoard(
+            moves: state.moves,
+            onFieldTapped: (index) =>
+                context.bloc<GameBloc>().add(GameEvent.onFieldTapped(index)),
+          ),
         ],
       ),
     );
@@ -72,12 +76,8 @@ class GameScreen extends StatelessWidget {
             fontSize: 84,
             fontWeight: FontWeight.bold,
             color: state.playerMark == GameMark.x
-                ? ThemeProvider
-                .of(context)
-                .markXColor
-                : ThemeProvider
-                .of(context)
-                .markOColor,
+                ? ThemeProvider.of(context).markXColor
+                : ThemeProvider.of(context).markOColor,
           ),
         ),
       ],
