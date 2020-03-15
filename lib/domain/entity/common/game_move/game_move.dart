@@ -1,7 +1,7 @@
 library game_move;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/domain/common/game_mark/game_mark.dart';
+import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 
 part 'game_move.freezed.dart';
 

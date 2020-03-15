@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/mapper/entity_mapper.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
-import 'package:tictactoe/domain/common/difficulty_level/difficulty_level.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
 @lazySingleton
 class DifficultyLevelEntityMapper

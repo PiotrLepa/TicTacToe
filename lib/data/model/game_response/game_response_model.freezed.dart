@@ -166,16 +166,17 @@ class _$_GameResponseModel implements _GameResponseModel {
 }
 
 abstract class _GameResponseModel implements GameResponseModel {
-  const factory _GameResponseModel({@required int gameId,
-    @required int playerId,
-    @required GameStatusModel status,
-    @required DifficultyLevelModel difficultyLevel,
-    @required GameMarkModel playerMark,
-    @required GameMarkModel computerMark,
-    @required List<GameMoveModel> moves}) = _$_GameResponseModel;
+  const factory _GameResponseModel(
+      {@required int gameId,
+      @required int playerId,
+      @required GameStatusModel status,
+      @required DifficultyLevelModel difficultyLevel,
+      @required GameMarkModel playerMark,
+      @required GameMarkModel computerMark,
+      @required List<GameMoveModel> moves}) = _$_GameResponseModel;
 
   factory _GameResponseModel.fromJson(Map<String, dynamic> json) =
-  _$_GameResponseModel.fromJson;
+      _$_GameResponseModel.fromJson;
 
   @override
   int get gameId;

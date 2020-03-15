@@ -1,18 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/domain/common/game_mark/game_mark.dart';
+import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
+import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/presentation/theme_provider.dart';
 import 'package:tictactoe/presentation/widgets/game_board.dart';
+import 'package:tictactoe/presentation/widgets/loading_indicator.dart';
 
 class GameScreen extends StatelessWidget {
-  final int gameId;
-  final GameMark playerMark;
+  final DifficultyLevel difficultyLevel;
 
   const GameScreen({
-    @required this.gameId,
-    @required this.playerMark,
-  }) : super();
+    Key key,
+    @required this.difficultyLevel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,20 +25,34 @@ class GameScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              buildPlayerMark(context),
-              GameBoard(),
-            ],
-          ),
+        child: BlocBuilder<GameBloc, GameState>(
+          builder: (context, state) {
+            return state.maybeMap(
+              loading: (_) => Center(
+                child: LoadingIndicator(),
+              ),
+              gameCreated: (gameCrated) => _buildGamePage(context, gameCrated),
+              orElse: () => Container(),
+            );
+          },
         ),
       ),
     );
   }
 
-  Column buildPlayerMark(BuildContext context) {
+  Widget _buildGamePage(BuildContext context, GameCreated state) {
+    return Container(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          _buildPlayerMark(context, state),
+          GameBoard(),
+        ],
+      ),
+    );
+  }
+
+  Column _buildPlayerMark(BuildContext context, GameCreated state) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
@@ -50,11 +67,11 @@ class GameScreen extends StatelessWidget {
           height: 12,
         ),
         Text(
-          playerMark == GameMark.x ? "X" : "O",
+          state.playerMark == GameMark.x ? "X" : "O",
           style: TextStyle(
             fontSize: 84,
             fontWeight: FontWeight.bold,
-            color: playerMark == GameMark.x
+            color: state.playerMark == GameMark.x
                 ? ThemeProvider
                 .of(context)
                 .markXColor

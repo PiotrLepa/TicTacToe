@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/util/locale_provider.dart';
-import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/screens/game_results_page.dart';
 import 'package:tictactoe/presentation/screens/settings_page.dart';
 import 'package:tictactoe/presentation/screens/start_game_page.dart';

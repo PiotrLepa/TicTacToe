@@ -4,7 +4,7 @@ import 'package:tictactoe/core/util/enum_helper.dart';
 import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
-import 'package:tictactoe/domain/common/difficulty_level/difficulty_level.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
 

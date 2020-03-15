@@ -21,7 +21,7 @@ import 'package:tictactoe/data/mapper/entity/game_status_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/repository/refresh_token_repository.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
-import 'package:tictactoe/presentation/bloc/bottom_navigation/bottom_navigation_bloc.dart';
+import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
 import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
@@ -29,7 +29,7 @@ import 'package:tictactoe/core/data/network/interceptor/refresh_token_intercepto
 import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/data/repository/create_game_repository_impl.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
-import 'package:tictactoe/presentation/bloc/start_game/start_game_bloc.dart';
+import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
@@ -94,7 +94,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<DifficultyLevelModelMapper>(),
         g<GameResponseEntityMapper>(),
       ));
-  g.registerFactory<StartGameBloc>(() => StartGameBloc(
+  g.registerFactory<GameBloc>(() => GameBloc(
         g<CreateGameRepository>(),
       ));
 }
