@@ -2,16 +2,16 @@ import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
 
 @lazySingleton
 class ErrorHandler {
-  FlushbarStatus _flushbarStatus;
+  FlushbarStatus _flushBarStatus;
 
   void showError(BuildContext context, RawKeyString message) async {
-    if (_flushbarStatus != null &&
-        _flushbarStatus != FlushbarStatus.DISMISSED) {
+    if (_flushBarStatus != null &&
+        _flushBarStatus != FlushbarStatus.DISMISSED) {
       return;
     }
     Flushbar(
@@ -22,6 +22,11 @@ class ErrorHandler {
       margin: EdgeInsets.all(8),
       borderRadius: 16,
       duration: Duration(seconds: 3),
+      icon: Icon(
+        Icons.warning,
+        color: Colors.white,
+      ),
+      shouldIconPulse: false,
       boxShadows: [
         BoxShadow(
           color: Color(0x44FFFFFF),
@@ -30,7 +35,7 @@ class ErrorHandler {
         )
       ],
       onStatusChanged: (status) {
-        _flushbarStatus = status;
+        _flushBarStatus = status;
       },
     )..show(context);
   }

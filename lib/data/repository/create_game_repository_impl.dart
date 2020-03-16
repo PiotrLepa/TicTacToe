@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/enum_helper.dart';
 import 'package:tictactoe/core/data/repository/network_repository.dart';
-import 'package:tictactoe/core/util/enum_helper.dart';
 import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';

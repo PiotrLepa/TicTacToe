@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/util/logger/logger.dart';
+import 'package:tictactoe/core/common/logger/logger.dart';
 
 class ErrorLoggerBlocDelegate extends BlocDelegate {
   @override

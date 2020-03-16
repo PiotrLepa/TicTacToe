@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tictactoe/core/common/locale_provider.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/util/locale_provider.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
 
 class AppLocalizations {
   final Locale locale;

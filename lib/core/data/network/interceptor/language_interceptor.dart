@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/util/locale_provider.dart';
 
 @injectable
 class LanguageInterceptor extends InterceptorsWrapper {

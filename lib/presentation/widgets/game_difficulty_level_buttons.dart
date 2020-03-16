@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 
 class GameDifficultyLevelButtons extends StatelessWidget {

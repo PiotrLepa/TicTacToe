@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:tictactoe/core/common/logger/logger.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
-import 'package:tictactoe/core/util/logger/logger.dart';
 
 class NetworkRepository {
   Future<E> call<E, M>({

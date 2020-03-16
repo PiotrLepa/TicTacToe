@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/presentation/bloc_helper.dart';
-import 'package:tictactoe/core/util/oauth_tokens_storage.dart';
+import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/presentation/test_event.dart';

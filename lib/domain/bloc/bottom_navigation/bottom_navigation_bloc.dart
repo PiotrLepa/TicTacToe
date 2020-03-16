@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 
 part 'bottom_navigation_bloc.freezed.dart';
 part 'bottom_navigation_event.dart';

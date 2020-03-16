@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/util/locale_provider.dart';
 import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/presentation/screens/game_results_page.dart';
 import 'package:tictactoe/presentation/screens/settings_page.dart';
@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _localeProvider.currentLocale = Localizations.localeOf(context);
     return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
       builder: (BuildContext context, BottomNavigationState state) {
         return Scaffold(
@@ -60,9 +59,7 @@ class HomeScreen extends StatelessWidget {
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
           title: Text(
-            AppLocalizations
-                .of(context)
-                .pageSettings,
+            AppLocalizations.of(context).pageSettings,
           ),
         ),
       ];
