@@ -2,11 +2,11 @@ part of 'game_bloc.dart';
 
 @freezed
 abstract class GameEvent with _$GameEvent {
-  const factory GameEvent.onEasyTapped() = OnEasyTapped;
+  const factory GameEvent.createGame(DifficultyLevel difficultyLevel) =
+      CreateGame;
 
-  const factory GameEvent.onMediumTapped() = OnMediumTapped;
-
-  const factory GameEvent.onHardTapped() = OnHardTapped;
+  const factory GameEvent.restartGame(DifficultyLevel difficultyLevel) =
+      RestartGame;
 
   const factory GameEvent.onFieldTapped(int index) = OnFieldTapped;
 }

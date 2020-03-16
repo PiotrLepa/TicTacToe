@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
 class GameDifficultyLevelButtons extends StatelessWidget {
   final titles = [
@@ -15,10 +16,10 @@ class GameDifficultyLevelButtons extends StatelessWidget {
     Color(0xFFEE4035),
     Color(0xFFB4000C),
   ];
-  final listeners = [
-    GameEvent.onEasyTapped(),
-    GameEvent.onMediumTapped(),
-    GameEvent.onHardTapped(),
+  final difficultyLevels = [
+    DifficultyLevel.easy,
+    DifficultyLevel.medium,
+    DifficultyLevel.hard,
   ];
 
   @override
@@ -42,7 +43,9 @@ class GameDifficultyLevelButtons extends StatelessWidget {
           return Align(
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => context.bloc<GameBloc>().add(listeners[index]),
+              onTap: () => context
+                  .bloc<GameBloc>()
+                  .add(GameEvent.createGame(difficultyLevels[index])),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Text(

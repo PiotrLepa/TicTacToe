@@ -10,6 +10,7 @@ import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
+import 'package:tictactoe/domain/entity/game_response/game_response.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
@@ -21,8 +22,7 @@ part 'game_state.dart';
 class GameBloc extends Bloc<GameEvent, GameState> {
   final CreateGameRepository _createGameRepository;
 
-  int _gameId;
-  GameStatus _currentGameStatus;
+  GameResponse _gameResponse;
 
   GameBloc(this._createGameRepository);
 
@@ -34,33 +34,24 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     GameEvent event,
   ) async* {
     yield* event.map(
-      onEasyTapped: _onEasyTapped,
-      onMediumTapped: _onMediumTapped,
-      onHardTapped: _onHardTapped,
+      createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
+      restartGame: _onRestartGame,
     );
   }
 
+  Stream<GameState> _onCreateGame(CreateGame event) async* {
+    Router.navigator.pop();
+    _pushGameScreen(event.difficultyLevel);
+    yield* _createGame(event.difficultyLevel);
+  }
+
   Stream<GameState> _onFieldTapped(OnFieldTapped event) async* {
-    yield* _setMove(_gameId, event.index);
+    yield* _setMove(_gameResponse.gameId, event.index);
   }
 
-  Stream<GameState> _onEasyTapped(OnEasyTapped event) async* {
-    Router.navigator.pop();
-    _pushGameScreen(DifficultyLevel.easy);
-    yield* _createGame(DifficultyLevel.easy);
-  }
-
-  Stream<GameState> _onMediumTapped(OnMediumTapped event) async* {
-    Router.navigator.pop();
-    _pushGameScreen(DifficultyLevel.medium);
-    yield* _createGame(DifficultyLevel.medium);
-  }
-
-  Stream<GameState> _onHardTapped(OnHardTapped event) async* {
-    Router.navigator.pop();
-    _pushGameScreen(DifficultyLevel.hard);
-    yield* _createGame(DifficultyLevel.hard);
+  Stream<GameState> _onRestartGame(RestartGame event) async* {
+    yield* _createGame(event.difficultyLevel);
   }
 
   Stream<GameState> _createGame(DifficultyLevel difficultyLevel) async* {
@@ -71,8 +62,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           yield GameState.loading();
         },
         success: (response) async* {
-          _gameId = response.gameId;
-          _currentGameStatus = response.status;
+          _gameResponse = response;
           yield GameState.renderGame(
             playerMark: response.playerMark,
             moves: response.moves,
@@ -86,7 +76,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _setMove(int gameId, int fieldIndex) async* {
-    if (_currentGameStatus != GameStatus.onGoing) {
+    if (_gameResponse.status != GameStatus.onGoing ||
+        !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
       return;
     }
     final request = fetch(_createGameRepository.setMove(gameId, fieldIndex));
@@ -96,7 +87,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           yield GameState.moveLoading();
         },
         success: (response) async* {
-          _currentGameStatus = response.status;
+          _gameResponse = response;
           yield GameState.renderGame(
             playerMark: response.playerMark,
             moves: response.moves,
@@ -108,7 +99,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
               yield GameState.playerWon();
               break;
             case GameStatus.computerWon:
-              yield GameState.draw();
+              yield GameState.computerWon();
               break;
             case GameStatus.draw:
               yield GameState.draw();
@@ -121,6 +112,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       );
     }
   }
+
+  bool _isFieldEmpty(BuiltList<GameMove> moves, int fieldIndex) =>
+      moves
+          .where((move) => move.fieldIndex == fieldIndex)
+          .isEmpty;
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
     Router.navigator.pushNamed(
