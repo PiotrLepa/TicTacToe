@@ -41,6 +41,7 @@ dependencies:
   # Storage
   shared_preferences: ^0.5.6+2
 
+  flushbar: ^1.9.1
 
 dev_dependencies:
   flutter_test:

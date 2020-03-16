@@ -20,6 +20,8 @@ part 'game_state.dart';
 class GameBloc extends Bloc<GameEvent, GameState> {
   final CreateGameRepository _createGameRepository;
 
+  int _gameId;
+
   GameBloc(this._createGameRepository);
 
   @override
@@ -38,14 +40,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _onFieldTapped(OnFieldTapped event) async* {
-    final gameCreatedState = state as GameCreated;
-    if (_isFieldEmpty(gameCreatedState.moves, event)) {
-      yield* _setMove(gameCreatedState.gameId, event.index);
-    }
+    yield* _setMove(_gameId, event.index);
   }
-
-  bool _isFieldEmpty(BuiltList<GameMove> moves, OnFieldTapped event) =>
-      moves.where((move) => move.fieldIndex == event.index).isEmpty;
 
   Stream<GameState> _onEasyTapped(OnEasyTapped event) async* {
     Router.navigator.pop();
@@ -72,6 +68,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             progress: (_) => GameState.loading(),
             success: (success) {
               final result = success.result;
+              _gameId = result.gameId;
               return GameState.gameCreated(
                 gameId: result.gameId,
                 playerMark: result.playerMark,
