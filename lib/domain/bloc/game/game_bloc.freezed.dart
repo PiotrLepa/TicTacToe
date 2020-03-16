@@ -450,19 +450,29 @@ mixin _$GameState {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
+    @required Result moveLoading(),
     @required
-        Result gameCreated(@required int gameId, @required GameMark playerMark,
-            @required BuiltList<GameMove> moves),
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
     @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
   });
 
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(@required int gameId, @required GameMark playerMark,
-        @required BuiltList<GameMove> moves),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
     Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   });
 
@@ -470,16 +480,26 @@ mixin _$GameState {
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result loading(Loading value),
-    @required Result gameCreated(GameCreated value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
     @required Result error(Error value),
+    @required Result moveError(MoveError value),
   });
 
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result loading(Loading value),
-    Result gameCreated(GameCreated value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
     Result error(Error value),
+    Result moveError(MoveError value),
     @required Result orElse(),
   });
 }
@@ -495,19 +515,38 @@ class _$GameStateTearOff {
     return const Loading();
   }
 
-  GameCreated gameCreated(
-      {@required int gameId,
-      @required GameMark playerMark,
-      @required BuiltList<GameMove> moves}) {
-    return GameCreated(
-      gameId: gameId,
+  MoveLoading moveLoading() {
+    return const MoveLoading();
+  }
+
+  RenderGame renderGame(
+      {@required GameMark playerMark, @required BuiltList<GameMove> moves}) {
+    return RenderGame(
       playerMark: playerMark,
       moves: moves,
     );
   }
 
+  PlayerWon playerWon() {
+    return const PlayerWon();
+  }
+
+  ComputerWon computerWon() {
+    return const ComputerWon();
+  }
+
+  Draw draw() {
+    return const Draw();
+  }
+
   Error error(RawKeyString errorMessage) {
     return Error(
+      errorMessage,
+    );
+  }
+
+  MoveError moveError(RawKeyString errorMessage) {
+    return MoveError(
       errorMessage,
     );
   }
@@ -542,15 +581,25 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
+    @required Result moveLoading(),
     @required
-        Result gameCreated(@required int gameId, @required GameMark playerMark,
-            @required BuiltList<GameMove> moves),
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
     @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return nothing();
   }
 
@@ -559,9 +608,14 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(@required int gameId, @required GameMark playerMark,
-        @required BuiltList<GameMove> moves),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
     Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -576,13 +630,23 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result loading(Loading value),
-    @required Result gameCreated(GameCreated value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
     @required Result error(Error value),
+    @required Result moveError(MoveError value),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return nothing(this);
   }
 
@@ -591,8 +655,13 @@ class _$Nothing with DiagnosticableTreeMixin implements Nothing {
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result loading(Loading value),
-    Result gameCreated(GameCreated value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
     Result error(Error value),
+    Result moveError(MoveError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -634,15 +703,25 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
+    @required Result moveLoading(),
     @required
-        Result gameCreated(@required int gameId, @required GameMark playerMark,
-            @required BuiltList<GameMove> moves),
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
     @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return loading();
   }
 
@@ -651,9 +730,14 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(@required int gameId, @required GameMark playerMark,
-        @required BuiltList<GameMove> moves),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
     Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -668,13 +752,23 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result loading(Loading value),
-    @required Result gameCreated(GameCreated value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
     @required Result error(Error value),
+    @required Result moveError(MoveError value),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return loading(this);
   }
 
@@ -683,8 +777,13 @@ class _$Loading with DiagnosticableTreeMixin implements Loading {
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result loading(Loading value),
-    Result gameCreated(GameCreated value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
     Result error(Error value),
+    Result moveError(MoveError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -699,15 +798,133 @@ abstract class Loading implements GameState {
   const factory Loading() = _$Loading;
 }
 
-class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
-  const _$GameCreated(
-      {@required this.gameId, @required this.playerMark, @required this.moves})
-      : assert(gameId != null),
-        assert(playerMark != null),
-        assert(moves != null);
+class _$MoveLoading with DiagnosticableTreeMixin implements MoveLoading {
+  const _$MoveLoading();
 
   @override
-  final int gameId;
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameState.moveLoading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'GameState.moveLoading'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is MoveLoading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result loading(),
+    @required Result moveLoading(),
+    @required
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
+    @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return moveLoading();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result loading(),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
+    Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (moveLoading != null) {
+      return moveLoading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result loading(Loading value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
+    @required Result error(Error value),
+    @required Result moveError(MoveError value),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return moveLoading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result loading(Loading value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
+    Result error(Error value),
+    Result moveError(MoveError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (moveLoading != null) {
+      return moveLoading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MoveLoading implements GameState {
+  const factory MoveLoading() = _$MoveLoading;
+}
+
+class _$RenderGame with DiagnosticableTreeMixin implements RenderGame {
+  const _$RenderGame({@required this.playerMark, @required this.moves})
+      : assert(playerMark != null),
+        assert(moves != null);
+
   @override
   final GameMark playerMark;
   @override
@@ -715,15 +932,14 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'GameState.gameCreated(gameId: $gameId, playerMark: $playerMark, moves: $moves)';
+    return 'GameState.renderGame(playerMark: $playerMark, moves: $moves)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'GameState.gameCreated'))
-      ..add(DiagnosticsProperty('gameId', gameId))
+      ..add(DiagnosticsProperty('type', 'GameState.renderGame'))
       ..add(DiagnosticsProperty('playerMark', playerMark))
       ..add(DiagnosticsProperty('moves', moves));
   }
@@ -731,9 +947,7 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is GameCreated &&
-            (identical(other.gameId, gameId) ||
-                const DeepCollectionEquality().equals(other.gameId, gameId)) &&
+        (other is RenderGame &&
             (identical(other.playerMark, playerMark) ||
                 const DeepCollectionEquality()
                     .equals(other.playerMark, playerMark)) &&
@@ -744,18 +958,15 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(gameId) ^
       const DeepCollectionEquality().hash(playerMark) ^
       const DeepCollectionEquality().hash(moves);
 
   @override
-  _$GameCreated copyWith({
-    Object gameId = freezed,
+  _$RenderGame copyWith({
     Object playerMark = freezed,
     Object moves = freezed,
   }) {
-    return _$GameCreated(
-      gameId: gameId == freezed ? this.gameId : gameId as int,
+    return _$RenderGame(
       playerMark:
           playerMark == freezed ? this.playerMark : playerMark as GameMark,
       moves: moves == freezed ? this.moves : moves as BuiltList<GameMove>,
@@ -767,16 +978,26 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
+    @required Result moveLoading(),
     @required
-        Result gameCreated(@required int gameId, @required GameMark playerMark,
-            @required BuiltList<GameMove> moves),
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
     @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
-    return gameCreated(gameId, playerMark, moves);
+    assert(moveError != null);
+    return renderGame(playerMark, moves);
   }
 
   @override
@@ -784,14 +1005,19 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(@required int gameId, @required GameMark playerMark,
-        @required BuiltList<GameMove> moves),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
     Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (gameCreated != null) {
-      return gameCreated(gameId, playerMark, moves);
+    if (renderGame != null) {
+      return renderGame(playerMark, moves);
     }
     return orElse();
   }
@@ -801,14 +1027,24 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result loading(Loading value),
-    @required Result gameCreated(GameCreated value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
     @required Result error(Error value),
+    @required Result moveError(MoveError value),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
-    return gameCreated(this);
+    assert(moveError != null);
+    return renderGame(this);
   }
 
   @override
@@ -816,30 +1052,398 @@ class _$GameCreated with DiagnosticableTreeMixin implements GameCreated {
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result loading(Loading value),
-    Result gameCreated(GameCreated value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
     Result error(Error value),
+    Result moveError(MoveError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (gameCreated != null) {
-      return gameCreated(this);
+    if (renderGame != null) {
+      return renderGame(this);
     }
     return orElse();
   }
 }
 
-abstract class GameCreated implements GameState {
-  const factory GameCreated(
-      {@required int gameId,
-      @required GameMark playerMark,
-      @required BuiltList<GameMove> moves}) = _$GameCreated;
+abstract class RenderGame implements GameState {
+  const factory RenderGame(
+      {@required GameMark playerMark,
+      @required BuiltList<GameMove> moves}) = _$RenderGame;
 
-  int get gameId;
   GameMark get playerMark;
   BuiltList<GameMove> get moves;
 
-  GameCreated copyWith(
-      {int gameId, GameMark playerMark, BuiltList<GameMove> moves});
+  RenderGame copyWith({GameMark playerMark, BuiltList<GameMove> moves});
+}
+
+class _$PlayerWon with DiagnosticableTreeMixin implements PlayerWon {
+  const _$PlayerWon();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameState.playerWon()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'GameState.playerWon'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is PlayerWon);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result loading(),
+    @required Result moveLoading(),
+    @required
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
+    @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return playerWon();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result loading(),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
+    Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (playerWon != null) {
+      return playerWon();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result loading(Loading value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
+    @required Result error(Error value),
+    @required Result moveError(MoveError value),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return playerWon(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result loading(Loading value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
+    Result error(Error value),
+    Result moveError(MoveError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (playerWon != null) {
+      return playerWon(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PlayerWon implements GameState {
+  const factory PlayerWon() = _$PlayerWon;
+}
+
+class _$ComputerWon with DiagnosticableTreeMixin implements ComputerWon {
+  const _$ComputerWon();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameState.computerWon()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'GameState.computerWon'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is ComputerWon);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result loading(),
+    @required Result moveLoading(),
+    @required
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
+    @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return computerWon();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result loading(),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
+    Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (computerWon != null) {
+      return computerWon();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result loading(Loading value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
+    @required Result error(Error value),
+    @required Result moveError(MoveError value),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return computerWon(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result loading(Loading value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
+    Result error(Error value),
+    Result moveError(MoveError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (computerWon != null) {
+      return computerWon(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ComputerWon implements GameState {
+  const factory ComputerWon() = _$ComputerWon;
+}
+
+class _$Draw with DiagnosticableTreeMixin implements Draw {
+  const _$Draw();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameState.draw()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties..add(DiagnosticsProperty('type', 'GameState.draw'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is Draw);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result loading(),
+    @required Result moveLoading(),
+    @required
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
+    @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return draw();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result loading(),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
+    Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (draw != null) {
+      return draw();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result loading(Loading value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
+    @required Result error(Error value),
+    @required Result moveError(MoveError value),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return draw(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result loading(Loading value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
+    Result error(Error value),
+    Result moveError(MoveError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (draw != null) {
+      return draw(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Draw implements GameState {
+  const factory Draw() = _$Draw;
 }
 
 class _$Error with DiagnosticableTreeMixin implements Error {
@@ -890,15 +1494,25 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result when<Result extends Object>({
     @required Result nothing(),
     @required Result loading(),
+    @required Result moveLoading(),
     @required
-        Result gameCreated(@required int gameId, @required GameMark playerMark,
-            @required BuiltList<GameMove> moves),
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
     @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return error(errorMessage);
   }
 
@@ -907,9 +1521,14 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result maybeWhen<Result extends Object>({
     Result nothing(),
     Result loading(),
-    Result gameCreated(@required int gameId, @required GameMark playerMark,
-        @required BuiltList<GameMove> moves),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
     Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -924,13 +1543,23 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result loading(Loading value),
-    @required Result gameCreated(GameCreated value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
     @required Result error(Error value),
+    @required Result moveError(MoveError value),
   }) {
     assert(nothing != null);
     assert(loading != null);
-    assert(gameCreated != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
     assert(error != null);
+    assert(moveError != null);
     return error(this);
   }
 
@@ -939,8 +1568,13 @@ class _$Error with DiagnosticableTreeMixin implements Error {
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result loading(Loading value),
-    Result gameCreated(GameCreated value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
     Result error(Error value),
+    Result moveError(MoveError value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -957,4 +1591,151 @@ abstract class Error implements GameState {
   RawKeyString get errorMessage;
 
   Error copyWith({RawKeyString errorMessage});
+}
+
+class _$MoveError with DiagnosticableTreeMixin implements MoveError {
+  const _$MoveError(this.errorMessage) : assert(errorMessage != null);
+
+  @override
+  final RawKeyString errorMessage;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'GameState.moveError(errorMessage: $errorMessage)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'GameState.moveError'))
+      ..add(DiagnosticsProperty('errorMessage', errorMessage));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is MoveError &&
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
+
+  @override
+  _$MoveError copyWith({
+    Object errorMessage = freezed,
+  }) {
+    return _$MoveError(
+      errorMessage == freezed
+          ? this.errorMessage
+          : errorMessage as RawKeyString,
+    );
+  }
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result nothing(),
+    @required Result loading(),
+    @required Result moveLoading(),
+    @required
+        Result renderGame(
+            @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    @required Result playerWon(),
+    @required Result computerWon(),
+    @required Result draw(),
+    @required Result error(RawKeyString errorMessage),
+    @required Result moveError(RawKeyString errorMessage),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return moveError(errorMessage);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(),
+    Result loading(),
+    Result moveLoading(),
+    Result renderGame(
+        @required GameMark playerMark, @required BuiltList<GameMove> moves),
+    Result playerWon(),
+    Result computerWon(),
+    Result draw(),
+    Result error(RawKeyString errorMessage),
+    Result moveError(RawKeyString errorMessage),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (moveError != null) {
+      return moveError(errorMessage);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result loading(Loading value),
+    @required Result moveLoading(MoveLoading value),
+    @required Result renderGame(RenderGame value),
+    @required Result playerWon(PlayerWon value),
+    @required Result computerWon(ComputerWon value),
+    @required Result draw(Draw value),
+    @required Result error(Error value),
+    @required Result moveError(MoveError value),
+  }) {
+    assert(nothing != null);
+    assert(loading != null);
+    assert(moveLoading != null);
+    assert(renderGame != null);
+    assert(playerWon != null);
+    assert(computerWon != null);
+    assert(draw != null);
+    assert(error != null);
+    assert(moveError != null);
+    return moveError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result loading(Loading value),
+    Result moveLoading(MoveLoading value),
+    Result renderGame(RenderGame value),
+    Result playerWon(PlayerWon value),
+    Result computerWon(ComputerWon value),
+    Result draw(Draw value),
+    Result error(Error value),
+    Result moveError(MoveError value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (moveError != null) {
+      return moveError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class MoveError implements GameState {
+  const factory MoveError(RawKeyString errorMessage) = _$MoveError;
+
+  RawKeyString get errorMessage;
+
+  MoveError copyWith({RawKeyString errorMessage});
 }

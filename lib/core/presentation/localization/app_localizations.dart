@@ -16,6 +16,8 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
+  String get errorTitle => _localizedStrings["errorTitle"];
+
   String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
 
   String get apiErrorBadRequest => _localizedStrings["apiErrorBadRequest"];
@@ -48,6 +50,19 @@ class AppLocalizations {
       _localizedStrings["difficultyLevelMedium"];
 
   String get difficultyLevelHard => _localizedStrings["difficultyLevelHard"];
+
+  String get gameScreenStatusPlayerWon =>
+      _localizedStrings["gameScreenStatusPlayerWon"];
+
+  String get gameScreenStatusComputerWon =>
+      _localizedStrings["gameScreenStatusComputerWon"];
+
+  String get gameScreenStatusDraw => _localizedStrings["gameScreenStatusDraw"];
+
+  String get gameScreenPlayAgainQuestion =>
+      _localizedStrings["gameScreenPlayAgainQuestion"];
+
+  String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
 
   Future load() async {
     final String jsonString =

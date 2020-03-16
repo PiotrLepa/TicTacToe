@@ -9,13 +9,12 @@ import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
+import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
 import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
 part 'game_bloc.freezed.dart';
-
 part 'game_event.dart';
-
 part 'game_state.dart';
 
 @injectable
@@ -23,6 +22,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   final CreateGameRepository _createGameRepository;
 
   int _gameId;
+  GameStatus _currentGameStatus;
 
   GameBloc(this._createGameRepository);
 
@@ -64,40 +64,62 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _createGame(DifficultyLevel difficultyLevel) async* {
-    yield* fetch(_createGameRepository.createGame(difficultyLevel)).map(
-          (state) =>
-          state.map(
-            progress: (_) => GameState.loading(),
-            success: (success) {
-              final result = success.result;
-              _gameId = result.gameId;
-              return GameState.gameCreated(
-                gameId: result.gameId,
-                playerMark: result.playerMark,
-                moves: result.moves,
-              );
-            },
-            error: (error) => GameState.error(error.errorMessage),
-          ),
-    );
+    final request = fetch(_createGameRepository.createGame(difficultyLevel));
+    await for (final state in request) {
+      yield* state.when(
+        progress: () async* {
+          yield GameState.loading();
+        },
+        success: (response) async* {
+          _gameId = response.gameId;
+          _currentGameStatus = response.status;
+          yield GameState.renderGame(
+            playerMark: response.playerMark,
+            moves: response.moves,
+          );
+        },
+        error: (errorMessage) async* {
+          yield GameState.error(errorMessage);
+        },
+      );
+    }
   }
 
   Stream<GameState> _setMove(int gameId, int fieldIndex) async* {
-    yield* fetch(_createGameRepository.setMove(gameId, fieldIndex)).map(
-          (state) =>
-          state.map(
-            progress: (_) => this.state,
-            success: (success) {
-              final result = success.result;
-              return GameState.gameCreated(
-                gameId: result.gameId,
-                playerMark: result.playerMark,
-                moves: result.moves,
-              );
-            },
-            error: (error) => GameState.error(error.errorMessage),
-          ),
-    );
+    if (_currentGameStatus != GameStatus.onGoing) {
+      return;
+    }
+    final request = fetch(_createGameRepository.setMove(gameId, fieldIndex));
+    await for (final state in request) {
+      yield* state.when(
+        progress: () async* {
+          yield GameState.moveLoading();
+        },
+        success: (response) async* {
+          _currentGameStatus = response.status;
+          yield GameState.renderGame(
+            playerMark: response.playerMark,
+            moves: response.moves,
+          );
+          switch (response.status) {
+            case GameStatus.onGoing:
+              break;
+            case GameStatus.playerWon:
+              yield GameState.playerWon();
+              break;
+            case GameStatus.computerWon:
+              yield GameState.draw();
+              break;
+            case GameStatus.draw:
+              yield GameState.draw();
+              break;
+          }
+        },
+        error: (errorMessage) async* {
+          yield GameState.moveError(errorMessage);
+        },
+      );
+    }
   }
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {

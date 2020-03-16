@@ -15,7 +15,7 @@ class ErrorHandler {
       return;
     }
     Flushbar(
-      title: "Wystąpił błąd",
+      title: AppLocalizations.of(context).errorTitle,
       message: AppLocalizations.of(context).get(message),
       backgroundColor: Theme.of(context).errorColor,
       flushbarStyle: FlushbarStyle.FLOATING,

@@ -1,4 +1,5 @@
 import 'package:built_collection/built_collection.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,34 +37,66 @@ class _GameScreenState extends State<GameScreen> {
         padding: const EdgeInsets.all(12),
         child: BlocListener<GameBloc, GameState>(
           listener: (context, state) {
-            if (state is Error) {
-              getIt<ErrorHandler>().showError(context, state.errorMessage);
-              setState(() {
-                _isFieldLoadingVisible = false;
-              });
-            }
-          },
-          child: BlocBuilder<GameBloc, GameState>(
-            condition: (oldState, newState) {
-              if (newState is GameCreated && newState.moves.isNotEmpty) {
+            state.maybeWhen(
+              moveLoading: () {
+                setState(() {
+                  _isFieldLoadingVisible = true;
+                });
+              },
+              renderGame: (playerMark, moves) {
                 setState(() {
                   _isFieldLoadingVisible = false;
                 });
-              }
-              return newState is! Error;
+              },
+              playerWon: () {
+                setState(() {
+                  _isFieldLoadingVisible = false;
+                });
+                _showRestartGameFlushBar(
+                    AppLocalizations.of(context).gameScreenStatusPlayerWon);
+              },
+              computerWon: () {
+                setState(() {
+                  _isFieldLoadingVisible = false;
+                });
+                _showRestartGameFlushBar(
+                    AppLocalizations.of(context).gameScreenStatusComputerWon);
+              },
+              draw: () {
+                setState(() {
+                  _isFieldLoadingVisible = false;
+                });
+                _showRestartGameFlushBar(
+                    AppLocalizations.of(context).gameScreenStatusDraw);
+              },
+              moveError: (errorMessage) {
+                setState(() {
+                  _isFieldLoadingVisible = false;
+                });
+                getIt<ErrorHandler>().showError(context, errorMessage);
+                setState(() {
+                  _isFieldLoadingVisible = false;
+                });
+              },
+              orElse: () {},
+            );
+          },
+          child: BlocBuilder<GameBloc, GameState>(
+            condition: (oldState, newState) {
+              return newState is Loading || newState is RenderGame;
             },
             builder: (context, state) {
               return state.maybeMap(
                 loading: (_) => Center(
                   child: LoadingIndicator(),
                 ),
-                gameCreated: (gameCrated) => GamePage(
-                  playerMark: gameCrated.playerMark,
-                  moves: gameCrated.moves,
-                  isLoadingVisible: _isFieldLoadingVisible,
-                  onFieldTapped: (index) =>
-                      _onFieldTapped(context, gameCrated, index),
-                ),
+                renderGame: (renderGame) => GamePage(
+                    playerMark: renderGame.playerMark,
+                    moves: renderGame.moves,
+                    isLoadingVisible: _isFieldLoadingVisible,
+                    onFieldTapped: (index) => context
+                        .bloc<GameBloc>()
+                        .add(GameEvent.onFieldTapped(index))),
                 orElse: () => Container(),
               );
             },
@@ -73,8 +106,8 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  void _onFieldTapped(BuildContext context, GameCreated gameCrated, int index) {
-    if (_isFieldEmpty(gameCrated.moves, index)) {
+  void _onFieldTapped(BuildContext context, RenderGame state, int index) {
+    if (_isFieldEmpty(state.moves, index)) {
       setState(() {
         _isFieldLoadingVisible = true;
       });
@@ -85,5 +118,33 @@ class _GameScreenState extends State<GameScreen> {
   bool _isFieldEmpty(BuiltList<GameMove> moves, int fieldIndex) =>
       moves.where((move) => move.fieldIndex == fieldIndex).isEmpty;
 
-  void _showRestartGameFlushBar() {}
+  void _showRestartGameFlushBar(String message) {
+    Flushbar(
+      title: AppLocalizations.of(context).gameScreenPlayAgainQuestion,
+      message: message,
+      flushbarStyle: FlushbarStyle.FLOATING,
+      mainButton: FlatButton(
+        onPressed: () {},
+        child: Text(
+          AppLocalizations.of(context).gameScreenPlayAgain,
+          style: TextStyle(color: Colors.amber),
+        ),
+      ),
+      margin: EdgeInsets.all(8),
+      borderRadius: 16,
+      isDismissible: false,
+      icon: Icon(
+        Icons.videogame_asset,
+        color: Colors.white,
+      ),
+      shouldIconPulse: false,
+      boxShadows: [
+        BoxShadow(
+          color: Color(0x44FFFFFF),
+          offset: Offset(0, 3),
+          blurRadius: 4,
+        )
+      ],
+    )..show(context);
+  }
 }

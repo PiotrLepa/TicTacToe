@@ -1,21 +1,23 @@
 {
+  "errorTitle": "Something get wrong",
   "apiErrorNoConnection": "No internet connection",
-  "apiErrorBadRequest": "Something get wrong",
+  "apiErrorBadRequest": "Unknown error",
   "apiErrorUnauthorized": "Lack of access",
   "apiErrorNotFound": "Not found",
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
-
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",
-
   "pageStartGame": "Play",
   "pageGameResults": "Results",
   "pageSettings": "Settings",
-
   "startGameGameWithComputer": "Game with computer",
-
   "gameScreenTitle": "Game with computer",
-  "gameScreenPlayerMark": "You play as:"
+  "gameScreenPlayerMark": "You play as:",
+  "gameScreenStatusPlayerWon": "You won",
+  "gameScreenStatusComputerWon": "You lost",
+  "gameScreenStatusDraw": "Draw",
+  "gameScreenPlayAgainQuestion": "Do you want to play again?",
+  "gameScreenPlayAgain": "Play"
 }
