@@ -2,18 +2,22 @@ import 'dart:convert';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tictactoe/core/common/locale_provider.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/util/locale_provider.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
 
 class AppLocalizations {
   final Locale locale;
+  final LocaleProvider _localeProvider;
 
-  AppLocalizations(this.locale);
+  AppLocalizations(this.locale, this._localeProvider) {
+    _localeProvider.currentLocale = locale;
+  }
 
   Map<String, String> _localizedStrings;
 
-//  Errors
+  String get errorTitle => _localizedStrings["errorTitle"];
+
   String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
 
   String get apiErrorBadRequest => _localizedStrings["apiErrorBadRequest"];
@@ -27,7 +31,6 @@ class AppLocalizations {
 
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
-//  Bottom Navigation
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
@@ -36,6 +39,30 @@ class AppLocalizations {
 
   String get startGameGameWithComputer =>
       _localizedStrings["startGameGameWithComputer"];
+
+  String get gameScreenTitle => _localizedStrings["gameScreenTitle"];
+
+  String get gameScreenPlayerMark => _localizedStrings["gameScreenPlayerMark"];
+
+  String get difficultyLevelEasy => _localizedStrings["difficultyLevelEasy"];
+
+  String get difficultyLevelMedium =>
+      _localizedStrings["difficultyLevelMedium"];
+
+  String get difficultyLevelHard => _localizedStrings["difficultyLevelHard"];
+
+  String get gameScreenStatusPlayerWon =>
+      _localizedStrings["gameScreenStatusPlayerWon"];
+
+  String get gameScreenStatusComputerWon =>
+      _localizedStrings["gameScreenStatusComputerWon"];
+
+  String get gameScreenStatusDraw => _localizedStrings["gameScreenStatusDraw"];
+
+  String get gameScreenPlayAgainQuestion =>
+      _localizedStrings["gameScreenPlayAgainQuestion"];
+
+  String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
 
   Future load() async {
     final String jsonString =
@@ -69,7 +96,7 @@ class _AppLocalizationsDelegate
 
   @override
   Future<AppLocalizations> load(Locale locale) async {
-    AppLocalizations localizations = AppLocalizations(locale);
+    AppLocalizations localizations = AppLocalizations(locale, _localeProvider);
     await localizations.load();
     return localizations;
   }

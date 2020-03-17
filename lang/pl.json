@@ -1,17 +1,23 @@
 {
-  "ERRORS": "",
+  "errorTitle": "Coś poszło nie tak",
   "apiErrorNoConnection": "Brak połączenia z internetem",
-  "apiErrorBadRequest": "Coś poszło nie tak",
+  "apiErrorBadRequest": "Nieznany błąd",
   "apiErrorUnauthorized": "Brak dostępu",
   "apiErrorNotFound": "Nie znaleziono",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
-
-  "BOTTOM_NAVIGATION": "",
+  "difficultyLevelEasy": "Łatwy",
+  "difficultyLevelMedium": "Średni",
+  "difficultyLevelHard": "Trudny",
   "pageStartGame": "Zagraj",
   "pageGameResults": "Wyniki",
   "pageSettings": "Ustawienia",
-
-  "START_GAME_PAGE": "",
-  "startGameGameWithComputer": "Gra z komputerem"
+  "startGameGameWithComputer": "Gra z komputerem",
+  "gameScreenTitle": "Gra z komputerem",
+  "gameScreenPlayerMark": "Grasz jako:",
+  "gameScreenStatusPlayerWon": "Wygrałeś",
+  "gameScreenStatusComputerWon": "Przegrałeś",
+  "gameScreenStatusDraw": "Remis",
+  "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
+  "gameScreenPlayAgain": "Zagraj"
 }

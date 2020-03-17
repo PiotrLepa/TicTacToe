@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/presentation/future_dispatch.dart';
-import 'package:tictactoe/core/util/oauth_tokens_storage.dart';
-import 'package:tictactoe/data/model/login_request/login_request.dart';
+import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/presentation/test_event.dart';
 import 'package:tictactoe/presentation/test_state.dart';
@@ -28,7 +28,7 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _fetchGamesSecured() async* {
-    yield* dispatch(_testRepository.fetchGames()).map(
+    yield* fetch(_testRepository.fetchGames()).map(
       (state) => state.map(
         progress: (_) => TestState.progress(),
         success: (success) {
@@ -41,44 +41,46 @@ class TestBloc extends Bloc<TestEvent, TestState> {
   }
 
   Stream<TestState> _login() async* {
-    final request = LoginRequest(
+    final request = LoginRequestModel(
       email: "piotrlepadev@gmail.com",
       password: "dev12",
       grantType: oauthGrantTypePassword,
     );
-    yield* dispatch(_testRepository.login(request)).map(
-      (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final tokens = success.result;
-          _oauthTokensStorage.saveTokens(
-            tokens.accessToken,
-            tokens.refreshToken,
-          );
-          return TestState.success(tokens.toString());
-        },
+    yield* fetch(_testRepository.login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final tokens = success.result;
+              _oauthTokensStorage.saveTokens(
+                tokens.accessToken,
+                tokens.refreshToken,
+              );
+              return TestState.success(tokens.toString());
+            },
         error: (error) => TestState.error(error.errorMessage),
       ),
     );
   }
 
   Stream<TestState> _makeError() async* {
-    final request = LoginRequest(
+    final request = LoginRequestModel(
       email: "312312",
       password: "312321",
       grantType: oauthGrantTypePassword,
     );
-    yield* dispatch(_testRepository.login(request)).map(
-      (state) => state.map(
-        progress: (_) => TestState.progress(),
-        success: (success) {
-          final tokens = success.result;
-          _oauthTokensStorage.saveTokens(
-            tokens.accessToken,
-            tokens.refreshToken,
-          );
-          return TestState.success(tokens.toString());
-        },
+    yield* fetch(_testRepository.login(request)).map(
+          (state) =>
+          state.map(
+            progress: (_) => TestState.progress(),
+            success: (success) {
+              final tokens = success.result;
+              _oauthTokensStorage.saveTokens(
+                tokens.accessToken,
+                tokens.refreshToken,
+              );
+              return TestState.success(tokens.toString());
+            },
         error: (error) => TestState.error(error.errorMessage),
       ),
     );

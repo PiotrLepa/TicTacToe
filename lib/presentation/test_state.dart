@@ -1,7 +1,7 @@
 library test_state;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/core/util/raw_key_string.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
 
 part 'test_state.freezed.dart';
 

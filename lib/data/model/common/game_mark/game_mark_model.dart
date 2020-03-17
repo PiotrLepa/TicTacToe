@@ -1,0 +1,4 @@
+enum GameMarkModel {
+  X,
+  O,
+}

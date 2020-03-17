@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/util/logger/logger.dart';
+import 'package:tictactoe/core/common/logger/logger.dart';
 
 @injectable
 class LoggerInterceptor extends InterceptorsWrapper {

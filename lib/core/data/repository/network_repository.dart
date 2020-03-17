@@ -1,14 +1,20 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:tictactoe/core/common/logger/logger.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
-import 'package:tictactoe/core/util/logger/logger.dart';
 
 class NetworkRepository {
-  Future<T> call<T>(Future<Response<T>> call) async {
+  Future<E> call<E, M>({
+    @required Future<M> request,
+    @required E mapper(M data),
+  }) async {
     try {
-      final response = await call;
-      return Future.value(response.data);
-    } on DioError catch (e) {
+      final responseData = await request;
+      final mapped = mapper(responseData);
+      return Future.value(mapped);
+    } on DioError catch (e, s) {
+      logger.e("error", e, s);
       return Future.error(_handleError(e));
     }
   }

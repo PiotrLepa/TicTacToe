@@ -9,6 +9,8 @@ import 'package:tictactoe/core/data/network/interceptor/refresh_token_intercepto
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
+import 'package:tictactoe/data/service/network_service.dart';
+import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 
 @registerModule
 abstract class NetworkClient {
@@ -24,12 +26,20 @@ abstract class NetworkClient {
 
   @lazySingleton
   @Named(refreshTokenNetworkClient)
-  Dio get dioRefreshToken => Dio()
-    ..options.baseUrl = baseUrl
-    ..interceptors.add(getIt.get<BearerTokenInterceptor>())
-    ..interceptors.add(getIt.get<LanguageInterceptor>())
-    ..interceptors.add(getIt.get<LoggerInterceptor>())
-    ..interceptors.add(getIt.get<ConnectionInterceptor>());
+  Dio get dioRefreshToken =>
+      Dio()
+        ..options.baseUrl = baseUrl
+        ..interceptors.add(getIt.get<LanguageInterceptor>())
+        ..interceptors.add(getIt.get<LoggerInterceptor>())
+        ..interceptors.add(getIt.get<ConnectionInterceptor>());
+
+  @lazySingleton
+  NetworkService get networkService =>
+      NetworkService(getIt<Dio>('defaultNetworkClient'));
+
+  @lazySingleton
+  RefreshTokenNetworkService get refreshTokenNetworkService =>
+      RefreshTokenNetworkService(getIt<Dio>('refreshTokenNetworkClient'));
 
   Future<SharedPreferences> get sharedPreferences =>
       SharedPreferences.getInstance();
