@@ -51,6 +51,7 @@ class GameBoard extends StatelessWidget {
     );
   }
 
+  // ignore: missing_return
   String _getFieldText(int index) {
     final mark = _getFieldMark(index);
     if (mark == null) {
@@ -64,6 +65,7 @@ class GameBoard extends StatelessWidget {
     }
   }
 
+  // ignore: missing_return
   Color _getFieldColor(BuildContext context, int index) {
     final mark = _getFieldMark(index);
     if (mark == null) {

@@ -7,23 +7,10 @@ part of login_request_model;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 LoginRequestModel _$LoginRequestModelFromJson(Map<String, dynamic> json) {
   return _LoginRequestModel.fromJson(json);
-}
-
-mixin _$LoginRequestModel {
-  @JsonKey(name: 'username')
-  String get email;
-  String get password;
-  @JsonKey(name: 'grant_type')
-  String get grantType;
-
-  LoginRequestModel copyWith(
-      {@JsonKey(name: 'username') String email,
-      String password,
-      @JsonKey(name: 'grant_type') String grantType});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$LoginRequestModelTearOff {
@@ -41,7 +28,93 @@ class _$LoginRequestModelTearOff {
   }
 }
 
+// ignore: unused_element
 const $LoginRequestModel = _$LoginRequestModelTearOff();
+
+mixin _$LoginRequestModel {
+  @JsonKey(name: 'username')
+  String get email;
+
+  String get password;
+
+  @JsonKey(name: 'grant_type')
+  String get grantType;
+
+  Map<String, dynamic> toJson();
+
+  $LoginRequestModelCopyWith<LoginRequestModel> get copyWith;
+}
+
+abstract class $LoginRequestModelCopyWith<$Res> {
+  factory $LoginRequestModelCopyWith(
+          LoginRequestModel value, $Res Function(LoginRequestModel) then) =
+      _$LoginRequestModelCopyWithImpl<$Res>;
+
+  $Res call(
+      {@JsonKey(name: 'username') String email,
+      String password,
+      @JsonKey(name: 'grant_type') String grantType});
+}
+
+class _$LoginRequestModelCopyWithImpl<$Res>
+    implements $LoginRequestModelCopyWith<$Res> {
+  _$LoginRequestModelCopyWithImpl(this._value, this._then);
+
+  final LoginRequestModel _value;
+
+  // ignore: unused_field
+  final $Res Function(LoginRequestModel) _then;
+
+  @override
+  $Res call({
+    Object email = freezed,
+    Object password = freezed,
+    Object grantType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      email: email == freezed ? _value.email : email as String,
+      password: password == freezed ? _value.password : password as String,
+      grantType: grantType == freezed ? _value.grantType : grantType as String,
+    ));
+  }
+}
+
+abstract class _$LoginRequestModelCopyWith<$Res>
+    implements $LoginRequestModelCopyWith<$Res> {
+  factory _$LoginRequestModelCopyWith(
+          _LoginRequestModel value, $Res Function(_LoginRequestModel) then) =
+      __$LoginRequestModelCopyWithImpl<$Res>;
+
+  @override
+  $Res call(
+      {@JsonKey(name: 'username') String email,
+      String password,
+      @JsonKey(name: 'grant_type') String grantType});
+}
+
+class __$LoginRequestModelCopyWithImpl<$Res>
+    extends _$LoginRequestModelCopyWithImpl<$Res>
+    implements _$LoginRequestModelCopyWith<$Res> {
+  __$LoginRequestModelCopyWithImpl(
+      _LoginRequestModel _value, $Res Function(_LoginRequestModel) _then)
+      : super(_value, (v) => _then(v as _LoginRequestModel));
+
+  @override
+  _LoginRequestModel get _value => super._value as _LoginRequestModel;
+
+  @override
+  $Res call({
+    Object email = freezed,
+    Object password = freezed,
+    Object grantType = freezed,
+  }) {
+    return _then(_LoginRequestModel(
+      email: email == freezed ? _value.email : email as String,
+      password: password == freezed ? _value.password : password as String,
+      grantType: grantType == freezed ? _value.grantType : grantType as String,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_LoginRequestModel implements _LoginRequestModel {
@@ -92,17 +165,8 @@ class _$_LoginRequestModel implements _LoginRequestModel {
       const DeepCollectionEquality().hash(grantType);
 
   @override
-  _$_LoginRequestModel copyWith({
-    Object email = freezed,
-    Object password = freezed,
-    Object grantType = freezed,
-  }) {
-    return _$_LoginRequestModel(
-      email: email == freezed ? this.email : email as String,
-      password: password == freezed ? this.password : password as String,
-      grantType: grantType == freezed ? this.grantType : grantType as String,
-    );
-  }
+  _$LoginRequestModelCopyWith<_LoginRequestModel> get copyWith =>
+      __$LoginRequestModelCopyWithImpl<_LoginRequestModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -125,13 +189,11 @@ abstract class _LoginRequestModel implements LoginRequestModel {
   String get email;
   @override
   String get password;
+
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;
 
   @override
-  _LoginRequestModel copyWith(
-      {@JsonKey(name: 'username') String email,
-      String password,
-      @JsonKey(name: 'grant_type') String grantType});
+  _$LoginRequestModelCopyWith<_LoginRequestModel> get copyWith;
 }

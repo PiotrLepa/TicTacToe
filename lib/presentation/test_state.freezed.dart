@@ -7,41 +7,7 @@ part of test_state;
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$TestState {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result initial(),
-    @required Result progress(),
-    @required Result success(String result),
-    @required Result error(RawKeyString errorMessage),
-  });
-
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result initial(),
-    Result progress(),
-    Result success(String result),
-    Result error(RawKeyString errorMessage),
-    @required Result orElse(),
-  });
-
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result initial(_Initial value),
-    @required Result progress(_Progress value),
-    @required Result success(_Success value),
-    @required Result error(_Error value),
-  });
-
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result initial(_Initial value),
-    Result progress(_Progress value),
-    Result success(_Success value),
-    Result error(_Error value),
-    @required Result orElse(),
-  });
-}
+T _$identity<T>(T value) => value;
 
 class _$TestStateTearOff {
   const _$TestStateTearOff();
@@ -67,7 +33,70 @@ class _$TestStateTearOff {
   }
 }
 
+// ignore: unused_element
 const $TestState = _$TestStateTearOff();
+
+mixin _$TestState {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result initial(),
+    @required Result progress(),
+    @required Result success(String result),
+    @required Result error(RawKeyString errorMessage),
+  });
+
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result initial(),
+    Result progress(),
+    Result success(String result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result initial(_Initial value),
+    @required Result progress(_Progress value),
+    @required Result success(_Success value),
+    @required Result error(_Error value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result initial(_Initial value),
+    Result progress(_Progress value),
+    Result success(_Success value),
+    Result error(_Error value),
+    @required Result orElse(),
+  });
+}
+
+abstract class $TestStateCopyWith<$Res> {
+  factory $TestStateCopyWith(TestState value, $Res Function(TestState) then) =
+      _$TestStateCopyWithImpl<$Res>;
+}
+
+class _$TestStateCopyWithImpl<$Res> implements $TestStateCopyWith<$Res> {
+  _$TestStateCopyWithImpl(this._value, this._then);
+
+  final TestState _value;
+
+  // ignore: unused_field
+  final $Res Function(TestState) _then;
+}
+
+abstract class _$InitialCopyWith<$Res> {
+  factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
+  __$InitialCopyWithImpl<$Res>;
+}
+
+class __$InitialCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
+    implements _$InitialCopyWith<$Res> {
+  __$InitialCopyWithImpl(_Initial _value, $Res Function(_Initial) _then)
+      : super(_value, (v) => _then(v as _Initial));
+
+  @override
+  _Initial get _value => super._value as _Initial;
+}
 
 class _$_Initial implements _Initial {
   const _$_Initial();
@@ -150,6 +179,20 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements TestState {
   const factory _Initial() = _$_Initial;
+}
+
+abstract class _$ProgressCopyWith<$Res> {
+  factory _$ProgressCopyWith(_Progress value, $Res Function(_Progress) then) =
+  __$ProgressCopyWithImpl<$Res>;
+}
+
+class __$ProgressCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
+    implements _$ProgressCopyWith<$Res> {
+  __$ProgressCopyWithImpl(_Progress _value, $Res Function(_Progress) _then)
+      : super(_value, (v) => _then(v as _Progress));
+
+  @override
+  _Progress get _value => super._value as _Progress;
 }
 
 class _$_Progress implements _Progress {
@@ -235,6 +278,31 @@ abstract class _Progress implements TestState {
   const factory _Progress() = _$_Progress;
 }
 
+abstract class _$SuccessCopyWith<$Res> {
+  factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
+  __$SuccessCopyWithImpl<$Res>;
+
+  $Res call({String result});
+}
+
+class __$SuccessCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
+    implements _$SuccessCopyWith<$Res> {
+  __$SuccessCopyWithImpl(_Success _value, $Res Function(_Success) _then)
+      : super(_value, (v) => _then(v as _Success));
+
+  @override
+  _Success get _value => super._value as _Success;
+
+  @override
+  $Res call({
+    Object result = freezed,
+  }) {
+    return _then(_Success(
+      result == freezed ? _value.result : result as String,
+    ));
+  }
+}
+
 class _$_Success implements _Success {
   const _$_Success(this.result) : assert(result != null);
 
@@ -259,13 +327,8 @@ class _$_Success implements _Success {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
 
   @override
-  _$_Success copyWith({
-    Object result = freezed,
-  }) {
-    return _$_Success(
-      result == freezed ? this.result : result as String,
-    );
-  }
+  _$SuccessCopyWith<_Success> get copyWith =>
+      __$SuccessCopyWithImpl<_Success>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -335,7 +398,34 @@ abstract class _Success implements TestState {
 
   String get result;
 
-  _Success copyWith({String result});
+  _$SuccessCopyWith<_Success> get copyWith;
+}
+
+abstract class _$ErrorCopyWith<$Res> {
+  factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
+  __$ErrorCopyWithImpl<$Res>;
+
+  $Res call({RawKeyString errorMessage});
+}
+
+class __$ErrorCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
+    implements _$ErrorCopyWith<$Res> {
+  __$ErrorCopyWithImpl(_Error _value, $Res Function(_Error) _then)
+      : super(_value, (v) => _then(v as _Error));
+
+  @override
+  _Error get _value => super._value as _Error;
+
+  @override
+  $Res call({
+    Object errorMessage = freezed,
+  }) {
+    return _then(_Error(
+      errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage as RawKeyString,
+    ));
+  }
 }
 
 class _$_Error implements _Error {
@@ -363,15 +453,8 @@ class _$_Error implements _Error {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
 
   @override
-  _$_Error copyWith({
-    Object errorMessage = freezed,
-  }) {
-    return _$_Error(
-      errorMessage == freezed
-          ? this.errorMessage
-          : errorMessage as RawKeyString,
-    );
-  }
+  _$ErrorCopyWith<_Error> get copyWith =>
+      __$ErrorCopyWithImpl<_Error>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -441,5 +524,5 @@ abstract class _Error implements TestState {
 
   RawKeyString get errorMessage;
 
-  _Error copyWith({RawKeyString errorMessage});
+  _$ErrorCopyWith<_Error> get copyWith;
 }

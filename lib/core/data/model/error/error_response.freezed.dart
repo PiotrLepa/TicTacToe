@@ -7,19 +7,10 @@ part of error_response;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
   return _ErrorResponse.fromJson(json);
-}
-
-mixin _$ErrorResponse {
-  int get code;
-  String get developerMessage;
-  String get printableMessage;
-
-  ErrorResponse copyWith(
-      {int code, String developerMessage, String printableMessage});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$ErrorResponseTearOff {
@@ -37,7 +28,93 @@ class _$ErrorResponseTearOff {
   }
 }
 
+// ignore: unused_element
 const $ErrorResponse = _$ErrorResponseTearOff();
+
+mixin _$ErrorResponse {
+  int get code;
+
+  String get developerMessage;
+
+  String get printableMessage;
+
+  Map<String, dynamic> toJson();
+
+  $ErrorResponseCopyWith<ErrorResponse> get copyWith;
+}
+
+abstract class $ErrorResponseCopyWith<$Res> {
+  factory $ErrorResponseCopyWith(
+          ErrorResponse value, $Res Function(ErrorResponse) then) =
+      _$ErrorResponseCopyWithImpl<$Res>;
+
+  $Res call({int code, String developerMessage, String printableMessage});
+}
+
+class _$ErrorResponseCopyWithImpl<$Res>
+    implements $ErrorResponseCopyWith<$Res> {
+  _$ErrorResponseCopyWithImpl(this._value, this._then);
+
+  final ErrorResponse _value;
+
+  // ignore: unused_field
+  final $Res Function(ErrorResponse) _then;
+
+  @override
+  $Res call({
+    Object code = freezed,
+    Object developerMessage = freezed,
+    Object printableMessage = freezed,
+  }) {
+    return _then(_value.copyWith(
+      code: code == freezed ? _value.code : code as int,
+      developerMessage: developerMessage == freezed
+          ? _value.developerMessage
+          : developerMessage as String,
+      printableMessage: printableMessage == freezed
+          ? _value.printableMessage
+          : printableMessage as String,
+    ));
+  }
+}
+
+abstract class _$ErrorResponseCopyWith<$Res>
+    implements $ErrorResponseCopyWith<$Res> {
+  factory _$ErrorResponseCopyWith(
+          _ErrorResponse value, $Res Function(_ErrorResponse) then) =
+      __$ErrorResponseCopyWithImpl<$Res>;
+
+  @override
+  $Res call({int code, String developerMessage, String printableMessage});
+}
+
+class __$ErrorResponseCopyWithImpl<$Res>
+    extends _$ErrorResponseCopyWithImpl<$Res>
+    implements _$ErrorResponseCopyWith<$Res> {
+  __$ErrorResponseCopyWithImpl(
+      _ErrorResponse _value, $Res Function(_ErrorResponse) _then)
+      : super(_value, (v) => _then(v as _ErrorResponse));
+
+  @override
+  _ErrorResponse get _value => super._value as _ErrorResponse;
+
+  @override
+  $Res call({
+    Object code = freezed,
+    Object developerMessage = freezed,
+    Object printableMessage = freezed,
+  }) {
+    return _then(_ErrorResponse(
+      code: code == freezed ? _value.code : code as int,
+      developerMessage: developerMessage == freezed
+          ? _value.developerMessage
+          : developerMessage as String,
+      printableMessage: printableMessage == freezed
+          ? _value.printableMessage
+          : printableMessage as String,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_ErrorResponse implements _ErrorResponse {
@@ -85,21 +162,8 @@ class _$_ErrorResponse implements _ErrorResponse {
       const DeepCollectionEquality().hash(printableMessage);
 
   @override
-  _$_ErrorResponse copyWith({
-    Object code = freezed,
-    Object developerMessage = freezed,
-    Object printableMessage = freezed,
-  }) {
-    return _$_ErrorResponse(
-      code: code == freezed ? this.code : code as int,
-      developerMessage: developerMessage == freezed
-          ? this.developerMessage
-          : developerMessage as String,
-      printableMessage: printableMessage == freezed
-          ? this.printableMessage
-          : printableMessage as String,
-    );
-  }
+  _$ErrorResponseCopyWith<_ErrorResponse> get copyWith =>
+      __$ErrorResponseCopyWithImpl<_ErrorResponse>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -120,10 +184,10 @@ abstract class _ErrorResponse implements ErrorResponse {
   int get code;
   @override
   String get developerMessage;
+
   @override
   String get printableMessage;
 
   @override
-  _ErrorResponse copyWith(
-      {int code, String developerMessage, String printableMessage});
+  _$ErrorResponseCopyWith<_ErrorResponse> get copyWith;
 }

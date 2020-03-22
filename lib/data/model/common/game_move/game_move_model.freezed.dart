@@ -7,20 +7,10 @@ part of game_move_model;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 GameMoveModel _$GameMoveModelFromJson(Map<String, dynamic> json) {
   return _GameMoveModel.fromJson(json);
-}
-
-mixin _$GameMoveModel {
-  int get moveId;
-  int get fieldIndex;
-  int get counter;
-  GameMarkModel get mark;
-
-  GameMoveModel copyWith(
-      {int moveId, int fieldIndex, int counter, GameMarkModel mark});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$GameMoveModelTearOff {
@@ -40,7 +30,91 @@ class _$GameMoveModelTearOff {
   }
 }
 
+// ignore: unused_element
 const $GameMoveModel = _$GameMoveModelTearOff();
+
+mixin _$GameMoveModel {
+  int get moveId;
+
+  int get fieldIndex;
+
+  int get counter;
+
+  GameMarkModel get mark;
+
+  Map<String, dynamic> toJson();
+
+  $GameMoveModelCopyWith<GameMoveModel> get copyWith;
+}
+
+abstract class $GameMoveModelCopyWith<$Res> {
+  factory $GameMoveModelCopyWith(
+          GameMoveModel value, $Res Function(GameMoveModel) then) =
+      _$GameMoveModelCopyWithImpl<$Res>;
+
+  $Res call({int moveId, int fieldIndex, int counter, GameMarkModel mark});
+}
+
+class _$GameMoveModelCopyWithImpl<$Res>
+    implements $GameMoveModelCopyWith<$Res> {
+  _$GameMoveModelCopyWithImpl(this._value, this._then);
+
+  final GameMoveModel _value;
+
+  // ignore: unused_field
+  final $Res Function(GameMoveModel) _then;
+
+  @override
+  $Res call({
+    Object moveId = freezed,
+    Object fieldIndex = freezed,
+    Object counter = freezed,
+    Object mark = freezed,
+  }) {
+    return _then(_value.copyWith(
+      moveId: moveId == freezed ? _value.moveId : moveId as int,
+      fieldIndex: fieldIndex == freezed ? _value.fieldIndex : fieldIndex as int,
+      counter: counter == freezed ? _value.counter : counter as int,
+      mark: mark == freezed ? _value.mark : mark as GameMarkModel,
+    ));
+  }
+}
+
+abstract class _$GameMoveModelCopyWith<$Res>
+    implements $GameMoveModelCopyWith<$Res> {
+  factory _$GameMoveModelCopyWith(
+          _GameMoveModel value, $Res Function(_GameMoveModel) then) =
+      __$GameMoveModelCopyWithImpl<$Res>;
+
+  @override
+  $Res call({int moveId, int fieldIndex, int counter, GameMarkModel mark});
+}
+
+class __$GameMoveModelCopyWithImpl<$Res>
+    extends _$GameMoveModelCopyWithImpl<$Res>
+    implements _$GameMoveModelCopyWith<$Res> {
+  __$GameMoveModelCopyWithImpl(
+      _GameMoveModel _value, $Res Function(_GameMoveModel) _then)
+      : super(_value, (v) => _then(v as _GameMoveModel));
+
+  @override
+  _GameMoveModel get _value => super._value as _GameMoveModel;
+
+  @override
+  $Res call({
+    Object moveId = freezed,
+    Object fieldIndex = freezed,
+    Object counter = freezed,
+    Object mark = freezed,
+  }) {
+    return _then(_GameMoveModel(
+      moveId: moveId == freezed ? _value.moveId : moveId as int,
+      fieldIndex: fieldIndex == freezed ? _value.fieldIndex : fieldIndex as int,
+      counter: counter == freezed ? _value.counter : counter as int,
+      mark: mark == freezed ? _value.mark : mark as GameMarkModel,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_GameMoveModel implements _GameMoveModel {
@@ -96,19 +170,8 @@ class _$_GameMoveModel implements _GameMoveModel {
       const DeepCollectionEquality().hash(mark);
 
   @override
-  _$_GameMoveModel copyWith({
-    Object moveId = freezed,
-    Object fieldIndex = freezed,
-    Object counter = freezed,
-    Object mark = freezed,
-  }) {
-    return _$_GameMoveModel(
-      moveId: moveId == freezed ? this.moveId : moveId as int,
-      fieldIndex: fieldIndex == freezed ? this.fieldIndex : fieldIndex as int,
-      counter: counter == freezed ? this.counter : counter as int,
-      mark: mark == freezed ? this.mark : mark as GameMarkModel,
-    );
-  }
+  _$GameMoveModelCopyWith<_GameMoveModel> get copyWith =>
+      __$GameMoveModelCopyWithImpl<_GameMoveModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -132,10 +195,10 @@ abstract class _GameMoveModel implements GameMoveModel {
   int get fieldIndex;
   @override
   int get counter;
+
   @override
   GameMarkModel get mark;
 
   @override
-  _GameMoveModel copyWith(
-      {int moveId, int fieldIndex, int counter, GameMarkModel mark});
+  _$GameMoveModelCopyWith<_GameMoveModel> get copyWith;
 }

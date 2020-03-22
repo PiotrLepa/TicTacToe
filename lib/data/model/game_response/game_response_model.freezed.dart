@@ -7,29 +7,10 @@ part of game_response_model;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 GameResponseModel _$GameResponseModelFromJson(Map<String, dynamic> json) {
   return _GameResponseModel.fromJson(json);
-}
-
-mixin _$GameResponseModel {
-  int get gameId;
-  int get playerId;
-  GameStatusModel get status;
-  DifficultyLevelModel get difficultyLevel;
-  GameMarkModel get playerMark;
-  GameMarkModel get computerMark;
-  List<GameMoveModel> get moves;
-
-  GameResponseModel copyWith(
-      {int gameId,
-      int playerId,
-      GameStatusModel status,
-      DifficultyLevelModel difficultyLevel,
-      GameMarkModel playerMark,
-      GameMarkModel computerMark,
-      List<GameMoveModel> moves});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$GameResponseModelTearOff {
@@ -55,7 +36,135 @@ class _$GameResponseModelTearOff {
   }
 }
 
+// ignore: unused_element
 const $GameResponseModel = _$GameResponseModelTearOff();
+
+mixin _$GameResponseModel {
+  int get gameId;
+
+  int get playerId;
+
+  GameStatusModel get status;
+
+  DifficultyLevelModel get difficultyLevel;
+
+  GameMarkModel get playerMark;
+
+  GameMarkModel get computerMark;
+
+  List<GameMoveModel> get moves;
+
+  Map<String, dynamic> toJson();
+
+  $GameResponseModelCopyWith<GameResponseModel> get copyWith;
+}
+
+abstract class $GameResponseModelCopyWith<$Res> {
+  factory $GameResponseModelCopyWith(
+          GameResponseModel value, $Res Function(GameResponseModel) then) =
+      _$GameResponseModelCopyWithImpl<$Res>;
+
+  $Res call(
+      {int gameId,
+      int playerId,
+      GameStatusModel status,
+      DifficultyLevelModel difficultyLevel,
+      GameMarkModel playerMark,
+      GameMarkModel computerMark,
+      List<GameMoveModel> moves});
+}
+
+class _$GameResponseModelCopyWithImpl<$Res>
+    implements $GameResponseModelCopyWith<$Res> {
+  _$GameResponseModelCopyWithImpl(this._value, this._then);
+
+  final GameResponseModel _value;
+
+  // ignore: unused_field
+  final $Res Function(GameResponseModel) _then;
+
+  @override
+  $Res call({
+    Object gameId = freezed,
+    Object playerId = freezed,
+    Object status = freezed,
+    Object difficultyLevel = freezed,
+    Object playerMark = freezed,
+    Object computerMark = freezed,
+    Object moves = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gameId: gameId == freezed ? _value.gameId : gameId as int,
+      playerId: playerId == freezed ? _value.playerId : playerId as int,
+      status: status == freezed ? _value.status : status as GameStatusModel,
+      difficultyLevel: difficultyLevel == freezed
+          ? _value.difficultyLevel
+          : difficultyLevel as DifficultyLevelModel,
+      playerMark: playerMark == freezed
+          ? _value.playerMark
+          : playerMark as GameMarkModel,
+      computerMark: computerMark == freezed
+          ? _value.computerMark
+          : computerMark as GameMarkModel,
+      moves: moves == freezed ? _value.moves : moves as List<GameMoveModel>,
+    ));
+  }
+}
+
+abstract class _$GameResponseModelCopyWith<$Res>
+    implements $GameResponseModelCopyWith<$Res> {
+  factory _$GameResponseModelCopyWith(
+          _GameResponseModel value, $Res Function(_GameResponseModel) then) =
+      __$GameResponseModelCopyWithImpl<$Res>;
+
+  @override
+  $Res call(
+      {int gameId,
+      int playerId,
+      GameStatusModel status,
+      DifficultyLevelModel difficultyLevel,
+      GameMarkModel playerMark,
+      GameMarkModel computerMark,
+      List<GameMoveModel> moves});
+}
+
+class __$GameResponseModelCopyWithImpl<$Res>
+    extends _$GameResponseModelCopyWithImpl<$Res>
+    implements _$GameResponseModelCopyWith<$Res> {
+  __$GameResponseModelCopyWithImpl(
+      _GameResponseModel _value, $Res Function(_GameResponseModel) _then)
+      : super(_value, (v) => _then(v as _GameResponseModel));
+
+  @override
+  _GameResponseModel get _value => super._value as _GameResponseModel;
+
+  @override
+  $Res call({
+    Object gameId = freezed,
+    Object playerId = freezed,
+    Object status = freezed,
+    Object difficultyLevel = freezed,
+    Object playerMark = freezed,
+    Object computerMark = freezed,
+    Object moves = freezed,
+  }) {
+    return _then(_GameResponseModel(
+      gameId: gameId == freezed ? _value.gameId : gameId as int,
+      playerId: playerId == freezed ? _value.playerId : playerId as int,
+      status: status == freezed ? _value.status : status as GameStatusModel,
+      difficultyLevel: difficultyLevel == freezed
+          ? _value.difficultyLevel
+          : difficultyLevel as DifficultyLevelModel,
+      playerMark: playerMark == freezed
+          ? _value.playerMark
+          : playerMark as GameMarkModel,
+      computerMark: computerMark == freezed
+          ? _value.computerMark
+          : computerMark as GameMarkModel,
+      moves: moves == freezed ? _value.moves : moves as List<GameMoveModel>,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_GameResponseModel implements _GameResponseModel {
@@ -134,30 +243,8 @@ class _$_GameResponseModel implements _GameResponseModel {
       const DeepCollectionEquality().hash(moves);
 
   @override
-  _$_GameResponseModel copyWith({
-    Object gameId = freezed,
-    Object playerId = freezed,
-    Object status = freezed,
-    Object difficultyLevel = freezed,
-    Object playerMark = freezed,
-    Object computerMark = freezed,
-    Object moves = freezed,
-  }) {
-    return _$_GameResponseModel(
-      gameId: gameId == freezed ? this.gameId : gameId as int,
-      playerId: playerId == freezed ? this.playerId : playerId as int,
-      status: status == freezed ? this.status : status as GameStatusModel,
-      difficultyLevel: difficultyLevel == freezed
-          ? this.difficultyLevel
-          : difficultyLevel as DifficultyLevelModel,
-      playerMark:
-          playerMark == freezed ? this.playerMark : playerMark as GameMarkModel,
-      computerMark: computerMark == freezed
-          ? this.computerMark
-          : computerMark as GameMarkModel,
-      moves: moves == freezed ? this.moves : moves as List<GameMoveModel>,
-    );
-  }
+  _$GameResponseModelCopyWith<_GameResponseModel> get copyWith =>
+      __$GameResponseModelCopyWithImpl<_GameResponseModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -180,10 +267,8 @@ abstract class _GameResponseModel implements GameResponseModel {
 
   @override
   int get gameId;
-
   @override
   int get playerId;
-
   @override
   GameStatusModel get status;
   @override
@@ -192,15 +277,10 @@ abstract class _GameResponseModel implements GameResponseModel {
   GameMarkModel get playerMark;
   @override
   GameMarkModel get computerMark;
+
   @override
   List<GameMoveModel> get moves;
 
   @override
-  _GameResponseModel copyWith({int gameId,
-    int playerId,
-    GameStatusModel status,
-    DifficultyLevelModel difficultyLevel,
-    GameMarkModel playerMark,
-    GameMarkModel computerMark,
-    List<GameMoveModel> moves});
+  _$GameResponseModelCopyWith<_GameResponseModel> get copyWith;
 }

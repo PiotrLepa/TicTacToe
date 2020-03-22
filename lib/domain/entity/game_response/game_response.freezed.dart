@@ -7,22 +7,7 @@ part of game_response;
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$GameResponse {
-  int get gameId;
-  GameStatus get status;
-  DifficultyLevel get difficultyLevel;
-  GameMark get playerMark;
-  GameMark get computerMark;
-  BuiltList<GameMove> get moves;
-
-  GameResponse copyWith(
-      {int gameId,
-      GameStatus status,
-      DifficultyLevel difficultyLevel,
-      GameMark playerMark,
-      GameMark computerMark,
-      BuiltList<GameMove> moves});
-}
+T _$identity<T>(T value) => value;
 
 class _$GameResponseTearOff {
   const _$GameResponseTearOff();
@@ -45,7 +30,121 @@ class _$GameResponseTearOff {
   }
 }
 
+// ignore: unused_element
 const $GameResponse = _$GameResponseTearOff();
+
+mixin _$GameResponse {
+  int get gameId;
+
+  GameStatus get status;
+
+  DifficultyLevel get difficultyLevel;
+
+  GameMark get playerMark;
+
+  GameMark get computerMark;
+
+  BuiltList<GameMove> get moves;
+
+  $GameResponseCopyWith<GameResponse> get copyWith;
+}
+
+abstract class $GameResponseCopyWith<$Res> {
+  factory $GameResponseCopyWith(
+          GameResponse value, $Res Function(GameResponse) then) =
+      _$GameResponseCopyWithImpl<$Res>;
+
+  $Res call(
+      {int gameId,
+      GameStatus status,
+      DifficultyLevel difficultyLevel,
+      GameMark playerMark,
+      GameMark computerMark,
+      BuiltList<GameMove> moves});
+}
+
+class _$GameResponseCopyWithImpl<$Res> implements $GameResponseCopyWith<$Res> {
+  _$GameResponseCopyWithImpl(this._value, this._then);
+
+  final GameResponse _value;
+
+  // ignore: unused_field
+  final $Res Function(GameResponse) _then;
+
+  @override
+  $Res call({
+    Object gameId = freezed,
+    Object status = freezed,
+    Object difficultyLevel = freezed,
+    Object playerMark = freezed,
+    Object computerMark = freezed,
+    Object moves = freezed,
+  }) {
+    return _then(_value.copyWith(
+      gameId: gameId == freezed ? _value.gameId : gameId as int,
+      status: status == freezed ? _value.status : status as GameStatus,
+      difficultyLevel: difficultyLevel == freezed
+          ? _value.difficultyLevel
+          : difficultyLevel as DifficultyLevel,
+      playerMark:
+          playerMark == freezed ? _value.playerMark : playerMark as GameMark,
+      computerMark: computerMark == freezed
+          ? _value.computerMark
+          : computerMark as GameMark,
+      moves: moves == freezed ? _value.moves : moves as BuiltList<GameMove>,
+    ));
+  }
+}
+
+abstract class _$GameResponseCopyWith<$Res>
+    implements $GameResponseCopyWith<$Res> {
+  factory _$GameResponseCopyWith(
+          _GameResponse value, $Res Function(_GameResponse) then) =
+      __$GameResponseCopyWithImpl<$Res>;
+
+  @override
+  $Res call(
+      {int gameId,
+      GameStatus status,
+      DifficultyLevel difficultyLevel,
+      GameMark playerMark,
+      GameMark computerMark,
+      BuiltList<GameMove> moves});
+}
+
+class __$GameResponseCopyWithImpl<$Res> extends _$GameResponseCopyWithImpl<$Res>
+    implements _$GameResponseCopyWith<$Res> {
+  __$GameResponseCopyWithImpl(
+      _GameResponse _value, $Res Function(_GameResponse) _then)
+      : super(_value, (v) => _then(v as _GameResponse));
+
+  @override
+  _GameResponse get _value => super._value as _GameResponse;
+
+  @override
+  $Res call({
+    Object gameId = freezed,
+    Object status = freezed,
+    Object difficultyLevel = freezed,
+    Object playerMark = freezed,
+    Object computerMark = freezed,
+    Object moves = freezed,
+  }) {
+    return _then(_GameResponse(
+      gameId: gameId == freezed ? _value.gameId : gameId as int,
+      status: status == freezed ? _value.status : status as GameStatus,
+      difficultyLevel: difficultyLevel == freezed
+          ? _value.difficultyLevel
+          : difficultyLevel as DifficultyLevel,
+      playerMark:
+          playerMark == freezed ? _value.playerMark : playerMark as GameMark,
+      computerMark: computerMark == freezed
+          ? _value.computerMark
+          : computerMark as GameMark,
+      moves: moves == freezed ? _value.moves : moves as BuiltList<GameMove>,
+    ));
+  }
+}
 
 class _$_GameResponse implements _GameResponse {
   const _$_GameResponse(
@@ -112,28 +211,8 @@ class _$_GameResponse implements _GameResponse {
       const DeepCollectionEquality().hash(moves);
 
   @override
-  _$_GameResponse copyWith({
-    Object gameId = freezed,
-    Object status = freezed,
-    Object difficultyLevel = freezed,
-    Object playerMark = freezed,
-    Object computerMark = freezed,
-    Object moves = freezed,
-  }) {
-    return _$_GameResponse(
-      gameId: gameId == freezed ? this.gameId : gameId as int,
-      status: status == freezed ? this.status : status as GameStatus,
-      difficultyLevel: difficultyLevel == freezed
-          ? this.difficultyLevel
-          : difficultyLevel as DifficultyLevel,
-      playerMark:
-          playerMark == freezed ? this.playerMark : playerMark as GameMark,
-      computerMark: computerMark == freezed
-          ? this.computerMark
-          : computerMark as GameMark,
-      moves: moves == freezed ? this.moves : moves as BuiltList<GameMove>,
-    );
-  }
+  _$GameResponseCopyWith<_GameResponse> get copyWith =>
+      __$GameResponseCopyWithImpl<_GameResponse>(this, _$identity);
 }
 
 abstract class _GameResponse implements GameResponse {
@@ -155,15 +234,10 @@ abstract class _GameResponse implements GameResponse {
   GameMark get playerMark;
   @override
   GameMark get computerMark;
+
   @override
   BuiltList<GameMove> get moves;
 
   @override
-  _GameResponse copyWith(
-      {int gameId,
-      GameStatus status,
-      DifficultyLevel difficultyLevel,
-      GameMark playerMark,
-      GameMark computerMark,
-      BuiltList<GameMove> moves});
+  _$GameResponseCopyWith<_GameResponse> get copyWith;
 }

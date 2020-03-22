@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   GameState get initialState => GameState.nothing();
 
   @override
-  Stream<GameState> mapEventToState(
-    GameEvent event,
-  ) async* {
+  Stream<GameState> mapEventToState(GameEvent event,) async* {
     yield* event.map(
       createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
@@ -114,16 +113,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   bool _isFieldEmpty(BuiltList<GameMove> moves, int fieldIndex) =>
-      moves
-          .where((move) => move.fieldIndex == fieldIndex)
-          .isEmpty;
+      moves.where((move) => move.fieldIndex == fieldIndex).isEmpty;
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
-    Router.navigator.pushNamed(
-      Router.gameScreen,
-      arguments: GameScreenArguments(
-        difficultyLevel: difficultyLevel,
-      ),
+    ExtendedNavigator.ofRouter<Router>().pushGameScreen(
+      difficultyLevel: difficultyLevel,
     );
   }
 }

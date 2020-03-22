@@ -7,29 +7,10 @@ part of login_response_model;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) {
   return _LoginResponseModel.fromJson(json);
-}
-
-mixin _$LoginResponseModel {
-  @JsonKey(name: 'access_token')
-  String get accessToken;
-  @JsonKey(name: 'token_type')
-  String get tokenType;
-  @JsonKey(name: 'refresh_token')
-  String get refreshToken;
-  @JsonKey(name: 'expires_in')
-  int get expiresIn;
-  String get scope;
-
-  LoginResponseModel copyWith(
-      {@JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'token_type') String tokenType,
-      @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_in') int expiresIn,
-      String scope});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$LoginResponseModelTearOff {
@@ -51,12 +32,117 @@ class _$LoginResponseModelTearOff {
   }
 }
 
+// ignore: unused_element
 const $LoginResponseModel = _$LoginResponseModelTearOff();
+
+mixin _$LoginResponseModel {
+  @JsonKey(name: 'access_token')
+  String get accessToken;
+
+  @JsonKey(name: 'token_type')
+  String get tokenType;
+
+  @JsonKey(name: 'refresh_token')
+  String get refreshToken;
+
+  @JsonKey(name: 'expires_in')
+  int get expiresIn;
+
+  String get scope;
+
+  Map<String, dynamic> toJson();
+
+  $LoginResponseModelCopyWith<LoginResponseModel> get copyWith;
+}
+
+abstract class $LoginResponseModelCopyWith<$Res> {
+  factory $LoginResponseModelCopyWith(
+          LoginResponseModel value, $Res Function(LoginResponseModel) then) =
+      _$LoginResponseModelCopyWithImpl<$Res>;
+
+  $Res call(
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'token_type') String tokenType,
+      @JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'expires_in') int expiresIn,
+      String scope});
+}
+
+class _$LoginResponseModelCopyWithImpl<$Res>
+    implements $LoginResponseModelCopyWith<$Res> {
+  _$LoginResponseModelCopyWithImpl(this._value, this._then);
+
+  final LoginResponseModel _value;
+
+  // ignore: unused_field
+  final $Res Function(LoginResponseModel) _then;
+
+  @override
+  $Res call({
+    Object accessToken = freezed,
+    Object tokenType = freezed,
+    Object refreshToken = freezed,
+    Object expiresIn = freezed,
+    Object scope = freezed,
+  }) {
+    return _then(_value.copyWith(
+      accessToken:
+          accessToken == freezed ? _value.accessToken : accessToken as String,
+      tokenType: tokenType == freezed ? _value.tokenType : tokenType as String,
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken as String,
+      expiresIn: expiresIn == freezed ? _value.expiresIn : expiresIn as int,
+      scope: scope == freezed ? _value.scope : scope as String,
+    ));
+  }
+}
+
+abstract class _$LoginResponseModelCopyWith<$Res>
+    implements $LoginResponseModelCopyWith<$Res> {
+  factory _$LoginResponseModelCopyWith(_LoginResponseModel value,
+      $Res Function(_LoginResponseModel) then) =
+  __$LoginResponseModelCopyWithImpl<$Res>;
+
+  @override
+  $Res call({@JsonKey(name: 'access_token') String accessToken,
+    @JsonKey(name: 'token_type') String tokenType,
+    @JsonKey(name: 'refresh_token') String refreshToken,
+    @JsonKey(name: 'expires_in') int expiresIn,
+    String scope});
+}
+
+class __$LoginResponseModelCopyWithImpl<$Res>
+    extends _$LoginResponseModelCopyWithImpl<$Res>
+    implements _$LoginResponseModelCopyWith<$Res> {
+  __$LoginResponseModelCopyWithImpl(_LoginResponseModel _value,
+      $Res Function(_LoginResponseModel) _then)
+      : super(_value, (v) => _then(v as _LoginResponseModel));
+
+  @override
+  _LoginResponseModel get _value => super._value as _LoginResponseModel;
+
+  @override
+  $Res call({
+    Object accessToken = freezed,
+    Object tokenType = freezed,
+    Object refreshToken = freezed,
+    Object expiresIn = freezed,
+    Object scope = freezed,
+  }) {
+    return _then(_LoginResponseModel(
+      accessToken == freezed ? _value.accessToken : accessToken as String,
+      tokenType == freezed ? _value.tokenType : tokenType as String,
+      refreshToken == freezed ? _value.refreshToken : refreshToken as String,
+      expiresIn == freezed ? _value.expiresIn : expiresIn as int,
+      scope == freezed ? _value.scope : scope as String,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_LoginResponseModel implements _LoginResponseModel {
-  const _$_LoginResponseModel(
-      @JsonKey(name: 'access_token') this.accessToken,
+  const _$_LoginResponseModel(@JsonKey(name: 'access_token') this.accessToken,
       @JsonKey(name: 'token_type') this.tokenType,
       @JsonKey(name: 'refresh_token') this.refreshToken,
       @JsonKey(name: 'expires_in') this.expiresIn,
@@ -120,21 +206,8 @@ class _$_LoginResponseModel implements _LoginResponseModel {
       const DeepCollectionEquality().hash(scope);
 
   @override
-  _$_LoginResponseModel copyWith({
-    Object accessToken = freezed,
-    Object tokenType = freezed,
-    Object refreshToken = freezed,
-    Object expiresIn = freezed,
-    Object scope = freezed,
-  }) {
-    return _$_LoginResponseModel(
-      accessToken == freezed ? this.accessToken : accessToken as String,
-      tokenType == freezed ? this.tokenType : tokenType as String,
-      refreshToken == freezed ? this.refreshToken : refreshToken as String,
-      expiresIn == freezed ? this.expiresIn : expiresIn as int,
-      scope == freezed ? this.scope : scope as String,
-    );
-  }
+  _$LoginResponseModelCopyWith<_LoginResponseModel> get copyWith =>
+      __$LoginResponseModelCopyWithImpl<_LoginResponseModel>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -165,14 +238,10 @@ abstract class _LoginResponseModel implements LoginResponseModel {
   @override
   @JsonKey(name: 'expires_in')
   int get expiresIn;
+
   @override
   String get scope;
 
   @override
-  _LoginResponseModel copyWith(
-      {@JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'token_type') String tokenType,
-      @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_in') int expiresIn,
-      String scope});
+  _$LoginResponseModelCopyWith<_LoginResponseModel> get copyWith;
 }

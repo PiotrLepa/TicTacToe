@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -44,9 +45,7 @@ class MyApp extends StatelessWidget {
         supportedLocales: _localeProvider.getSupportedLocales(),
         theme: ThemeProvider(isDark: false).getThemeData(),
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
-        onGenerateRoute: Router.onGenerateRoute,
-        navigatorKey: Router.navigator.key,
-        initialRoute: Router.homeScreen,
+        builder: ExtendedNavigator<Router>(router: Router()),
       ),
     );
   }

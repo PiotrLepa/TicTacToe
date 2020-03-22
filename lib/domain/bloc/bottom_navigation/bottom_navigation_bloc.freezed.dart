@@ -7,11 +7,7 @@ part of 'bottom_navigation_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$BottomNavigationEvent {
-  int get index;
-
-  BottomNavigationEvent copyWith({int index});
-}
+T _$identity<T>(T value) => value;
 
 class _$BottomNavigationEventTearOff {
   const _$BottomNavigationEventTearOff();
@@ -23,7 +19,72 @@ class _$BottomNavigationEventTearOff {
   }
 }
 
+// ignore: unused_element
 const $BottomNavigationEvent = _$BottomNavigationEventTearOff();
+
+mixin _$BottomNavigationEvent {
+  int get index;
+
+  $BottomNavigationEventCopyWith<BottomNavigationEvent> get copyWith;
+}
+
+abstract class $BottomNavigationEventCopyWith<$Res> {
+  factory $BottomNavigationEventCopyWith(BottomNavigationEvent value,
+          $Res Function(BottomNavigationEvent) then) =
+      _$BottomNavigationEventCopyWithImpl<$Res>;
+
+  $Res call({int index});
+}
+
+class _$BottomNavigationEventCopyWithImpl<$Res>
+    implements $BottomNavigationEventCopyWith<$Res> {
+  _$BottomNavigationEventCopyWithImpl(this._value, this._then);
+
+  final BottomNavigationEvent _value;
+
+  // ignore: unused_field
+  final $Res Function(BottomNavigationEvent) _then;
+
+  @override
+  $Res call({
+    Object index = freezed,
+  }) {
+    return _then(_value.copyWith(
+      index: index == freezed ? _value.index : index as int,
+    ));
+  }
+}
+
+abstract class $OnBottomNavigationTappedCopyWith<$Res>
+    implements $BottomNavigationEventCopyWith<$Res> {
+  factory $OnBottomNavigationTappedCopyWith(OnBottomNavigationTapped value,
+          $Res Function(OnBottomNavigationTapped) then) =
+      _$OnBottomNavigationTappedCopyWithImpl<$Res>;
+
+  @override
+  $Res call({int index});
+}
+
+class _$OnBottomNavigationTappedCopyWithImpl<$Res>
+    extends _$BottomNavigationEventCopyWithImpl<$Res>
+    implements $OnBottomNavigationTappedCopyWith<$Res> {
+  _$OnBottomNavigationTappedCopyWithImpl(OnBottomNavigationTapped _value,
+      $Res Function(OnBottomNavigationTapped) _then)
+      : super(_value, (v) => _then(v as OnBottomNavigationTapped));
+
+  @override
+  OnBottomNavigationTapped get _value =>
+      super._value as OnBottomNavigationTapped;
+
+  @override
+  $Res call({
+    Object index = freezed,
+  }) {
+    return _then(OnBottomNavigationTapped(
+      index == freezed ? _value.index : index as int,
+    ));
+  }
+}
 
 class _$OnBottomNavigationTapped implements OnBottomNavigationTapped {
   const _$OnBottomNavigationTapped(this.index) : assert(index != null);
@@ -49,13 +110,9 @@ class _$OnBottomNavigationTapped implements OnBottomNavigationTapped {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(index);
 
   @override
-  _$OnBottomNavigationTapped copyWith({
-    Object index = freezed,
-  }) {
-    return _$OnBottomNavigationTapped(
-      index == freezed ? this.index : index as int,
-    );
-  }
+  $OnBottomNavigationTappedCopyWith<OnBottomNavigationTapped> get copyWith =>
+      _$OnBottomNavigationTappedCopyWithImpl<OnBottomNavigationTapped>(
+          this, _$identity);
 }
 
 abstract class OnBottomNavigationTapped implements BottomNavigationEvent {
@@ -66,14 +123,7 @@ abstract class OnBottomNavigationTapped implements BottomNavigationEvent {
   int get index;
 
   @override
-  OnBottomNavigationTapped copyWith({int index});
-}
-
-mixin _$BottomNavigationState {
-  RawKeyString get pageTitle;
-  int get index;
-
-  BottomNavigationState copyWith({RawKeyString pageTitle, int index});
+  $OnBottomNavigationTappedCopyWith<OnBottomNavigationTapped> get copyWith;
 }
 
 class _$BottomNavigationStateTearOff {
@@ -88,7 +138,78 @@ class _$BottomNavigationStateTearOff {
   }
 }
 
+// ignore: unused_element
 const $BottomNavigationState = _$BottomNavigationStateTearOff();
+
+mixin _$BottomNavigationState {
+  RawKeyString get pageTitle;
+
+  int get index;
+
+  $BottomNavigationStateCopyWith<BottomNavigationState> get copyWith;
+}
+
+abstract class $BottomNavigationStateCopyWith<$Res> {
+  factory $BottomNavigationStateCopyWith(BottomNavigationState value,
+      $Res Function(BottomNavigationState) then) =
+  _$BottomNavigationStateCopyWithImpl<$Res>;
+
+  $Res call({RawKeyString pageTitle, int index});
+}
+
+class _$BottomNavigationStateCopyWithImpl<$Res>
+    implements $BottomNavigationStateCopyWith<$Res> {
+  _$BottomNavigationStateCopyWithImpl(this._value, this._then);
+
+  final BottomNavigationState _value;
+
+  // ignore: unused_field
+  final $Res Function(BottomNavigationState) _then;
+
+  @override
+  $Res call({
+    Object pageTitle = freezed,
+    Object index = freezed,
+  }) {
+    return _then(_value.copyWith(
+      pageTitle:
+      pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
+      index: index == freezed ? _value.index : index as int,
+    ));
+  }
+}
+
+abstract class $UpdatePageCopyWith<$Res>
+    implements $BottomNavigationStateCopyWith<$Res> {
+  factory $UpdatePageCopyWith(UpdatePage value,
+      $Res Function(UpdatePage) then) =
+  _$UpdatePageCopyWithImpl<$Res>;
+
+  @override
+  $Res call({RawKeyString pageTitle, int index});
+}
+
+class _$UpdatePageCopyWithImpl<$Res>
+    extends _$BottomNavigationStateCopyWithImpl<$Res>
+    implements $UpdatePageCopyWith<$Res> {
+  _$UpdatePageCopyWithImpl(UpdatePage _value, $Res Function(UpdatePage) _then)
+      : super(_value, (v) => _then(v as UpdatePage));
+
+  @override
+  UpdatePage get _value => super._value as UpdatePage;
+
+  @override
+  $Res call({
+    Object pageTitle = freezed,
+    Object index = freezed,
+  }) {
+    return _then(UpdatePage(
+      pageTitle:
+      pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
+      index: index == freezed ? _value.index : index as int,
+    ));
+  }
+}
 
 class _$UpdatePage implements UpdatePage {
   const _$UpdatePage({@required this.pageTitle, @required this.index})
@@ -123,16 +244,8 @@ class _$UpdatePage implements UpdatePage {
       const DeepCollectionEquality().hash(index);
 
   @override
-  _$UpdatePage copyWith({
-    Object pageTitle = freezed,
-    Object index = freezed,
-  }) {
-    return _$UpdatePage(
-      pageTitle:
-          pageTitle == freezed ? this.pageTitle : pageTitle as RawKeyString,
-      index: index == freezed ? this.index : index as int,
-    );
-  }
+  $UpdatePageCopyWith<UpdatePage> get copyWith =>
+      _$UpdatePageCopyWithImpl<UpdatePage>(this, _$identity);
 }
 
 abstract class UpdatePage implements BottomNavigationState {
@@ -141,9 +254,10 @@ abstract class UpdatePage implements BottomNavigationState {
 
   @override
   RawKeyString get pageTitle;
+
   @override
   int get index;
 
   @override
-  UpdatePage copyWith({RawKeyString pageTitle, int index});
+  $UpdatePageCopyWith<UpdatePage> get copyWith;
 }

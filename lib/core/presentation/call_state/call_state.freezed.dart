@@ -7,37 +7,7 @@ part of call_state;
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$CallState<T> {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result progress(),
-    @required Result success(T result),
-    @required Result error(RawKeyString errorMessage),
-  });
-
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result progress(),
-    Result success(T result),
-    Result error(RawKeyString errorMessage),
-    @required Result orElse(),
-  });
-
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result progress(Progress<T> value),
-    @required Result success(Success<T> value),
-    @required Result error(Error<T> value),
-  });
-
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result progress(Progress<T> value),
-    Result success(Success<T> value),
-    Result error(Error<T> value),
-    @required Result orElse(),
-  });
-}
+T _$identity<T>(T value) => value;
 
 class _$CallStateTearOff {
   const _$CallStateTearOff();
@@ -59,7 +29,68 @@ class _$CallStateTearOff {
   }
 }
 
+// ignore: unused_element
 const $CallState = _$CallStateTearOff();
+
+mixin _$CallState<T> {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result progress(),
+    @required Result success(T result),
+    @required Result error(RawKeyString errorMessage),
+  });
+
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result progress(),
+    Result success(T result),
+    Result error(RawKeyString errorMessage),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result progress(Progress<T> value),
+    @required Result success(Success<T> value),
+    @required Result error(Error<T> value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result progress(Progress<T> value),
+    Result success(Success<T> value),
+    Result error(Error<T> value),
+    @required Result orElse(),
+  });
+}
+
+abstract class $CallStateCopyWith<T, $Res> {
+  factory $CallStateCopyWith(
+          CallState<T> value, $Res Function(CallState<T>) then) =
+      _$CallStateCopyWithImpl<T, $Res>;
+}
+
+class _$CallStateCopyWithImpl<T, $Res> implements $CallStateCopyWith<T, $Res> {
+  _$CallStateCopyWithImpl(this._value, this._then);
+
+  final CallState<T> _value;
+
+  // ignore: unused_field
+  final $Res Function(CallState<T>) _then;
+}
+
+abstract class $ProgressCopyWith<T, $Res> {
+  factory $ProgressCopyWith(Progress<T> value,
+      $Res Function(Progress<T>) then) =
+  _$ProgressCopyWithImpl<T, $Res>;
+}
+
+class _$ProgressCopyWithImpl<T, $Res> extends _$CallStateCopyWithImpl<T, $Res>
+    implements $ProgressCopyWith<T, $Res> {
+  _$ProgressCopyWithImpl(Progress<T> _value, $Res Function(Progress<T>) _then)
+      : super(_value, (v) => _then(v as Progress<T>));
+
+  @override
+  Progress<T> get _value => super._value as Progress<T>;
+}
 
 class _$Progress<T> implements Progress<T> {
   const _$Progress();
@@ -138,6 +169,31 @@ abstract class Progress<T> implements CallState<T> {
   const factory Progress() = _$Progress<T>;
 }
 
+abstract class $SuccessCopyWith<T, $Res> {
+  factory $SuccessCopyWith(Success<T> value, $Res Function(Success<T>) then) =
+  _$SuccessCopyWithImpl<T, $Res>;
+
+  $Res call({T result});
+}
+
+class _$SuccessCopyWithImpl<T, $Res> extends _$CallStateCopyWithImpl<T, $Res>
+    implements $SuccessCopyWith<T, $Res> {
+  _$SuccessCopyWithImpl(Success<T> _value, $Res Function(Success<T>) _then)
+      : super(_value, (v) => _then(v as Success<T>));
+
+  @override
+  Success<T> get _value => super._value as Success<T>;
+
+  @override
+  $Res call({
+    Object result = freezed,
+  }) {
+    return _then(Success<T>(
+      result == freezed ? _value.result : result as T,
+    ));
+  }
+}
+
 class _$Success<T> implements Success<T> {
   const _$Success(this.result) : assert(result != null);
 
@@ -162,13 +218,8 @@ class _$Success<T> implements Success<T> {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(result);
 
   @override
-  _$Success<T> copyWith({
-    Object result = freezed,
-  }) {
-    return _$Success<T>(
-      result == freezed ? this.result : result as T,
-    );
-  }
+  $SuccessCopyWith<T, Success<T>> get copyWith =>
+      _$SuccessCopyWithImpl<T, Success<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -232,7 +283,34 @@ abstract class Success<T> implements CallState<T> {
 
   T get result;
 
-  Success<T> copyWith({T result});
+  $SuccessCopyWith<T, Success<T>> get copyWith;
+}
+
+abstract class $ErrorCopyWith<T, $Res> {
+  factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
+  _$ErrorCopyWithImpl<T, $Res>;
+
+  $Res call({RawKeyString errorMessage});
+}
+
+class _$ErrorCopyWithImpl<T, $Res> extends _$CallStateCopyWithImpl<T, $Res>
+    implements $ErrorCopyWith<T, $Res> {
+  _$ErrorCopyWithImpl(Error<T> _value, $Res Function(Error<T>) _then)
+      : super(_value, (v) => _then(v as Error<T>));
+
+  @override
+  Error<T> get _value => super._value as Error<T>;
+
+  @override
+  $Res call({
+    Object errorMessage = freezed,
+  }) {
+    return _then(Error<T>(
+      errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage as RawKeyString,
+    ));
+  }
 }
 
 class _$Error<T> implements Error<T> {
@@ -260,15 +338,8 @@ class _$Error<T> implements Error<T> {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(errorMessage);
 
   @override
-  _$Error<T> copyWith({
-    Object errorMessage = freezed,
-  }) {
-    return _$Error<T>(
-      errorMessage == freezed
-          ? this.errorMessage
-          : errorMessage as RawKeyString,
-    );
-  }
+  $ErrorCopyWith<T, Error<T>> get copyWith =>
+      _$ErrorCopyWithImpl<T, Error<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -332,5 +403,5 @@ abstract class Error<T> implements CallState<T> {
 
   RawKeyString get errorMessage;
 
-  Error<T> copyWith({RawKeyString errorMessage});
+  $ErrorCopyWith<T, Error<T>> get copyWith;
 }

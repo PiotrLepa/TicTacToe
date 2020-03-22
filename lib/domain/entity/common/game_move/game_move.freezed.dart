@@ -7,14 +7,7 @@ part of game_move;
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$GameMove {
-  int get moveId;
-  int get fieldIndex;
-  int get counter;
-  GameMark get mark;
-
-  GameMove copyWith({int moveId, int fieldIndex, int counter, GameMark mark});
-}
+T _$identity<T>(T value) => value;
 
 class _$GameMoveTearOff {
   const _$GameMoveTearOff();
@@ -33,7 +26,83 @@ class _$GameMoveTearOff {
   }
 }
 
+// ignore: unused_element
 const $GameMove = _$GameMoveTearOff();
+
+mixin _$GameMove {
+  int get moveId;
+
+  int get fieldIndex;
+
+  int get counter;
+
+  GameMark get mark;
+
+  $GameMoveCopyWith<GameMove> get copyWith;
+}
+
+abstract class $GameMoveCopyWith<$Res> {
+  factory $GameMoveCopyWith(GameMove value, $Res Function(GameMove) then) =
+      _$GameMoveCopyWithImpl<$Res>;
+
+  $Res call({int moveId, int fieldIndex, int counter, GameMark mark});
+}
+
+class _$GameMoveCopyWithImpl<$Res> implements $GameMoveCopyWith<$Res> {
+  _$GameMoveCopyWithImpl(this._value, this._then);
+
+  final GameMove _value;
+
+  // ignore: unused_field
+  final $Res Function(GameMove) _then;
+
+  @override
+  $Res call({
+    Object moveId = freezed,
+    Object fieldIndex = freezed,
+    Object counter = freezed,
+    Object mark = freezed,
+  }) {
+    return _then(_value.copyWith(
+      moveId: moveId == freezed ? _value.moveId : moveId as int,
+      fieldIndex: fieldIndex == freezed ? _value.fieldIndex : fieldIndex as int,
+      counter: counter == freezed ? _value.counter : counter as int,
+      mark: mark == freezed ? _value.mark : mark as GameMark,
+    ));
+  }
+}
+
+abstract class _$GameMoveCopyWith<$Res> implements $GameMoveCopyWith<$Res> {
+  factory _$GameMoveCopyWith(_GameMove value, $Res Function(_GameMove) then) =
+      __$GameMoveCopyWithImpl<$Res>;
+
+  @override
+  $Res call({int moveId, int fieldIndex, int counter, GameMark mark});
+}
+
+class __$GameMoveCopyWithImpl<$Res> extends _$GameMoveCopyWithImpl<$Res>
+    implements _$GameMoveCopyWith<$Res> {
+  __$GameMoveCopyWithImpl(_GameMove _value, $Res Function(_GameMove) _then)
+      : super(_value, (v) => _then(v as _GameMove));
+
+  @override
+  _GameMove get _value => super._value as _GameMove;
+
+  @override
+  $Res call({
+    Object moveId = freezed,
+    Object fieldIndex = freezed,
+    Object counter = freezed,
+    Object mark = freezed,
+  }) {
+    return _then(_GameMove(
+      moveId: moveId == freezed ? _value.moveId : moveId as int,
+      fieldIndex: fieldIndex == freezed ? _value.fieldIndex : fieldIndex as int,
+      counter: counter == freezed ? _value.counter : counter as int,
+      mark: mark == freezed ? _value.mark : mark as GameMark,
+    ));
+  }
+}
 
 class _$_GameMove implements _GameMove {
   const _$_GameMove(
@@ -85,19 +154,8 @@ class _$_GameMove implements _GameMove {
       const DeepCollectionEquality().hash(mark);
 
   @override
-  _$_GameMove copyWith({
-    Object moveId = freezed,
-    Object fieldIndex = freezed,
-    Object counter = freezed,
-    Object mark = freezed,
-  }) {
-    return _$_GameMove(
-      moveId: moveId == freezed ? this.moveId : moveId as int,
-      fieldIndex: fieldIndex == freezed ? this.fieldIndex : fieldIndex as int,
-      counter: counter == freezed ? this.counter : counter as int,
-      mark: mark == freezed ? this.mark : mark as GameMark,
-    );
-  }
+  _$GameMoveCopyWith<_GameMove> get copyWith =>
+      __$GameMoveCopyWithImpl<_GameMove>(this, _$identity);
 }
 
 abstract class _GameMove implements GameMove {
@@ -113,9 +171,10 @@ abstract class _GameMove implements GameMove {
   int get fieldIndex;
   @override
   int get counter;
+
   @override
   GameMark get mark;
 
   @override
-  _GameMove copyWith({int moveId, int fieldIndex, int counter, GameMark mark});
+  _$GameMoveCopyWith<_GameMove> get copyWith;
 }

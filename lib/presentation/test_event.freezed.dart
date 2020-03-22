@@ -7,37 +7,7 @@ part of test_event;
 // FreezedGenerator
 // **************************************************************************
 
-mixin _$TestEvent {
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result login(),
-    @required Result fetchGames(),
-    @required Result makeError(),
-  });
-
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result login(),
-    Result fetchGames(),
-    Result makeError(),
-    @required Result orElse(),
-  });
-
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result login(_Login value),
-    @required Result fetchGames(_FetchGames value),
-    @required Result makeError(_MakeError value),
-  });
-
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result login(_Login value),
-    Result fetchGames(_FetchGames value),
-    Result makeError(_MakeError value),
-    @required Result orElse(),
-  });
-}
+T _$identity<T>(T value) => value;
 
 class _$TestEventTearOff {
   const _$TestEventTearOff();
@@ -55,7 +25,66 @@ class _$TestEventTearOff {
   }
 }
 
+// ignore: unused_element
 const $TestEvent = _$TestEventTearOff();
+
+mixin _$TestEvent {
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result login(),
+    @required Result fetchGames(),
+    @required Result makeError(),
+  });
+
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result login(),
+    Result fetchGames(),
+    Result makeError(),
+    @required Result orElse(),
+  });
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result login(_Login value),
+    @required Result fetchGames(_FetchGames value),
+    @required Result makeError(_MakeError value),
+  });
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result login(_Login value),
+    Result fetchGames(_FetchGames value),
+    Result makeError(_MakeError value),
+    @required Result orElse(),
+  });
+}
+
+abstract class $TestEventCopyWith<$Res> {
+  factory $TestEventCopyWith(TestEvent value, $Res Function(TestEvent) then) =
+      _$TestEventCopyWithImpl<$Res>;
+}
+
+class _$TestEventCopyWithImpl<$Res> implements $TestEventCopyWith<$Res> {
+  _$TestEventCopyWithImpl(this._value, this._then);
+
+  final TestEvent _value;
+
+  // ignore: unused_field
+  final $Res Function(TestEvent) _then;
+}
+
+abstract class _$LoginCopyWith<$Res> {
+  factory _$LoginCopyWith(_Login value, $Res Function(_Login) then) =
+  __$LoginCopyWithImpl<$Res>;
+}
+
+class __$LoginCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>
+    implements _$LoginCopyWith<$Res> {
+  __$LoginCopyWithImpl(_Login _value, $Res Function(_Login) _then)
+      : super(_value, (v) => _then(v as _Login));
+
+  @override
+  _Login get _value => super._value as _Login;
+}
 
 class _$_Login implements _Login {
   const _$_Login();
@@ -134,6 +163,22 @@ abstract class _Login implements TestEvent {
   const factory _Login() = _$_Login;
 }
 
+abstract class _$FetchGamesCopyWith<$Res> {
+  factory _$FetchGamesCopyWith(_FetchGames value,
+      $Res Function(_FetchGames) then) =
+  __$FetchGamesCopyWithImpl<$Res>;
+}
+
+class __$FetchGamesCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>
+    implements _$FetchGamesCopyWith<$Res> {
+  __$FetchGamesCopyWithImpl(_FetchGames _value,
+      $Res Function(_FetchGames) _then)
+      : super(_value, (v) => _then(v as _FetchGames));
+
+  @override
+  _FetchGames get _value => super._value as _FetchGames;
+}
+
 class _$_FetchGames implements _FetchGames {
   const _$_FetchGames();
 
@@ -209,6 +254,21 @@ class _$_FetchGames implements _FetchGames {
 
 abstract class _FetchGames implements TestEvent {
   const factory _FetchGames() = _$_FetchGames;
+}
+
+abstract class _$MakeErrorCopyWith<$Res> {
+  factory _$MakeErrorCopyWith(_MakeError value,
+      $Res Function(_MakeError) then) =
+  __$MakeErrorCopyWithImpl<$Res>;
+}
+
+class __$MakeErrorCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>
+    implements _$MakeErrorCopyWith<$Res> {
+  __$MakeErrorCopyWithImpl(_MakeError _value, $Res Function(_MakeError) _then)
+      : super(_value, (v) => _then(v as _MakeError));
+
+  @override
+  _MakeError get _value => super._value as _MakeError;
 }
 
 class _$_MakeError implements _MakeError {

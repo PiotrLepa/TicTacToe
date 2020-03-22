@@ -7,22 +7,11 @@ part of refresh_token_request_model;
 // FreezedGenerator
 // **************************************************************************
 
+T _$identity<T>(T value) => value;
+
 RefreshTokenRequestModel _$RefreshTokenRequestModelFromJson(
     Map<String, dynamic> json) {
   return _RefreshTokenRequestModel.fromJson(json);
-}
-
-mixin _$RefreshTokenRequestModel {
-  @JsonKey(name: 'refresh_token')
-  String get refreshToken;
-  @JsonKey(name: 'grant_type')
-  String get grantType;
-
-  RefreshTokenRequestModel copyWith(
-      {@JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'grant_type') String grantType});
-
-  Map<String, dynamic> toJson();
 }
 
 class _$RefreshTokenRequestModelTearOff {
@@ -38,7 +27,90 @@ class _$RefreshTokenRequestModelTearOff {
   }
 }
 
+// ignore: unused_element
 const $RefreshTokenRequestModel = _$RefreshTokenRequestModelTearOff();
+
+mixin _$RefreshTokenRequestModel {
+  @JsonKey(name: 'refresh_token')
+  String get refreshToken;
+
+  @JsonKey(name: 'grant_type')
+  String get grantType;
+
+  Map<String, dynamic> toJson();
+
+  $RefreshTokenRequestModelCopyWith<RefreshTokenRequestModel> get copyWith;
+}
+
+abstract class $RefreshTokenRequestModelCopyWith<$Res> {
+  factory $RefreshTokenRequestModelCopyWith(RefreshTokenRequestModel value,
+          $Res Function(RefreshTokenRequestModel) then) =
+      _$RefreshTokenRequestModelCopyWithImpl<$Res>;
+
+  $Res call(
+      {@JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'grant_type') String grantType});
+}
+
+class _$RefreshTokenRequestModelCopyWithImpl<$Res>
+    implements $RefreshTokenRequestModelCopyWith<$Res> {
+  _$RefreshTokenRequestModelCopyWithImpl(this._value, this._then);
+
+  final RefreshTokenRequestModel _value;
+
+  // ignore: unused_field
+  final $Res Function(RefreshTokenRequestModel) _then;
+
+  @override
+  $Res call({
+    Object refreshToken = freezed,
+    Object grantType = freezed,
+  }) {
+    return _then(_value.copyWith(
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken as String,
+      grantType: grantType == freezed ? _value.grantType : grantType as String,
+    ));
+  }
+}
+
+abstract class _$RefreshTokenRequestModelCopyWith<$Res>
+    implements $RefreshTokenRequestModelCopyWith<$Res> {
+  factory _$RefreshTokenRequestModelCopyWith(_RefreshTokenRequestModel value,
+          $Res Function(_RefreshTokenRequestModel) then) =
+      __$RefreshTokenRequestModelCopyWithImpl<$Res>;
+
+  @override
+  $Res call(
+      {@JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'grant_type') String grantType});
+}
+
+class __$RefreshTokenRequestModelCopyWithImpl<$Res>
+    extends _$RefreshTokenRequestModelCopyWithImpl<$Res>
+    implements _$RefreshTokenRequestModelCopyWith<$Res> {
+  __$RefreshTokenRequestModelCopyWithImpl(_RefreshTokenRequestModel _value,
+      $Res Function(_RefreshTokenRequestModel) _then)
+      : super(_value, (v) => _then(v as _RefreshTokenRequestModel));
+
+  @override
+  _RefreshTokenRequestModel get _value =>
+      super._value as _RefreshTokenRequestModel;
+
+  @override
+  $Res call({
+    Object refreshToken = freezed,
+    Object grantType = freezed,
+  }) {
+    return _then(_RefreshTokenRequestModel(
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken as String,
+      grantType: grantType == freezed ? _value.grantType : grantType as String,
+    ));
+  }
+}
 
 @JsonSerializable()
 class _$_RefreshTokenRequestModel implements _RefreshTokenRequestModel {
@@ -82,16 +154,9 @@ class _$_RefreshTokenRequestModel implements _RefreshTokenRequestModel {
       const DeepCollectionEquality().hash(grantType);
 
   @override
-  _$_RefreshTokenRequestModel copyWith({
-    Object refreshToken = freezed,
-    Object grantType = freezed,
-  }) {
-    return _$_RefreshTokenRequestModel(
-      refreshToken:
-          refreshToken == freezed ? this.refreshToken : refreshToken as String,
-      grantType: grantType == freezed ? this.grantType : grantType as String,
-    );
-  }
+  _$RefreshTokenRequestModelCopyWith<_RefreshTokenRequestModel> get copyWith =>
+      __$RefreshTokenRequestModelCopyWithImpl<_RefreshTokenRequestModel>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -111,12 +176,11 @@ abstract class _RefreshTokenRequestModel implements RefreshTokenRequestModel {
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
+
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;
 
   @override
-  _RefreshTokenRequestModel copyWith(
-      {@JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'grant_type') String grantType});
+  _$RefreshTokenRequestModelCopyWith<_RefreshTokenRequestModel> get copyWith;
 }
