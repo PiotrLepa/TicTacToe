@@ -35,7 +35,6 @@ mixin _$TestEvent {
     @required Result fetchGames(),
     @required Result makeError(),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result login(),
@@ -67,14 +66,13 @@ class _$TestEventCopyWithImpl<$Res> implements $TestEventCopyWith<$Res> {
   _$TestEventCopyWithImpl(this._value, this._then);
 
   final TestEvent _value;
-
   // ignore: unused_field
   final $Res Function(TestEvent) _then;
 }
 
 abstract class _$LoginCopyWith<$Res> {
   factory _$LoginCopyWith(_Login value, $Res Function(_Login) then) =
-  __$LoginCopyWithImpl<$Res>;
+      __$LoginCopyWithImpl<$Res>;
 }
 
 class __$LoginCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>

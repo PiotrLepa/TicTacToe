@@ -8,7 +8,6 @@ part of error_response;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 ErrorResponse _$ErrorResponseFromJson(Map<String, dynamic> json) {
   return _ErrorResponse.fromJson(json);
 }
@@ -33,13 +32,10 @@ const $ErrorResponse = _$ErrorResponseTearOff();
 
 mixin _$ErrorResponse {
   int get code;
-
   String get developerMessage;
-
   String get printableMessage;
 
   Map<String, dynamic> toJson();
-
   $ErrorResponseCopyWith<ErrorResponse> get copyWith;
 }
 
@@ -47,7 +43,6 @@ abstract class $ErrorResponseCopyWith<$Res> {
   factory $ErrorResponseCopyWith(
           ErrorResponse value, $Res Function(ErrorResponse) then) =
       _$ErrorResponseCopyWithImpl<$Res>;
-
   $Res call({int code, String developerMessage, String printableMessage});
 }
 
@@ -56,7 +51,6 @@ class _$ErrorResponseCopyWithImpl<$Res>
   _$ErrorResponseCopyWithImpl(this._value, this._then);
 
   final ErrorResponse _value;
-
   // ignore: unused_field
   final $Res Function(ErrorResponse) _then;
 
@@ -83,7 +77,6 @@ abstract class _$ErrorResponseCopyWith<$Res>
   factory _$ErrorResponseCopyWith(
           _ErrorResponse value, $Res Function(_ErrorResponse) then) =
       __$ErrorResponseCopyWithImpl<$Res>;
-
   @override
   $Res call({int code, String developerMessage, String printableMessage});
 }
@@ -184,10 +177,8 @@ abstract class _ErrorResponse implements ErrorResponse {
   int get code;
   @override
   String get developerMessage;
-
   @override
   String get printableMessage;
-
   @override
   _$ErrorResponseCopyWith<_ErrorResponse> get copyWith;
 }

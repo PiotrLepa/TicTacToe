@@ -35,15 +35,10 @@ const $GameResponse = _$GameResponseTearOff();
 
 mixin _$GameResponse {
   int get gameId;
-
   GameStatus get status;
-
   DifficultyLevel get difficultyLevel;
-
   GameMark get playerMark;
-
   GameMark get computerMark;
-
   BuiltList<GameMove> get moves;
 
   $GameResponseCopyWith<GameResponse> get copyWith;
@@ -53,7 +48,6 @@ abstract class $GameResponseCopyWith<$Res> {
   factory $GameResponseCopyWith(
           GameResponse value, $Res Function(GameResponse) then) =
       _$GameResponseCopyWithImpl<$Res>;
-
   $Res call(
       {int gameId,
       GameStatus status,
@@ -67,7 +61,6 @@ class _$GameResponseCopyWithImpl<$Res> implements $GameResponseCopyWith<$Res> {
   _$GameResponseCopyWithImpl(this._value, this._then);
 
   final GameResponse _value;
-
   // ignore: unused_field
   final $Res Function(GameResponse) _then;
 
@@ -101,7 +94,6 @@ abstract class _$GameResponseCopyWith<$Res>
   factory _$GameResponseCopyWith(
           _GameResponse value, $Res Function(_GameResponse) then) =
       __$GameResponseCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {int gameId,
@@ -234,10 +226,8 @@ abstract class _GameResponse implements GameResponse {
   GameMark get playerMark;
   @override
   GameMark get computerMark;
-
   @override
   BuiltList<GameMove> get moves;
-
   @override
   _$GameResponseCopyWith<_GameResponse> get copyWith;
 }

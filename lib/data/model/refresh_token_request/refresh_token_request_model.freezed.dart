@@ -8,7 +8,6 @@ part of refresh_token_request_model;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 RefreshTokenRequestModel _$RefreshTokenRequestModelFromJson(
     Map<String, dynamic> json) {
   return _RefreshTokenRequestModel.fromJson(json);
@@ -33,12 +32,10 @@ const $RefreshTokenRequestModel = _$RefreshTokenRequestModelTearOff();
 mixin _$RefreshTokenRequestModel {
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
   Map<String, dynamic> toJson();
-
   $RefreshTokenRequestModelCopyWith<RefreshTokenRequestModel> get copyWith;
 }
 
@@ -46,7 +43,6 @@ abstract class $RefreshTokenRequestModelCopyWith<$Res> {
   factory $RefreshTokenRequestModelCopyWith(RefreshTokenRequestModel value,
           $Res Function(RefreshTokenRequestModel) then) =
       _$RefreshTokenRequestModelCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: 'refresh_token') String refreshToken,
       @JsonKey(name: 'grant_type') String grantType});
@@ -57,7 +53,6 @@ class _$RefreshTokenRequestModelCopyWithImpl<$Res>
   _$RefreshTokenRequestModelCopyWithImpl(this._value, this._then);
 
   final RefreshTokenRequestModel _value;
-
   // ignore: unused_field
   final $Res Function(RefreshTokenRequestModel) _then;
 
@@ -80,7 +75,6 @@ abstract class _$RefreshTokenRequestModelCopyWith<$Res>
   factory _$RefreshTokenRequestModelCopyWith(_RefreshTokenRequestModel value,
           $Res Function(_RefreshTokenRequestModel) then) =
       __$RefreshTokenRequestModelCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: 'refresh_token') String refreshToken,
@@ -176,11 +170,9 @@ abstract class _RefreshTokenRequestModel implements RefreshTokenRequestModel {
   @override
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;
-
   @override
   _$RefreshTokenRequestModelCopyWith<_RefreshTokenRequestModel> get copyWith;
 }

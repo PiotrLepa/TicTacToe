@@ -8,7 +8,6 @@ part of game_move_model;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 GameMoveModel _$GameMoveModelFromJson(Map<String, dynamic> json) {
   return _GameMoveModel.fromJson(json);
 }
@@ -35,15 +34,11 @@ const $GameMoveModel = _$GameMoveModelTearOff();
 
 mixin _$GameMoveModel {
   int get moveId;
-
   int get fieldIndex;
-
   int get counter;
-
   GameMarkModel get mark;
 
   Map<String, dynamic> toJson();
-
   $GameMoveModelCopyWith<GameMoveModel> get copyWith;
 }
 
@@ -51,7 +46,6 @@ abstract class $GameMoveModelCopyWith<$Res> {
   factory $GameMoveModelCopyWith(
           GameMoveModel value, $Res Function(GameMoveModel) then) =
       _$GameMoveModelCopyWithImpl<$Res>;
-
   $Res call({int moveId, int fieldIndex, int counter, GameMarkModel mark});
 }
 
@@ -60,7 +54,6 @@ class _$GameMoveModelCopyWithImpl<$Res>
   _$GameMoveModelCopyWithImpl(this._value, this._then);
 
   final GameMoveModel _value;
-
   // ignore: unused_field
   final $Res Function(GameMoveModel) _then;
 
@@ -85,7 +78,6 @@ abstract class _$GameMoveModelCopyWith<$Res>
   factory _$GameMoveModelCopyWith(
           _GameMoveModel value, $Res Function(_GameMoveModel) then) =
       __$GameMoveModelCopyWithImpl<$Res>;
-
   @override
   $Res call({int moveId, int fieldIndex, int counter, GameMarkModel mark});
 }
@@ -195,10 +187,8 @@ abstract class _GameMoveModel implements GameMoveModel {
   int get fieldIndex;
   @override
   int get counter;
-
   @override
   GameMarkModel get mark;
-
   @override
   _$GameMoveModelCopyWith<_GameMoveModel> get copyWith;
 }

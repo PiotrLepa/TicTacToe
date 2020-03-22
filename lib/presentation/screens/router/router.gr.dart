@@ -10,9 +10,11 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/presentation/screens/game_screen.dart';
 import 'package:tictactoe/presentation/screens/home_screen.dart';
+import 'package:tictactoe/presentation/screens/login_screen.dart';
 
 abstract class Routes {
-  static const homeScreen = '/';
+  static const loginScreen = '/';
+  static const homeScreen = '/home-screen';
   static const gameScreen = '/game-screen';
 }
 
@@ -26,6 +28,11 @@ class Router extends RouterBase {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final args = settings.arguments;
     switch (settings.name) {
+      case Routes.loginScreen:
+        return MaterialPageRoute<dynamic>(
+          builder: (_) => LoginScreen(),
+          settings: settings,
+        );
       case Routes.homeScreen:
         return MaterialPageRoute<dynamic>(
           builder: (_) => HomeScreen(),
@@ -55,7 +62,6 @@ class Router extends RouterBase {
 class GameScreenArguments {
   final Key key;
   final DifficultyLevel difficultyLevel;
-
   GameScreenArguments({this.key, @required this.difficultyLevel});
 }
 
@@ -64,6 +70,8 @@ class GameScreenArguments {
 //***************************************************************************
 
 extension RouterNavigationHelperMethods on ExtendedNavigatorState {
+  Future pushLoginScreen() => pushNamed(Routes.loginScreen);
+
   Future pushHomeScreen() => pushNamed(Routes.homeScreen);
 
   Future pushGameScreen({
@@ -72,5 +80,5 @@ extension RouterNavigationHelperMethods on ExtendedNavigatorState {
   }) =>
       pushNamed(Routes.gameScreen,
           arguments:
-          GameScreenArguments(key: key, difficultyLevel: difficultyLevel));
+              GameScreenArguments(key: key, difficultyLevel: difficultyLevel));
 }

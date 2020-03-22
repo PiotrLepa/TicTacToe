@@ -8,7 +8,6 @@ part of login_response_model;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) {
   return _LoginResponseModel.fromJson(json);
 }
@@ -38,20 +37,15 @@ const $LoginResponseModel = _$LoginResponseModelTearOff();
 mixin _$LoginResponseModel {
   @JsonKey(name: 'access_token')
   String get accessToken;
-
   @JsonKey(name: 'token_type')
   String get tokenType;
-
   @JsonKey(name: 'refresh_token')
   String get refreshToken;
-
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   String get scope;
 
   Map<String, dynamic> toJson();
-
   $LoginResponseModelCopyWith<LoginResponseModel> get copyWith;
 }
 
@@ -59,7 +53,6 @@ abstract class $LoginResponseModelCopyWith<$Res> {
   factory $LoginResponseModelCopyWith(
           LoginResponseModel value, $Res Function(LoginResponseModel) then) =
       _$LoginResponseModelCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: 'access_token') String accessToken,
       @JsonKey(name: 'token_type') String tokenType,
@@ -73,7 +66,6 @@ class _$LoginResponseModelCopyWithImpl<$Res>
   _$LoginResponseModelCopyWithImpl(this._value, this._then);
 
   final LoginResponseModel _value;
-
   // ignore: unused_field
   final $Res Function(LoginResponseModel) _then;
 
@@ -100,16 +92,17 @@ class _$LoginResponseModelCopyWithImpl<$Res>
 
 abstract class _$LoginResponseModelCopyWith<$Res>
     implements $LoginResponseModelCopyWith<$Res> {
-  factory _$LoginResponseModelCopyWith(_LoginResponseModel value,
-      $Res Function(_LoginResponseModel) then) =
-  __$LoginResponseModelCopyWithImpl<$Res>;
+  factory _$LoginResponseModelCopyWith(
+          _LoginResponseModel value, $Res Function(_LoginResponseModel) then) =
+      __$LoginResponseModelCopyWithImpl<$Res>;
 
   @override
-  $Res call({@JsonKey(name: 'access_token') String accessToken,
-    @JsonKey(name: 'token_type') String tokenType,
-    @JsonKey(name: 'refresh_token') String refreshToken,
-    @JsonKey(name: 'expires_in') int expiresIn,
-    String scope});
+  $Res call(
+      {@JsonKey(name: 'access_token') String accessToken,
+      @JsonKey(name: 'token_type') String tokenType,
+      @JsonKey(name: 'refresh_token') String refreshToken,
+      @JsonKey(name: 'expires_in') int expiresIn,
+      String scope});
 }
 
 class __$LoginResponseModelCopyWithImpl<$Res>
@@ -238,10 +231,8 @@ abstract class _LoginResponseModel implements LoginResponseModel {
   @override
   @JsonKey(name: 'expires_in')
   int get expiresIn;
-
   @override
   String get scope;
-
   @override
   _$LoginResponseModelCopyWith<_LoginResponseModel> get copyWith;
 }

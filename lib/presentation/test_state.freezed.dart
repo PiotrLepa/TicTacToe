@@ -44,7 +44,6 @@ mixin _$TestState {
     @required Result success(String result),
     @required Result error(RawKeyString errorMessage),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result initial(),
@@ -79,14 +78,13 @@ class _$TestStateCopyWithImpl<$Res> implements $TestStateCopyWith<$Res> {
   _$TestStateCopyWithImpl(this._value, this._then);
 
   final TestState _value;
-
   // ignore: unused_field
   final $Res Function(TestState) _then;
 }
 
 abstract class _$InitialCopyWith<$Res> {
   factory _$InitialCopyWith(_Initial value, $Res Function(_Initial) then) =
-  __$InitialCopyWithImpl<$Res>;
+      __$InitialCopyWithImpl<$Res>;
 }
 
 class __$InitialCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
@@ -281,7 +279,6 @@ abstract class _Progress implements TestState {
 abstract class _$SuccessCopyWith<$Res> {
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
   __$SuccessCopyWithImpl<$Res>;
-
   $Res call({String result});
 }
 
@@ -397,14 +394,12 @@ abstract class _Success implements TestState {
   const factory _Success(String result) = _$_Success;
 
   String get result;
-
   _$SuccessCopyWith<_Success> get copyWith;
 }
 
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
   __$ErrorCopyWithImpl<$Res>;
-
   $Res call({RawKeyString errorMessage});
 }
 
@@ -523,6 +518,5 @@ abstract class _Error implements TestState {
   const factory _Error(RawKeyString errorMessage) = _$_Error;
 
   RawKeyString get errorMessage;
-
   _$ErrorCopyWith<_Error> get copyWith;
 }

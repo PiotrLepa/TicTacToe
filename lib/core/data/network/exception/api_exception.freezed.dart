@@ -61,7 +61,6 @@ const $ApiException = _$ApiExceptionTearOff();
 
 mixin _$ApiException {
   int get code;
-
   @nullable
   String get printableMessage;
 
@@ -94,7 +93,6 @@ mixin _$ApiException {
     @required Result internalServerError(_InternalServerError value),
     @required Result unknownError(_UnknownError value),
   });
-
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result noConnection(_NoConnection value),
@@ -110,9 +108,9 @@ mixin _$ApiException {
 }
 
 abstract class $ApiExceptionCopyWith<$Res> {
-  factory $ApiExceptionCopyWith(ApiException value,
-      $Res Function(ApiException) then) =
-  _$ApiExceptionCopyWithImpl<$Res>;
+  factory $ApiExceptionCopyWith(
+          ApiException value, $Res Function(ApiException) then) =
+      _$ApiExceptionCopyWithImpl<$Res>;
 
   $Res call({int code, @nullable String printableMessage});
 }
@@ -121,7 +119,6 @@ class _$ApiExceptionCopyWithImpl<$Res> implements $ApiExceptionCopyWith<$Res> {
   _$ApiExceptionCopyWithImpl(this._value, this._then);
 
   final ApiException _value;
-
   // ignore: unused_field
   final $Res Function(ApiException) _then;
 
@@ -290,11 +287,9 @@ abstract class _NoConnection implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
-
   @override
   _$NoConnectionCopyWith<_NoConnection> get copyWith;
 }
@@ -450,11 +445,9 @@ abstract class _BadRequest implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
-
   @override
   _$BadRequestCopyWith<_BadRequest> get copyWith;
 }
@@ -610,11 +603,9 @@ abstract class _Unauthorized implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
-
   @override
   _$UnauthorizedCopyWith<_Unauthorized> get copyWith;
 }
@@ -622,7 +613,6 @@ abstract class _Unauthorized implements ApiException {
 abstract class _$NotFoundCopyWith<$Res> implements $ApiExceptionCopyWith<$Res> {
   factory _$NotFoundCopyWith(_NotFound value, $Res Function(_NotFound) then) =
   __$NotFoundCopyWithImpl<$Res>;
-
   @override
   $Res call({int code, @nullable String printableMessage});
 }
@@ -767,11 +757,9 @@ abstract class _NotFound implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
-
   @override
   _$NotFoundCopyWith<_NotFound> get copyWith;
 }
@@ -781,7 +769,6 @@ abstract class _$InternalServerErrorCopyWith<$Res>
   factory _$InternalServerErrorCopyWith(_InternalServerError value,
       $Res Function(_InternalServerError) then) =
   __$InternalServerErrorCopyWithImpl<$Res>;
-
   @override
   $Res call({int code, @nullable String printableMessage});
 }
@@ -1089,11 +1076,9 @@ abstract class _UnknownError implements ApiException {
 
   @override
   int get code;
-
   @override
   @nullable
   String get printableMessage;
-
   @override
   _$UnknownErrorCopyWith<_UnknownError> get copyWith;
 }

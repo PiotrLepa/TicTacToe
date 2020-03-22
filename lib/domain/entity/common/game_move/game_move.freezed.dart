@@ -31,11 +31,8 @@ const $GameMove = _$GameMoveTearOff();
 
 mixin _$GameMove {
   int get moveId;
-
   int get fieldIndex;
-
   int get counter;
-
   GameMark get mark;
 
   $GameMoveCopyWith<GameMove> get copyWith;
@@ -44,7 +41,6 @@ mixin _$GameMove {
 abstract class $GameMoveCopyWith<$Res> {
   factory $GameMoveCopyWith(GameMove value, $Res Function(GameMove) then) =
       _$GameMoveCopyWithImpl<$Res>;
-
   $Res call({int moveId, int fieldIndex, int counter, GameMark mark});
 }
 
@@ -52,7 +48,6 @@ class _$GameMoveCopyWithImpl<$Res> implements $GameMoveCopyWith<$Res> {
   _$GameMoveCopyWithImpl(this._value, this._then);
 
   final GameMove _value;
-
   // ignore: unused_field
   final $Res Function(GameMove) _then;
 
@@ -75,7 +70,6 @@ class _$GameMoveCopyWithImpl<$Res> implements $GameMoveCopyWith<$Res> {
 abstract class _$GameMoveCopyWith<$Res> implements $GameMoveCopyWith<$Res> {
   factory _$GameMoveCopyWith(_GameMove value, $Res Function(_GameMove) then) =
       __$GameMoveCopyWithImpl<$Res>;
-
   @override
   $Res call({int moveId, int fieldIndex, int counter, GameMark mark});
 }
@@ -171,10 +165,8 @@ abstract class _GameMove implements GameMove {
   int get fieldIndex;
   @override
   int get counter;
-
   @override
   GameMark get mark;
-
   @override
   _$GameMoveCopyWith<_GameMove> get copyWith;
 }

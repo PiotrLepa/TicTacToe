@@ -64,6 +64,22 @@ class AppLocalizations {
 
   String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
 
+  String get loginScreenTitle => _localizedStrings["loginScreenTitle"];
+
+  String get loginScreenUsernameHint =>
+      _localizedStrings["loginScreenUsernameHint"];
+
+  String get loginScreenPasswordHint =>
+      _localizedStrings["loginScreenPasswordHint"];
+
+  String get loginScreenLoginButton =>
+      _localizedStrings["loginScreenLoginButton"];
+
+  String get loginScreenLoadingButton =>
+      _localizedStrings["loginScreenLoadingButton"];
+
+  String get emptyFieldError => _localizedStrings["emptyFieldError"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

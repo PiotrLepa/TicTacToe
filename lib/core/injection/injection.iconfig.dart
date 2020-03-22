@@ -30,6 +30,7 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
+import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
 import 'package:tictactoe/presentation/test_bloc.dart';
 
@@ -63,6 +64,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       RefreshTokenNetworkService(
           g<Dio>(instanceName: 'refreshTokenNetworkClient')));
   g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
+  g.registerFactory<LoginBloc>(() => LoginBloc());
   g.registerFactory<OauthTokensStorage>(
       () => OauthTokensStorage(g<SharedPreferences>()));
   g.registerFactory<BearerTokenInterceptor>(

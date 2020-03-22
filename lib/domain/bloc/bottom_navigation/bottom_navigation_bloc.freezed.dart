@@ -32,7 +32,6 @@ abstract class $BottomNavigationEventCopyWith<$Res> {
   factory $BottomNavigationEventCopyWith(BottomNavigationEvent value,
           $Res Function(BottomNavigationEvent) then) =
       _$BottomNavigationEventCopyWithImpl<$Res>;
-
   $Res call({int index});
 }
 
@@ -41,7 +40,6 @@ class _$BottomNavigationEventCopyWithImpl<$Res>
   _$BottomNavigationEventCopyWithImpl(this._value, this._then);
 
   final BottomNavigationEvent _value;
-
   // ignore: unused_field
   final $Res Function(BottomNavigationEvent) _then;
 
@@ -60,7 +58,6 @@ abstract class $OnBottomNavigationTappedCopyWith<$Res>
   factory $OnBottomNavigationTappedCopyWith(OnBottomNavigationTapped value,
           $Res Function(OnBottomNavigationTapped) then) =
       _$OnBottomNavigationTappedCopyWithImpl<$Res>;
-
   @override
   $Res call({int index});
 }
@@ -121,7 +118,6 @@ abstract class OnBottomNavigationTapped implements BottomNavigationEvent {
 
   @override
   int get index;
-
   @override
   $OnBottomNavigationTappedCopyWith<OnBottomNavigationTapped> get copyWith;
 }
@@ -143,7 +139,6 @@ const $BottomNavigationState = _$BottomNavigationStateTearOff();
 
 mixin _$BottomNavigationState {
   RawKeyString get pageTitle;
-
   int get index;
 
   $BottomNavigationStateCopyWith<BottomNavigationState> get copyWith;
@@ -151,9 +146,8 @@ mixin _$BottomNavigationState {
 
 abstract class $BottomNavigationStateCopyWith<$Res> {
   factory $BottomNavigationStateCopyWith(BottomNavigationState value,
-      $Res Function(BottomNavigationState) then) =
-  _$BottomNavigationStateCopyWithImpl<$Res>;
-
+          $Res Function(BottomNavigationState) then) =
+      _$BottomNavigationStateCopyWithImpl<$Res>;
   $Res call({RawKeyString pageTitle, int index});
 }
 
@@ -162,7 +156,6 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
   _$BottomNavigationStateCopyWithImpl(this._value, this._then);
 
   final BottomNavigationState _value;
-
   // ignore: unused_field
   final $Res Function(BottomNavigationState) _then;
 
@@ -254,10 +247,8 @@ abstract class UpdatePage implements BottomNavigationState {
 
   @override
   RawKeyString get pageTitle;
-
   @override
   int get index;
-
   @override
   $UpdatePageCopyWith<UpdatePage> get copyWith;
 }

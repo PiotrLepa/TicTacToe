@@ -6,6 +6,7 @@
   "apiErrorNotFound": "Not found",
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
+  "emptyFieldError": "Field cannot be empty",
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",
@@ -19,5 +20,10 @@
   "gameScreenStatusComputerWon": "You lost",
   "gameScreenStatusDraw": "Draw",
   "gameScreenPlayAgainQuestion": "Do you want to play again?",
-  "gameScreenPlayAgain": "Play"
+  "gameScreenPlayAgain": "Play",
+  "loginScreenTitle": "Login",
+  "loginScreenUsernameHint": "Username",
+  "loginScreenPasswordHint": "Password",
+  "loginScreenLoginButton": "Log in",
+  "loginScreenLoadingButton": "Logging in"
 }

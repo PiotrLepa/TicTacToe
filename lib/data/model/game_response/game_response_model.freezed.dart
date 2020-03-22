@@ -8,7 +8,6 @@ part of game_response_model;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 GameResponseModel _$GameResponseModelFromJson(Map<String, dynamic> json) {
   return _GameResponseModel.fromJson(json);
 }
@@ -41,21 +40,14 @@ const $GameResponseModel = _$GameResponseModelTearOff();
 
 mixin _$GameResponseModel {
   int get gameId;
-
   int get playerId;
-
   GameStatusModel get status;
-
   DifficultyLevelModel get difficultyLevel;
-
   GameMarkModel get playerMark;
-
   GameMarkModel get computerMark;
-
   List<GameMoveModel> get moves;
 
   Map<String, dynamic> toJson();
-
   $GameResponseModelCopyWith<GameResponseModel> get copyWith;
 }
 
@@ -63,7 +55,6 @@ abstract class $GameResponseModelCopyWith<$Res> {
   factory $GameResponseModelCopyWith(
           GameResponseModel value, $Res Function(GameResponseModel) then) =
       _$GameResponseModelCopyWithImpl<$Res>;
-
   $Res call(
       {int gameId,
       int playerId,
@@ -79,7 +70,6 @@ class _$GameResponseModelCopyWithImpl<$Res>
   _$GameResponseModelCopyWithImpl(this._value, this._then);
 
   final GameResponseModel _value;
-
   // ignore: unused_field
   final $Res Function(GameResponseModel) _then;
 
@@ -116,7 +106,6 @@ abstract class _$GameResponseModelCopyWith<$Res>
   factory _$GameResponseModelCopyWith(
           _GameResponseModel value, $Res Function(_GameResponseModel) then) =
       __$GameResponseModelCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {int gameId,
@@ -277,10 +266,8 @@ abstract class _GameResponseModel implements GameResponseModel {
   GameMarkModel get playerMark;
   @override
   GameMarkModel get computerMark;
-
   @override
   List<GameMoveModel> get moves;
-
   @override
   _$GameResponseModelCopyWith<_GameResponseModel> get copyWith;
 }

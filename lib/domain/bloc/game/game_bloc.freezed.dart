@@ -41,7 +41,6 @@ mixin _$GameEvent {
     @required Result restartGame(DifficultyLevel difficultyLevel),
     @required Result onFieldTapped(int index),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result createGame(DifficultyLevel difficultyLevel),
@@ -49,14 +48,12 @@ mixin _$GameEvent {
     Result onFieldTapped(int index),
     @required Result orElse(),
   });
-
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result createGame(CreateGame value),
     @required Result restartGame(RestartGame value),
     @required Result onFieldTapped(OnFieldTapped value),
   });
-
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result createGame(CreateGame value),
@@ -75,7 +72,6 @@ class _$GameEventCopyWithImpl<$Res> implements $GameEventCopyWith<$Res> {
   _$GameEventCopyWithImpl(this._value, this._then);
 
   final GameEvent _value;
-
   // ignore: unused_field
   final $Res Function(GameEvent) _then;
 }
@@ -84,7 +80,6 @@ abstract class $CreateGameCopyWith<$Res> {
   factory $CreateGameCopyWith(
           CreateGame value, $Res Function(CreateGame) then) =
       _$CreateGameCopyWithImpl<$Res>;
-
   $Res call({DifficultyLevel difficultyLevel});
 }
 
@@ -206,7 +201,6 @@ abstract class CreateGame implements GameEvent {
   const factory CreateGame(DifficultyLevel difficultyLevel) = _$CreateGame;
 
   DifficultyLevel get difficultyLevel;
-
   $CreateGameCopyWith<CreateGame> get copyWith;
 }
 
@@ -214,7 +208,6 @@ abstract class $RestartGameCopyWith<$Res> {
   factory $RestartGameCopyWith(
           RestartGame value, $Res Function(RestartGame) then) =
       _$RestartGameCopyWithImpl<$Res>;
-
   $Res call({DifficultyLevel difficultyLevel});
 }
 
@@ -337,7 +330,6 @@ abstract class RestartGame implements GameEvent {
   const factory RestartGame(DifficultyLevel difficultyLevel) = _$RestartGame;
 
   DifficultyLevel get difficultyLevel;
-
   $RestartGameCopyWith<RestartGame> get copyWith;
 }
 
@@ -345,7 +337,6 @@ abstract class $OnFieldTappedCopyWith<$Res> {
   factory $OnFieldTappedCopyWith(
           OnFieldTapped value, $Res Function(OnFieldTapped) then) =
       _$OnFieldTappedCopyWithImpl<$Res>;
-
   $Res call({int index});
 }
 
@@ -464,7 +455,6 @@ abstract class OnFieldTapped implements GameEvent {
   const factory OnFieldTapped(int index) = _$OnFieldTapped;
 
   int get index;
-
   $OnFieldTappedCopyWith<OnFieldTapped> get copyWith;
 }
 
@@ -534,7 +524,6 @@ mixin _$GameState {
     @required Result error(RawKeyString errorMessage),
     @required Result moveError(RawKeyString errorMessage),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result nothing(),
@@ -549,7 +538,6 @@ mixin _$GameState {
     Result moveError(RawKeyString errorMessage),
     @required Result orElse(),
   });
-
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
@@ -562,7 +550,6 @@ mixin _$GameState {
     @required Result error(Error value),
     @required Result moveError(MoveError value),
   });
-
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
@@ -587,7 +574,6 @@ class _$GameStateCopyWithImpl<$Res> implements $GameStateCopyWith<$Res> {
   _$GameStateCopyWithImpl(this._value, this._then);
 
   final GameState _value;
-
   // ignore: unused_field
   final $Res Function(GameState) _then;
 }
@@ -1006,7 +992,6 @@ abstract class $RenderGameCopyWith<$Res> {
   factory $RenderGameCopyWith(
           RenderGame value, $Res Function(RenderGame) then) =
       _$RenderGameCopyWithImpl<$Res>;
-
   $Res call({GameMark playerMark, BuiltList<GameMove> moves});
 }
 
@@ -1178,9 +1163,7 @@ abstract class RenderGame implements GameState {
       @required BuiltList<GameMove> moves}) = _$RenderGame;
 
   GameMark get playerMark;
-
   BuiltList<GameMove> get moves;
-
   $RenderGameCopyWith<RenderGame> get copyWith;
 }
 
@@ -1597,7 +1580,6 @@ abstract class Draw implements GameState {
 abstract class $ErrorCopyWith<$Res> {
   factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
       _$ErrorCopyWithImpl<$Res>;
-
   $Res call({RawKeyString errorMessage});
 }
 
@@ -1757,14 +1739,12 @@ abstract class Error implements GameState {
   const factory Error(RawKeyString errorMessage) = _$Error;
 
   RawKeyString get errorMessage;
-
   $ErrorCopyWith<Error> get copyWith;
 }
 
 abstract class $MoveErrorCopyWith<$Res> {
   factory $MoveErrorCopyWith(MoveError value, $Res Function(MoveError) then) =
       _$MoveErrorCopyWithImpl<$Res>;
-
   $Res call({RawKeyString errorMessage});
 }
 
@@ -1924,6 +1904,5 @@ abstract class MoveError implements GameState {
   const factory MoveError(RawKeyString errorMessage) = _$MoveError;
 
   RawKeyString get errorMessage;
-
   $MoveErrorCopyWith<MoveError> get copyWith;
 }

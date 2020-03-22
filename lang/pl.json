@@ -6,6 +6,7 @@
   "apiErrorNotFound": "Nie znaleziono",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
+  "emptyFieldError": "Pole nie może być puste",
   "difficultyLevelEasy": "Łatwy",
   "difficultyLevelMedium": "Średni",
   "difficultyLevelHard": "Trudny",
@@ -19,5 +20,10 @@
   "gameScreenStatusComputerWon": "Przegrałeś",
   "gameScreenStatusDraw": "Remis",
   "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
-  "gameScreenPlayAgain": "Zagraj"
+  "gameScreenPlayAgain": "Zagraj",
+  "loginScreenTitle": "Logowanie",
+  "loginScreenUsernameHint": "Nazwa użytkownika",
+  "loginScreenPasswordHint": "Hasło",
+  "loginScreenLoginButton": "Zaloguj",
+  "loginScreenLoadingButton": "Logowanie"
 }

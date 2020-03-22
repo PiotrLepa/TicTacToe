@@ -8,7 +8,6 @@ part of login_request_model;
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-
 LoginRequestModel _$LoginRequestModelFromJson(Map<String, dynamic> json) {
   return _LoginRequestModel.fromJson(json);
 }
@@ -34,14 +33,11 @@ const $LoginRequestModel = _$LoginRequestModelTearOff();
 mixin _$LoginRequestModel {
   @JsonKey(name: 'username')
   String get email;
-
   String get password;
-
   @JsonKey(name: 'grant_type')
   String get grantType;
 
   Map<String, dynamic> toJson();
-
   $LoginRequestModelCopyWith<LoginRequestModel> get copyWith;
 }
 
@@ -49,7 +45,6 @@ abstract class $LoginRequestModelCopyWith<$Res> {
   factory $LoginRequestModelCopyWith(
           LoginRequestModel value, $Res Function(LoginRequestModel) then) =
       _$LoginRequestModelCopyWithImpl<$Res>;
-
   $Res call(
       {@JsonKey(name: 'username') String email,
       String password,
@@ -61,7 +56,6 @@ class _$LoginRequestModelCopyWithImpl<$Res>
   _$LoginRequestModelCopyWithImpl(this._value, this._then);
 
   final LoginRequestModel _value;
-
   // ignore: unused_field
   final $Res Function(LoginRequestModel) _then;
 
@@ -84,7 +78,6 @@ abstract class _$LoginRequestModelCopyWith<$Res>
   factory _$LoginRequestModelCopyWith(
           _LoginRequestModel value, $Res Function(_LoginRequestModel) then) =
       __$LoginRequestModelCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: 'username') String email,
@@ -189,11 +182,9 @@ abstract class _LoginRequestModel implements LoginRequestModel {
   String get email;
   @override
   String get password;
-
   @override
   @JsonKey(name: 'grant_type')
   String get grantType;
-
   @override
   _$LoginRequestModelCopyWith<_LoginRequestModel> get copyWith;
 }
