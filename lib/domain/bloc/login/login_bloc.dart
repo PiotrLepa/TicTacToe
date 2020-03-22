@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -8,11 +9,10 @@ import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/presentation/validation/validators.dart';
 import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
+import 'package:tictactoe/presentation/screens/router/router.gr.dart';
 
 part 'login_bloc.freezed.dart';
-
 part 'login_event.dart';
-
 part 'login_state.dart';
 
 @injectable
@@ -20,16 +20,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository _loginRepository;
   final OauthTokensStorage _oauthTokensStorage;
 
-  LoginBloc(
-    this._loginRepository,
-    this._oauthTokensStorage,
-  );
+  LoginBloc(this._loginRepository,
+      this._oauthTokensStorage,);
 
   @override
   LoginState get initialState => LoginState.nothing(
-        emailErrorKey: null,
-        passwordErrorKey: null,
-      );
+    emailErrorKey: null,
+    passwordErrorKey: null,
+  );
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -67,6 +65,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           _oauthTokensStorage.saveTokens(
             response.accessToken,
             response.refreshToken,
+          );
+          ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+            Routes.homeScreen,
+            (route) => false,
           );
         },
         error: (errorMessage) async* {

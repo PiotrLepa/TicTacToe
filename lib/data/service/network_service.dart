@@ -14,25 +14,28 @@ part 'network_service.g.dart';
 @RestApi()
 abstract class NetworkService {
   @factoryMethod
-  factory NetworkService(
-      @Named(defaultNetworkClient) Dio dio) = _NetworkService;
-
-  @POST("/game/create")
-  @http.Headers(securedHeader)
-  Future<GameResponseModel> createGame(
-      @Query("difficulty_level") String difficultyLevel,);
-
-  @PUT("/game/{gameId}/move/{fieldIndex}")
-  @http.Headers(securedHeader)
-  Future<GameResponseModel> setMove(@Path("gameId") int gameId,
-      @Path("fieldIndex") int fieldIndex,);
+  factory NetworkService(@Named(defaultNetworkClient) Dio dio) =
+      _NetworkService;
 
   @POST("/oauth/token")
   @http.FormUrlEncoded()
   @http.Headers({
     authorizationHeader: basicKey,
   })
-  Future<LoginResponseModel> login(LoginRequestModel request);
+  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
+
+  @POST("/game/create")
+  @http.Headers(securedHeader)
+  Future<GameResponseModel> createGame(
+    @Query("difficulty_level") String difficultyLevel,
+  );
+
+  @PUT("/game/{gameId}/move/{fieldIndex}")
+  @http.Headers(securedHeader)
+  Future<GameResponseModel> setMove(
+    @Path("gameId") int gameId,
+    @Path("fieldIndex") int fieldIndex,
+  );
 
   @GET("/game/results")
   @http.Headers(securedHeader)

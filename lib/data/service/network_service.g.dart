@@ -16,6 +16,29 @@ class _NetworkService implements NetworkService {
   String baseUrl;
 
   @override
+  login(request) async {
+    ArgumentError.checkNotNull(request, 'request');
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(request?.toJson() ?? <String, dynamic>{});
+    final Response<Map<String, dynamic>> _result = await _dio.request(
+        '/oauth/token',
+        queryParameters: queryParameters,
+        options: RequestOptions(
+            method: 'POST',
+            headers: <String, dynamic>{
+              'authorization': 'Basic dGljdGFjdG9lOnRpY3RhY3RvZVNlY3JldA=='
+            },
+            extra: _extra,
+            contentType: 'application/x-www-form-urlencoded',
+            baseUrl: baseUrl),
+        data: _data);
+    final value = LoginResponseModel.fromJson(_result.data);
+    return Future.value(value);
+  }
+
+  @override
   createGame(difficultyLevel) async {
     ArgumentError.checkNotNull(difficultyLevel, 'difficultyLevel');
     const _extra = <String, dynamic>{};
@@ -53,28 +76,6 @@ class _NetworkService implements NetworkService {
             baseUrl: baseUrl),
         data: _data);
     final value = GameResponseModel.fromJson(_result.data);
-    return Future.value(value);
-  }
-
-  @override
-  login(request) async {
-    ArgumentError.checkNotNull(request, 'request');
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    final Response<Map<String, dynamic>> _result = await _dio.request(
-        '/oauth/token',
-        queryParameters: queryParameters,
-        options: RequestOptions(
-            method: 'POST',
-            headers: <String, dynamic>{
-              'authorization': 'Basic dGljdGFjdG9lOnRpY3RhY3RvZVNlY3JldA=='
-            },
-            extra: _extra,
-            contentType: 'application/x-www-form-urlencoded',
-            baseUrl: baseUrl),
-        data: _data);
-    final value = LoginResponseModel.fromJson(_result.data);
     return Future.value(value);
   }
 
