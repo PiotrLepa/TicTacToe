@@ -20,19 +20,31 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository _loginRepository;
   final OauthTokensStorage _oauthTokensStorage;
 
-  LoginBloc(this._loginRepository,
-      this._oauthTokensStorage,);
-
-  @override
-  LoginState get initialState => LoginState.nothing(
-    emailErrorKey: null,
-    passwordErrorKey: null,
+  LoginBloc(
+    this._loginRepository,
+    this._oauthTokensStorage,
   );
 
   @override
+  LoginState get initialState => LoginState.nothing(
+        emailErrorKey: null,
+        passwordErrorKey: null,
+      );
+
+  @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    if (event is Login) {
-      yield* _mapLoginEvent(event);
+    yield* event.map(
+      started: _mapStartedEvent,
+      login: _mapLoginEvent,
+    );
+  }
+
+  Stream<LoginState> _mapStartedEvent(Started event) async* {
+    final accessToken = await _oauthTokensStorage.accessToken;
+    final refreshToken = await _oauthTokensStorage.refreshToken;
+
+    if (accessToken != null && refreshToken != null) {
+//      _navigateToHome();
     }
   }
 
@@ -63,18 +75,22 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         },
         success: (response) async* {
           _oauthTokensStorage.saveTokens(
-            response.accessToken,
+            'response.accessToken',
             response.refreshToken,
           );
-          ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-            Routes.homeScreen,
-            (route) => false,
-          );
+          _navigateToHome();
         },
         error: (errorMessage) async* {
           yield LoginState.error(errorMessage);
         },
       );
     }
+  }
+
+  void _navigateToHome() {
+    ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+      Routes.homeScreen,
+      (route) => false,
+    );
   }
 }

@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LoginBloc>(
-          create: (context) => getIt.get<LoginBloc>(),
+          create: (context) =>
+              getIt.get<LoginBloc>()..add(LoginEvent.started()),
         ),
         BlocProvider<BottomNavigationBloc>(
           create: (context) => getIt.get<BottomNavigationBloc>(),

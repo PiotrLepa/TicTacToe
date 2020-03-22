@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _isLoading = false;
-  final _usernameController = TextEditingController();
+  final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
   @override
@@ -71,7 +71,8 @@ class _LoginPageState extends State<LoginPage> {
     return Column(
       children: <Widget>[
         AppFormField(
-          controller: _usernameController,
+          controller: _emailController,
+          type: TextInputType.emailAddress,
           validator: state.emailErrorKey,
           labelText: AppLocalizations.of(context).loginScreenUsernameHint,
         ),
@@ -88,14 +89,14 @@ class _LoginPageState extends State<LoginPage> {
 
   void _loginUser() => context.bloc<LoginBloc>().add(
         LoginEvent.login(
-          email: _usernameController.text,
+          email: _emailController.text,
           password: _passwordController.text,
         ),
       );
 
   @override
   void dispose() {
-    _usernameController.dispose();
+    _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }

@@ -5,16 +5,18 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 
 class AppFormField extends StatelessWidget {
   final String labelText;
-  final bool obscureText;
   final TextEditingController controller;
   final RawKeyString validator;
+  final TextInputType type;
+  final bool obscureText;
 
   const AppFormField({
     Key key,
     @required this.labelText,
     this.controller,
     this.validator,
-    this.obscureText = false,
+    this.type,
+    this.obscureText,
   }) : super(key: key);
 
   @override
@@ -28,13 +30,14 @@ class AppFormField extends StatelessWidget {
       ),
       child: TextFormField(
         controller: controller,
+        keyboardType: type,
         cursorColor: formColor,
         decoration: InputDecoration(
           labelText: labelText,
           errorText: _getValidationText(context),
           border: OutlineInputBorder(),
         ),
-        obscureText: obscureText,
+        obscureText: obscureText ?? false,
       ),
     );
   }
