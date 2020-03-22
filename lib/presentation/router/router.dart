@@ -5,9 +5,9 @@ import 'package:tictactoe/presentation/screens/login_screen.dart';
 
 @MaterialAutoRouter(generateNavigationHelperExtension: true)
 class $Router {
-  @initial
   LoginScreen loginScreen;
 
+  @initial
   HomeScreen homeScreen;
 
   GameScreen gameScreen;

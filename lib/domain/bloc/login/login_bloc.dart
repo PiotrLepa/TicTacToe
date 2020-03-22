@@ -9,7 +9,7 @@ import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/presentation/validation/validators.dart';
 import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
-import 'package:tictactoe/presentation/screens/router/router.gr.dart';
+import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'login_bloc.freezed.dart';
 part 'login_event.dart';
@@ -33,18 +33,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    yield* event.map(
-      started: _mapStartedEvent,
-      login: _mapLoginEvent,
-    );
-  }
-
-  Stream<LoginState> _mapStartedEvent(Started event) async* {
-    final accessToken = await _oauthTokensStorage.accessToken;
-    final refreshToken = await _oauthTokensStorage.refreshToken;
-
-    if (accessToken != null && refreshToken != null) {
-      _navigateToHome();
+    if (event is Login) {
+      yield* _mapLoginEvent(event);
     }
   }
 

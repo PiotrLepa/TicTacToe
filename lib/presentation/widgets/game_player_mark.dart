@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
-import 'package:tictactoe/presentation/theme_provider.dart';
 
 class GamePlayerMark extends StatelessWidget {
   final GameMark playerMark;

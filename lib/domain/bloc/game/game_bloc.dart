@@ -13,7 +13,7 @@ import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
 import 'package:tictactoe/domain/repository/create_game_repository.dart';
-import 'package:tictactoe/presentation/screens/router/router.gr.dart';
+import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'game_bloc.freezed.dart';
 part 'game_event.dart';
@@ -31,7 +31,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   GameState get initialState => GameState.nothing();
 
   @override
-  Stream<GameState> mapEventToState(GameEvent event,) async* {
+  Stream<GameState> mapEventToState(
+    GameEvent event,
+  ) async* {
     yield* event.map(
       createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
@@ -40,7 +42,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _onCreateGame(CreateGame event) async* {
-    Router.navigator.pop();
+    ExtendedNavigator.ofRouter<Router>().pop();
     _pushGameScreen(event.difficultyLevel);
     yield* _createGame(event.difficultyLevel);
   }

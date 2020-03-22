@@ -23,7 +23,6 @@ import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/mapper/model/login_request_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
-import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
@@ -35,7 +34,7 @@ import 'package:tictactoe/data/repository/refresh_token_repositoryImpl.dart';
 import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
-import 'package:tictactoe/presentation/test_bloc.dart';
+import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
 import 'package:get_it/get_it.dart';
 
@@ -74,7 +73,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       RefreshTokenNetworkService(
           g<Dio>(instanceName: 'refreshTokenNetworkClient'),
           g<ResponseConverter>()));
-  g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
   g.registerLazySingleton<OauthTokensStorage>(
       () => OauthTokensStorage(g<SharedPreferences>()));
   g.registerLazySingleton<BearerTokenInterceptor>(
@@ -103,8 +101,7 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
   g.registerFactory<GameBloc>(() => GameBloc(g<CreateGameRepository>()));
   g.registerFactory<LoginBloc>(
       () => LoginBloc(g<LoginRepository>(), g<OauthTokensStorage>()));
-  g.registerFactory<TestBloc>(
-      () => TestBloc(g<OauthTokensStorage>(), g<TestRepository>()));
+  g.registerFactory<HomeBloc>(() => HomeBloc(g<OauthTokensStorage>()));
   g.registerLazySingleton<RefreshTokenInterceptor>(() =>
       RefreshTokenInterceptor(
           g<OauthTokensStorage>(), g<RefreshTokenRepository>()));

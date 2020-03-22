@@ -1,8 +1,8 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
-import 'package:tictactoe/presentation/theme_provider.dart';
 
 class GameBoard extends StatelessWidget {
   final Function(int) onFieldTapped;
