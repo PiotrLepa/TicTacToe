@@ -1,43 +1,82 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:retrofit/http.dart';
-import 'package:retrofit/http.dart' as http;
+import 'package:tictactoe/core/common/enum_helper.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
+import 'package:tictactoe/core/data/serializer/response_converter.dart';
+import 'package:tictactoe/core/data/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
+import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
 import 'package:tictactoe/data/model/game_response/game_response_model.dart';
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 
-part 'network_service.g.dart';
-
 @lazySingleton
-@RestApi()
-abstract class NetworkService {
-  @factoryMethod
-  factory NetworkService(@Named(defaultNetworkClient) Dio dio) =
-      _NetworkService;
+class NetworkService extends BaseNetworkService {
+  NetworkService(
+    @Named(defaultNetworkClient) Dio dio,
+    ResponseConverter responseConverter,
+  ) : super(dio, responseConverter);
 
-  @POST("/oauth/token")
-  @http.FormUrlEncoded()
-  @http.Headers({
-    authorizationHeader: basicKey,
-  })
-  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
+  Future<LoginResponseModel> login(
+    LoginRequestModel request,
+  ) =>
+      post(
+        "/oauth/token",
+        data: request,
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {authorizationHeader: basicKey},
+      );
 
-  @POST("/game/create")
-  @http.Headers(securedHeader)
   Future<GameResponseModel> createGame(
-    @Query("difficulty_level") String difficultyLevel,
-  );
+    DifficultyLevelModel difficultyLevel,
+  ) =>
+      post(
+        "/game/create",
+        queryParameters: {
+          "difficulty_level": enumToString(difficultyLevel),
+        },
+        secured: true,
+      );
 
-  @PUT("/game/{gameId}/move/{fieldIndex}")
-  @http.Headers(securedHeader)
-  Future<GameResponseModel> setMove(
-    @Path("gameId") int gameId,
-    @Path("fieldIndex") int fieldIndex,
-  );
+  Future<GameResponseModel> setMove(int gameId,
+      int fieldIndex,) =>
+      put(
+        "/game/$gameId/move/$fieldIndex",
+        secured: true,
+      );
 
-  @GET("/game/results")
-  @http.Headers(securedHeader)
-  Future<List<GameResponseModel>> getGames();
+  Future<BuiltList<GameResponseModel>> getGames() =>
+      getList("/game/results", secured: true);
 }
+
+//@RestApi()
+//abstract class NetworkService {
+//  @factoryMethod
+//  factory NetworkService(@Named(defaultNetworkClient) Dio dio) =
+//      _NetworkService;
+//
+//  @POST("/oauth/token")
+//  @http.FormUrlEncoded()
+//  @http.Headers({
+//    authorizationHeader: basicKey,
+//  })
+//  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
+//
+//  @POST("/game/create")
+//  @http.Headers(securedHeader)
+//  Future<GameResponseModel> createGame(
+//    @Query("difficulty_level") String difficultyLevel,
+//  );
+//
+//  @PUT("/game/{gameId}/move/{fieldIndex}")
+//  @http.Headers(securedHeader)
+//  Future<GameResponseModel> setMove(
+//    @Path("gameId") int gameId,
+//    @Path("fieldIndex") int fieldIndex,
+//  );
+//
+//  @GET("/game/results")
+//  @http.Headers(securedHeader)
+//  Future<List<GameResponseModel>> getGames();
+//}

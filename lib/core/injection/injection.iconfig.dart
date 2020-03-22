@@ -8,6 +8,7 @@ import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/data/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/logger_interceptor.dart';
+import 'package:tictactoe/core/data/serializer/response_converter.dart';
 import 'package:tictactoe/core/domain/error/error_translator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/injection/register_module.dart';
@@ -41,10 +42,11 @@ import 'package:get_it/get_it.dart';
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();
   g.registerLazySingleton<LocaleProvider>(() => LocaleProvider());
-  g.registerFactory<ConnectionInterceptor>(() => ConnectionInterceptor());
-  g.registerFactory<LanguageInterceptor>(
+  g.registerLazySingleton<ConnectionInterceptor>(() => ConnectionInterceptor());
+  g.registerLazySingleton<LanguageInterceptor>(
       () => LanguageInterceptor(g<LocaleProvider>()));
-  g.registerFactory<LoggerInterceptor>(() => LoggerInterceptor());
+  g.registerLazySingleton<LoggerInterceptor>(() => LoggerInterceptor());
+  g.registerLazySingleton<ResponseConverter>(() => ResponseConverter());
   g.registerLazySingleton<ErrorTranslator>(() => ErrorTranslator());
   final sharedPreferences = await networkClient.sharedPreferences;
   g.registerFactory<SharedPreferences>(() => sharedPreferences);
@@ -66,15 +68,16 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       () => DifficultyLevelModelMapper());
   g.registerLazySingleton<LoginRequestModelMapper>(
       () => LoginRequestModelMapper());
-  g.registerLazySingleton<NetworkService>(
-      () => NetworkService(g<Dio>(instanceName: 'defaultNetworkClient')));
+  g.registerLazySingleton<NetworkService>(() => NetworkService(
+      g<Dio>(instanceName: 'defaultNetworkClient'), g<ResponseConverter>()));
   g.registerLazySingleton<RefreshTokenNetworkService>(() =>
       RefreshTokenNetworkService(
-          g<Dio>(instanceName: 'refreshTokenNetworkClient')));
+          g<Dio>(instanceName: 'refreshTokenNetworkClient'),
+          g<ResponseConverter>()));
   g.registerFactory<BottomNavigationBloc>(() => BottomNavigationBloc());
-  g.registerFactory<OauthTokensStorage>(
+  g.registerLazySingleton<OauthTokensStorage>(
       () => OauthTokensStorage(g<SharedPreferences>()));
-  g.registerFactory<BearerTokenInterceptor>(
+  g.registerLazySingleton<BearerTokenInterceptor>(
       () => BearerTokenInterceptor(g<OauthTokensStorage>()));
   g.registerLazySingleton<GameResponseEntityMapper>(
       () => GameResponseEntityMapper(
@@ -93,17 +96,18 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<LoginRequestModelMapper>(),
         g<LoginResponseEntityMapper>(),
       ));
-  g.registerFactory<RefreshTokenRepository>(() => RefreshTokenRepository(
-      g<RefreshTokenNetworkService>(),
-      g<Dio>(instanceName: 'refreshTokenNetworkClient')));
-  g.registerFactory<TestRepository>(() => TestRepository(g<NetworkService>()));
+  g.registerLazySingleton<RefreshTokenRepository>(
+      () => RefreshTokenRepository(g<RefreshTokenNetworkService>()));
+  g.registerLazySingleton<TestRepository>(
+      () => TestRepository(g<NetworkService>()));
   g.registerFactory<GameBloc>(() => GameBloc(g<CreateGameRepository>()));
   g.registerFactory<LoginBloc>(
       () => LoginBloc(g<LoginRepository>(), g<OauthTokensStorage>()));
   g.registerFactory<TestBloc>(
       () => TestBloc(g<OauthTokensStorage>(), g<TestRepository>()));
-  g.registerFactory<RefreshTokenInterceptor>(() => RefreshTokenInterceptor(
-      g<OauthTokensStorage>(), g<RefreshTokenRepository>()));
+  g.registerLazySingleton<RefreshTokenInterceptor>(() =>
+      RefreshTokenInterceptor(
+          g<OauthTokensStorage>(), g<RefreshTokenRepository>()));
 }
 
 class _$NetworkClient extends NetworkClient {}

@@ -44,7 +44,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
     if (accessToken != null && refreshToken != null) {
-//      _navigateToHome();
+      _navigateToHome();
     }
   }
 
@@ -75,7 +75,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         },
         success: (response) async* {
           _oauthTokensStorage.saveTokens(
-            'response.accessToken',
+            response.accessToken,
             response.refreshToken,
           );
           _navigateToHome();

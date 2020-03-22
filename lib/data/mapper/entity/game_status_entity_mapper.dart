@@ -15,7 +15,6 @@ class GameStatusEntityMapper
       case GameStatusModel.PLAYER_WON:
         return GameStatus.playerWon;
       case GameStatusModel.COMPUTER_WON:
-        // TODO: Handle this case.
         return GameStatus.computerWon;
       case GameStatusModel.DRAW:
         return GameStatus.draw;

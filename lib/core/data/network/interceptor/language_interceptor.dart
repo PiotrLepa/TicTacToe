@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 
-@injectable
+@lazySingleton
 class LanguageInterceptor extends InterceptorsWrapper {
   final LocaleProvider _localeProvider;
 

@@ -23,28 +23,13 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
-      child: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            BlocConsumer<LoginBloc, LoginState>(
-              listener: (context, state) {
-                _respondForState(state);
-              },
-              builder: (context, state) {
-                return _buildForms(state);
-              },
-            ),
-            SizedBox(height: 40),
-            ProgressButton(
-              text: AppLocalizations.of(context).loginScreenLoginButton,
-              loadingText:
-                  AppLocalizations.of(context).loginScreenLoadingButton,
-              isLoading: _isLoading,
-              onPressed: _loginUser,
-            ),
-          ],
-        ),
+      child: BlocConsumer<LoginBloc, LoginState>(
+        listener: (context, state) {
+          _respondForState(state);
+        },
+        builder: (context, state) {
+          return _buildPage(state);
+        },
       ),
     );
   }
@@ -67,8 +52,9 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Column _buildForms(LoginState state) {
+  Column _buildPage(LoginState state) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         AppFormField(
           controller: _emailController,
@@ -83,16 +69,26 @@ class _LoginPageState extends State<LoginPage> {
           obscureText: true,
           labelText: AppLocalizations.of(context).loginScreenPasswordHint,
         ),
+        SizedBox(height: 40),
+        ProgressButton(
+          text: AppLocalizations.of(context).loginScreenLoginButton,
+          loadingText: AppLocalizations.of(context).loginScreenLoadingButton,
+          isLoading: _isLoading,
+          onPressed: () => _loginUser(state),
+        ),
       ],
     );
   }
 
-  void _loginUser() => context.bloc<LoginBloc>().add(
-        LoginEvent.login(
-          email: _emailController.text,
-          password: _passwordController.text,
-        ),
-      );
+  void _loginUser(LoginState state) {
+    if (state is Loading) return;
+    context.bloc<LoginBloc>().add(
+          LoginEvent.login(
+            email: _emailController.text,
+            password: _passwordController.text,
+          ),
+        );
+  }
 
   @override
   void dispose() {

@@ -1,18 +1,15 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/repository/network_repository.dart';
-import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request_model.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
 
-@injectable
+@lazySingleton
 class RefreshTokenRepository extends NetworkRepository {
   final RefreshTokenNetworkService _service;
-  final Dio _dio;
 
-  RefreshTokenRepository(
-      this._service, @Named(refreshTokenNetworkClient) this._dio);
+  RefreshTokenRepository(this._service);
 
   Future<LoginResponseModel> refreshAccessToken(
           RefreshTokenRequestModel requestData) =>
@@ -22,18 +19,17 @@ class RefreshTokenRepository extends NetworkRepository {
       );
 
   Future retryRequest(RequestOptions requestData) {
-    final request = _dio.request(
+    final request = _service.createRequest(
+      requestData.method,
       requestData.path,
       data: requestData.data,
       queryParameters: requestData.queryParameters,
-      options: Options(
-        method: requestData.method,
-        headers: requestData.headers,
-        contentType: requestData.contentType,
-      ),
+      headers: requestData.headers,
+      contentType: requestData.contentType,
+      secured: true,
     );
     return call(
-      request: request,
+      request: request.then((value) => value.data),
       mapper: (model) => model,
     );
   }

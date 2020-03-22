@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-@injectable
+@lazySingleton
 class OauthTokensStorage {
   final SharedPreferences _prefs;
 
