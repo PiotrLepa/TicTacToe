@@ -162,15 +162,15 @@ abstract class _Login implements TestEvent {
 }
 
 abstract class _$FetchGamesCopyWith<$Res> {
-  factory _$FetchGamesCopyWith(_FetchGames value,
-      $Res Function(_FetchGames) then) =
-  __$FetchGamesCopyWithImpl<$Res>;
+  factory _$FetchGamesCopyWith(
+          _FetchGames value, $Res Function(_FetchGames) then) =
+      __$FetchGamesCopyWithImpl<$Res>;
 }
 
 class __$FetchGamesCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>
     implements _$FetchGamesCopyWith<$Res> {
-  __$FetchGamesCopyWithImpl(_FetchGames _value,
-      $Res Function(_FetchGames) _then)
+  __$FetchGamesCopyWithImpl(
+      _FetchGames _value, $Res Function(_FetchGames) _then)
       : super(_value, (v) => _then(v as _FetchGames));
 
   @override
@@ -255,9 +255,9 @@ abstract class _FetchGames implements TestEvent {
 }
 
 abstract class _$MakeErrorCopyWith<$Res> {
-  factory _$MakeErrorCopyWith(_MakeError value,
-      $Res Function(_MakeError) then) =
-  __$MakeErrorCopyWithImpl<$Res>;
+  factory _$MakeErrorCopyWith(
+          _MakeError value, $Res Function(_MakeError) then) =
+      __$MakeErrorCopyWithImpl<$Res>;
 }
 
 class __$MakeErrorCopyWithImpl<$Res> extends _$TestEventCopyWithImpl<$Res>

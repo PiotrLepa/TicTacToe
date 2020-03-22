@@ -111,7 +111,6 @@ abstract class $ApiExceptionCopyWith<$Res> {
   factory $ApiExceptionCopyWith(
           ApiException value, $Res Function(ApiException) then) =
       _$ApiExceptionCopyWithImpl<$Res>;
-
   $Res call({int code, @nullable String printableMessage});
 }
 
@@ -138,9 +137,9 @@ class _$ApiExceptionCopyWithImpl<$Res> implements $ApiExceptionCopyWith<$Res> {
 
 abstract class _$NoConnectionCopyWith<$Res>
     implements $ApiExceptionCopyWith<$Res> {
-  factory _$NoConnectionCopyWith(_NoConnection value,
-      $Res Function(_NoConnection) then) =
-  __$NoConnectionCopyWithImpl<$Res>;
+  factory _$NoConnectionCopyWith(
+          _NoConnection value, $Res Function(_NoConnection) then) =
+      __$NoConnectionCopyWithImpl<$Res>;
 
   @override
   $Res call({int code, @nullable String printableMessage});

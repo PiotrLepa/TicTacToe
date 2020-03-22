@@ -166,7 +166,7 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
   }) {
     return _then(_value.copyWith(
       pageTitle:
-      pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
+          pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
       index: index == freezed ? _value.index : index as int,
     ));
   }
@@ -174,10 +174,9 @@ class _$BottomNavigationStateCopyWithImpl<$Res>
 
 abstract class $UpdatePageCopyWith<$Res>
     implements $BottomNavigationStateCopyWith<$Res> {
-  factory $UpdatePageCopyWith(UpdatePage value,
-      $Res Function(UpdatePage) then) =
-  _$UpdatePageCopyWithImpl<$Res>;
-
+  factory $UpdatePageCopyWith(
+          UpdatePage value, $Res Function(UpdatePage) then) =
+      _$UpdatePageCopyWithImpl<$Res>;
   @override
   $Res call({RawKeyString pageTitle, int index});
 }
@@ -198,7 +197,7 @@ class _$UpdatePageCopyWithImpl<$Res>
   }) {
     return _then(UpdatePage(
       pageTitle:
-      pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
+          pageTitle == freezed ? _value.pageTitle : pageTitle as RawKeyString,
       index: index == freezed ? _value.index : index as int,
     ));
   }

@@ -13,7 +13,6 @@ import 'package:tictactoe/domain/repository/create_game_repository.dart';
 class CreateGameRepositoryImpl extends NetworkRepository
     implements CreateGameRepository {
   final NetworkService _service;
-
   final DifficultyLevelModelMapper _difficultyLevelModelMapper;
   final GameResponseEntityMapper _gameResponseEntityMapper;
 

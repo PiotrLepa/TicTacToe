@@ -12,9 +12,9 @@ T _$identity<T>(T value) => value;
 class _$LoginEventTearOff {
   const _$LoginEventTearOff();
 
-  Login login({@required String username, @required String password}) {
+  Login login({@required String email, @required String password}) {
     return Login(
-      username: username,
+      email: email,
       password: password,
     );
   }
@@ -24,8 +24,7 @@ class _$LoginEventTearOff {
 const $LoginEvent = _$LoginEventTearOff();
 
 mixin _$LoginEvent {
-  String get username;
-
+  String get email;
   String get password;
 
   $LoginEventCopyWith<LoginEvent> get copyWith;
@@ -35,25 +34,23 @@ abstract class $LoginEventCopyWith<$Res> {
   factory $LoginEventCopyWith(
           LoginEvent value, $Res Function(LoginEvent) then) =
       _$LoginEventCopyWithImpl<$Res>;
-
-  $Res call({String username, String password});
+  $Res call({String email, String password});
 }
 
 class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
   _$LoginEventCopyWithImpl(this._value, this._then);
 
   final LoginEvent _value;
-
   // ignore: unused_field
   final $Res Function(LoginEvent) _then;
 
   @override
   $Res call({
-    Object username = freezed,
+    Object email = freezed,
     Object password = freezed,
   }) {
     return _then(_value.copyWith(
-      username: username == freezed ? _value.username : username as String,
+      email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
     ));
   }
@@ -62,9 +59,8 @@ class _$LoginEventCopyWithImpl<$Res> implements $LoginEventCopyWith<$Res> {
 abstract class $LoginCopyWith<$Res> implements $LoginEventCopyWith<$Res> {
   factory $LoginCopyWith(Login value, $Res Function(Login) then) =
       _$LoginCopyWithImpl<$Res>;
-
   @override
-  $Res call({String username, String password});
+  $Res call({String email, String password});
 }
 
 class _$LoginCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
@@ -77,38 +73,37 @@ class _$LoginCopyWithImpl<$Res> extends _$LoginEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object username = freezed,
+    Object email = freezed,
     Object password = freezed,
   }) {
     return _then(Login(
-      username: username == freezed ? _value.username : username as String,
+      email: email == freezed ? _value.email : email as String,
       password: password == freezed ? _value.password : password as String,
     ));
   }
 }
 
 class _$Login implements Login {
-  const _$Login({@required this.username, @required this.password})
-      : assert(username != null),
+  const _$Login({@required this.email, @required this.password})
+      : assert(email != null),
         assert(password != null);
 
   @override
-  final String username;
+  final String email;
   @override
   final String password;
 
   @override
   String toString() {
-    return 'LoginEvent.login(username: $username, password: $password)';
+    return 'LoginEvent.login(email: $email, password: $password)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Login &&
-            (identical(other.username, username) ||
-                const DeepCollectionEquality()
-                    .equals(other.username, username)) &&
+            (identical(other.email, email) ||
+                const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.password, password) ||
                 const DeepCollectionEquality()
                     .equals(other.password, password)));
@@ -117,7 +112,7 @@ class _$Login implements Login {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(username) ^
+      const DeepCollectionEquality().hash(email) ^
       const DeepCollectionEquality().hash(password);
 
   @override
@@ -126,15 +121,13 @@ class _$Login implements Login {
 }
 
 abstract class Login implements LoginEvent {
-  const factory Login({@required String username, @required String password}) =
+  const factory Login({@required String email, @required String password}) =
       _$Login;
 
   @override
-  String get username;
-
+  String get email;
   @override
   String get password;
-
   @override
   $LoginCopyWith<Login> get copyWith;
 }
@@ -142,26 +135,33 @@ abstract class Login implements LoginEvent {
 class _$LoginStateTearOff {
   const _$LoginStateTearOff();
 
-  Nothing nothing(
-      {RawKeyString usernameErrorKey, RawKeyString passwordErrorKey}) {
+  Nothing nothing({RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) {
     return Nothing(
-      usernameErrorKey: usernameErrorKey,
+      emailErrorKey: emailErrorKey,
       passwordErrorKey: passwordErrorKey,
     );
   }
 
   RenderInputError renderInputError(
-      {RawKeyString usernameErrorKey, RawKeyString passwordErrorKey}) {
+      {RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) {
     return RenderInputError(
-      usernameErrorKey: usernameErrorKey,
+      emailErrorKey: emailErrorKey,
       passwordErrorKey: passwordErrorKey,
     );
   }
 
-  Loading loading(
-      {RawKeyString usernameErrorKey, RawKeyString passwordErrorKey}) {
+  Loading loading({RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) {
     return Loading(
-      usernameErrorKey: usernameErrorKey,
+      emailErrorKey: emailErrorKey,
+      passwordErrorKey: passwordErrorKey,
+    );
+  }
+
+  Error error(RawKeyString errorMessage,
+      {RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) {
+    return Error(
+      errorMessage,
+      emailErrorKey: emailErrorKey,
       passwordErrorKey: passwordErrorKey,
     );
   }
@@ -171,46 +171,47 @@ class _$LoginStateTearOff {
 const $LoginState = _$LoginStateTearOff();
 
 mixin _$LoginState {
-  RawKeyString get usernameErrorKey;
-
+  RawKeyString get emailErrorKey;
   RawKeyString get passwordErrorKey;
 
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required
         Result nothing(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result renderInputError(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result loading(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+            RawKeyString passwordErrorKey),
   });
-
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result nothing(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+    Result nothing(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     Result renderInputError(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
-    Result loading(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+        RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result loading(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+        RawKeyString passwordErrorKey),
     @required Result orElse(),
   });
-
   @optionalTypeArgs
   Result map<Result extends Object>({
     @required Result nothing(Nothing value),
     @required Result renderInputError(RenderInputError value),
     @required Result loading(Loading value),
+    @required Result error(Error value),
   });
-
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
     Result nothing(Nothing value),
     Result renderInputError(RenderInputError value),
     Result loading(Loading value),
+    Result error(Error value),
     @required Result orElse(),
   });
 
@@ -221,27 +222,25 @@ abstract class $LoginStateCopyWith<$Res> {
   factory $LoginStateCopyWith(
           LoginState value, $Res Function(LoginState) then) =
       _$LoginStateCopyWithImpl<$Res>;
-
-  $Res call({RawKeyString usernameErrorKey, RawKeyString passwordErrorKey});
+  $Res call({RawKeyString emailErrorKey, RawKeyString passwordErrorKey});
 }
 
 class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
   _$LoginStateCopyWithImpl(this._value, this._then);
 
   final LoginState _value;
-
   // ignore: unused_field
   final $Res Function(LoginState) _then;
 
   @override
   $Res call({
-    Object usernameErrorKey = freezed,
+    Object emailErrorKey = freezed,
     Object passwordErrorKey = freezed,
   }) {
     return _then(_value.copyWith(
-      usernameErrorKey: usernameErrorKey == freezed
-          ? _value.usernameErrorKey
-          : usernameErrorKey as RawKeyString,
+      emailErrorKey: emailErrorKey == freezed
+          ? _value.emailErrorKey
+          : emailErrorKey as RawKeyString,
       passwordErrorKey: passwordErrorKey == freezed
           ? _value.passwordErrorKey
           : passwordErrorKey as RawKeyString,
@@ -252,9 +251,8 @@ class _$LoginStateCopyWithImpl<$Res> implements $LoginStateCopyWith<$Res> {
 abstract class $NothingCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   factory $NothingCopyWith(Nothing value, $Res Function(Nothing) then) =
       _$NothingCopyWithImpl<$Res>;
-
   @override
-  $Res call({RawKeyString usernameErrorKey, RawKeyString passwordErrorKey});
+  $Res call({RawKeyString emailErrorKey, RawKeyString passwordErrorKey});
 }
 
 class _$NothingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
@@ -267,13 +265,13 @@ class _$NothingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object usernameErrorKey = freezed,
+    Object emailErrorKey = freezed,
     Object passwordErrorKey = freezed,
   }) {
     return _then(Nothing(
-      usernameErrorKey: usernameErrorKey == freezed
-          ? _value.usernameErrorKey
-          : usernameErrorKey as RawKeyString,
+      emailErrorKey: emailErrorKey == freezed
+          ? _value.emailErrorKey
+          : emailErrorKey as RawKeyString,
       passwordErrorKey: passwordErrorKey == freezed
           ? _value.passwordErrorKey
           : passwordErrorKey as RawKeyString,
@@ -282,25 +280,25 @@ class _$NothingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 }
 
 class _$Nothing implements Nothing {
-  const _$Nothing({this.usernameErrorKey, this.passwordErrorKey});
+  const _$Nothing({this.emailErrorKey, this.passwordErrorKey});
 
   @override
-  final RawKeyString usernameErrorKey;
+  final RawKeyString emailErrorKey;
   @override
   final RawKeyString passwordErrorKey;
 
   @override
   String toString() {
-    return 'LoginState.nothing(usernameErrorKey: $usernameErrorKey, passwordErrorKey: $passwordErrorKey)';
+    return 'LoginState.nothing(emailErrorKey: $emailErrorKey, passwordErrorKey: $passwordErrorKey)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Nothing &&
-            (identical(other.usernameErrorKey, usernameErrorKey) ||
+            (identical(other.emailErrorKey, emailErrorKey) ||
                 const DeepCollectionEquality()
-                    .equals(other.usernameErrorKey, usernameErrorKey)) &&
+                    .equals(other.emailErrorKey, emailErrorKey)) &&
             (identical(other.passwordErrorKey, passwordErrorKey) ||
                 const DeepCollectionEquality()
                     .equals(other.passwordErrorKey, passwordErrorKey)));
@@ -309,7 +307,7 @@ class _$Nothing implements Nothing {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(usernameErrorKey) ^
+      const DeepCollectionEquality().hash(emailErrorKey) ^
       const DeepCollectionEquality().hash(passwordErrorKey);
 
   @override
@@ -321,34 +319,38 @@ class _$Nothing implements Nothing {
   Result when<Result extends Object>({
     @required
         Result nothing(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result renderInputError(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result loading(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+            RawKeyString passwordErrorKey),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
-    return nothing(usernameErrorKey, passwordErrorKey);
+    assert(error != null);
+    return nothing(emailErrorKey, passwordErrorKey);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result nothing(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+    Result nothing(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     Result renderInputError(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
-    Result loading(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+        RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result loading(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+        RawKeyString passwordErrorKey),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (nothing != null) {
-      return nothing(usernameErrorKey, passwordErrorKey);
+      return nothing(emailErrorKey, passwordErrorKey);
     }
     return orElse();
   }
@@ -359,10 +361,12 @@ class _$Nothing implements Nothing {
     @required Result nothing(Nothing value),
     @required Result renderInputError(RenderInputError value),
     @required Result loading(Loading value),
+    @required Result error(Error value),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
+    assert(error != null);
     return nothing(this);
   }
 
@@ -372,6 +376,7 @@ class _$Nothing implements Nothing {
     Result nothing(Nothing value),
     Result renderInputError(RenderInputError value),
     Result loading(Loading value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -384,15 +389,12 @@ class _$Nothing implements Nothing {
 
 abstract class Nothing implements LoginState {
   const factory Nothing(
-      {RawKeyString usernameErrorKey,
-      RawKeyString passwordErrorKey}) = _$Nothing;
+      {RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) = _$Nothing;
 
   @override
-  RawKeyString get usernameErrorKey;
-
+  RawKeyString get emailErrorKey;
   @override
   RawKeyString get passwordErrorKey;
-
   @override
   $NothingCopyWith<Nothing> get copyWith;
 }
@@ -402,9 +404,8 @@ abstract class $RenderInputErrorCopyWith<$Res>
   factory $RenderInputErrorCopyWith(
           RenderInputError value, $Res Function(RenderInputError) then) =
       _$RenderInputErrorCopyWithImpl<$Res>;
-
   @override
-  $Res call({RawKeyString usernameErrorKey, RawKeyString passwordErrorKey});
+  $Res call({RawKeyString emailErrorKey, RawKeyString passwordErrorKey});
 }
 
 class _$RenderInputErrorCopyWithImpl<$Res>
@@ -419,13 +420,13 @@ class _$RenderInputErrorCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object usernameErrorKey = freezed,
+    Object emailErrorKey = freezed,
     Object passwordErrorKey = freezed,
   }) {
     return _then(RenderInputError(
-      usernameErrorKey: usernameErrorKey == freezed
-          ? _value.usernameErrorKey
-          : usernameErrorKey as RawKeyString,
+      emailErrorKey: emailErrorKey == freezed
+          ? _value.emailErrorKey
+          : emailErrorKey as RawKeyString,
       passwordErrorKey: passwordErrorKey == freezed
           ? _value.passwordErrorKey
           : passwordErrorKey as RawKeyString,
@@ -434,25 +435,25 @@ class _$RenderInputErrorCopyWithImpl<$Res>
 }
 
 class _$RenderInputError implements RenderInputError {
-  const _$RenderInputError({this.usernameErrorKey, this.passwordErrorKey});
+  const _$RenderInputError({this.emailErrorKey, this.passwordErrorKey});
 
   @override
-  final RawKeyString usernameErrorKey;
+  final RawKeyString emailErrorKey;
   @override
   final RawKeyString passwordErrorKey;
 
   @override
   String toString() {
-    return 'LoginState.renderInputError(usernameErrorKey: $usernameErrorKey, passwordErrorKey: $passwordErrorKey)';
+    return 'LoginState.renderInputError(emailErrorKey: $emailErrorKey, passwordErrorKey: $passwordErrorKey)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is RenderInputError &&
-            (identical(other.usernameErrorKey, usernameErrorKey) ||
+            (identical(other.emailErrorKey, emailErrorKey) ||
                 const DeepCollectionEquality()
-                    .equals(other.usernameErrorKey, usernameErrorKey)) &&
+                    .equals(other.emailErrorKey, emailErrorKey)) &&
             (identical(other.passwordErrorKey, passwordErrorKey) ||
                 const DeepCollectionEquality()
                     .equals(other.passwordErrorKey, passwordErrorKey)));
@@ -461,7 +462,7 @@ class _$RenderInputError implements RenderInputError {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(usernameErrorKey) ^
+      const DeepCollectionEquality().hash(emailErrorKey) ^
       const DeepCollectionEquality().hash(passwordErrorKey);
 
   @override
@@ -473,34 +474,38 @@ class _$RenderInputError implements RenderInputError {
   Result when<Result extends Object>({
     @required
         Result nothing(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result renderInputError(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result loading(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+            RawKeyString passwordErrorKey),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
-    return renderInputError(usernameErrorKey, passwordErrorKey);
+    assert(error != null);
+    return renderInputError(emailErrorKey, passwordErrorKey);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result nothing(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+    Result nothing(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     Result renderInputError(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
-    Result loading(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+        RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result loading(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+        RawKeyString passwordErrorKey),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (renderInputError != null) {
-      return renderInputError(usernameErrorKey, passwordErrorKey);
+      return renderInputError(emailErrorKey, passwordErrorKey);
     }
     return orElse();
   }
@@ -511,10 +516,12 @@ class _$RenderInputError implements RenderInputError {
     @required Result nothing(Nothing value),
     @required Result renderInputError(RenderInputError value),
     @required Result loading(Loading value),
+    @required Result error(Error value),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
+    assert(error != null);
     return renderInputError(this);
   }
 
@@ -524,6 +531,7 @@ class _$RenderInputError implements RenderInputError {
     Result nothing(Nothing value),
     Result renderInputError(RenderInputError value),
     Result loading(Loading value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -536,15 +544,13 @@ class _$RenderInputError implements RenderInputError {
 
 abstract class RenderInputError implements LoginState {
   const factory RenderInputError(
-      {RawKeyString usernameErrorKey,
+      {RawKeyString emailErrorKey,
       RawKeyString passwordErrorKey}) = _$RenderInputError;
 
   @override
-  RawKeyString get usernameErrorKey;
-
+  RawKeyString get emailErrorKey;
   @override
   RawKeyString get passwordErrorKey;
-
   @override
   $RenderInputErrorCopyWith<RenderInputError> get copyWith;
 }
@@ -552,9 +558,8 @@ abstract class RenderInputError implements LoginState {
 abstract class $LoadingCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
   factory $LoadingCopyWith(Loading value, $Res Function(Loading) then) =
       _$LoadingCopyWithImpl<$Res>;
-
   @override
-  $Res call({RawKeyString usernameErrorKey, RawKeyString passwordErrorKey});
+  $Res call({RawKeyString emailErrorKey, RawKeyString passwordErrorKey});
 }
 
 class _$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
@@ -567,13 +572,13 @@ class _$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object usernameErrorKey = freezed,
+    Object emailErrorKey = freezed,
     Object passwordErrorKey = freezed,
   }) {
     return _then(Loading(
-      usernameErrorKey: usernameErrorKey == freezed
-          ? _value.usernameErrorKey
-          : usernameErrorKey as RawKeyString,
+      emailErrorKey: emailErrorKey == freezed
+          ? _value.emailErrorKey
+          : emailErrorKey as RawKeyString,
       passwordErrorKey: passwordErrorKey == freezed
           ? _value.passwordErrorKey
           : passwordErrorKey as RawKeyString,
@@ -582,25 +587,25 @@ class _$LoadingCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
 }
 
 class _$Loading implements Loading {
-  const _$Loading({this.usernameErrorKey, this.passwordErrorKey});
+  const _$Loading({this.emailErrorKey, this.passwordErrorKey});
 
   @override
-  final RawKeyString usernameErrorKey;
+  final RawKeyString emailErrorKey;
   @override
   final RawKeyString passwordErrorKey;
 
   @override
   String toString() {
-    return 'LoginState.loading(usernameErrorKey: $usernameErrorKey, passwordErrorKey: $passwordErrorKey)';
+    return 'LoginState.loading(emailErrorKey: $emailErrorKey, passwordErrorKey: $passwordErrorKey)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is Loading &&
-            (identical(other.usernameErrorKey, usernameErrorKey) ||
+            (identical(other.emailErrorKey, emailErrorKey) ||
                 const DeepCollectionEquality()
-                    .equals(other.usernameErrorKey, usernameErrorKey)) &&
+                    .equals(other.emailErrorKey, emailErrorKey)) &&
             (identical(other.passwordErrorKey, passwordErrorKey) ||
                 const DeepCollectionEquality()
                     .equals(other.passwordErrorKey, passwordErrorKey)));
@@ -609,7 +614,7 @@ class _$Loading implements Loading {
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(usernameErrorKey) ^
+      const DeepCollectionEquality().hash(emailErrorKey) ^
       const DeepCollectionEquality().hash(passwordErrorKey);
 
   @override
@@ -621,34 +626,38 @@ class _$Loading implements Loading {
   Result when<Result extends Object>({
     @required
         Result nothing(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result renderInputError(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     @required
         Result loading(
-            RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+            RawKeyString passwordErrorKey),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
-    return loading(usernameErrorKey, passwordErrorKey);
+    assert(error != null);
+    return loading(emailErrorKey, passwordErrorKey);
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result nothing(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+    Result nothing(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
     Result renderInputError(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
-    Result loading(
-        RawKeyString usernameErrorKey, RawKeyString passwordErrorKey),
+        RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result loading(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+        RawKeyString passwordErrorKey),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (loading != null) {
-      return loading(usernameErrorKey, passwordErrorKey);
+      return loading(emailErrorKey, passwordErrorKey);
     }
     return orElse();
   }
@@ -659,10 +668,12 @@ class _$Loading implements Loading {
     @required Result nothing(Nothing value),
     @required Result renderInputError(RenderInputError value),
     @required Result loading(Loading value),
+    @required Result error(Error value),
   }) {
     assert(nothing != null);
     assert(renderInputError != null);
     assert(loading != null);
+    assert(error != null);
     return loading(this);
   }
 
@@ -672,6 +683,7 @@ class _$Loading implements Loading {
     Result nothing(Nothing value),
     Result renderInputError(RenderInputError value),
     Result loading(Loading value),
+    Result error(Error value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -684,15 +696,178 @@ class _$Loading implements Loading {
 
 abstract class Loading implements LoginState {
   const factory Loading(
-      {RawKeyString usernameErrorKey,
-      RawKeyString passwordErrorKey}) = _$Loading;
+      {RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) = _$Loading;
 
   @override
-  RawKeyString get usernameErrorKey;
-
+  RawKeyString get emailErrorKey;
   @override
   RawKeyString get passwordErrorKey;
-
   @override
   $LoadingCopyWith<Loading> get copyWith;
+}
+
+abstract class $ErrorCopyWith<$Res> implements $LoginStateCopyWith<$Res> {
+  factory $ErrorCopyWith(Error value, $Res Function(Error) then) =
+      _$ErrorCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {RawKeyString errorMessage,
+      RawKeyString emailErrorKey,
+      RawKeyString passwordErrorKey});
+}
+
+class _$ErrorCopyWithImpl<$Res> extends _$LoginStateCopyWithImpl<$Res>
+    implements $ErrorCopyWith<$Res> {
+  _$ErrorCopyWithImpl(Error _value, $Res Function(Error) _then)
+      : super(_value, (v) => _then(v as Error));
+
+  @override
+  Error get _value => super._value as Error;
+
+  @override
+  $Res call({
+    Object errorMessage = freezed,
+    Object emailErrorKey = freezed,
+    Object passwordErrorKey = freezed,
+  }) {
+    return _then(Error(
+      errorMessage == freezed
+          ? _value.errorMessage
+          : errorMessage as RawKeyString,
+      emailErrorKey: emailErrorKey == freezed
+          ? _value.emailErrorKey
+          : emailErrorKey as RawKeyString,
+      passwordErrorKey: passwordErrorKey == freezed
+          ? _value.passwordErrorKey
+          : passwordErrorKey as RawKeyString,
+    ));
+  }
+}
+
+class _$Error implements Error {
+  const _$Error(this.errorMessage, {this.emailErrorKey, this.passwordErrorKey})
+      : assert(errorMessage != null);
+
+  @override
+  final RawKeyString errorMessage;
+  @override
+  final RawKeyString emailErrorKey;
+  @override
+  final RawKeyString passwordErrorKey;
+
+  @override
+  String toString() {
+    return 'LoginState.error(errorMessage: $errorMessage, emailErrorKey: $emailErrorKey, passwordErrorKey: $passwordErrorKey)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is Error &&
+            (identical(other.errorMessage, errorMessage) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessage, errorMessage)) &&
+            (identical(other.emailErrorKey, emailErrorKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.emailErrorKey, emailErrorKey)) &&
+            (identical(other.passwordErrorKey, passwordErrorKey) ||
+                const DeepCollectionEquality()
+                    .equals(other.passwordErrorKey, passwordErrorKey)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(errorMessage) ^
+      const DeepCollectionEquality().hash(emailErrorKey) ^
+      const DeepCollectionEquality().hash(passwordErrorKey);
+
+  @override
+  $ErrorCopyWith<Error> get copyWith =>
+      _$ErrorCopyWithImpl<Error>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required
+        Result nothing(
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result renderInputError(
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result loading(
+            RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    @required
+        Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+            RawKeyString passwordErrorKey),
+  }) {
+    assert(nothing != null);
+    assert(renderInputError != null);
+    assert(loading != null);
+    assert(error != null);
+    return error(errorMessage, emailErrorKey, passwordErrorKey);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result nothing(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result renderInputError(
+        RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result loading(RawKeyString emailErrorKey, RawKeyString passwordErrorKey),
+    Result error(RawKeyString errorMessage, RawKeyString emailErrorKey,
+        RawKeyString passwordErrorKey),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(errorMessage, emailErrorKey, passwordErrorKey);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result nothing(Nothing value),
+    @required Result renderInputError(RenderInputError value),
+    @required Result loading(Loading value),
+    @required Result error(Error value),
+  }) {
+    assert(nothing != null);
+    assert(renderInputError != null);
+    assert(loading != null);
+    assert(error != null);
+    return error(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result nothing(Nothing value),
+    Result renderInputError(RenderInputError value),
+    Result loading(Loading value),
+    Result error(Error value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (error != null) {
+      return error(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Error implements LoginState {
+  const factory Error(RawKeyString errorMessage,
+      {RawKeyString emailErrorKey, RawKeyString passwordErrorKey}) = _$Error;
+
+  RawKeyString get errorMessage;
+  @override
+  RawKeyString get emailErrorKey;
+  @override
+  RawKeyString get passwordErrorKey;
+  @override
+  $ErrorCopyWith<Error> get copyWith;
 }

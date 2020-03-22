@@ -9,11 +9,11 @@ part of login_response_model;
 _$_LoginResponseModel _$_$_LoginResponseModelFromJson(
     Map<String, dynamic> json) {
   return _$_LoginResponseModel(
-    json['access_token'] as String,
-    json['token_type'] as String,
-    json['refresh_token'] as String,
-    json['expires_in'] as int,
-    json['scope'] as String,
+    accessToken: json['access_token'] as String,
+    tokenType: json['token_type'] as String,
+    refreshToken: json['refresh_token'] as String,
+    expiresIn: json['expires_in'] as int,
+    scope: json['scope'] as String,
   );
 }
 

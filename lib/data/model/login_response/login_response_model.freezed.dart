@@ -16,17 +16,17 @@ class _$LoginResponseModelTearOff {
   const _$LoginResponseModelTearOff();
 
   _LoginResponseModel call(
-      @JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'token_type') String tokenType,
-      @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_in') int expiresIn,
-      String scope) {
+      {@required @JsonKey(name: 'access_token') String accessToken,
+      @required @JsonKey(name: 'token_type') String tokenType,
+      @required @JsonKey(name: 'refresh_token') String refreshToken,
+      @required @JsonKey(name: 'expires_in') int expiresIn,
+      @required String scope}) {
     return _LoginResponseModel(
-      accessToken,
-      tokenType,
-      refreshToken,
-      expiresIn,
-      scope,
+      accessToken: accessToken,
+      tokenType: tokenType,
+      refreshToken: refreshToken,
+      expiresIn: expiresIn,
+      scope: scope,
     );
   }
 }
@@ -95,7 +95,6 @@ abstract class _$LoginResponseModelCopyWith<$Res>
   factory _$LoginResponseModelCopyWith(
           _LoginResponseModel value, $Res Function(_LoginResponseModel) then) =
       __$LoginResponseModelCopyWithImpl<$Res>;
-
   @override
   $Res call(
       {@JsonKey(name: 'access_token') String accessToken,
@@ -108,8 +107,8 @@ abstract class _$LoginResponseModelCopyWith<$Res>
 class __$LoginResponseModelCopyWithImpl<$Res>
     extends _$LoginResponseModelCopyWithImpl<$Res>
     implements _$LoginResponseModelCopyWith<$Res> {
-  __$LoginResponseModelCopyWithImpl(_LoginResponseModel _value,
-      $Res Function(_LoginResponseModel) _then)
+  __$LoginResponseModelCopyWithImpl(
+      _LoginResponseModel _value, $Res Function(_LoginResponseModel) _then)
       : super(_value, (v) => _then(v as _LoginResponseModel));
 
   @override
@@ -124,22 +123,26 @@ class __$LoginResponseModelCopyWithImpl<$Res>
     Object scope = freezed,
   }) {
     return _then(_LoginResponseModel(
-      accessToken == freezed ? _value.accessToken : accessToken as String,
-      tokenType == freezed ? _value.tokenType : tokenType as String,
-      refreshToken == freezed ? _value.refreshToken : refreshToken as String,
-      expiresIn == freezed ? _value.expiresIn : expiresIn as int,
-      scope == freezed ? _value.scope : scope as String,
+      accessToken:
+          accessToken == freezed ? _value.accessToken : accessToken as String,
+      tokenType: tokenType == freezed ? _value.tokenType : tokenType as String,
+      refreshToken: refreshToken == freezed
+          ? _value.refreshToken
+          : refreshToken as String,
+      expiresIn: expiresIn == freezed ? _value.expiresIn : expiresIn as int,
+      scope: scope == freezed ? _value.scope : scope as String,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_LoginResponseModel implements _LoginResponseModel {
-  const _$_LoginResponseModel(@JsonKey(name: 'access_token') this.accessToken,
-      @JsonKey(name: 'token_type') this.tokenType,
-      @JsonKey(name: 'refresh_token') this.refreshToken,
-      @JsonKey(name: 'expires_in') this.expiresIn,
-      this.scope)
+  const _$_LoginResponseModel(
+      {@required @JsonKey(name: 'access_token') this.accessToken,
+      @required @JsonKey(name: 'token_type') this.tokenType,
+      @required @JsonKey(name: 'refresh_token') this.refreshToken,
+      @required @JsonKey(name: 'expires_in') this.expiresIn,
+      @required this.scope})
       : assert(accessToken != null),
         assert(tokenType != null),
         assert(refreshToken != null),
@@ -210,11 +213,11 @@ class _$_LoginResponseModel implements _LoginResponseModel {
 
 abstract class _LoginResponseModel implements LoginResponseModel {
   const factory _LoginResponseModel(
-      @JsonKey(name: 'access_token') String accessToken,
-      @JsonKey(name: 'token_type') String tokenType,
-      @JsonKey(name: 'refresh_token') String refreshToken,
-      @JsonKey(name: 'expires_in') int expiresIn,
-      String scope) = _$_LoginResponseModel;
+      {@required @JsonKey(name: 'access_token') String accessToken,
+      @required @JsonKey(name: 'token_type') String tokenType,
+      @required @JsonKey(name: 'refresh_token') String refreshToken,
+      @required @JsonKey(name: 'expires_in') int expiresIn,
+      @required String scope}) = _$_LoginResponseModel;
 
   factory _LoginResponseModel.fromJson(Map<String, dynamic> json) =
       _$_LoginResponseModel.fromJson;

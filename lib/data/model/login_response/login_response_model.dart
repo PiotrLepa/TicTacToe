@@ -7,13 +7,13 @@ part 'login_response_model.g.dart';
 
 @freezed
 abstract class LoginResponseModel with _$LoginResponseModel {
-  const factory LoginResponseModel(
-    @JsonKey(name: "access_token") String accessToken,
-    @JsonKey(name: "token_type") String tokenType,
-    @JsonKey(name: "refresh_token") String refreshToken,
-    @JsonKey(name: "expires_in") int expiresIn,
-    String scope,
-  ) = _LoginResponseModel;
+  const factory LoginResponseModel({
+    @JsonKey(name: "access_token") @required String accessToken,
+    @JsonKey(name: "token_type") @required String tokenType,
+    @JsonKey(name: "refresh_token") @required String refreshToken,
+    @JsonKey(name: "expires_in") @required int expiresIn,
+    @required String scope,
+  }) = _LoginResponseModel;
 
   factory LoginResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LoginResponseModelFromJson(json);

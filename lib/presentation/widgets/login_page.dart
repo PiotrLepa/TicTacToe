@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
       children: <Widget>[
         AppFormField(
           controller: _usernameController,
-          validator: state.usernameErrorKey,
+          validator: state.emailErrorKey,
           labelText: AppLocalizations.of(context).loginScreenUsernameHint,
         ),
         SizedBox(height: 20),
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _loginUser() => context.bloc<LoginBloc>().add(
         LoginEvent.login(
-          username: _usernameController.text,
+          email: _usernameController.text,
           password: _passwordController.text,
         ),
       );

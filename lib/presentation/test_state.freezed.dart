@@ -181,7 +181,7 @@ abstract class _Initial implements TestState {
 
 abstract class _$ProgressCopyWith<$Res> {
   factory _$ProgressCopyWith(_Progress value, $Res Function(_Progress) then) =
-  __$ProgressCopyWithImpl<$Res>;
+      __$ProgressCopyWithImpl<$Res>;
 }
 
 class __$ProgressCopyWithImpl<$Res> extends _$TestStateCopyWithImpl<$Res>
@@ -278,7 +278,7 @@ abstract class _Progress implements TestState {
 
 abstract class _$SuccessCopyWith<$Res> {
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) then) =
-  __$SuccessCopyWithImpl<$Res>;
+      __$SuccessCopyWithImpl<$Res>;
   $Res call({String result});
 }
 
@@ -399,7 +399,7 @@ abstract class _Success implements TestState {
 
 abstract class _$ErrorCopyWith<$Res> {
   factory _$ErrorCopyWith(_Error value, $Res Function(_Error) then) =
-  __$ErrorCopyWithImpl<$Res>;
+      __$ErrorCopyWithImpl<$Res>;
   $Res call({RawKeyString errorMessage});
 }
 

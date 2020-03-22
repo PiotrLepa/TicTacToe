@@ -169,7 +169,7 @@ abstract class Progress<T> implements CallState<T> {
 
 abstract class $SuccessCopyWith<T, $Res> {
   factory $SuccessCopyWith(Success<T> value, $Res Function(Success<T>) then) =
-  _$SuccessCopyWithImpl<T, $Res>;
+      _$SuccessCopyWithImpl<T, $Res>;
   $Res call({T result});
 }
 
@@ -284,7 +284,7 @@ abstract class Success<T> implements CallState<T> {
 
 abstract class $ErrorCopyWith<T, $Res> {
   factory $ErrorCopyWith(Error<T> value, $Res Function(Error<T>) then) =
-  _$ErrorCopyWithImpl<T, $Res>;
+      _$ErrorCopyWithImpl<T, $Res>;
   $Res call({RawKeyString errorMessage});
 }
 

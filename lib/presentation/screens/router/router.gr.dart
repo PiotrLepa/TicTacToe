@@ -4,13 +4,13 @@
 // AutoRouteGenerator
 // **************************************************************************
 
-import 'package:auto_route/auto_route.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
-import 'package:tictactoe/presentation/screens/game_screen.dart';
-import 'package:tictactoe/presentation/screens/home_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:tictactoe/presentation/screens/login_screen.dart';
+import 'package:tictactoe/presentation/screens/home_screen.dart';
+import 'package:tictactoe/presentation/screens/game_screen.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
 abstract class Routes {
   static const loginScreen = '/';
@@ -71,9 +71,7 @@ class GameScreenArguments {
 
 extension RouterNavigationHelperMethods on ExtendedNavigatorState {
   Future pushLoginScreen() => pushNamed(Routes.loginScreen);
-
   Future pushHomeScreen() => pushNamed(Routes.homeScreen);
-
   Future pushGameScreen({
     Key key,
     @required DifficultyLevel difficultyLevel,
