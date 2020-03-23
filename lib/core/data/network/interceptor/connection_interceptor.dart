@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
 
-@injectable
+@lazySingleton
 class ConnectionInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) async {

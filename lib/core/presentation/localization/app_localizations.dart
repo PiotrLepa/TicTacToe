@@ -31,6 +31,11 @@ class AppLocalizations {
 
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
+  String get invalidEmailError => _localizedStrings["invalidEmailError"];
+
+  String get passwordTooShortError =>
+      _localizedStrings["passwordTooShortError"];
+
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
@@ -63,6 +68,21 @@ class AppLocalizations {
       _localizedStrings["gameScreenPlayAgainQuestion"];
 
   String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
+
+  String get loginScreenTitle => _localizedStrings["loginScreenTitle"];
+
+  String get loginScreenEmailHint => _localizedStrings["loginScreenEmailHint"];
+
+  String get loginScreenPasswordHint =>
+      _localizedStrings["loginScreenPasswordHint"];
+
+  String get loginScreenLoginButton =>
+      _localizedStrings["loginScreenLoginButton"];
+
+  String get loginScreenLoadingButton =>
+      _localizedStrings["loginScreenLoadingButton"];
+
+  String get emptyFieldError => _localizedStrings["emptyFieldError"];
 
   Future load() async {
     final String jsonString =

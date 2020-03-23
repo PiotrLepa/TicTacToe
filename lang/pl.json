@@ -6,6 +6,9 @@
   "apiErrorNotFound": "Nie znaleziono",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
+  "emptyFieldError": "Pole nie może być puste",
+  "invalidEmailError": "Niepoprawny adres e-mail",
+  "passwordTooShortError": "Hasło musi mieć conajmniej 5 znaków",
   "difficultyLevelEasy": "Łatwy",
   "difficultyLevelMedium": "Średni",
   "difficultyLevelHard": "Trudny",
@@ -19,5 +22,10 @@
   "gameScreenStatusComputerWon": "Przegrałeś",
   "gameScreenStatusDraw": "Remis",
   "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
-  "gameScreenPlayAgain": "Zagraj"
+  "gameScreenPlayAgain": "Zagraj",
+  "loginScreenTitle": "Logowanie",
+  "loginScreenEmailHint": "E-mail",
+  "loginScreenPasswordHint": "Hasło",
+  "loginScreenLoginButton": "Zaloguj",
+  "loginScreenLoadingButton": "Logowanie"
 }

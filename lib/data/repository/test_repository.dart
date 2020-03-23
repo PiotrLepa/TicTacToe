@@ -7,7 +7,7 @@ import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 
-@injectable
+@lazySingleton
 class TestRepository extends NetworkRepository {
   final NetworkService _service;
 

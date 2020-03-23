@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 
-@injectable
+@lazySingleton
 class BearerTokenInterceptor extends InterceptorsWrapper {
   final OauthTokensStorage _oauthTokensStorage;
 
@@ -11,8 +11,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
 
   @override
   Future onRequest(RequestOptions options) async {
-//    final accessToken = await _oauthTokensStorage.accessToken; // TODO
-    final accessToken = "d4ee8b7d-cb71-4657-8869-146d6be3ff9e";
+    final accessToken = await _oauthTokensStorage.accessToken;
     final headers = options.headers;
 
     if (accessToken != null && _isRequestSecure(headers)) {
@@ -24,7 +23,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   }
 
   static bool _isRequestSecure(Map<String, dynamic> headers) =>
-      headers[securedHeaderKey] == securedHeaderKey;
+      headers[securedHeaderKey] == true;
 
   void _addAuthorizationHeader(
     Map<String, dynamic> headers,

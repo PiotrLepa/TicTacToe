@@ -4,9 +4,9 @@ import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request_model.dart';
-import 'package:tictactoe/data/repository/refresh_token_repository.dart';
+import 'package:tictactoe/data/repository/refresh_token_repositoryImpl.dart';
 
-@injectable
+@lazySingleton
 class RefreshTokenInterceptor extends InterceptorsWrapper {
   final OauthTokensStorage _oauthTokensStorage;
   final RefreshTokenRepository _refreshTokenRepository;
@@ -19,7 +19,7 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
   @override
   Future onError(DioError err) async {
     if (err.response?.statusCode == 401) {
-      final retriedData = await refreshTokenAndRetry(err.response.request);
+      final retriedData = await _refreshTokenAndRetry(err.response.request);
       final response = Response(
         data: retriedData,
       );
@@ -29,7 +29,7 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
     }
   }
 
-  Future refreshTokenAndRetry(RequestOptions request) async {
+  Future _refreshTokenAndRetry(RequestOptions request) async {
     final tokens = await _refreshAccessToken();
     _oauthTokensStorage.saveTokens(
       tokens.accessToken,

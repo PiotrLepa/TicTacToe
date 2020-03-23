@@ -5,5 +5,4 @@ const securedHeaderKey = "secured";
 const bearerPrefix = "Bearer";
 const oauthGrantTypePassword = "password";
 const oauthGrantTypeRefreshToken = "refresh_token";
-const accept_language_header = "Accept-Language";
-const securedHeader = {securedHeaderKey: securedHeaderKey};
+const accept_language_header = "accept-language";

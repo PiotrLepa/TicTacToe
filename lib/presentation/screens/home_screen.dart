@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/common/locale_provider.dart';
-import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/domain/bloc/bottom_navigation/bottom_navigation_bloc.dart';
-import 'package:tictactoe/presentation/screens/game_results_page.dart';
-import 'package:tictactoe/presentation/screens/settings_page.dart';
-import 'package:tictactoe/presentation/screens/start_game_page.dart';
+import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
+import 'package:tictactoe/presentation/widgets/game_results_page.dart';
+import 'package:tictactoe/presentation/widgets/settings_page.dart';
+import 'package:tictactoe/presentation/widgets/start_game_page.dart';
 
 class HomeScreen extends StatelessWidget {
-  final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
-
   final _pages = [
     StartGamePage(),
     GameResultsPage(),
@@ -20,8 +16,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
-      builder: (BuildContext context, BottomNavigationState state) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (BuildContext context, HomeState state) {
         return Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context).get(state.pageTitle)),
@@ -35,8 +31,8 @@ class HomeScreen extends StatelessWidget {
             currentIndex: state.index,
             selectedItemColor: Theme.of(context).primaryColor,
             onTap: (index) => context
-                .bloc<BottomNavigationBloc>()
-                .add(BottomNavigationEvent.onBottomNavigationTapped(index)),
+                .bloc<HomeBloc>()
+                .add(HomeEvent.onBottomNavigationTapped(index)),
           ),
         );
       },

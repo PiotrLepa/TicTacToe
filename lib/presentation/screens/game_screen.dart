@@ -7,7 +7,7 @@ import 'package:tictactoe/core/presentation/error/error_handler.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
-import 'package:tictactoe/presentation/screens/game_page.dart';
+import 'package:tictactoe/presentation/widgets/game_page.dart';
 import 'package:tictactoe/presentation/widgets/loading_indicator.dart';
 
 class GameScreen extends StatefulWidget {

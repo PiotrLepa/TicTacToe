@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/logger/logger.dart';
 
-@injectable
+@lazySingleton
 class LoggerInterceptor extends InterceptorsWrapper {
   @override
   Future onRequest(RequestOptions options) {

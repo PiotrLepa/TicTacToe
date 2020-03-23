@@ -24,5 +24,5 @@ abstract class GameResponseModel with _$GameResponseModel {
   factory GameResponseModel.fromJson(Map<String, dynamic> json) =>
       _$GameResponseModelFromJson(json);
 
-  Map<String, dynamic> toJson();
+  static const fromJsonFactory = _$GameResponseModelFromJson;
 }
