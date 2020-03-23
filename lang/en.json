@@ -7,6 +7,8 @@
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
   "emptyFieldError": "Field cannot be empty",
+  "invalidEmailError": "Incorrect email address",
+  "passwordTooShortError": "Password must be at least 5 characters",
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",
@@ -22,7 +24,7 @@
   "gameScreenPlayAgainQuestion": "Do you want to play again?",
   "gameScreenPlayAgain": "Play",
   "loginScreenTitle": "Login",
-  "loginScreenUsernameHint": "Username",
+  "loginScreenEmailHint": "Email",
   "loginScreenPasswordHint": "Password",
   "loginScreenLoginButton": "Log in",
   "loginScreenLoadingButton": "Logging in"

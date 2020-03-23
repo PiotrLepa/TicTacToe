@@ -31,6 +31,11 @@ class AppLocalizations {
 
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
+  String get invalidEmailError => _localizedStrings["invalidEmailError"];
+
+  String get passwordTooShortError =>
+      _localizedStrings["passwordTooShortError"];
+
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];
@@ -66,8 +71,7 @@ class AppLocalizations {
 
   String get loginScreenTitle => _localizedStrings["loginScreenTitle"];
 
-  String get loginScreenUsernameHint =>
-      _localizedStrings["loginScreenUsernameHint"];
+  String get loginScreenEmailHint => _localizedStrings["loginScreenEmailHint"];
 
   String get loginScreenPasswordHint =>
       _localizedStrings["loginScreenPasswordHint"];

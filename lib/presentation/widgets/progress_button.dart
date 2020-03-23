@@ -20,7 +20,7 @@ class ProgressButton extends StatelessWidget {
     return RaisedButton(
       onPressed: onPressed,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: isLoading ? _buildLoadingWidgets() : _buildDefaultWidgets(),

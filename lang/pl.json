@@ -7,6 +7,8 @@
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
   "emptyFieldError": "Pole nie może być puste",
+  "invalidEmailError": "Niepoprawny adres e-mail",
+  "passwordTooShortError": "Hasło musi mieć conajmniej 5 znaków",
   "difficultyLevelEasy": "Łatwy",
   "difficultyLevelMedium": "Średni",
   "difficultyLevelHard": "Trudny",
@@ -22,7 +24,7 @@
   "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
   "gameScreenPlayAgain": "Zagraj",
   "loginScreenTitle": "Logowanie",
-  "loginScreenUsernameHint": "Nazwa użytkownika",
+  "loginScreenEmailHint": "E-mail",
   "loginScreenPasswordHint": "Hasło",
   "loginScreenLoginButton": "Zaloguj",
   "loginScreenLoadingButton": "Logowanie"

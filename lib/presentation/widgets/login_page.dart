@@ -60,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
           controller: _emailController,
           type: TextInputType.emailAddress,
           validator: state.emailErrorKey,
-          labelText: AppLocalizations.of(context).loginScreenUsernameHint,
+          labelText: AppLocalizations.of(context).loginScreenEmailHint,
         ),
         SizedBox(height: 20),
         AppFormField(

@@ -39,11 +39,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapLoginEvent(Login event) async* {
-    final usernameValidation = Validators.validateEmail(event.email);
+    final emailValidation = Validators.validateEmail(event.email);
     final passwordValidation = Validators.validatePassword(event.password);
-    if (usernameValidation != null || passwordValidation != null) {
+    if (emailValidation != null || passwordValidation != null) {
       yield LoginState.renderInputError(
-        emailErrorKey: usernameValidation,
+        emailErrorKey: emailValidation,
         passwordErrorKey: passwordValidation,
       );
     } else {
