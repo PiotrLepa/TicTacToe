@@ -57,7 +57,7 @@ dev_dependencies:
   auto_route_generator: ^0.4.0
 
   # Data classes
-  freezed: ^0.10.3
+  freezed: ^0.10.4
 
 # The following section is specific to Flutter.
 flutter:

@@ -9,6 +9,7 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
+import 'package:tictactoe/domain/bloc/start_page/start_bloc.dart';
 import 'package:tictactoe/presentation/router/router.gr.dart';
 
 class App extends StatelessWidget {
@@ -18,6 +19,9 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<StartBloc>(
+          create: (context) => getIt.get<StartBloc>(),
+        ),
         BlocProvider<HomeBloc>(
           create: (context) =>
               getIt.get<HomeBloc>()..add(HomeEvent.appStarted()),
