@@ -28,7 +28,7 @@ dependencies:
   injectable: ^0.3.0
 
   # Navigation
-  auto_route: ^0.4.1
+  auto_route: ^0.4.2
 
   # Logging
   logger: ^0.8.3
@@ -41,6 +41,8 @@ dependencies:
   shared_preferences: ^0.5.6+3
 
   flushbar: ^1.9.1
+
+  flutter_svg: ^0.17.3+1
 
 dev_dependencies:
   flutter_test:
@@ -55,7 +57,7 @@ dev_dependencies:
   auto_route_generator: ^0.4.0
 
   # Data classes
-  freezed: ^0.10.2
+  freezed: ^0.10.3
 
 # The following section is specific to Flutter.
 flutter:
@@ -63,6 +65,7 @@ flutter:
 
   assets:
     - lang/
+    - assets/
 
   fonts:
     - family: Lato

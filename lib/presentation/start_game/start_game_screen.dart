@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/util/app_modal_bottom_sheet.dart';
-import 'package:tictactoe/presentation/widgets/game_difficulty_level_buttons.dart';
+import 'package:tictactoe/presentation/start_game/widgets/game_difficulty_level_buttons.dart';
 
 class StartGamePage extends StatelessWidget {
   @override

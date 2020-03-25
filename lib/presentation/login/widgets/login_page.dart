@@ -6,8 +6,8 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/error/error_handler.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
-import 'package:tictactoe/presentation/widgets/app_field_form.dart';
-import 'package:tictactoe/presentation/widgets/progress_button.dart';
+import 'package:tictactoe/presentation/common/app_field_form.dart';
+import 'package:tictactoe/presentation/common/progress_button.dart';
 
 class LoginPage extends StatefulWidget {
   @override

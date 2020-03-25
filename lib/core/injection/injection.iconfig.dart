@@ -89,20 +89,19 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
         g<DifficultyLevelModelMapper>(),
         g<GameResponseEntityMapper>(),
       ));
-  g.registerLazySingleton<LoginRepository>(() =>
-      LoginRepositoryImpl(
+  g.registerLazySingleton<LoginRepository>(() => LoginRepositoryImpl(
         g<NetworkService>(),
         g<LoginRequestModelMapper>(),
         g<LoginResponseEntityMapper>(),
       ));
   g.registerLazySingleton<RefreshTokenRepository>(
-          () => RefreshTokenRepository(g<RefreshTokenNetworkService>()));
+      () => RefreshTokenRepository(g<RefreshTokenNetworkService>()));
   g.registerLazySingleton<TestRepository>(
-          () => TestRepository(g<NetworkService>()));
+      () => TestRepository(g<NetworkService>()));
   g.registerFactory<GameBloc>(() => GameBloc(g<CreateGameRepository>()));
   g.registerFactory<HomeBloc>(() => HomeBloc(g<OauthTokensStorage>()));
   g.registerFactory<LoginBloc>(
-          () => LoginBloc(g<LoginRepository>(), g<OauthTokensStorage>()));
+      () => LoginBloc(g<LoginRepository>(), g<OauthTokensStorage>()));
   g.registerLazySingleton<RefreshTokenInterceptor>(() =>
       RefreshTokenInterceptor(
           g<OauthTokensStorage>(), g<RefreshTokenRepository>()));

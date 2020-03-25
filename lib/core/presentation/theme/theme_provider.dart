@@ -11,6 +11,8 @@ class ThemeProvider {
 
   Color get accentColor => Color(0xFF667EEA);
 
+  Color get textColorLight => Colors.grey;
+
   Color get textColor => isDark ? Colors.white : Colors.black87;
 
   Color get markXColor => Color(0xFFFE8A71);

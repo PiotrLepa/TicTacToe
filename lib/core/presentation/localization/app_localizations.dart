@@ -84,6 +84,14 @@ class AppLocalizations {
 
   String get emptyFieldError => _localizedStrings["emptyFieldError"];
 
+  String get startScreenTitle => _localizedStrings["startScreenTitle"];
+
+  String get startScreenRegistrationButton =>
+      _localizedStrings["startScreenRegistrationButton"];
+
+  String get startScreenLoginButton =>
+      _localizedStrings["startScreenLoginButton"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

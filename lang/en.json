@@ -27,5 +27,8 @@
   "loginScreenEmailHint": "Email",
   "loginScreenPasswordHint": "Password",
   "loginScreenLoginButton": "Log in",
-  "loginScreenLoadingButton": "Logging in"
+  "loginScreenLoadingButton": "Logging in",
+  "startScreenTitle": "Join to us",
+  "startScreenRegistrationButton": "Registration",
+  "startScreenLoginButton": "Login"
 }

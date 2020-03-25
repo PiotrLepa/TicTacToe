@@ -1,0 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
+
+class RegistrationButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: Text(
+        AppLocalizations.of(context).startScreenRegistrationButton,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: ThemeProvider.of(context).textColorLight,
+        ),
+      ),
+      onPressed: () {},
+    );
+  }
+}

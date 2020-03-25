@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
-import 'package:tictactoe/presentation/widgets/login_page.dart';
+import 'package:tictactoe/presentation/login/widgets/login_page.dart';
 
 class LoginScreen extends StatelessWidget {
   @override

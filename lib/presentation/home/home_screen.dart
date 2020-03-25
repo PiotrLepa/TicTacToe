@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
-import 'package:tictactoe/presentation/widgets/game_results_page.dart';
-import 'package:tictactoe/presentation/widgets/settings_page.dart';
-import 'package:tictactoe/presentation/widgets/start_game_page.dart';
+import 'package:tictactoe/presentation/game_results/game_results_screen.dart';
+import 'package:tictactoe/presentation/settings/settings_screen.dart';
+import 'package:tictactoe/presentation/start_game/start_game_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final _pages = [
