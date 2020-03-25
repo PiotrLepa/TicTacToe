@@ -23,12 +23,13 @@
   "gameScreenStatusDraw": "Remis",
   "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
   "gameScreenPlayAgain": "Zagraj",
-  "loginScreenTitle": "Logowanie",
+  "loginScreenToolbar": "Logowanie",
   "loginScreenEmailHint": "E-mail",
   "loginScreenPasswordHint": "Hasło",
   "loginScreenLoginButton": "Zaloguj",
   "loginScreenLoadingButton": "Logowanie",
   "startScreenTitle": "Dołącz do nas",
   "startScreenRegistrationButton": "Rejestracja",
-  "startScreenLoginButton": "Logowanie"
+  "startScreenLoginButton": "Logowanie",
+  "registrationScreenToolbar": "Rejestracja"
 }

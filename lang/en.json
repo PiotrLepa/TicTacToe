@@ -23,12 +23,13 @@
   "gameScreenStatusDraw": "Draw",
   "gameScreenPlayAgainQuestion": "Do you want to play again?",
   "gameScreenPlayAgain": "Play",
-  "loginScreenTitle": "Login",
+  "loginScreenToolbar": "Login",
   "loginScreenEmailHint": "Email",
   "loginScreenPasswordHint": "Password",
   "loginScreenLoginButton": "Log in",
   "loginScreenLoadingButton": "Logging in",
   "startScreenTitle": "Join to us",
   "startScreenRegistrationButton": "Registration",
-  "startScreenLoginButton": "Login"
+  "startScreenLoginButton": "Login",
+  "registrationScreenToolbar": "Registration"
 }

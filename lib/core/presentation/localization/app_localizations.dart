@@ -69,7 +69,7 @@ class AppLocalizations {
 
   String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
 
-  String get loginScreenTitle => _localizedStrings["loginScreenTitle"];
+  String get loginScreenToolbar => _localizedStrings["loginScreenToolbar"];
 
   String get loginScreenEmailHint => _localizedStrings["loginScreenEmailHint"];
 
@@ -91,6 +91,9 @@ class AppLocalizations {
 
   String get startScreenLoginButton =>
       _localizedStrings["startScreenLoginButton"];
+
+  String get registrationScreenToolbar =>
+      _localizedStrings["registrationScreenToolbar"];
 
   Future load() async {
     final String jsonString =

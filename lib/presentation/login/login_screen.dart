@@ -13,7 +13,7 @@ class LoginScreen extends StatelessWidget {
       create: (context) => getIt.get<LoginBloc>(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(AppLocalizations.of(context).loginScreenTitle),
+          title: Text(AppLocalizations.of(context).loginScreenToolbar),
         ),
         body: LoginPage(),
       ),

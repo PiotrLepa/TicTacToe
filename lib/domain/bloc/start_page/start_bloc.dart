@@ -5,9 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'start_bloc.freezed.dart';
-
 part 'start_event.dart';
-
 part 'start_state.dart';
 
 @injectable
@@ -26,9 +24,14 @@ class StartBloc extends Bloc<StartEvent, StartState> {
   }
 
   Stream<StartState> _onRegistrationClicked(
-      OnRegistrationClicked event) async* {}
+    OnRegistrationClicked event,
+  ) async* {
+    ExtendedNavigator.ofRouter<Router>().pushRegistrationScreen();
+  }
 
-  Stream<StartState> _onLoginClicked(OnLoginClicked event) async* {
+  Stream<StartState> _onLoginClicked(
+    OnLoginClicked event,
+  ) async* {
     ExtendedNavigator.ofRouter<Router>().pushLoginScreen();
   }
 }
