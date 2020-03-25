@@ -4,41 +4,40 @@
 // InjectableConfigGenerator
 // **************************************************************************
 
-import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/common/locale_provider.dart';
-import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
-import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/connection_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/language_interceptor.dart';
 import 'package:tictactoe/core/data/network/interceptor/logger_interceptor.dart';
-import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
 import 'package:tictactoe/core/data/serializer/response_converter.dart';
 import 'package:tictactoe/core/domain/error/error_translator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/injection/register_module.dart';
+import 'package:dio/dio.dart';
 import 'package:tictactoe/core/presentation/error/error_handler.dart';
 import 'package:tictactoe/data/mapper/entity/difficilty_level_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_mark_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_move_entity_mapper.dart';
-import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_status_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/login_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/mapper/model/login_request_model_mapper.dart';
-import 'package:tictactoe/data/repository/create_game_repository_impl.dart';
-import 'package:tictactoe/data/repository/login_repository_impl.dart';
-import 'package:tictactoe/data/repository/refresh_token_repositoryImpl.dart';
-import 'package:tictactoe/data/repository/test_repository.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';
+import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
+import 'package:tictactoe/domain/bloc/start_page/start_bloc.dart';
+import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
+import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
+import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
+import 'package:tictactoe/data/repository/create_game_repository_impl.dart';
+import 'package:tictactoe/domain/repository/create_game_repository.dart';
+import 'package:tictactoe/data/repository/login_repository_impl.dart';
+import 'package:tictactoe/domain/repository/login_repository.dart';
+import 'package:tictactoe/data/repository/refresh_token_repositoryImpl.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
-import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
-import 'package:tictactoe/domain/bloc/start_page/start_bloc.dart';
-import 'package:tictactoe/domain/repository/create_game_repository.dart';
-import 'package:tictactoe/domain/repository/login_repository.dart';
+import 'package:tictactoe/core/data/network/interceptor/refresh_token_interceptor.dart';
+import 'package:get_it/get_it.dart';
 
 Future<void> $initGetIt(GetIt g, {String environment}) async {
   final networkClient = _$NetworkClient();
@@ -100,8 +99,6 @@ Future<void> $initGetIt(GetIt g, {String environment}) async {
       ));
   g.registerLazySingleton<RefreshTokenRepository>(
       () => RefreshTokenRepository(g<RefreshTokenNetworkService>()));
-  g.registerLazySingleton<TestRepository>(
-      () => TestRepository(g<NetworkService>()));
   g.registerFactory<GameBloc>(() => GameBloc(g<CreateGameRepository>()));
   g.registerFactory<HomeBloc>(() => HomeBloc(g<OauthTokensStorage>()));
   g.registerFactory<LoginBloc>(

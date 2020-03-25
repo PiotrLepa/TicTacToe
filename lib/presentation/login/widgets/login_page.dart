@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
           _respondForState(state);
         },
         builder: (context, state) {
-          return _buildPage(state);
+          return _buildFieldsAndButton(state);
         },
       ),
     );
@@ -52,22 +52,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Column _buildPage(LoginState state) {
+  Column _buildFieldsAndButton(LoginState state) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         AppFormField(
           controller: _emailController,
           type: TextInputType.emailAddress,
-          validator: state.emailErrorKey,
-          labelText: AppLocalizations.of(context).loginScreenEmailHint,
+          errorText: state.emailErrorKey,
+          labelText: AppLocalizations.of(context).fieldEmailHint,
         ),
         SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
-          validator: state.passwordErrorKey,
+          errorText: state.passwordErrorKey,
           obscureText: true,
-          labelText: AppLocalizations.of(context).loginScreenPasswordHint,
+          labelText: AppLocalizations
+              .of(context)
+              .fieldPasswordHint,
         ),
         SizedBox(height: 40),
         ProgressButton(

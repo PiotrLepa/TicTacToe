@@ -24,12 +24,16 @@
   "gameScreenPlayAgainQuestion": "Chcesz zagrać jeszcze raz?",
   "gameScreenPlayAgain": "Zagraj",
   "loginScreenToolbar": "Logowanie",
-  "loginScreenEmailHint": "E-mail",
-  "loginScreenPasswordHint": "Hasło",
+  "fieldUsernameHint": "Nazwa użytkownika",
+  "fieldEmailHint": "E-mail",
+  "fieldPasswordHint": "Hasło",
+  "fieldRepeatPasswordHint": "Powtórz Hasło",
   "loginScreenLoginButton": "Zaloguj",
   "loginScreenLoadingButton": "Logowanie",
   "startScreenTitle": "Dołącz do nas",
   "startScreenRegistrationButton": "Rejestracja",
   "startScreenLoginButton": "Logowanie",
-  "registrationScreenToolbar": "Rejestracja"
+  "registrationScreenToolbar": "Rejestracja",
+  "registrationScreenButton": "Zarejestruj się",
+  "registrationScreenLoadingButton": "Rejestrowanie"
 }

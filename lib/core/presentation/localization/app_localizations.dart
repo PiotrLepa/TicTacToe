@@ -71,10 +71,14 @@ class AppLocalizations {
 
   String get loginScreenToolbar => _localizedStrings["loginScreenToolbar"];
 
-  String get loginScreenEmailHint => _localizedStrings["loginScreenEmailHint"];
+  String get fieldUsernameHint => _localizedStrings["fieldUsernameHint"];
 
-  String get loginScreenPasswordHint =>
-      _localizedStrings["loginScreenPasswordHint"];
+  String get fieldEmailHint => _localizedStrings["fieldEmailHint"];
+
+  String get fieldPasswordHint => _localizedStrings["fieldPasswordHint"];
+
+  String get fieldRepeatPasswordHint =>
+      _localizedStrings["fieldRepeatPasswordHint"];
 
   String get loginScreenLoginButton =>
       _localizedStrings["loginScreenLoginButton"];
@@ -94,6 +98,12 @@ class AppLocalizations {
 
   String get registrationScreenToolbar =>
       _localizedStrings["registrationScreenToolbar"];
+
+  String get registrationScreenButton =>
+      _localizedStrings["registrationScreenButton"];
+
+  String get registrationScreenLoadingButton =>
+      _localizedStrings["registrationScreenLoadingButton"];
 
   Future load() async {
     final String jsonString =
