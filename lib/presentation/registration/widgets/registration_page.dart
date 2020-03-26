@@ -26,24 +26,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
       listener: (context, state) {
         _respondForState(state);
       },
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: BlocBuilder<RegistrationBloc, RegistrationState>(
-          condition: (previous, current) =>
-              current is Nothing ||
-              current is RenderInputsErrors ||
-              current is ClearInputsErrors,
-          builder: (context, state) {
-            return state.maybeMap(
-              renderInputsErrors: (mapState) => _buildFieldsAndButton(
-                usernameError: mapState.usernameError,
-                emailError: mapState.emailError,
-                passwordError: mapState.passwordError,
-                repeatedPasswordError: mapState.repeatedPasswordError,
-              ),
-              orElse: () => _buildFieldsAndButton(),
-            );
-          },
+      child: Center(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: BlocBuilder<RegistrationBloc, RegistrationState>(
+              condition: (previous, current) =>
+                  current is Nothing ||
+                  current is RenderInputsErrors ||
+                  current is ClearInputsErrors,
+              builder: (context, state) {
+                return state.maybeMap(
+                  renderInputsErrors: (mapState) => _buildFieldsAndButton(
+                    usernameError: mapState.usernameError,
+                    emailError: mapState.emailError,
+                    passwordError: mapState.passwordError,
+                    repeatedPasswordError: mapState.repeatedPasswordError,
+                  ),
+                  orElse: () => _buildFieldsAndButton(),
+                );
+              },
+            ),
+          ),
         ),
       ),
     );

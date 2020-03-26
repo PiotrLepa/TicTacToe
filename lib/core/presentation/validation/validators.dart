@@ -4,6 +4,16 @@ class Validators {
   static final emailRegex = RegExp(
       r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 
+  static RawKeyString validateUsername(String value) {
+    if (value.isEmpty) {
+      return KeyString('emptyFieldError');
+    } else if (value.length < 5) {
+      return KeyString('usernameTooShortError');
+    } else {
+      return null;
+    }
+  }
+
   static RawKeyString validateEmail(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');

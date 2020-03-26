@@ -7,8 +7,9 @@ part 'refresh_token_request_model.freezed.dart';
 part 'refresh_token_request_model.g.dart';
 
 @freezed
-abstract class RefreshTokenRequestModel extends Serializable
-    with _$RefreshTokenRequestModel {
+abstract class RefreshTokenRequestModel
+    with _$RefreshTokenRequestModel
+    implements Serializable {
   const factory RefreshTokenRequestModel({
     @JsonKey(name: "refresh_token") @required String refreshToken,
     @JsonKey(name: "grant_type") @required String grantType,

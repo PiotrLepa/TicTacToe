@@ -36,6 +36,9 @@ class AppLocalizations {
   String get passwordTooShortError =>
       _localizedStrings["passwordTooShortError"];
 
+  String get usernameTooShortError =>
+      _localizedStrings["usernameTooShortError"];
+
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
   String get pageGameResults => _localizedStrings["pageGameResults"];

@@ -9,6 +9,7 @@
   "emptyFieldError": "Field cannot be empty",
   "invalidEmailError": "Incorrect email address",
   "passwordTooShortError": "Password must be at least 5 characters",
+  "usernameTooShortError": "Username must be at least 3 characters",
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",

@@ -9,6 +9,7 @@
   "emptyFieldError": "Pole nie może być puste",
   "invalidEmailError": "Niepoprawny adres e-mail",
   "passwordTooShortError": "Hasło musi mieć conajmniej 5 znaków",
+  "usernameTooShortError": "Nazwa użytkownika musi mieć conajmniej 3 znaki",
   "difficultyLevelEasy": "Łatwy",
   "difficultyLevelMedium": "Średni",
   "difficultyLevelHard": "Trudny",
