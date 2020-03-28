@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/error_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/success_flushbar.dart';
@@ -26,10 +25,8 @@ class FlushbarHelper {
   Future<void> showError({
     @required RawKeyString message,
     RawKeyString title,
-    bool syncWithNavigation = false,
   }) =>
       _showFlushbar(
-        syncWithNavigation: syncWithNavigation,
         flushbar: ErrorFlushbar(
           context: _context,
           title: title,
@@ -39,12 +36,10 @@ class FlushbarHelper {
       );
 
   Future<void> showSuccess({
-    @required RawKeyString message,
-    RawKeyString title,
-    bool syncWithNavigation = false,
+    @required String message,
+    String title,
   }) =>
       _showFlushbar(
-        syncWithNavigation: syncWithNavigation,
         flushbar: SuccessFlushbar(
           context: _context,
           title: title,
@@ -54,8 +49,6 @@ class FlushbarHelper {
       );
 
   Future<void> show({
-    RawKeyString titleRawKey,
-    RawKeyString messageRawKey,
     String title,
     String message,
     Color backgroundColor,
@@ -63,13 +56,11 @@ class FlushbarHelper {
     FlatButton mainButton,
     bool infinityDuration = false,
     bool isDismissible = true,
-    bool syncWithNavigation = false,
   }) =>
       _showFlushbar(
-        syncWithNavigation: syncWithNavigation,
         flushbar: AppFlushbar(
-          title: title ?? AppLocalizations.of(_context).get(titleRawKey),
-          message: message ?? AppLocalizations.of(_context).get(messageRawKey),
+          title: title,
+          message: message,
           backgroundColor: backgroundColor,
           icon: icon,
           mainButton: mainButton,
@@ -80,16 +71,13 @@ class FlushbarHelper {
       );
 
   Future<void> _showFlushbar({
-    @required bool syncWithNavigation,
     @required AppFlushbar flushbar,
   }) async {
     if (_isFlushbarVisible) {
       return;
     }
     _isFlushbarVisible = true;
-    if (syncWithNavigation) {
-      await Future.delayed(Duration(milliseconds: 200));
-    }
+    await Future.delayed(Duration(milliseconds: 200));
     return ExtendedNavigator.ofRouter<Router>().push(
       flushbarRoute.showFlushbar(
         context: _context,

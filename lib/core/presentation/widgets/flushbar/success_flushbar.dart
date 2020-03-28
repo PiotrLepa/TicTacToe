@@ -1,7 +1,6 @@
 // ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 
@@ -10,12 +9,12 @@ class SuccessFlushbar extends AppFlushbar {
   SuccessFlushbar({
     Key key,
     @required BuildContext context,
-    @required RawKeyString message,
+    @required String message,
     @required VoidCallback onDismiss,
-    RawKeyString title,
+    String title,
   }) : super(
-          title: title ?? AppLocalizations.of(context).successFlushbarTitle,
-          message: AppLocalizations.of(context).get(message),
+    title: title ?? AppLocalizations.of(context).successFlushbarTitle,
+          message: message,
           backgroundColor: Theme.of(context).primaryColor,
           onDismiss: onDismiss,
         );

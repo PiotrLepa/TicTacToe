@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
 import 'package:tictactoe/presentation/common/app_field_form.dart';
 import 'package:tictactoe/presentation/common/progress_button.dart';
@@ -60,11 +62,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
         });
       },
       error: (errorMessage) {
+        getIt.get<FlushbarHelper>().showError(
+              message: errorMessage,
+            );
         setState(() {
           _isLoading = false;
         });
       },
       showSuccessFlushbar: () {
+        getIt.get<FlushbarHelper>().showSuccess(
+          message: AppLocalizations
+              .of(context)
+              .registrationScreenRegistrationSuccess,
+        );
         setState(() {
           _isLoading = false;
         });
@@ -110,9 +120,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
         SizedBox(height: 40),
         ProgressButton(
-          text: AppLocalizations.of(context).registrationScreenButton,
+          text: AppLocalizations
+              .of(context)
+              .registrationScreenButton,
           loadingText:
-          AppLocalizations.of(context).registrationScreenLoadingButton,
+          AppLocalizations
+              .of(context)
+              .registrationScreenLoadingButton,
           isLoading: _isLoading,
           onPressed: () => _registerUser(),
         ),
@@ -121,6 +135,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   void _registerUser() {
+    FocusScope.of(context).unfocus();
     context.bloc<RegistrationBloc>().add(
       RegistrationEvent.register(
         username: _usernameController.text,

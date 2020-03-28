@@ -98,12 +98,17 @@ class _GameScreenState extends State<GameScreen> {
             AppLocalizations.of(context).gameScreenStatusDraw);
       },
       moveError: (errorMessage) {
+        getIt.get<FlushbarHelper>().showError(
+              message: errorMessage,
+            );
         setState(() {
           _isFieldLoadingVisible = false;
         });
-        setState(() {
-          _isFieldLoadingVisible = false;
-        });
+      },
+      error: (errorMessage) {
+        getIt.get<FlushbarHelper>().showError(
+              message: errorMessage,
+            );
       },
       orElse: () {},
     );

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
 import 'package:tictactoe/presentation/common/app_field_form.dart';
 import 'package:tictactoe/presentation/common/progress_button.dart';
@@ -40,6 +42,9 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       error: (errorMessage, emailErrorKey, passwordErrorKey) {
+        getIt.get<FlushbarHelper>().showError(
+              message: errorMessage,
+            );
         setState(() {
           _isLoading = false;
         });
@@ -78,12 +83,13 @@ class _LoginPageState extends State<LoginPage> {
 
   void _loginUser(LoginState state) {
     if (state is Loading) return;
+    FocusScope.of(context).unfocus();
     context.bloc<LoginBloc>().add(
-          LoginEvent.login(
-            email: _emailController.text,
-            password: _passwordController.text,
-          ),
-        );
+      LoginEvent.login(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ),
+    );
   }
 
   @override
