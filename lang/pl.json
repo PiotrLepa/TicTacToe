@@ -1,5 +1,4 @@
 {
-  "errorTitle": "Coś poszło nie tak",
   "apiErrorNoConnection": "Brak połączenia z internetem",
   "apiErrorBadRequest": "Nieznany błąd",
   "apiErrorUnauthorized": "Brak dostępu",
@@ -10,6 +9,8 @@
   "invalidEmailError": "Niepoprawny adres e-mail",
   "passwordTooShortError": "Hasło musi mieć conajmniej 5 znaków",
   "usernameTooShortError": "Nazwa użytkownika musi mieć conajmniej 3 znaki",
+  "errorFlushbarTitle": "Coś poszło nie tak",
+  "successFlushbarTitle": "Sukces",
   "difficultyLevelEasy": "Łatwy",
   "difficultyLevelMedium": "Średni",
   "difficultyLevelHard": "Trudny",
@@ -36,5 +37,6 @@
   "startScreenLoginButton": "Logowanie",
   "registrationScreenToolbar": "Rejestracja",
   "registrationScreenButton": "Zarejestruj się",
-  "registrationScreenLoadingButton": "Rejestrowanie"
+  "registrationScreenLoadingButton": "Rejestrowanie",
+  "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji"
 }

@@ -7,6 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
@@ -21,19 +22,18 @@ part 'game_state.dart';
 
 @injectable
 class GameBloc extends Bloc<GameEvent, GameState> {
+  final FlushbarHelper _flushbarHelper;
   final CreateGameRepository _createGameRepository;
 
   GameResponse _gameResponse;
 
-  GameBloc(this._createGameRepository);
+  GameBloc(this._flushbarHelper, this._createGameRepository);
 
   @override
   GameState get initialState => GameState.nothing();
 
   @override
-  Stream<GameState> mapEventToState(
-    GameEvent event,
-  ) async* {
+  Stream<GameState> mapEventToState(GameEvent event,) async* {
     yield* event.map(
       createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
@@ -108,6 +108,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
           }
         },
         error: (errorMessage) async* {
+          _flushbarHelper.showError(
+            message: errorMessage,
+          );
           yield GameState.moveError(errorMessage);
         },
       );

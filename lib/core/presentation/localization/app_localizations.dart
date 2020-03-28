@@ -16,7 +16,7 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
-  String get errorTitle => _localizedStrings["errorTitle"];
+  String get errorFlushbarTitle => _localizedStrings["errorFlushbarTitle"];
 
   String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
 
@@ -38,6 +38,8 @@ class AppLocalizations {
 
   String get usernameTooShortError =>
       _localizedStrings["usernameTooShortError"];
+
+  String get successFlushbarTitle => _localizedStrings["successFlushbarTitle"];
 
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
@@ -107,6 +109,9 @@ class AppLocalizations {
 
   String get registrationScreenLoadingButton =>
       _localizedStrings["registrationScreenLoadingButton"];
+
+  String get registrationScreenRegistrationSuccess =>
+      _localizedStrings["registrationScreenRegistrationSuccess"];
 
   Future load() async {
     final String jsonString =

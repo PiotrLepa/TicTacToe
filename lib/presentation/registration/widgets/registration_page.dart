@@ -1,8 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/presentation/error/error_handler.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
 import 'package:tictactoe/presentation/common/app_field_form.dart';
@@ -32,7 +31,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
             padding: const EdgeInsets.all(16),
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
               condition: (previous, current) =>
-                  current is Nothing ||
+              current is Nothing ||
                   current is RenderInputsErrors ||
                   current is ClearInputsErrors,
               builder: (context, state) {
@@ -61,8 +60,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
         });
       },
       error: (errorMessage) {
-        getIt<ErrorHandler>().showError(context, errorMessage);
-
+        setState(() {
+          _isLoading = false;
+        });
+      },
+      showSuccessFlushbar: () {
         setState(() {
           _isLoading = false;
         });
@@ -110,7 +112,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ProgressButton(
           text: AppLocalizations.of(context).registrationScreenButton,
           loadingText:
-              AppLocalizations.of(context).registrationScreenLoadingButton,
+          AppLocalizations.of(context).registrationScreenLoadingButton,
           isLoading: _isLoading,
           onPressed: () => _registerUser(),
         ),
@@ -120,13 +122,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   void _registerUser() {
     context.bloc<RegistrationBloc>().add(
-          RegistrationEvent.register(
-            username: _usernameController.text,
-            email: _emailController.text,
-            password: _passwordController.text,
-            repeatedPassword: _repeatedPasswordController.text,
-          ),
-        );
+      RegistrationEvent.register(
+        username: _usernameController.text,
+        email: _emailController.text,
+        password: _passwordController.text,
+        repeatedPassword: _repeatedPasswordController.text,
+      ),
+    );
   }
 
   @override

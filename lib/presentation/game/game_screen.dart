@@ -1,10 +1,9 @@
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/presentation/error/error_handler.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/presentation/common/loading_indicator.dart';
@@ -24,7 +23,6 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
   bool _isFieldLoadingVisible = false;
-  Flushbar restartGameFlushBar;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +101,6 @@ class _GameScreenState extends State<GameScreen> {
         setState(() {
           _isFieldLoadingVisible = false;
         });
-        getIt<ErrorHandler>().showError(context, errorMessage);
         setState(() {
           _isFieldLoadingVisible = false;
         });
@@ -112,38 +109,28 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  void _showRestartGameFlushBar(String message) {
-    restartGameFlushBar = Flushbar(
-      title: message,
-      message: AppLocalizations.of(context).gameScreenPlayAgainQuestion,
-      flushbarStyle: FlushbarStyle.FLOATING,
-      mainButton: FlatButton(
-        onPressed: () {
-          restartGameFlushBar.dismiss();
-          context
-              .bloc<GameBloc>()
-              .add(GameEvent.restartGame(widget.difficultyLevel));
-        },
-        child: Text(
-          AppLocalizations.of(context).gameScreenPlayAgain,
-          style: TextStyle(color: Theme.of(context).primaryColor),
-        ),
-      ),
-      margin: EdgeInsets.all(8),
-      borderRadius: 16,
-      isDismissible: false,
-      icon: Icon(
-        Icons.videogame_asset,
-        color: Colors.white,
-      ),
-      shouldIconPulse: false,
-      boxShadows: [
-        BoxShadow(
-          color: Color(0x44FFFFFF),
-          offset: Offset(0, 3),
-          blurRadius: 4,
-        )
-      ],
-    )..show(context);
+  Future<void> _showRestartGameFlushBar(String message) async {
+    getIt.get<FlushbarHelper>().show(
+          title: message,
+          message: AppLocalizations.of(context).gameScreenPlayAgainQuestion,
+          isDismissible: false,
+          infinityDuration: true,
+          icon: Icon(
+            Icons.videogame_asset,
+            color: Colors.white,
+          ),
+          mainButton: FlatButton(
+            onPressed: () {
+              getIt.get<FlushbarHelper>().dismiss();
+              context
+                  .bloc<GameBloc>()
+                  .add(GameEvent.restartGame(widget.difficultyLevel));
+            },
+            child: Text(
+              AppLocalizations.of(context).gameScreenPlayAgain,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        );
   }
 }

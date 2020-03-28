@@ -1,5 +1,4 @@
 {
-  "errorTitle": "Something get wrong",
   "apiErrorNoConnection": "No internet connection",
   "apiErrorBadRequest": "Unknown error",
   "apiErrorUnauthorized": "Lack of access",
@@ -10,6 +9,8 @@
   "invalidEmailError": "Incorrect email address",
   "passwordTooShortError": "Password must be at least 5 characters",
   "usernameTooShortError": "Username must be at least 3 characters",
+  "errorFlushbarTitle": "Something get wrong",
+  "successFlushbarTitle": "Success",
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",
@@ -36,5 +37,6 @@
   "startScreenLoginButton": "Login",
   "registrationScreenToolbar": "Registration",
   "registrationScreenButton": "Sign in",
-  "registrationScreenLoadingButton": "Signing in"
+  "registrationScreenLoadingButton": "Signing in",
+  "registrationScreenRegistrationSuccess": "Log in to your account to use the application"
 }

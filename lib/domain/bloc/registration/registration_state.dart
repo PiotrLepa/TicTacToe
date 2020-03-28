@@ -15,5 +15,7 @@ abstract class RegistrationState with _$RegistrationState {
 
   const factory RegistrationState.loading() = Loading;
 
+  const factory RegistrationState.showSuccessFlushbar() = ShowSuccessFlushbar;
+
   const factory RegistrationState.error(RawKeyString errorMessage) = Error;
 }

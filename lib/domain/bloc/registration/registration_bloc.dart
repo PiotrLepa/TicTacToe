@@ -4,30 +4,28 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/core/presentation/validation/validators.dart';
 import 'package:tictactoe/domain/entity/reqistration_request/registration_request.dart';
 import 'package:tictactoe/domain/repository/registration_repository.dart';
 import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'registration_bloc.freezed.dart';
-
 part 'registration_event.dart';
-
 part 'registration_state.dart';
 
 @injectable
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
+  final FlushbarHelper _flushbarHelper;
   final RegistrationRepository _registrationRepository;
 
-  RegistrationBloc(this._registrationRepository);
+  RegistrationBloc(this._flushbarHelper, this._registrationRepository);
 
   @override
   RegistrationState get initialState => RegistrationState.nothing();
 
   @override
-  Stream<RegistrationState> mapEventToState(
-    RegistrationEvent event,
-  ) async* {
+  Stream<RegistrationState> mapEventToState(RegistrationEvent event,) async* {
     if (event is Register) {
       yield* _mapRegisterEvent(event);
     }
@@ -38,7 +36,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final usernameValidation = Validators.validateUsername(event.username);
     final passwordValidation = Validators.validatePassword(event.password);
     final repeatedPasswordValidation =
-        Validators.validatePassword(event.repeatedPassword);
+    Validators.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,
@@ -70,14 +68,20 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
           _navigateToLogin();
         },
         error: (errorMessage) async* {
+          _flushbarHelper.showError(
+            message: errorMessage,
+          );
           yield RegistrationState.error(errorMessage);
         },
       );
     }
   }
 
-  void _navigateToLogin() {
-    ExtendedNavigator.ofRouter<Router>()
-        .pushReplacementNamed(Routes.loginScreen);
+  void _navigateToLogin() async {
+    ExtendedNavigator.ofRouter<Router>().pushNamed(Routes.loginScreen);
+    _flushbarHelper.showSuccess(
+      message: KeyString('registrationScreenRegistrationSuccess'),
+      syncWithNavigation: true,
+    );
   }
 }

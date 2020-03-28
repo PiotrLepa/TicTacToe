@@ -6,6 +6,7 @@ import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/core/presentation/validation/validators.dart';
 import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
@@ -17,19 +18,21 @@ part 'login_state.dart';
 
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
+  final FlushbarHelper _flushbarHelper;
   final LoginRepository _loginRepository;
   final OauthTokensStorage _oauthTokensStorage;
 
   LoginBloc(
+    this._flushbarHelper,
     this._loginRepository,
     this._oauthTokensStorage,
   );
 
   @override
   LoginState get initialState => LoginState.nothing(
-        emailErrorKey: null,
-        passwordErrorKey: null,
-      );
+    emailErrorKey: null,
+    passwordErrorKey: null,
+  );
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -71,6 +74,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           _navigateToHome();
         },
         error: (errorMessage) async* {
+          _flushbarHelper.showError(
+            message: errorMessage,
+          );
           yield LoginState.error(errorMessage);
         },
       );
@@ -80,7 +86,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _navigateToHome() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
       Routes.homeScreen,
-      (route) => false,
+          (route) => false,
     );
   }
 }
