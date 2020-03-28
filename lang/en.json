@@ -1,5 +1,4 @@
 {
-  "errorTitle": "Something get wrong",
   "apiErrorNoConnection": "No internet connection",
   "apiErrorBadRequest": "Unknown error",
   "apiErrorUnauthorized": "Lack of access",
@@ -9,6 +8,9 @@
   "emptyFieldError": "Field cannot be empty",
   "invalidEmailError": "Incorrect email address",
   "passwordTooShortError": "Password must be at least 5 characters",
+  "usernameTooShortError": "Username must be at least 3 characters",
+  "errorFlushbarTitle": "Something get wrong",
+  "successFlushbarTitle": "Success",
   "difficultyLevelEasy": "Easy",
   "difficultyLevelMedium": "Medium",
   "difficultyLevelHard": "Hard",
@@ -23,9 +25,18 @@
   "gameScreenStatusDraw": "Draw",
   "gameScreenPlayAgainQuestion": "Do you want to play again?",
   "gameScreenPlayAgain": "Play",
-  "loginScreenTitle": "Login",
-  "loginScreenEmailHint": "Email",
-  "loginScreenPasswordHint": "Password",
+  "loginScreenToolbar": "Login",
+  "fieldUsernameHint": "Username",
+  "fieldEmailHint": "Email",
+  "fieldPasswordHint": "Password",
+  "fieldRepeatPasswordHint": "Repeat password",
   "loginScreenLoginButton": "Log in",
-  "loginScreenLoadingButton": "Logging in"
+  "loginScreenLoadingButton": "Logging in",
+  "startScreenTitle": "Join to us",
+  "startScreenRegistrationButton": "Registration",
+  "startScreenLoginButton": "Login",
+  "registrationScreenToolbar": "Registration",
+  "registrationScreenButton": "Sign in",
+  "registrationScreenLoadingButton": "Signing in",
+  "registrationScreenRegistrationSuccess": "Log in to your account to use the application"
 }

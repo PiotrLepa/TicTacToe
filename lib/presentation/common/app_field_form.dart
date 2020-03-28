@@ -6,7 +6,7 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 class AppFormField extends StatelessWidget {
   final String labelText;
   final TextEditingController controller;
-  final RawKeyString validator;
+  final RawKeyString errorText;
   final TextInputType type;
   final bool obscureText;
 
@@ -14,7 +14,7 @@ class AppFormField extends StatelessWidget {
     Key key,
     @required this.labelText,
     this.controller,
-    this.validator,
+    this.errorText,
     this.type,
     this.obscureText,
   }) : super(key: key);
@@ -43,8 +43,8 @@ class AppFormField extends StatelessWidget {
   }
 
   String _getValidationText(BuildContext context) {
-    if (validator != null) {
-      return AppLocalizations.of(context).get(validator);
+    if (errorText != null) {
+      return AppLocalizations.of(context).get(errorText);
     } else {
       return null;
     }

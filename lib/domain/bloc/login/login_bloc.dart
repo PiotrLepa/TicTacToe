@@ -42,7 +42,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final emailValidation = Validators.validateEmail(event.email);
     final passwordValidation = Validators.validatePassword(event.password);
     if (emailValidation != null || passwordValidation != null) {
-      yield LoginState.renderInputError(
+      yield LoginState.renderInputsErrors(
         emailErrorKey: emailValidation,
         passwordErrorKey: passwordValidation,
       );
@@ -80,7 +80,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _navigateToHome() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
       Routes.homeScreen,
-      (route) => false,
+          (route) => false,
     );
   }
 }

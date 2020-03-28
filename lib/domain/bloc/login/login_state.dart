@@ -7,10 +7,10 @@ abstract class LoginState with _$LoginState {
     RawKeyString passwordErrorKey,
   }) = Nothing;
 
-  const factory LoginState.renderInputError({
+  const factory LoginState.renderInputsErrors({
     RawKeyString emailErrorKey,
     RawKeyString passwordErrorKey,
-  }) = RenderInputError;
+  }) = RenderInputsErrors;
 
   const factory LoginState.loading({
     RawKeyString emailErrorKey,

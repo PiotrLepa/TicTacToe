@@ -7,7 +7,9 @@ part 'login_request_model.freezed.dart';
 part 'login_request_model.g.dart';
 
 @freezed
-abstract class LoginRequestModel extends Serializable with _$LoginRequestModel {
+abstract class LoginRequestModel
+    with _$LoginRequestModel
+    implements Serializable {
   const factory LoginRequestModel({
     @JsonKey(name: "username") @required String email,
     @required String password,

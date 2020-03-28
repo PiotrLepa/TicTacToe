@@ -30,7 +30,6 @@ class RefreshTokenRepository extends NetworkRepository {
     );
     return call(
       request: request.then((value) => value.data),
-      mapper: (model) => model,
     );
   }
 }

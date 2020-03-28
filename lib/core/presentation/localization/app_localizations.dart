@@ -16,7 +16,7 @@ class AppLocalizations {
 
   Map<String, String> _localizedStrings;
 
-  String get errorTitle => _localizedStrings["errorTitle"];
+  String get errorFlushbarTitle => _localizedStrings["errorFlushbarTitle"];
 
   String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
 
@@ -35,6 +35,11 @@ class AppLocalizations {
 
   String get passwordTooShortError =>
       _localizedStrings["passwordTooShortError"];
+
+  String get usernameTooShortError =>
+      _localizedStrings["usernameTooShortError"];
+
+  String get successFlushbarTitle => _localizedStrings["successFlushbarTitle"];
 
   String get pageStartGame => _localizedStrings["pageStartGame"];
 
@@ -69,12 +74,16 @@ class AppLocalizations {
 
   String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
 
-  String get loginScreenTitle => _localizedStrings["loginScreenTitle"];
+  String get loginScreenToolbar => _localizedStrings["loginScreenToolbar"];
 
-  String get loginScreenEmailHint => _localizedStrings["loginScreenEmailHint"];
+  String get fieldUsernameHint => _localizedStrings["fieldUsernameHint"];
 
-  String get loginScreenPasswordHint =>
-      _localizedStrings["loginScreenPasswordHint"];
+  String get fieldEmailHint => _localizedStrings["fieldEmailHint"];
+
+  String get fieldPasswordHint => _localizedStrings["fieldPasswordHint"];
+
+  String get fieldRepeatPasswordHint =>
+      _localizedStrings["fieldRepeatPasswordHint"];
 
   String get loginScreenLoginButton =>
       _localizedStrings["loginScreenLoginButton"];
@@ -83,6 +92,26 @@ class AppLocalizations {
       _localizedStrings["loginScreenLoadingButton"];
 
   String get emptyFieldError => _localizedStrings["emptyFieldError"];
+
+  String get startScreenTitle => _localizedStrings["startScreenTitle"];
+
+  String get startScreenRegistrationButton =>
+      _localizedStrings["startScreenRegistrationButton"];
+
+  String get startScreenLoginButton =>
+      _localizedStrings["startScreenLoginButton"];
+
+  String get registrationScreenToolbar =>
+      _localizedStrings["registrationScreenToolbar"];
+
+  String get registrationScreenButton =>
+      _localizedStrings["registrationScreenButton"];
+
+  String get registrationScreenLoadingButton =>
+      _localizedStrings["registrationScreenLoadingButton"];
+
+  String get registrationScreenRegistrationSuccess =>
+      _localizedStrings["registrationScreenRegistrationSuccess"];
 
   Future load() async {
     final String jsonString =
