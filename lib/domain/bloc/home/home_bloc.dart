@@ -7,9 +7,7 @@ import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'home_bloc.freezed.dart';
-
 part 'home_event.dart';
-
 part 'home_state.dart';
 
 @injectable
@@ -35,12 +33,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeEvent event,
   ) async* {
     yield* event.map(
-      appStarted: mapAppStartedEvent,
-      onBottomNavigationTapped: mapEventToState,
+      appStarted: _mapAppStartedEvent,
+      onBottomNavigationTapped: _mapOnBottomNavigationTappedEvent,
     );
   }
 
-  Stream<HomeState> mapAppStartedEvent(AppStarted event) async* {
+  Stream<HomeState> _mapAppStartedEvent(AppStarted event) async* {
     final accessToken = await _oauthTokensStorage.accessToken;
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
@@ -56,7 +54,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  Stream<HomeState> mapUpdatePageEvent(OnBottomNavigationTapped event) async* {
+  Stream<HomeState> _mapOnBottomNavigationTappedEvent(
+      OnBottomNavigationTapped event) async* {
     yield HomeState.updatePage(
       pageTitle: pageTitles[event.index],
       index: event.index,

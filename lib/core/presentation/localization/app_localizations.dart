@@ -113,6 +113,10 @@ class AppLocalizations {
   String get registrationScreenRegistrationSuccess =>
       _localizedStrings["registrationScreenRegistrationSuccess"];
 
+  String get gameResultsUserTab => _localizedStrings["gameResultsUserTab"];
+
+  String get gameResultsAllTab => _localizedStrings["gameResultsAllTab"];
+
   Future load() async {
     final String jsonString =
         await rootBundle.loadString('lang/${locale.languageCode}.json');

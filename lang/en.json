@@ -38,5 +38,7 @@
   "registrationScreenToolbar": "Registration",
   "registrationScreenButton": "Sign in",
   "registrationScreenLoadingButton": "Signing in",
-  "registrationScreenRegistrationSuccess": "Log in to your account to use the application"
+  "registrationScreenRegistrationSuccess": "Log in to your account to use the application",
+  "gameResultsUserTab": "Yours",
+  "gameResultsAllTab": "All"
 }

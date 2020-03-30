@@ -38,5 +38,7 @@
   "registrationScreenToolbar": "Rejestracja",
   "registrationScreenButton": "Zarejestruj się",
   "registrationScreenLoadingButton": "Rejestrowanie",
-  "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji"
+  "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji",
+  "gameResultsUserTab": "Twoje",
+  "gameResultsAllTab": "Wszystkie"
 }

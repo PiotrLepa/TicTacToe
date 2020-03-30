@@ -9,9 +9,9 @@ import 'package:tictactoe/presentation/start_game/start_game_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final _pages = [
-    StartGamePage(),
-    GameResultsPage(),
-    SettingsPage(),
+    StartGameScreen(),
+    GameResultsScreen(),
+    SettingsScreen(),
   ];
 
   @override
@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context).get(state.pageTitle)),
+            elevation: 0,
           ),
           body: IndexedStack(
             index: state.index,
