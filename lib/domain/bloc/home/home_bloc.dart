@@ -49,7 +49,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _navigateToLogin() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-      Routes.loginScreen,
+      Routes.startScreen,
       (route) => false,
     );
   }

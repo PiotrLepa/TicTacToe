@@ -7,16 +7,16 @@ import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
-import 'package:tictactoe/domain/repository/create_game_repository.dart';
+import 'package:tictactoe/domain/repository/game_repository.dart';
 
-@RegisterAs(CreateGameRepository)
+@RegisterAs(GameRepository)
 @lazySingleton
-class CreateGameRepositoryImpl implements CreateGameRepository {
+class GameRepositoryImpl implements GameRepository {
   final NetworkService _service;
   final DifficultyLevelModelMapper _difficultyLevelModelMapper;
   final GameResponseEntityMapper _gameResponseEntityMapper;
 
-  CreateGameRepositoryImpl(
+  GameRepositoryImpl(
     this._service,
     this._difficultyLevelModelMapper,
     this._gameResponseEntityMapper,
