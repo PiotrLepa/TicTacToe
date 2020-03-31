@@ -1,23 +1,26 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/data/serializer/json_factories.dart';
 
 typedef T JsonFactory<T>(Map<String, dynamic> json);
 
 @lazySingleton
 class ResponseConverter {
-  Future<T> decodeResponse<T>(Future<Response> futureResponse) async {
+  Future<T> decodeResponse<T>(
+    Future<Response> futureResponse,
+  ) async {
     final response = await futureResponse;
     final data = _decodeJson<T>(response.data);
     return data;
   }
 
-  Future<BuiltList<T>> decodeResponseList<T>(
-      Future<Response> futureResponse) async {
+  Future<KtList<T>> decodeResponseList<T>(
+    Future<Response> futureResponse,
+  ) async {
     final response = await futureResponse;
     final data = _decodeJson<T>(response.data);
-    return BuiltList<T>(data);
+    return KtList.from(data);
   }
 
   dynamic _decodeJson<T>(entity) {

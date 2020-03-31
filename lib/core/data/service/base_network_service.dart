@@ -1,5 +1,5 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/data/serializer/response_converter.dart';
 import 'package:tictactoe/core/data/serializer/serializable.dart';
@@ -28,7 +28,7 @@ abstract class BaseNetworkService {
         secured: secured,
       ));
 
-  Future<BuiltList<T>> getList<T>(
+  Future<KtList<T>> getList<T>(
     String path, {
     Serializable data,
     Map<String, dynamic> queryParameters,

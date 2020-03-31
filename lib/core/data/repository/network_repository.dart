@@ -5,14 +5,12 @@ import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
 
 class NetworkRepository {
-  Future<E> call<E, M>({
-    @required Future<M> request,
-    E mapper(M data),
+  Future<E> call<E>({
+    @required Future<E> request,
   }) async {
     try {
       final responseData = await request;
-      final mapped = mapper?.call(responseData) ?? responseData;
-      return Future.value(mapped);
+      return Future.value(responseData);
     } on DioError catch (e, s) {
       logger.e("error", e, s);
       return Future.error(_handleError(e));
