@@ -1,5 +1,5 @@
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/data/repository/network_repository.dart';
+import 'package:tictactoe/core/data/network/network_error_handler.dart';
 import 'package:tictactoe/data/mapper/entity/login_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/login_request_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
@@ -9,7 +9,7 @@ import 'package:tictactoe/domain/repository/login_repository.dart';
 
 @RegisterAs(LoginRepository)
 @lazySingleton
-class LoginRepositoryImpl extends NetworkRepository implements LoginRepository {
+class LoginRepositoryImpl implements LoginRepository {
   final NetworkService _service;
   final LoginRequestModelMapper _loginRequestModelMapper;
   final LoginResponseEntityMapper _loginResponseEntityMapper;
@@ -21,11 +21,8 @@ class LoginRepositoryImpl extends NetworkRepository implements LoginRepository {
   );
 
   @override
-  Future<LoginResponse> login(LoginRequest request) {
-    final requestModel = _loginRequestModelMapper.toModel(request);
-    return call(
-      request: _service.login(requestModel),
-      mapper: _loginResponseEntityMapper.toEntity,
-    );
-  }
+  Future<LoginResponse> login(LoginRequest request) => _service
+      .login(_loginRequestModelMapper.toModel(request))
+      .then(_loginResponseEntityMapper.toEntity)
+      .handleNetworkError();
 }

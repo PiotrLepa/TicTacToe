@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/data/repository/network_repository.dart';
+import 'package:tictactoe/core/data/network/network_error_handler.dart';
 import 'package:tictactoe/data/mapper/entity/game_response_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/model/difficilty_level_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
@@ -9,8 +11,7 @@ import 'package:tictactoe/domain/repository/create_game_repository.dart';
 
 @RegisterAs(CreateGameRepository)
 @lazySingleton
-class CreateGameRepositoryImpl extends NetworkRepository
-    implements CreateGameRepository {
+class CreateGameRepositoryImpl implements CreateGameRepository {
   final NetworkService _service;
   final DifficultyLevelModelMapper _difficultyLevelModelMapper;
   final GameResponseEntityMapper _gameResponseEntityMapper;
@@ -22,23 +23,15 @@ class CreateGameRepositoryImpl extends NetworkRepository
   );
 
   @override
-  Future<GameResponse> createGame(DifficultyLevel difficultyLevel) {
-    final difficultyLevelModel =
-        _difficultyLevelModelMapper.toModel(difficultyLevel);
-    final request = _service.createGame(
-      difficultyLevelModel,
-    );
-    return call(
-      request: request,
-      mapper: _gameResponseEntityMapper.toEntity,
-    );
-  }
+  Future<GameResponse> createGame(DifficultyLevel difficultyLevel) => _service
+      .createGame(_difficultyLevelModelMapper.toModel(difficultyLevel))
+      .then(_gameResponseEntityMapper.toEntity)
+      .handleNetworkError();
 
   @override
-  Future<GameResponse> setMove(int gameId, int fieldIndex) {
-    return call(
-      request: _service.setMove(gameId, fieldIndex),
-      mapper: _gameResponseEntityMapper.toEntity,
-    );
-  }
+  Future<GameResponse> setMove(int gameId, int fieldIndex) =>
+      _service
+          .setMove(gameId, fieldIndex)
+          .then(_gameResponseEntityMapper.toEntity)
+          .handleNetworkError();
 }

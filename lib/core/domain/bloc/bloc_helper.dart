@@ -14,7 +14,7 @@ Stream<CallState<T>> fetch<T>(Future<T> call,
     logger.e(e);
     final errorMessage = getIt.get<ErrorTranslator>().translate(e);
     yield CallState.error(errorMessage);
-  } catch (e) {
-    logger.e(e);
+  } catch (e, s) {
+    logger.e("bloc helper fetch", e, s);
   }
 }

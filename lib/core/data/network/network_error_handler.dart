@@ -1,23 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/logger/logger.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api_exception.dart';
+import 'package:tictactoe/core/injection/injection.dart';
 
-class NetworkRepository {
-  Future<E> call<E>({
-    @required Future<E> request,
-  }) async {
-    try {
-      final responseData = await request;
-      return Future.value(responseData);
-    } on DioError catch (e, s) {
-      logger.e("error", e, s);
-      return Future.error(_handleError(e));
+@lazySingleton
+class NetworkErrorHandler {
+  Future<T> handleError<T>(dynamic error, StackTrace stackTrace) async {
+    logger.e("NetworkErrorHandler", error, stackTrace);
+    if (error is DioError) {
+      final apiException = _mapError(error);
+      return Future.error(apiException);
+    } else {
+      return Future.error(ApiException.unknownError(-1, null));
     }
   }
 
-  ApiException _handleError(DioError error) {
+  ApiException _mapError(DioError error) {
     final response = error.response;
     final statusCode = response?.statusCode;
     if (statusCode == null) {
@@ -62,5 +62,12 @@ class NetworkRepository {
         return ApiException.unknownError(
             statusCode, errorResponse.printableMessage);
     }
+  }
+}
+
+extension FutureExtension<T> on Future<T> {
+  Future<T> handleNetworkError<T>() {
+    final errorHandler = getIt<NetworkErrorHandler>();
+    return catchError((e, s) => errorHandler.handleError<T>(e, s)) as Future<T>;
   }
 }
