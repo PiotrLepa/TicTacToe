@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_response.dart';
+import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
 
 class GameResultItem extends StatelessWidget {
   final GameResultResponse data;

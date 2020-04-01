@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/enum_helper.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/data/serializer/response_converter.dart';
@@ -8,7 +7,7 @@ import 'package:tictactoe/core/data/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
 import 'package:tictactoe/data/model/game_response/game_response_model.dart';
-import 'package:tictactoe/data/model/game_result_response/game_result_response_model.dart';
+import 'package:tictactoe/data/model/game_result_response/game_result_paged_response_model.dart';
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/registration_request/registration_request_model.dart';
@@ -59,13 +58,22 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<KtList<GameResultResponseModel>> getUserGameResults() => getList(
+  Future<GameResultPagedResponseModel> getUserGameResults(int page) => get(
         "/game/user-results",
+        queryParameters: {
+          "page": page,
+          "size": pagination_elements_per_page,
+        },
         secured: true,
       );
 
-  Future<KtList<GameResultResponseModel>> getAllGameResults() => getList(
+  Future<GameResultPagedResponseModel> getAllGameResults(int page) =>
+      get(
         "/game/all-results",
+        queryParameters: {
+          "page": page,
+          "size": pagination_elements_per_page,
+        },
         secured: true,
       );
 }

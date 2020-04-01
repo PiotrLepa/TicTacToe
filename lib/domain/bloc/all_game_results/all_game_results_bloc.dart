@@ -6,13 +6,11 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_response.dart';
+import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
 
 part 'all_game_results_bloc.freezed.dart';
-
 part 'all_game_results_event.dart';
-
 part 'all_game_results_state.dart';
 
 @injectable
@@ -42,7 +40,7 @@ class AllGameResultsBloc
   }
 
   Stream<AllGameResultsState> _fetchAllGameResults() async* {
-    final request = fetch(_gameResultRepository.getAllGameResults());
+    final request = fetch(_gameResultRepository.getAllGameResults(0));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
@@ -50,7 +48,7 @@ class AllGameResultsBloc
         },
         success: (response) async* {
           yield AllGameResultsState.renderGameResults(
-            gameResults: response,
+            gameResults: response.content,
           );
         },
         error: (errorMessage) async* {

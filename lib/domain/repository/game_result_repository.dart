@@ -1,8 +1,7 @@
-import 'package:kt_dart/collection.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_response.dart';
+import 'package:tictactoe/domain/entity/game_result_response/game_result_paged_response.dart';
 
 abstract class GameResultRepository {
-  Future<KtList<GameResultResponse>> getUserGameResults();
+  Future<GameResultPagedResponse> getUserGameResults(int page);
 
-  Future<KtList<GameResultResponse>> getAllGameResults();
+  Future<GameResultPagedResponse> getAllGameResults(int page);
 }

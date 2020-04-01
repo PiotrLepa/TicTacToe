@@ -6,7 +6,6 @@ import 'package:tictactoe/data/model/common/game_mark/game_mark_model.dart';
 import 'package:tictactoe/data/model/common/game_status/game_status_model.dart';
 
 part 'game_result_response_model.freezed.dart';
-
 part 'game_result_response_model.g.dart';
 
 @freezed

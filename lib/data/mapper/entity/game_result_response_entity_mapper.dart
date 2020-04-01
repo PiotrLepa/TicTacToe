@@ -3,8 +3,8 @@ import 'package:tictactoe/core/data/mapper/entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/difficilty_level_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_mark_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_status_entity_mapper.dart';
-import 'package:tictactoe/data/model/game_result_response/game_result_response_model.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_response.dart';
+import 'package:tictactoe/data/model/game_result_response/content/game_result_response_model.dart';
+import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
 
 @lazySingleton
 class GameResultResponseEntityMapper
