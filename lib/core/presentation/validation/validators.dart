@@ -7,7 +7,7 @@ class Validators {
   static RawKeyString validateUsername(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');
-    } else if (value.length < 5) {
+    } else if (value.length < 3) {
       return KeyString('usernameTooShortError');
     } else {
       return null;
@@ -27,7 +27,7 @@ class Validators {
   static RawKeyString validatePassword(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');
-    } else if (value.length < 5) {
+    } else if (value.length < 6) {
       return KeyString('passwordTooShortError');
     } else {
       return null;

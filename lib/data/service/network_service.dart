@@ -59,8 +59,13 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
+  Future<KtList<GameResultResponseModel>> getUserGameResults() => getList(
+        "/game/user-results",
+        secured: true,
+      );
+
   Future<KtList<GameResultResponseModel>> getAllGameResults() => getList(
-        "/game/results",
+        "/game/all-results",
         secured: true,
       );
 }

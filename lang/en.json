@@ -7,7 +7,7 @@
   "apiErrorUnknown": "Unknown error",
   "emptyFieldError": "Field cannot be empty",
   "invalidEmailError": "Incorrect email address",
-  "passwordTooShortError": "Password must be at least 5 characters",
+  "passwordTooShortError": "Password must be at least 6 characters",
   "usernameTooShortError": "Username must be at least 3 characters",
   "errorFlushbarTitle": "Something get wrong",
   "successFlushbarTitle": "Success",
