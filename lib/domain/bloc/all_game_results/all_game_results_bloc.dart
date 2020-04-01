@@ -29,18 +29,26 @@ class AllGameResultsBloc
   ) async* {
     yield* event.map(
       screenStarted: _mapScreenStartedEvent,
+      loadMoreItems: _mapLoadMoreItemsEvent,
       gameResultTapped: _mapGameResultTappedEvent,
     );
   }
 
   Stream<AllGameResultsState> _mapScreenStartedEvent(
-    ScreenStarted event,
-  ) async* {
-    yield* _fetchAllGameResults();
+      ScreenStarted event) async* {
+    yield* _fetchAllGameResults(0);
   }
 
-  Stream<AllGameResultsState> _fetchAllGameResults() async* {
-    final request = fetch(_gameResultRepository.getAllGameResults(0));
+  Stream<AllGameResultsState> _mapLoadMoreItemsEvent(
+      LoadMoreItems event) async* {
+    if (event.isLastPage) {
+      return;
+    }
+    yield* _fetchAllGameResults(event.currentPage + 1);
+  }
+
+  Stream<AllGameResultsState> _fetchAllGameResults(int page) async* {
+    final request = fetch(_gameResultRepository.getAllGameResults(page));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
@@ -48,6 +56,8 @@ class AllGameResultsBloc
         },
         success: (response) async* {
           yield AllGameResultsState.renderGameResults(
+            currentPage: response.pageNumber,
+            isLastPage: response.lastPage,
             gameResults: response.content,
           );
         },

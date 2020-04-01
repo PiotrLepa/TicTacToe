@@ -29,6 +29,7 @@ class UserGameResultsBloc
   ) async* {
     yield* event.map(
       screenStarted: _mapScreenStartedEvent,
+      loadMoreItems: _mapLoadMoreItemsEvent,
       gameResultTapped: _mapGameResultTappedEvent,
     );
   }
@@ -36,18 +37,28 @@ class UserGameResultsBloc
   Stream<UserGameResultsState> _mapScreenStartedEvent(
     ScreenStarted event,
   ) async* {
-    yield* _fetchUserGameResults();
+    yield* _fetchUserGameResults(0);
   }
 
-  Stream<UserGameResultsState> _fetchUserGameResults() async* {
-    final request = fetch(_gameResultRepository.getUserGameResults(0));
+  Stream<UserGameResultsState> _mapLoadMoreItemsEvent(
+      LoadMoreItems event) async* {
+    if (event.isLastPage) {
+      return;
+    }
+    yield* _fetchUserGameResults(event.currentPage + 1);
+  }
+
+  Stream<UserGameResultsState> _fetchUserGameResults(int page) async* {
+    final request = fetch(_gameResultRepository.getUserGameResults(page));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield UserGameResultsState.loading();
+//          yield UserGameResultsState.loading();
         },
         success: (response) async* {
           yield UserGameResultsState.renderGameResults(
+            currentPage: response.pageNumber,
+            isLastPage: response.lastPage,
             gameResults: response.content,
           );
         },

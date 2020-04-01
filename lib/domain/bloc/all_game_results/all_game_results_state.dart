@@ -5,6 +5,8 @@ abstract class AllGameResultsState with _$AllGameResultsState {
   const factory AllGameResultsState.loading() = Loading;
 
   const factory AllGameResultsState.renderGameResults({
+    @required int currentPage,
+    @required bool isLastPage,
     @required KtList<GameResultResponse> gameResults,
   }) = RenderGameResults;
 

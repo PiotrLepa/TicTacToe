@@ -11,6 +11,6 @@ abstract class GameResultPagedResponse with _$GameResultPagedResponse {
   const factory GameResultPagedResponse({
     @required KtList<GameResultResponse> content,
     @required int pageNumber,
-    @required bool last,
+    @required bool lastPage,
   }) = _GameResultPagedResponse;
 }

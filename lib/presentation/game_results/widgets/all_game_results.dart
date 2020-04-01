@@ -21,6 +21,14 @@ class AllGameResults extends StatelessWidget {
             ),
             renderGameResults: (renderGameResults) => GameResultList(
               data: renderGameResults.gameResults,
+              loadMoreItemsCallback: () {
+                context
+                    .bloc<AllGameResultsBloc>()
+                    .add(AllGameResultsEvent.loadMoreItems(
+                      currentPage: renderGameResults.currentPage,
+                      isLastPage: renderGameResults.isLastPage,
+                    ));
+              },
             ),
             error: (error) => Center(
               child: Text(

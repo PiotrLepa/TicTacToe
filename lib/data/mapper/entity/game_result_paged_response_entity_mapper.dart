@@ -20,7 +20,7 @@ class GameResultPagedResponseEntityMapper
         model.content.map(_gameResultResponseEntityMapper.toEntity),
       ),
       pageNumber: model.number,
-      last: model.last,
+      lastPage: model.last,
     );
   }
 }
