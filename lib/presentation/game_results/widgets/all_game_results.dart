@@ -24,10 +24,7 @@ class AllGameResults extends StatelessWidget {
               loadMoreItemsCallback: () {
                 context
                     .bloc<AllGameResultsBloc>()
-                    .add(AllGameResultsEvent.loadMoreItems(
-                      currentPage: renderGameResults.currentPage,
-                      isLastPage: renderGameResults.isLastPage,
-                    ));
+                    .add(AllGameResultsEvent.loadMoreItems());
               },
             ),
             error: (error) => Center(

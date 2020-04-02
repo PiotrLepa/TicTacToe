@@ -7,6 +7,7 @@ import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
+import 'package:tictactoe/domain/entity/game_result_response/game_result_paged_response.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
 
 part 'all_game_results_bloc.freezed.dart';
@@ -17,6 +18,8 @@ part 'all_game_results_state.dart';
 class AllGameResultsBloc
     extends Bloc<AllGameResultsEvent, AllGameResultsState> {
   final GameResultRepository _gameResultRepository;
+
+  GameResultPagedResponse _gameResultPagedResponse;
 
   AllGameResultsBloc(this._gameResultRepository);
 
@@ -41,10 +44,10 @@ class AllGameResultsBloc
 
   Stream<AllGameResultsState> _mapLoadMoreItemsEvent(
       LoadMoreItems event) async* {
-    if (event.isLastPage) {
+    if (_gameResultPagedResponse.lastPage) {
       return;
     }
-    yield* _fetchAllGameResults(event.currentPage + 1);
+    yield* _fetchAllGameResults(_gameResultPagedResponse.pageNumber + 1);
   }
 
   Stream<AllGameResultsState> _fetchAllGameResults(int page) async* {
@@ -52,14 +55,14 @@ class AllGameResultsBloc
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield AllGameResultsState.loading();
+//          yield AllGameResultsState.loading();
         },
         success: (response) async* {
-          yield AllGameResultsState.renderGameResults(
-            currentPage: response.pageNumber,
-            isLastPage: response.lastPage,
-            gameResults: response.content,
-          );
+          final newList = _gameResultPagedResponse != null
+              ? _gameResultPagedResponse.content + response.content
+              : response.content;
+          yield AllGameResultsState.renderGameResults(newList,);
+          _gameResultPagedResponse = response;
         },
         error: (errorMessage) async* {
           yield AllGameResultsState.error(errorMessage);
