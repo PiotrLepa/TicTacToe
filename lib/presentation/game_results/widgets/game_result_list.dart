@@ -7,11 +7,13 @@ import 'package:tictactoe/presentation/game_results/widgets/game_result_item.dar
 
 class GameResultList extends StatelessWidget {
   final KtList<GameResultResponse> data;
+  final bool hasReachedEnd;
   final VoidCallback loadMoreItemsCallback;
 
   const GameResultList({
     Key key,
     @required this.data,
+    @required this.hasReachedEnd,
     @required this.loadMoreItemsCallback,
   }) : super(key: key);
 
@@ -19,6 +21,7 @@ class GameResultList extends StatelessWidget {
   Widget build(BuildContext context) {
     return PagedListView(
       data: data,
+      hasReachedEnd: hasReachedEnd,
       itemBuilder: (context, itemData, index) {
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 30),
@@ -36,20 +39,5 @@ class GameResultList extends StatelessWidget {
       },
       loadMoreItemsCallback: loadMoreItemsCallback,
     );
-//    return ListView.separated(
-//      itemCount: data.size,
-//      separatorBuilder: (context, index) {
-//        return Padding(
-//          padding: const EdgeInsets.all(8),
-//          child: Divider(
-//            thickness: 1.5,
-//            color: Theme.of(context).dividerColor,
-//          ),
-//        );
-//      },
-//      itemBuilder: (context, index) {
-//        return GameResultItem(data: data[index]);
-//      },
-//    );
   }
 }

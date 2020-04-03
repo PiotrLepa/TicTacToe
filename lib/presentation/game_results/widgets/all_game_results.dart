@@ -14,13 +14,15 @@ class AllGameResults extends StatelessWidget {
       create: (context) =>
           getIt<AllGameResultsBloc>()..add(AllGameResultsEvent.screenStarted()),
       child: BlocBuilder<AllGameResultsBloc, AllGameResultsState>(
+        condition: (oldState, newState) => newState is! AdditionalLoading,
         builder: (context, state) {
-          return state.map(
+          return state.maybeMap(
             loading: (loading) => Center(
               child: LoadingIndicator(),
             ),
             renderGameResults: (renderGameResults) => GameResultList(
               data: renderGameResults.gameResults,
+              hasReachedEnd: renderGameResults.hasReachedEnd,
               loadMoreItemsCallback: () {
                 context
                     .bloc<AllGameResultsBloc>()
@@ -32,6 +34,7 @@ class AllGameResults extends StatelessWidget {
                 AppLocalizations.of(context).get(error.errorMessage),
               ),
             ),
+            orElse: () => Container(),
           );
         },
       ),

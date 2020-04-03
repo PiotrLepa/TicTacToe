@@ -6,6 +6,7 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/core/domain/bloc/pagination_handler.dart';
 import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
 import 'package:tictactoe/domain/entity/game_result_response/game_result_paged_response.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
@@ -15,11 +16,9 @@ part 'all_game_results_event.dart';
 part 'all_game_results_state.dart';
 
 @injectable
-class AllGameResultsBloc
-    extends Bloc<AllGameResultsEvent, AllGameResultsState> {
+class AllGameResultsBloc extends Bloc<AllGameResultsEvent, AllGameResultsState>
+    with PaginationHandler<GameResultResponse> {
   final GameResultRepository _gameResultRepository;
-
-  GameResultPagedResponse _gameResultPagedResponse;
 
   AllGameResultsBloc(this._gameResultRepository);
 
@@ -44,34 +43,51 @@ class AllGameResultsBloc
 
   Stream<AllGameResultsState> _mapLoadMoreItemsEvent(
       LoadMoreItems event) async* {
-    if (_gameResultPagedResponse.lastPage) {
-      return;
+    if (hasMorePages()) {
+      yield* _fetchAllGameResults(getNextPage());
     }
-    yield* _fetchAllGameResults(_gameResultPagedResponse.pageNumber + 1);
   }
 
   Stream<AllGameResultsState> _fetchAllGameResults(int page) async* {
-    final request = fetch(_gameResultRepository.getAllGameResults(page));
-    await for (final state in request) {
-      yield* state.when(
-        progress: () async* {
-//          yield AllGameResultsState.loading();
+    final fetchResult = pagedFetch(
+      page: page,
+      call: _gameResultRepository.getAllGameResults(page),
+    );
+    await for (final state in fetchResult) {
+      yield* state.maybeWhen(
+        initialProgress: () async* {
+          yield AllGameResultsState.loading();
         },
-        success: (response) async* {
-          final newList = _gameResultPagedResponse != null
-              ? _gameResultPagedResponse.content + response.content
-              : response.content;
-          yield AllGameResultsState.renderGameResults(newList,);
-          _gameResultPagedResponse = response;
+        initialSuccess: (response) async* {
+          yield* _renderGameResults(response);
         },
-        error: (errorMessage) async* {
+        initialError: (errorMessage) async* {
           yield AllGameResultsState.error(errorMessage);
         },
+        additionalProgress: () async* {
+          yield AllGameResultsState.additionalLoading();
+        },
+        additionalSuccess: (response) async* {
+          yield* _renderGameResults(response);
+        },
+        orElse: () {},
       );
     }
   }
 
+  Stream<AllGameResultsState> _renderGameResults(
+      GameResultPagedResponse response,) async* {
+    onPageFetched(
+      page: response.pageNumber,
+      hasReachedEnd: response.lastPage,
+      items: response.content,
+    );
+    yield AllGameResultsState.renderGameResults(
+      gameResults: getAllItems(),
+      hasReachedEnd: response.lastPage,
+    );
+  }
+
   Stream<AllGameResultsState> _mapGameResultTappedEvent(
-    GameResultTapped event,
-  ) async* {}
+      GameResultTapped event,) async* {}
 }
