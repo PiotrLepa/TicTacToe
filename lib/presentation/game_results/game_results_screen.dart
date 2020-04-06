@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/presentation/game_results/widgets/all_game_results.dart';
+import 'package:tictactoe/domain/entity/game_result_response/game_result_type.dart';
+import 'package:tictactoe/presentation/game_results/widgets/game_result_page.dart';
 import 'package:tictactoe/presentation/game_results/widgets/game_results_tab_bar.dart';
-import 'package:tictactoe/presentation/game_results/widgets/user_game_results.dart';
 
 class GameResultsScreen extends StatelessWidget {
   @override
@@ -17,8 +17,12 @@ class GameResultsScreen extends StatelessWidget {
           Expanded(
             child: TabBarView(
               children: <Widget>[
-                UserGameResults(),
-                AllGameResults(),
+                GameResults(
+                  type: GameResultType.user,
+                ),
+                GameResults(
+                  type: GameResultType.all,
+                ),
               ],
             ),
           ),

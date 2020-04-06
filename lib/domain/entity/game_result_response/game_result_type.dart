@@ -1,0 +1,4 @@
+enum GameResultType {
+  all,
+  user,
+}

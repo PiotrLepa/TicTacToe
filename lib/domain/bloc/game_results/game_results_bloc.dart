@@ -9,26 +9,28 @@ import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/bloc/pagination_handler.dart';
 import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
 import 'package:tictactoe/domain/entity/game_result_response/game_result_paged_response.dart';
+import 'package:tictactoe/domain/entity/game_result_response/game_result_type.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
 
-part 'user_game_results_bloc.freezed.dart';
-part 'user_game_results_event.dart';
-part 'user_game_results_state.dart';
+part 'game_results_bloc.freezed.dart';
+
+part 'game_results_event.dart';
+
+part 'game_results_state.dart';
 
 @injectable
-class UserGameResultsBloc
-    extends Bloc<UserGameResultsEvent, UserGameResultsState>
+class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     with PaginationHandler<GameResultResponse> {
   final GameResultRepository _gameResultRepository;
 
-  UserGameResultsBloc(this._gameResultRepository);
+  GameResultsBloc(this._gameResultRepository);
 
   @override
-  UserGameResultsState get initialState => UserGameResultsState.loading();
+  GameResultsState get initialState => GameResultsState.loading();
 
   @override
-  Stream<UserGameResultsState> mapEventToState(
-    UserGameResultsEvent event,
+  Stream<GameResultsState> mapEventToState(
+    GameResultsEvent event,
   ) async* {
     yield* event.map(
       screenStarted: _mapScreenStartedEvent,
@@ -37,37 +39,35 @@ class UserGameResultsBloc
     );
   }
 
-  Stream<UserGameResultsState> _mapScreenStartedEvent(
-    ScreenStarted event,
-  ) async* {
-    yield* _fetchUserGameResults(0);
+  Stream<GameResultsState> _mapScreenStartedEvent(ScreenStarted event,) async* {
+    yield* _fetchGameResults(0, event.type);
   }
 
-  Stream<UserGameResultsState> _mapLoadMoreItemsEvent(
-      LoadMoreItems event) async* {
+  Stream<GameResultsState> _mapLoadMoreItemsEvent(LoadMoreItems event) async* {
     if (hasMorePages()) {
-      yield* _fetchUserGameResults(getNextPage());
+      yield* _fetchGameResults(getNextPage(), event.type);
     }
   }
 
-  Stream<UserGameResultsState> _fetchUserGameResults(int page) async* {
+  Stream<GameResultsState> _fetchGameResults(int page,
+      GameResultType type,) async* {
     final fetchResult = pagedFetch(
       page: page,
-      call: _gameResultRepository.getUserGameResults(page),
+      call: _getFetchCall(page, type),
     );
     await for (final state in fetchResult) {
       yield* state.maybeWhen(
         initialProgress: () async* {
-          yield UserGameResultsState.loading();
+          yield GameResultsState.loading();
         },
         initialSuccess: (response) async* {
           yield* _renderGameResults(response);
         },
         initialError: (errorMessage) async* {
-          yield UserGameResultsState.error(errorMessage);
+          yield GameResultsState.error(errorMessage);
         },
         additionalProgress: () async* {
-          yield UserGameResultsState.additionalLoading();
+          yield GameResultsState.additionalLoading();
         },
         additionalSuccess: (response) async* {
           yield* _renderGameResults(response);
@@ -77,19 +77,29 @@ class UserGameResultsBloc
     }
   }
 
-  Stream<UserGameResultsState> _renderGameResults(
+  Future<GameResultPagedResponse> _getFetchCall(int page, GameResultType type) {
+    switch (type) {
+      case GameResultType.all:
+        return _gameResultRepository.getAllGameResults(page);
+      case GameResultType.user:
+        return _gameResultRepository.getUserGameResults(page);
+        break;
+    }
+  }
+
+  Stream<GameResultsState> _renderGameResults(
       GameResultPagedResponse response,) async* {
     onPageFetched(
       page: response.pageNumber,
       hasReachedEnd: response.lastPage,
       items: response.content,
     );
-    yield UserGameResultsState.renderGameResults(
+    yield GameResultsState.renderGameResults(
       gameResults: getAllItems(),
       hasReachedEnd: response.lastPage,
     );
   }
 
-  Stream<UserGameResultsState> _mapGameResultTappedEvent(
+  Stream<GameResultsState> _mapGameResultTappedEvent(
       GameResultTapped event,) async* {}
 }
