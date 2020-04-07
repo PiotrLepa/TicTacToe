@@ -5,6 +5,7 @@
   "apiErrorNotFound": "Nie znaleziono",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
+  "errorSessionExpired": "Sesja wygasła. Zaloguj sie ponownie",
   "emptyFieldError": "Pole nie może być puste",
   "invalidEmailError": "Niepoprawny adres e-mail",
   "passwordTooShortError": "Hasło musi mieć conajmniej 6 znaków",

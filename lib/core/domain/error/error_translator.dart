@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/data/network/exception/api_exception.dart';
+import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 
 @lazySingleton
 class ErrorTranslator {

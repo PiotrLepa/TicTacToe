@@ -5,6 +5,7 @@
   "apiErrorNotFound": "Not found",
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
+  "errorSessionExpired": "Session has expired. Log in again",
   "emptyFieldError": "Field cannot be empty",
   "invalidEmailError": "Incorrect email address",
   "passwordTooShortError": "Password must be at least 6 characters",

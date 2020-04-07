@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';

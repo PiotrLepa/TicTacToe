@@ -1,8 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/common/logger/logger.dart';
+import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
-import 'package:tictactoe/core/data/network/exception/api_exception.dart';
+import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
+import 'package:tictactoe/core/data/network/exception/internal/internal_exception.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 
 @lazySingleton
@@ -17,20 +22,25 @@ class NetworkErrorHandler {
     }
   }
 
-  ApiException _mapError(DioError error) {
-    final response = error.response;
-    final statusCode = response?.statusCode;
-    if (statusCode == null) {
-      if (error.error is ApiException) {
-        return error.error;
+  ApiException _mapError(DioError dioError) {
+    final error = dioError.error;
+    if (error is InternalException) {
+      if (error is SessionExpired) {
+        handleExpiredSession();
       }
-      return ApiException.unknownError(-1, null);
+      return error.map(
+        noConnection: (_) => ApiException.noConnection(-1, null),
+        sessionExpired: (_) => ApiException.unauthorized(401, null),
+      );
     }
+    final response = dioError.response;
+    final statusCode = response?.statusCode;
     try {
       final data = response.data;
       convertModelCodePropertyToInt(data);
       var errorResponse = ErrorResponse.fromJson(data);
-      return _mapToApiException(statusCode, errorResponse);
+      final exception = _mapToApiException(statusCode, errorResponse);
+      return exception;
     } on TypeError catch (e) {
       logger.e(e);
       return ApiException.unknownError(statusCode, null);
@@ -62,6 +72,16 @@ class NetworkErrorHandler {
         return ApiException.unknownError(
             statusCode, errorResponse.printableMessage);
     }
+  }
+
+  void handleExpiredSession() {
+    ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+      Routes.startScreen,
+      (route) => false,
+    );
+    getIt<FlushbarHelper>().showError(
+      message: KeyString('errorSessionExpired'),
+    );
   }
 }
 

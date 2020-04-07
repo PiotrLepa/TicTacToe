@@ -31,6 +31,8 @@ class AppLocalizations {
 
   String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
 
+  String get errorSessionExpired => _localizedStrings["errorSessionExpired"];
+
   String get invalidEmailError => _localizedStrings["invalidEmailError"];
 
   String get passwordTooShortError =>

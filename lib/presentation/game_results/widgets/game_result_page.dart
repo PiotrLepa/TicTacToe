@@ -30,8 +30,8 @@ class GameResults extends StatelessWidget {
               hasReachedEnd: renderGameResults.hasReachedEnd,
               loadMoreItemsCallback: () {
                 context
-                        .bloc<GameResultsBloc>()
-                        .add(GameResultsEvent.loadMoreItems(type));
+                    .bloc<GameResultsBloc>()
+                    .add(GameResultsEvent.loadMoreItems(type));
               },
             ),
             error: (error) => Center(

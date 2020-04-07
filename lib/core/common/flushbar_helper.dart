@@ -4,10 +4,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/error_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/success_flushbar.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
 
 @lazySingleton
 class FlushbarHelper {

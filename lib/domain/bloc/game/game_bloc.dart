@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
@@ -13,7 +14,6 @@ import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
 import 'package:tictactoe/domain/repository/game_repository.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'game_bloc.freezed.dart';
 part 'game_event.dart';
