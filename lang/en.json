@@ -42,8 +42,9 @@
   "registrationScreenRegistrationSuccess": "Log in to your account to use the application",
   "gameResultsUserTab": "Yours",
   "gameResultsAllTab": "All",
-  "gameResultsWinnerLabel": "Winner",
+  "gameResultsWinnerLabel": "Winner:",
   "gameResultsWinnerPlayer": "Player",
   "gameResultsWinnerComputer": "Computer",
-  "gameResultsWinnerDraw": "Draw"
+  "gameResultsWinnerDraw": "Draw",
+  "gameResultsGameTime": "Game time:"
 }

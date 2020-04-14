@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/presentation/game_results/game_results_screen.dart';
 import 'package:tictactoe/presentation/settings/settings_screen.dart';
@@ -21,8 +20,7 @@ class HomeScreen extends StatelessWidget {
       builder: (BuildContext context, HomeState state) {
         return Scaffold(
           appBar: AppBar(
-            title:
-                Text(AppLocalizations.of(context).translate(state.pageTitle)),
+            title: Text(context.translate(state.pageTitle)),
             elevation: 0,
           ),
           body: IndexedStack(

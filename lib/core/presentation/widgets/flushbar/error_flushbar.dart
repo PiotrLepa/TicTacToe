@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +14,7 @@ class ErrorFlushbar extends AppFlushbar {
     RawKeyString title,
   }) : super(
           title: title ?? context.translateKey('errorFlushbarTitle'),
-          message: AppLocalizations.of(context).translate(message),
+          message: context.translate(message),
           backgroundColor: Theme.of(context).errorColor,
           icon: Icon(
             Icons.warning,

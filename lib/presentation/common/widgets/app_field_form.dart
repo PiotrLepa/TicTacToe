@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 
 class AppFormField extends StatelessWidget {
   final String labelText;
@@ -44,7 +44,7 @@ class AppFormField extends StatelessWidget {
 
   String _getValidationText(BuildContext context) {
     if (errorText != null) {
-      return AppLocalizations.of(context).translate(errorText);
+      return context.translate(errorText);
     } else {
       return null;
     }

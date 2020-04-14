@@ -18,7 +18,7 @@ class GameResultItemWinner extends StatelessWidget {
         Text(
           context.translateKey('gameResultsWinnerLabel'),
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 18,
             color: Colors.white,
           ),
         ),
@@ -26,7 +26,7 @@ class GameResultItemWinner extends StatelessWidget {
           _mapGameStatusToString(context),
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 30,
+            fontSize: 24,
             color: Theme.of(context).primaryColor,
           ),
         )

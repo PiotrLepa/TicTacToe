@@ -23,18 +23,13 @@ class GameResultList extends StatelessWidget {
       data: data,
       hasReachedEnd: hasReachedEnd,
       itemBuilder: (context, itemData, index) {
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30),
-          child: GameResultItem(data: itemData),
-        );
+        return GameResultItem(data: itemData);
       },
       separatorBuilder: (context, index) {
-        return Padding(
-          padding: const EdgeInsets.all(8),
-          child: Divider(
-            thickness: 1.5,
-            color: Theme.of(context).dividerColor,
-          ),
+        return Divider(
+          thickness: 1.5,
+          color: Theme.of(context).dividerColor,
+          indent: 18,
         );
       },
       loadMoreItemsCallback: loadMoreItemsCallback,
