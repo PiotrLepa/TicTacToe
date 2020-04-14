@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:tictactoe/core/data/serializer/json_factories.dart';
+import 'package:tictactoe/core/data/network/serializer/json_factories.dart';
+import 'package:tictactoe/core/extension/iterable_extension.dart';
 
 typedef T JsonFactory<T>(Map<String, dynamic> json);
 
@@ -11,34 +12,32 @@ class ResponseConverter {
     Future<Response> futureResponse,
   ) async {
     final response = await futureResponse;
-    final data = _decodeJson<T>(response.data);
-    return data;
+    return _decodeJson<T>(response.data);
   }
 
   Future<KtList<T>> decodeResponseList<T>(
     Future<Response> futureResponse,
   ) async {
     final response = await futureResponse;
-    final data = _decodeJson<T>(response.data);
-    return KtList.from(data);
+    return _decodeJson<T>(response.data);
   }
 
   dynamic _decodeJson<T>(entity) {
-    if (entity is Iterable) return _decodeList<T>(entity);
+    if (entity is Iterable) return _decodeList<T>(entity.toKtList());
 
     if (entity is Map) return _decodeMap<T>(entity);
 
     return entity;
   }
 
-  List<T> _decodeList<T>(List values) =>
-      values.where((v) => v != null).map<T>((v) => _decodeJson<T>(v)).toList();
+  KtList<T> _decodeList<T>(KtList values) =>
+      values.filter((v) => v != null).map<T>((v) => _decodeJson<T>(v));
 
   T _decodeMap<T>(Map<String, dynamic> values) {
     final jsonFactory = jsonFactories[T];
     if (jsonFactory == null || jsonFactory is! JsonFactory<T>) {
       throw Exception(
-          "Json factory for type $T not found. Check if class is added to converters.");
+          "Json factory for type $T not found. Check if class is added to json factories.");
     }
     return jsonFactory(values);
   }

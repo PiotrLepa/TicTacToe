@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:tictactoe/presentation/common/loading_indicator.dart';
+import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 
 class PagedListView<T> extends StatefulWidget {
   final ScrollController _scrollController = ScrollController();
@@ -47,7 +47,7 @@ class _PagedListViewState extends State<PagedListView> {
         }
       },
       separatorBuilder: (context, index) =>
-      widget.separatorBuilder?.call(context, index) ?? Container(),
+          widget.separatorBuilder?.call(context, index) ?? Container(),
     );
   }
 

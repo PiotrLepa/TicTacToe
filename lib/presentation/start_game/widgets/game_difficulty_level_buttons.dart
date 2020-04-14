@@ -49,7 +49,7 @@ class GameDifficultyLevelButtons extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Text(
-                  AppLocalizations.of(context).get(titles[index]),
+                  AppLocalizations.of(context).translate(titles[index]),
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 24,

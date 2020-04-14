@@ -33,7 +33,7 @@ class App extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate,
           GlobalCupertinoLocalizations.delegate,
         ],
-        supportedLocales: _localeProvider.getSupportedLocales(),
+        supportedLocales: _localeProvider.getSupportedLocales().asList(),
         theme: ThemeProvider(isDark: false).getThemeData(),
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
         builder: ExtendedNavigator<Router>(router: Router()),

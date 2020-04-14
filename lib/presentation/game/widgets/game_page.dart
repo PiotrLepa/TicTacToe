@@ -1,14 +1,14 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/widgets.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
-import 'package:tictactoe/presentation/common/loading_indicator.dart';
+import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 import 'package:tictactoe/presentation/game/widgets/game_board.dart';
 import 'package:tictactoe/presentation/game/widgets/game_player_mark.dart';
 
 class GamePage extends StatelessWidget {
   final GameMark playerMark;
-  final BuiltList<GameMove> moves;
+  final KtList<GameMove> moves;
   final bool isLoadingVisible;
   final Function(int index) onFieldTapped;
 

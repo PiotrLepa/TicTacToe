@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
-import 'package:tictactoe/core/presentation/validation/validators.dart';
+import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/reqistration_request/registration_request.dart';
 import 'package:tictactoe/domain/repository/registration_repository.dart';
 
@@ -36,7 +36,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final usernameValidation = Validators.validateUsername(event.username);
     final passwordValidation = Validators.validatePassword(event.password);
     final repeatedPasswordValidation =
-    Validators.validatePassword(event.repeatedPassword);
+        Validators.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,

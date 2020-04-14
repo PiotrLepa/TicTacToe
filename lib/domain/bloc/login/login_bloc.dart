@@ -7,7 +7,7 @@ import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
-import 'package:tictactoe/core/presentation/validation/validators.dart';
+import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
 
@@ -80,7 +80,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _navigateToHome() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
       Routes.homeScreen,
-          (route) => false,
+      (route) => false,
     );
   }
 }

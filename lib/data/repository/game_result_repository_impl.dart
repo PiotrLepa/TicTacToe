@@ -24,9 +24,8 @@ class GameResultRepositoryImpl implements GameResultRepository {
       .handleNetworkError();
 
   @override
-  Future<GameResultPagedResponse> getAllGameResults(int page) =>
-      _service
-          .getAllGameResults(page)
-          .then(_gameResultResponsePagedEntityMapper.toEntity)
-          .handleNetworkError();
+  Future<GameResultPagedResponse> getAllGameResults(int page) => _service
+      .getAllGameResults(page)
+      .then(_gameResultResponsePagedEntityMapper.toEntity)
+      .handleNetworkError();
 }

@@ -16,7 +16,7 @@ class AppFormField extends StatelessWidget {
     this.controller,
     this.errorText,
     this.type,
-    this.obscureText,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -37,14 +37,14 @@ class AppFormField extends StatelessWidget {
           errorText: _getValidationText(context),
           border: OutlineInputBorder(),
         ),
-        obscureText: obscureText ?? false,
+        obscureText: obscureText,
       ),
     );
   }
 
   String _getValidationText(BuildContext context) {
     if (errorText != null) {
-      return AppLocalizations.of(context).get(errorText);
+      return AppLocalizations.of(context).translate(errorText);
     } else {
       return null;
     }

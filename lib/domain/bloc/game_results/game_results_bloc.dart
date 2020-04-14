@@ -13,9 +13,7 @@ import 'package:tictactoe/domain/entity/game_result_response/game_result_type.da
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
 
 part 'game_results_bloc.freezed.dart';
-
 part 'game_results_event.dart';
-
 part 'game_results_state.dart';
 
 @injectable
@@ -39,7 +37,9 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     );
   }
 
-  Stream<GameResultsState> _mapScreenStartedEvent(ScreenStarted event,) async* {
+  Stream<GameResultsState> _mapScreenStartedEvent(
+    ScreenStarted event,
+  ) async* {
     yield* _fetchGameResults(0, event.type);
   }
 
@@ -49,8 +49,10 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     }
   }
 
-  Stream<GameResultsState> _fetchGameResults(int page,
-      GameResultType type,) async* {
+  Stream<GameResultsState> _fetchGameResults(
+    int page,
+    GameResultType type,
+  ) async* {
     final fetchResult = pagedFetch(
       page: page,
       call: _getFetchCall(page, type),

@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/enum_helper.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/data/serializer/response_converter.dart';
-import 'package:tictactoe/core/data/service/base_network_service.dart';
+import 'package:tictactoe/core/data/network/serializer/response_converter.dart';
+import 'package:tictactoe/core/data/network/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
 import 'package:tictactoe/data/model/game_response/game_response_model.dart';
@@ -67,8 +67,7 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<GameResultPagedResponseModel> getAllGameResults(int page) =>
-      get(
+  Future<GameResultPagedResponseModel> getAllGameResults(int page) => get(
         "/game/all-results",
         queryParameters: {
           "page": page,

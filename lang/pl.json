@@ -41,5 +41,9 @@
   "registrationScreenLoadingButton": "Rejestrowanie",
   "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji",
   "gameResultsUserTab": "Twoje",
-  "gameResultsAllTab": "Wszystkie"
+  "gameResultsAllTab": "Wszystkie",
+  "gameResultsWinnerLabel": "Zwyciężca",
+  "gameResultsWinnerPlayer": "Gracz",
+  "gameResultsWinnerComputer": "Komputer",
+  "gameResultsWinnerDraw": "Remis"
 }

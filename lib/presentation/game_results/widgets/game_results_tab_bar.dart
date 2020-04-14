@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/presentation/game_results/widgets/game_results_tab.dart';
 
 class GameResultsTabBar extends StatelessWidget {
@@ -19,10 +19,10 @@ class GameResultsTabBar extends StatelessWidget {
       ),
       tabs: [
         GameResultTab(
-          text: AppLocalizations.of(context).gameResultsUserTab,
+          text: context.translateKey('gameResultsUserTab'),
         ),
         GameResultTab(
-          text: AppLocalizations.of(context).gameResultsAllTab,
+          text: context.translateKey('gameResultsAllTab'),
         ),
       ],
     );

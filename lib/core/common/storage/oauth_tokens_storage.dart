@@ -5,8 +5,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class OauthTokensStorage {
   final SharedPreferences _prefs;
 
-  static const String _accessTokenKey = "ACCESS_TOKEN_KEY";
-  static const String _refreshTokenKey = "REFRESH_TOKEN_KEY";
+  static const String _accessTokenKey = 'ACCESS_TOKEN_KEY';
+  static const String _refreshTokenKey = 'REFRESH_TOKEN_KEY';
 
   OauthTokensStorage(this._prefs);
 

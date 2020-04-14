@@ -6,7 +6,7 @@ import 'package:tictactoe/data/model/game_result_response/game_result_paged_resp
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/registration_response/registration_response_model.dart';
 
-const jsonFactories = {
+const Map<Type, Object Function(Map<String, dynamic> json)> jsonFactories = {
   ErrorResponse: ErrorResponse.fromJsonFactory,
   GameMoveModel: GameMoveModel.fromJsonFactory,
   GameResponseModel: GameResponseModel.fromJsonFactory,

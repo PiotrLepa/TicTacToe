@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
@@ -114,8 +114,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     }
   }
 
-  bool _isFieldEmpty(BuiltList<GameMove> moves, int fieldIndex) =>
-      moves.where((move) => move.fieldIndex == fieldIndex).isEmpty;
+  bool _isFieldEmpty(KtList<GameMove> moves, int fieldIndex) =>
+      moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
     ExtendedNavigator.ofRouter<Router>().pushGameScreen(

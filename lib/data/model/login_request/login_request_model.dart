@@ -1,7 +1,7 @@
 library login_request_model;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/core/data/serializer/serializable.dart';
+import 'package:tictactoe/core/data/network/serializer/serializable.dart';
 
 part 'login_request_model.freezed.dart';
 part 'login_request_model.g.dart';

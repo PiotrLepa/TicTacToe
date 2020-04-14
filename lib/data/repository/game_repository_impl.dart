@@ -29,9 +29,8 @@ class GameRepositoryImpl implements GameRepository {
       .handleNetworkError();
 
   @override
-  Future<GameResponse> setMove(int gameId, int fieldIndex) =>
-      _service
-          .setMove(gameId, fieldIndex)
-          .then(_gameResponseEntityMapper.toEntity)
-          .handleNetworkError();
+  Future<GameResponse> setMove(int gameId, int fieldIndex) => _service
+      .setMove(gameId, fieldIndex)
+      .then(_gameResponseEntityMapper.toEntity)
+      .handleNetworkError();
 }

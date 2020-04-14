@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
-import 'package:tictactoe/presentation/common/paged_list_view.dart';
+import 'package:tictactoe/presentation/common/widgets/paged_list_view.dart';
 import 'package:tictactoe/presentation/game_results/widgets/game_result_item.dart';
 
 class GameResultList extends StatelessWidget {

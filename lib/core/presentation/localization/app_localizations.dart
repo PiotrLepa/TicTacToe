@@ -10,114 +10,11 @@ class AppLocalizations {
   final Locale locale;
   final LocaleProvider _localeProvider;
 
+  Map<String, String> _localizedStrings;
+
   AppLocalizations(this.locale, this._localeProvider) {
     _localeProvider.currentLocale = locale;
   }
-
-  Map<String, String> _localizedStrings;
-
-  String get errorFlushbarTitle => _localizedStrings["errorFlushbarTitle"];
-
-  String get apiErrorNoConnection => _localizedStrings["apiErrorNoConnection"];
-
-  String get apiErrorBadRequest => _localizedStrings["apiErrorBadRequest"];
-
-  String get apiErrorUnauthorized => _localizedStrings["apiErrorUnauthorized"];
-
-  String get apiErrorNotFound => _localizedStrings["apiErrorNotFound"];
-
-  String get apiErrorInternalServerError =>
-      _localizedStrings["apiErrorInternalServerError"];
-
-  String get apiErrorUnknown => _localizedStrings["apiErrorUnknown"];
-
-  String get errorSessionExpired => _localizedStrings["errorSessionExpired"];
-
-  String get invalidEmailError => _localizedStrings["invalidEmailError"];
-
-  String get passwordTooShortError =>
-      _localizedStrings["passwordTooShortError"];
-
-  String get usernameTooShortError =>
-      _localizedStrings["usernameTooShortError"];
-
-  String get successFlushbarTitle => _localizedStrings["successFlushbarTitle"];
-
-  String get pageStartGame => _localizedStrings["pageStartGame"];
-
-  String get pageGameResults => _localizedStrings["pageGameResults"];
-
-  String get pageSettings => _localizedStrings["pageSettings"];
-
-  String get startGameGameWithComputer =>
-      _localizedStrings["startGameGameWithComputer"];
-
-  String get gameScreenTitle => _localizedStrings["gameScreenTitle"];
-
-  String get gameScreenPlayerMark => _localizedStrings["gameScreenPlayerMark"];
-
-  String get difficultyLevelEasy => _localizedStrings["difficultyLevelEasy"];
-
-  String get difficultyLevelMedium =>
-      _localizedStrings["difficultyLevelMedium"];
-
-  String get difficultyLevelHard => _localizedStrings["difficultyLevelHard"];
-
-  String get gameScreenStatusPlayerWon =>
-      _localizedStrings["gameScreenStatusPlayerWon"];
-
-  String get gameScreenStatusComputerWon =>
-      _localizedStrings["gameScreenStatusComputerWon"];
-
-  String get gameScreenStatusDraw => _localizedStrings["gameScreenStatusDraw"];
-
-  String get gameScreenPlayAgainQuestion =>
-      _localizedStrings["gameScreenPlayAgainQuestion"];
-
-  String get gameScreenPlayAgain => _localizedStrings["gameScreenPlayAgain"];
-
-  String get loginScreenToolbar => _localizedStrings["loginScreenToolbar"];
-
-  String get fieldUsernameHint => _localizedStrings["fieldUsernameHint"];
-
-  String get fieldEmailHint => _localizedStrings["fieldEmailHint"];
-
-  String get fieldPasswordHint => _localizedStrings["fieldPasswordHint"];
-
-  String get fieldRepeatPasswordHint =>
-      _localizedStrings["fieldRepeatPasswordHint"];
-
-  String get loginScreenLoginButton =>
-      _localizedStrings["loginScreenLoginButton"];
-
-  String get loginScreenLoadingButton =>
-      _localizedStrings["loginScreenLoadingButton"];
-
-  String get emptyFieldError => _localizedStrings["emptyFieldError"];
-
-  String get startScreenTitle => _localizedStrings["startScreenTitle"];
-
-  String get startScreenRegistrationButton =>
-      _localizedStrings["startScreenRegistrationButton"];
-
-  String get startScreenLoginButton =>
-      _localizedStrings["startScreenLoginButton"];
-
-  String get registrationScreenToolbar =>
-      _localizedStrings["registrationScreenToolbar"];
-
-  String get registrationScreenButton =>
-      _localizedStrings["registrationScreenButton"];
-
-  String get registrationScreenLoadingButton =>
-      _localizedStrings["registrationScreenLoadingButton"];
-
-  String get registrationScreenRegistrationSuccess =>
-      _localizedStrings["registrationScreenRegistrationSuccess"];
-
-  String get gameResultsUserTab => _localizedStrings["gameResultsUserTab"];
-
-  String get gameResultsAllTab => _localizedStrings["gameResultsAllTab"];
 
   Future load() async {
     final String jsonString =
@@ -128,9 +25,10 @@ class AppLocalizations {
         jsonMap.map((key, value) => MapEntry(key, value.toString()));
   }
 
-  String translate(String key) => _localizedStrings[key];
+  String translate(RawKeyString rawKeyString) =>
+      rawKeyString.get(_localizedStrings);
 
-  String get(RawKeyString rawKeyString) => rawKeyString.get(_localizedStrings);
+  String translateKey(String key) => _localizedStrings[key];
 
   static LocalizationsDelegate<AppLocalizations> delegate =
       _AppLocalizationsDelegate();
