@@ -1,6 +1,6 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/mapper/entity_mapper.dart';
+import 'package:tictactoe/core/extension/iterable_extension.dart';
 import 'package:tictactoe/data/mapper/entity/difficilty_level_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_mark_entity_mapper.dart';
 import 'package:tictactoe/data/mapper/entity/game_move_entity_mapper.dart';
@@ -16,19 +16,21 @@ class GameResponseEntityMapper
   final GameMarkEntityMapper _gameMarkEntityMapper;
   final GameMoveEntityMapper _gameMoveEntityMapper;
 
-  GameResponseEntityMapper(this._gameStatusEntityMapper,
-      this._difficultyLevelEntityMapper,
-      this._gameMarkEntityMapper,
-      this._gameMoveEntityMapper,);
+  GameResponseEntityMapper(
+    this._gameStatusEntityMapper,
+    this._difficultyLevelEntityMapper,
+    this._gameMarkEntityMapper,
+    this._gameMoveEntityMapper,
+  );
 
   @override
   GameResponse toEntity(GameResponseModel model) => GameResponse(
-    gameId: model.gameId,
+        gameId: model.gameId,
         status: _gameStatusEntityMapper.toEntity(model.status),
         difficultyLevel:
             _difficultyLevelEntityMapper.toEntity(model.difficultyLevel),
         playerMark: _gameMarkEntityMapper.toEntity(model.playerMark),
         computerMark: _gameMarkEntityMapper.toEntity(model.computerMark),
-        moves: BuiltList(model.moves.map(_gameMoveEntityMapper.toEntity)),
+        moves: model.moves.map(_gameMoveEntityMapper.toEntity).toKtList(),
       );
 }

@@ -1,13 +1,13 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/enum_helper.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
-import 'package:tictactoe/core/data/serializer/response_converter.dart';
-import 'package:tictactoe/core/data/service/base_network_service.dart';
+import 'package:tictactoe/core/data/network/serializer/response_converter.dart';
+import 'package:tictactoe/core/data/network/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
 import 'package:tictactoe/data/model/game_response/game_response_model.dart';
+import 'package:tictactoe/data/model/game_result_response/game_result_paged_response_model.dart';
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/registration_request/registration_request_model.dart';
@@ -58,37 +58,21 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<BuiltList<GameResponseModel>> getGames() =>
-      getList("/game/results", secured: true);
-}
+  Future<GameResultPagedResponseModel> getUserGameResults(int page) => get(
+        "/game/user-results",
+        queryParameters: {
+          "page": page,
+          "size": pagination_elements_per_page,
+        },
+        secured: true,
+      );
 
-//@RestApi()
-//abstract class NetworkService {
-//  @factoryMethod
-//  factory NetworkService(@Named(defaultNetworkClient) Dio dio) =
-//      _NetworkService;
-//
-//  @POST("/oauth/token")
-//  @http.FormUrlEncoded()
-//  @http.Headers({
-//    authorizationHeader: basicKey,
-//  })
-//  Future<LoginResponseModel> login(@Body() LoginRequestModel request);
-//
-//  @POST("/game/create")
-//  @http.Headers(securedHeader)
-//  Future<GameResponseModel> createGame(
-//    @Query("difficulty_level") String difficultyLevel,
-//  );
-//
-//  @PUT("/game/{gameId}/move/{fieldIndex}")
-//  @http.Headers(securedHeader)
-//  Future<GameResponseModel> setMove(
-//    @Path("gameId") int gameId,
-//    @Path("fieldIndex") int fieldIndex,
-//  );
-//
-//  @GET("/game/results")
-//  @http.Headers(securedHeader)
-//  Future<List<GameResponseModel>> getGames();
-//}
+  Future<GameResultPagedResponseModel> getAllGameResults(int page) => get(
+        "/game/all-results",
+        queryParameters: {
+          "page": page,
+          "size": pagination_elements_per_page,
+        },
+        secured: true,
+      );
+}

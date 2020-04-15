@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 
 part 'start_bloc.freezed.dart';
 part 'start_event.dart';

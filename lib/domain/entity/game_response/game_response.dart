@@ -1,7 +1,7 @@
 library game_response;
 
-import 'package:built_collection/built_collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
@@ -17,6 +17,6 @@ abstract class GameResponse with _$GameResponse {
     @required DifficultyLevel difficultyLevel,
     @required GameMark playerMark,
     @required GameMark computerMark,
-    @required BuiltList<GameMove> moves,
+    @required KtList<GameMove> moves,
   }) = _GameResponse;
 }

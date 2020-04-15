@@ -1,19 +1,19 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
-import 'package:tictactoe/domain/repository/create_game_repository.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
+import 'package:tictactoe/domain/repository/game_repository.dart';
 
 part 'game_bloc.freezed.dart';
 part 'game_event.dart';
@@ -21,11 +21,11 @@ part 'game_state.dart';
 
 @injectable
 class GameBloc extends Bloc<GameEvent, GameState> {
-  final CreateGameRepository _createGameRepository;
+  final GameRepository _gameRepository;
 
   GameResponse _gameResponse;
 
-  GameBloc(this._createGameRepository);
+  GameBloc(this._gameRepository);
 
   @override
   GameState get initialState => GameState.nothing();
@@ -56,7 +56,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   Stream<GameState> _createGame(DifficultyLevel difficultyLevel) async* {
-    final request = fetch(_createGameRepository.createGame(difficultyLevel));
+    final request = fetch(_gameRepository.createGame(difficultyLevel));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
@@ -81,7 +81,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
         !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
       return;
     }
-    final request = fetch(_createGameRepository.setMove(gameId, fieldIndex));
+    final request = fetch(_gameRepository.setMove(gameId, fieldIndex));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
@@ -114,8 +114,8 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     }
   }
 
-  bool _isFieldEmpty(BuiltList<GameMove> moves, int fieldIndex) =>
-      moves.where((move) => move.fieldIndex == fieldIndex).isEmpty;
+  bool _isFieldEmpty(KtList<GameMove> moves, int fieldIndex) =>
+      moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
     ExtendedNavigator.ofRouter<Router>().pushGameScreen(

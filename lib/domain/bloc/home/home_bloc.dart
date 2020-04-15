@@ -3,13 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
-import 'package:tictactoe/presentation/router/router.gr.dart';
 
 part 'home_bloc.freezed.dart';
-
 part 'home_event.dart';
-
 part 'home_state.dart';
 
 @injectable
@@ -35,12 +33,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     HomeEvent event,
   ) async* {
     yield* event.map(
-      appStarted: mapAppStartedEvent,
-      onBottomNavigationTapped: mapEventToState,
+      appStarted: _mapAppStartedEvent,
+      onBottomNavigationTapped: _mapOnBottomNavigationTappedEvent,
     );
   }
 
-  Stream<HomeState> mapAppStartedEvent(AppStarted event) async* {
+  Stream<HomeState> _mapAppStartedEvent(AppStarted event) async* {
     final accessToken = await _oauthTokensStorage.accessToken;
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
@@ -51,12 +49,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   void _navigateToLogin() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-      Routes.loginScreen,
+      Routes.startScreen,
       (route) => false,
     );
   }
 
-  Stream<HomeState> mapUpdatePageEvent(OnBottomNavigationTapped event) async* {
+  Stream<HomeState> _mapOnBottomNavigationTappedEvent(
+      OnBottomNavigationTapped event) async* {
     yield HomeState.updatePage(
       pageTitle: pageTitles[event.index],
       index: event.index,

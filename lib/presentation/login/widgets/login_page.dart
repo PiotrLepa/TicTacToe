@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/flushbar_helper.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
-import 'package:tictactoe/presentation/common/app_field_form.dart';
-import 'package:tictactoe/presentation/common/progress_button.dart';
+import 'package:tictactoe/presentation/common/widgets/app_field_form.dart';
+import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -35,15 +35,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _respondForState(LoginState state) {
-    state.maybeWhen(
-      loading: (emailErrorKey, passwordErrorKey) {
+    state.maybeMap(
+      loading: (mappedState) {
         setState(() {
           _isLoading = true;
         });
       },
-      error: (errorMessage, emailErrorKey, passwordErrorKey) {
+      error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
+              message: mappedState.errorMessage,
             );
         setState(() {
           _isLoading = false;
@@ -61,19 +61,19 @@ class _LoginPageState extends State<LoginPage> {
           controller: _emailController,
           type: TextInputType.emailAddress,
           errorText: state.emailErrorKey,
-          labelText: AppLocalizations.of(context).fieldEmailHint,
+          labelText: context.translateKey('fieldEmailHint'),
         ),
         SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
           errorText: state.passwordErrorKey,
           obscureText: true,
-          labelText: AppLocalizations.of(context).fieldPasswordHint,
+          labelText: context.translateKey('fieldPasswordHint'),
         ),
         SizedBox(height: 40),
         ProgressButton(
-          text: AppLocalizations.of(context).loginScreenLoginButton,
-          loadingText: AppLocalizations.of(context).loginScreenLoadingButton,
+          text: context.translateKey('loginScreenLoginButton'),
+          loadingText: context.translateKey('loginScreenLoadingButton'),
           isLoading: _isLoading,
           onPressed: () => _loginUser(state),
         ),
@@ -85,11 +85,11 @@ class _LoginPageState extends State<LoginPage> {
     if (state is Loading) return;
     FocusScope.of(context).unfocus();
     context.bloc<LoginBloc>().add(
-      LoginEvent.login(
-        email: _emailController.text,
-        password: _passwordController.text,
-      ),
-    );
+          LoginEvent.login(
+            email: _emailController.text,
+            password: _passwordController.text,
+          ),
+        );
   }
 
   @override

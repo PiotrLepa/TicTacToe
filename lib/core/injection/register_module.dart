@@ -28,11 +28,10 @@ abstract class NetworkClient {
 
   @lazySingleton
   @Named(refreshTokenNetworkClient)
-  Dio get dioRefreshToken =>
-      Dio()
-        ..options.baseUrl = baseUrl
+  Dio get dioRefreshToken => Dio()
+    ..options.baseUrl = baseUrl
     ..interceptors.add(getIt.get<BearerTokenInterceptor>())
     ..interceptors.add(getIt.get<LanguageInterceptor>())
     ..interceptors.add(getIt.get<LoggerInterceptor>())
-        ..interceptors.add(getIt.get<ConnectionInterceptor>());
+    ..interceptors.add(getIt.get<ConnectionInterceptor>());
 }

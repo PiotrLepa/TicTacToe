@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/presentation/game_results/game_results_screen.dart';
 import 'package:tictactoe/presentation/settings/settings_screen.dart';
@@ -9,9 +9,9 @@ import 'package:tictactoe/presentation/start_game/start_game_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final _pages = [
-    StartGamePage(),
-    GameResultsPage(),
-    SettingsPage(),
+    StartGameScreen(),
+    GameResultsScreen(),
+    SettingsScreen(),
   ];
 
   @override
@@ -20,7 +20,8 @@ class HomeScreen extends StatelessWidget {
       builder: (BuildContext context, HomeState state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).get(state.pageTitle)),
+            title: Text(context.translate(state.pageTitle)),
+            elevation: 0,
           ),
           body: IndexedStack(
             index: state.index,
@@ -42,21 +43,15 @@ class HomeScreen extends StatelessWidget {
   List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) => [
         BottomNavigationBarItem(
           icon: Icon(Icons.gamepad),
-          title: Text(
-            AppLocalizations.of(context).pageStartGame,
-          ),
+          title: Text(context.translateKey('pageStartGame')),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.note),
-          title: Text(
-            AppLocalizations.of(context).pageGameResults,
-          ),
+          title: Text(context.translateKey('pageGameResults')),
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.settings),
-          title: Text(
-            AppLocalizations.of(context).pageSettings,
-          ),
+          title: Text(context.translateKey('pageSettings')),
         ),
       ];
 }

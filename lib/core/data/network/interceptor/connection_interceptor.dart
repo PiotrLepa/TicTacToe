@@ -1,7 +1,7 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/data/network/exception/api_exception.dart';
+import 'package:tictactoe/core/data/network/exception/internal/internal_exception.dart';
 
 @lazySingleton
 class ConnectionInterceptor extends InterceptorsWrapper {
@@ -10,7 +10,7 @@ class ConnectionInterceptor extends InterceptorsWrapper {
     bool hasConnection = await DataConnectionChecker().hasConnection;
 
     if (!hasConnection) {
-      throw ApiException.noConnection(-1, null);
+      throw InternalException.noConnection();
     }
 
     return super.onRequest(options);

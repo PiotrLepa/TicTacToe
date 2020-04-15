@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/flushbar_helper.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
-import 'package:tictactoe/presentation/common/loading_indicator.dart';
+import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 import 'package:tictactoe/presentation/game/widgets/game_page.dart';
 
 class GameScreen extends StatefulWidget {
@@ -28,7 +28,7 @@ class _GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context).gameScreenTitle),
+        title: Text(context.translateKey('gameScreenTitle')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -51,12 +51,12 @@ class _GameScreenState extends State<GameScreen> {
 
   Widget _renderForState(GameState state, BuildContext context) {
     return state.maybeMap(
-      loading: (_) => Center(
+      loading: (mappedState) => Center(
         child: LoadingIndicator(),
       ),
-      renderGame: (renderGame) => GamePage(
-          playerMark: renderGame.playerMark,
-          moves: renderGame.moves,
+      renderGame: (mappedState) => GamePage(
+          playerMark: mappedState.playerMark,
+          moves: mappedState.moves,
           isLoadingVisible: _isFieldLoadingVisible,
           onFieldTapped: (index) =>
               context.bloc<GameBloc>().add(GameEvent.onFieldTapped(index))),
@@ -65,50 +65,49 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void _respondForState(GameState state, BuildContext context) {
-    state.maybeWhen(
-      moveLoading: () {
+    state.maybeMap(
+      moveLoading: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = true;
         });
       },
-      renderGame: (playerMark, moves) {
+      renderGame: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
       },
-      playerWon: () {
-        setState(() {
-          _isFieldLoadingVisible = false;
-        });
-        _showRestartGameFlushBar(
-            AppLocalizations.of(context).gameScreenStatusPlayerWon);
-      },
-      computerWon: () {
+      playerWon: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            AppLocalizations.of(context).gameScreenStatusComputerWon);
+            context.translateKey('gameScreenStatusPlayerWon'));
       },
-      draw: () {
+      computerWon: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            AppLocalizations.of(context).gameScreenStatusDraw);
+            context.translateKey('gameScreenStatusComputerWon'));
       },
-      moveError: (errorMessage) {
+      draw: (mappedState) {
+        setState(() {
+          _isFieldLoadingVisible = false;
+        });
+        _showRestartGameFlushBar(context.translateKey('gameScreenStatusDraw'));
+      },
+      moveError: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
-            );
+          message: mappedState.errorMessage,
+        );
         setState(() {
           _isFieldLoadingVisible = false;
         });
       },
-      error: (errorMessage) {
+      error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
-            );
+          message: mappedState.errorMessage,
+        );
       },
       orElse: () {},
     );
@@ -116,24 +115,26 @@ class _GameScreenState extends State<GameScreen> {
 
   Future<void> _showRestartGameFlushBar(String message) async {
     getIt.get<FlushbarHelper>().show(
-          title: message,
-          message: AppLocalizations.of(context).gameScreenPlayAgainQuestion,
-          isDismissible: false,
-          infinityDuration: true,
-          icon: Icon(
-            Icons.videogame_asset,
-            color: Colors.white,
-          ),
-          mainButton: FlatButton(
-            onPressed: () {
-              getIt.get<FlushbarHelper>().dismiss();
+      title: message,
+      message: context.translateKey('gameScreenPlayAgainQuestion'),
+      isDismissible: false,
+      infinityDuration: true,
+      icon: Icon(
+        Icons.videogame_asset,
+        color: Colors.white,
+      ),
+      mainButton: FlatButton(
+        onPressed: () {
+          getIt.get<FlushbarHelper>().dismiss();
               context
                   .bloc<GameBloc>()
                   .add(GameEvent.restartGame(widget.difficultyLevel));
             },
             child: Text(
-              AppLocalizations.of(context).gameScreenPlayAgain,
-              style: TextStyle(color: Theme.of(context).primaryColor),
+              context.translateKey('gameScreenPlayAgain'),
+              style: TextStyle(color: Theme
+                  .of(context)
+                  .primaryColor),
             ),
           ),
         );

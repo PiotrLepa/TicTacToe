@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
-import 'package:tictactoe/core/presentation/util/flushbar_helper.dart';
 import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
-import 'package:tictactoe/presentation/common/app_field_form.dart';
-import 'package:tictactoe/presentation/common/progress_button.dart';
+import 'package:tictactoe/presentation/common/widgets/app_field_form.dart';
+import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -33,17 +33,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
             padding: const EdgeInsets.all(16),
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
               condition: (previous, current) =>
-              current is Nothing ||
+                  current is Nothing ||
                   current is RenderInputsErrors ||
                   current is ClearInputsErrors,
               builder: (context, state) {
                 return state.maybeMap(
-                  renderInputsErrors: (mapState) => _buildFieldsAndButton(
-                    usernameError: mapState.usernameError,
-                    emailError: mapState.emailError,
-                    passwordError: mapState.passwordError,
-                    repeatedPasswordError: mapState.repeatedPasswordError,
-                  ),
+                  renderInputsErrors: (mappedState) =>
+                      _buildFieldsAndButton(
+                        usernameError: mappedState.usernameError,
+                        emailError: mappedState.emailError,
+                        passwordError: mappedState.passwordError,
+                        repeatedPasswordError: mappedState
+                            .repeatedPasswordError,
+                      ),
                   orElse: () => _buildFieldsAndButton(),
                 );
               },
@@ -55,25 +57,24 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   void _respondForState(RegistrationState state) {
-    state.maybeWhen(
-      loading: () {
+    state.maybeMap(
+      loading: (mappedState) {
         setState(() {
           _isLoading = true;
         });
       },
-      error: (errorMessage) {
+      error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
-            );
+          message: mappedState.errorMessage,
+        );
         setState(() {
           _isLoading = false;
         });
       },
-      showSuccessFlushbar: () {
+      showSuccessFlushbar: (mappedState) {
         getIt.get<FlushbarHelper>().showSuccess(
-          message: AppLocalizations
-              .of(context)
-              .registrationScreenRegistrationSuccess,
+          message:
+          context.translateKey('registrationScreenRegistrationSuccess'),
         );
         setState(() {
           _isLoading = false;
@@ -95,38 +96,33 @@ class _RegistrationPageState extends State<RegistrationPage> {
         AppFormField(
           controller: _usernameController,
           errorText: usernameError,
-          labelText: AppLocalizations.of(context).fieldUsernameHint,
+          labelText: context.translateKey('fieldUsernameHint'),
         ),
         SizedBox(height: 20),
         AppFormField(
           controller: _emailController,
           type: TextInputType.emailAddress,
           errorText: emailError,
-          labelText: AppLocalizations.of(context).fieldEmailHint,
+          labelText: context.translateKey('fieldEmailHint'),
         ),
         SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
           errorText: passwordError,
           obscureText: true,
-          labelText: AppLocalizations.of(context).fieldPasswordHint,
+          labelText: context.translateKey('fieldPasswordHint'),
         ),
         SizedBox(height: 20),
         AppFormField(
           controller: _repeatedPasswordController,
           errorText: repeatedPasswordError,
           obscureText: true,
-          labelText: AppLocalizations.of(context).fieldRepeatPasswordHint,
+          labelText: context.translateKey('fieldRepeatPasswordHint'),
         ),
         SizedBox(height: 40),
         ProgressButton(
-          text: AppLocalizations
-              .of(context)
-              .registrationScreenButton,
-          loadingText:
-          AppLocalizations
-              .of(context)
-              .registrationScreenLoadingButton,
+          text: context.translateKey('registrationScreenButton'),
+          loadingText: context.translateKey('registrationScreenLoadingButton'),
           isLoading: _isLoading,
           onPressed: () => _registerUser(),
         ),

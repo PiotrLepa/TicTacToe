@@ -5,9 +5,10 @@
   "apiErrorNotFound": "Nie znaleziono",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
+  "errorSessionExpired": "Sesja wygasła. Zaloguj sie ponownie",
   "emptyFieldError": "Pole nie może być puste",
   "invalidEmailError": "Niepoprawny adres e-mail",
-  "passwordTooShortError": "Hasło musi mieć conajmniej 5 znaków",
+  "passwordTooShortError": "Hasło musi mieć conajmniej 6 znaków",
   "usernameTooShortError": "Nazwa użytkownika musi mieć conajmniej 3 znaki",
   "errorFlushbarTitle": "Coś poszło nie tak",
   "successFlushbarTitle": "Sukces",
@@ -38,5 +39,12 @@
   "registrationScreenToolbar": "Rejestracja",
   "registrationScreenButton": "Zarejestruj się",
   "registrationScreenLoadingButton": "Rejestrowanie",
-  "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji"
+  "registrationScreenRegistrationSuccess": "Zaloguj się na swoje konto, aby korzystać z aplikacji",
+  "gameResultsUserTab": "Twoje",
+  "gameResultsAllTab": "Wszystkie",
+  "gameResultsWinnerLabel": "Zwyciężca:",
+  "gameResultsWinnerPlayer": "Gracz",
+  "gameResultsWinnerComputer": "Komputer",
+  "gameResultsWinnerDraw": "Remis",
+  "gameResultsGameTime": "Czas rozgrywki:"
 }

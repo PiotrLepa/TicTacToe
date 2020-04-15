@@ -10,7 +10,7 @@ abstract class GameState with _$GameState {
 
   const factory GameState.renderGame({
     @required GameMark playerMark,
-    @required BuiltList<GameMove> moves,
+    @required KtList<GameMove> moves,
   }) = RenderGame;
 
   const factory GameState.playerWon() = PlayerWon;

@@ -1,12 +1,12 @@
-import 'package:built_collection/built_collection.dart';
 import 'package:flutter/material.dart';
+import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 
 class GameBoard extends StatelessWidget {
   final Function(int) onFieldTapped;
-  final BuiltList<GameMove> moves;
+  final KtList<GameMove> moves;
 
   const GameBoard({
     Key key,
@@ -80,7 +80,7 @@ class GameBoard extends StatelessWidget {
   }
 
   GameMark _getFieldMark(int index) {
-    final movesForIndex = moves.where((move) => move.fieldIndex == index);
-    return movesForIndex.isNotEmpty ? movesForIndex.first.mark : null;
+    final movesForIndex = moves.filter((move) => move.fieldIndex == index);
+    return movesForIndex.isNotEmpty() ? movesForIndex.first().mark : null;
   }
 }

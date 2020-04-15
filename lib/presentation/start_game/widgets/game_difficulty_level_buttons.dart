@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
@@ -49,7 +49,7 @@ class GameDifficultyLevelButtons extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),
                 child: Text(
-                  AppLocalizations.of(context).get(titles[index]),
+                  context.translate(titles[index]),
                   style: TextStyle(
                     fontWeight: FontWeight.w900,
                     fontSize: 24,

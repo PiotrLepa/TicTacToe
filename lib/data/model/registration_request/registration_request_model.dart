@@ -1,10 +1,9 @@
 library registration_request_model;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/core/data/serializer/serializable.dart';
+import 'package:tictactoe/core/data/network/serializer/serializable.dart';
 
 part 'registration_request_model.freezed.dart';
-
 part 'registration_request_model.g.dart';
 
 @freezed

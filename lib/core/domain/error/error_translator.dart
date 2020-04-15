@@ -1,6 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/data/network/exception/api_exception.dart';
+import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 
 @lazySingleton
 class ErrorTranslator {
@@ -9,12 +9,12 @@ class ErrorTranslator {
       return RawString(exception.printableMessage);
     }
     final keyString = exception.map(
-      noConnection: (value) => "apiErrorNoConnection",
-      badRequest: (value) => "apiErrorBadRequest",
-      unauthorized: (value) => "apiErrorUnauthorized",
-      notFound: (value) => "apiErrorNotFound",
-      internalServerError: (value) => "apiErrorInternalServerError",
-      unknownError: (value) => "apiErrorUnknown",
+      noConnection: (mappedState) => "apiErrorNoConnection",
+      badRequest: (mappedState) => "apiErrorBadRequest",
+      unauthorized: (mappedState) => "apiErrorUnauthorized",
+      notFound: (mappedState) => "apiErrorNotFound",
+      internalServerError: (mappedState) => "apiErrorInternalServerError",
+      unknownError: (mappedState) => "apiErrorUnknown",
     );
     return KeyString(keyString);
   }
