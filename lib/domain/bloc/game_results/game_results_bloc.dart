@@ -74,18 +74,19 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
         additionalSuccess: (response) async* {
           yield* _renderGameResults(response);
         },
+        // ignore: missing_return
         orElse: () {},
       );
     }
   }
 
+  // ignore: missing_return
   Future<GameResultPagedResponse> _getFetchCall(int page, GameResultType type) {
     switch (type) {
       case GameResultType.all:
         return _gameResultRepository.getAllGameResults(page);
       case GameResultType.user:
         return _gameResultRepository.getUserGameResults(page);
-        break;
     }
   }
 

@@ -33,17 +33,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
             padding: const EdgeInsets.all(16),
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
               condition: (previous, current) =>
-              current is Nothing ||
+                  current is Nothing ||
                   current is RenderInputsErrors ||
                   current is ClearInputsErrors,
               builder: (context, state) {
                 return state.maybeMap(
-                  renderInputsErrors: (mapState) => _buildFieldsAndButton(
-                    usernameError: mapState.usernameError,
-                    emailError: mapState.emailError,
-                    passwordError: mapState.passwordError,
-                    repeatedPasswordError: mapState.repeatedPasswordError,
-                  ),
+                  renderInputsErrors: (mappedState) =>
+                      _buildFieldsAndButton(
+                        usernameError: mappedState.usernameError,
+                        emailError: mappedState.emailError,
+                        passwordError: mappedState.passwordError,
+                        repeatedPasswordError: mappedState
+                            .repeatedPasswordError,
+                      ),
                   orElse: () => _buildFieldsAndButton(),
                 );
               },
@@ -55,25 +57,25 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   void _respondForState(RegistrationState state) {
-    state.maybeWhen(
-      loading: () {
+    state.maybeMap(
+      loading: (mappedState) {
         setState(() {
           _isLoading = true;
         });
       },
-      error: (errorMessage) {
+      error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
-            );
+          message: mappedState.errorMessage,
+        );
         setState(() {
           _isLoading = false;
         });
       },
-      showSuccessFlushbar: () {
+      showSuccessFlushbar: (mappedState) {
         getIt.get<FlushbarHelper>().showSuccess(
-              message:
-                  context.translateKey('registrationScreenRegistrationSuccess'),
-            );
+          message:
+          context.translateKey('registrationScreenRegistrationSuccess'),
+        );
         setState(() {
           _isLoading = false;
         });

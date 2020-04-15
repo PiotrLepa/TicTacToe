@@ -29,8 +29,8 @@ class NetworkErrorHandler {
         handleExpiredSession();
       }
       return error.map(
-        noConnection: (_) => ApiException.noConnection(-1, null),
-        sessionExpired: (_) => ApiException.unauthorized(401, null),
+        noConnection: (mappedState) => ApiException.noConnection(-1, null),
+        sessionExpired: (mappedState) => ApiException.unauthorized(401, null),
       );
     }
     final response = dioError.response;

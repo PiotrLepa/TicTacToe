@@ -35,21 +35,21 @@ class _GameResultsState extends State<GameResults>
         condition: (oldState, newState) => newState is! AdditionalLoading,
         builder: (context, state) {
           return state.maybeMap(
-            loading: (loading) => Center(
+            loading: (mappedState) => Center(
               child: LoadingIndicator(),
             ),
-            renderGameResults: (renderGameResults) => GameResultList(
-              data: renderGameResults.gameResults,
-              hasReachedEnd: renderGameResults.hasReachedEnd,
+            renderGameResults: (mappedState) => GameResultList(
+              data: mappedState.gameResults,
+              hasReachedEnd: mappedState.hasReachedEnd,
               loadMoreItemsCallback: () {
-                    context
-                        .bloc<GameResultsBloc>()
-                        .add(GameResultsEvent.loadMoreItems(widget.type));
-                  },
-                ),
-            error: (error) => Center(
+                context
+                    .bloc<GameResultsBloc>()
+                    .add(GameResultsEvent.loadMoreItems(widget.type));
+              },
+            ),
+            error: (mappedState) => Center(
               child: Text(
-                context.translate(error.errorMessage),
+                context.translate(mappedState.errorMessage),
               ),
             ),
             orElse: () => Container(),

@@ -35,15 +35,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _respondForState(LoginState state) {
-    state.maybeWhen(
-      loading: (emailErrorKey, passwordErrorKey) {
+    state.maybeMap(
+      loading: (mappedState) {
         setState(() {
           _isLoading = true;
         });
       },
-      error: (errorMessage, emailErrorKey, passwordErrorKey) {
+      error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: errorMessage,
+              message: mappedState.errorMessage,
             );
         setState(() {
           _isLoading = false;
