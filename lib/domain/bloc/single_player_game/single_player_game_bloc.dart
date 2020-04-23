@@ -12,27 +12,30 @@ import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
-import 'package:tictactoe/domain/entity/game_response/game_response.dart';
+import 'package:tictactoe/domain/entity/single_player_game_response/single_player_game_response.dart';
 import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
-part 'game_bloc.freezed.dart';
-part 'game_event.dart';
-part 'game_state.dart';
+part 'single_player_game_bloc.freezed.dart';
+
+part 'single_player_game_event.dart';
+
+part 'single_player_game_state.dart';
 
 @injectable
-class GameBloc extends Bloc<GameEvent, GameState> {
+class SinglePlayerGameBloc
+    extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
   final SinglePlayerGameRepository _gameRepository;
 
-  GameResponse _gameResponse;
+  SinglePlayerGameResponse _gameResponse;
 
-  GameBloc(this._gameRepository);
-
-  @override
-  GameState get initialState => GameState.nothing();
+  SinglePlayerGameBloc(this._gameRepository);
 
   @override
-  Stream<GameState> mapEventToState(
-    GameEvent event,
+  SinglePlayerGameState get initialState => SinglePlayerGameState.nothing();
+
+  @override
+  Stream<SinglePlayerGameState> mapEventToState(
+    SinglePlayerGameEvent event,
   ) async* {
     yield* event.map(
       createGame: _onCreateGame,
@@ -41,42 +44,43 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     );
   }
 
-  Stream<GameState> _onCreateGame(CreateGame event) async* {
+  Stream<SinglePlayerGameState> _onCreateGame(CreateGame event) async* {
     ExtendedNavigator.ofRouter<Router>().pop();
     _pushGameScreen(event.difficultyLevel);
     yield* _createGame(event.difficultyLevel);
   }
 
-  Stream<GameState> _onFieldTapped(OnFieldTapped event) async* {
+  Stream<SinglePlayerGameState> _onFieldTapped(OnFieldTapped event) async* {
     yield* _setMove(_gameResponse.gameId, event.index);
   }
 
-  Stream<GameState> _onRestartGame(RestartGame event) async* {
+  Stream<SinglePlayerGameState> _onRestartGame(RestartGame event) async* {
     yield* _createGame(event.difficultyLevel);
   }
 
-  Stream<GameState> _createGame(DifficultyLevel difficultyLevel) async* {
+  Stream<SinglePlayerGameState> _createGame(
+      DifficultyLevel difficultyLevel) async* {
     final request = fetch(_gameRepository.createGame(difficultyLevel));
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield GameState.loading();
+          yield SinglePlayerGameState.loading();
         },
         success: (response) async* {
           _gameResponse = response;
-          yield GameState.renderGame(
+          yield SinglePlayerGameState.renderGame(
             playerMark: response.playerMark,
             moves: response.moves,
           );
         },
         error: (errorMessage) async* {
-          yield GameState.error(errorMessage);
+          yield SinglePlayerGameState.error(errorMessage);
         },
       );
     }
   }
 
-  Stream<GameState> _setMove(int gameId, int fieldIndex) async* {
+  Stream<SinglePlayerGameState> _setMove(int gameId, int fieldIndex) async* {
     if (_gameResponse.status != GameStatus.onGoing ||
         !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
       return;
@@ -85,11 +89,11 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield GameState.moveLoading();
+          yield SinglePlayerGameState.moveLoading();
         },
         success: (response) async* {
           _gameResponse = response;
-          yield GameState.renderGame(
+          yield SinglePlayerGameState.renderGame(
             playerMark: response.playerMark,
             moves: response.moves,
           );
@@ -97,18 +101,18 @@ class GameBloc extends Bloc<GameEvent, GameState> {
             case GameStatus.onGoing:
               break;
             case GameStatus.playerWon:
-              yield GameState.playerWon();
+              yield SinglePlayerGameState.playerWon();
               break;
             case GameStatus.computerWon:
-              yield GameState.computerWon();
+              yield SinglePlayerGameState.computerWon();
               break;
             case GameStatus.draw:
-              yield GameState.draw();
+              yield SinglePlayerGameState.draw();
               break;
           }
         },
         error: (errorMessage) async* {
-          yield GameState.moveError(errorMessage);
+          yield SinglePlayerGameState.moveError(errorMessage);
         },
       );
     }

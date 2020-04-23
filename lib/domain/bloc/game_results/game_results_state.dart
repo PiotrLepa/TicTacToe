@@ -7,7 +7,7 @@ abstract class GameResultsState with _$GameResultsState {
   const factory GameResultsState.additionalLoading() = AdditionalLoading;
 
   const factory GameResultsState.renderGameResults({
-    @required KtList<GameResultResponse> gameResults,
+    @required KtList<SinglePlayerGameResultResponse> gameResults,
     @required bool hasReachedEnd,
   }) = RenderGameResults;
 

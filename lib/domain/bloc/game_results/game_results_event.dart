@@ -8,6 +8,6 @@ abstract class GameResultsEvent with _$GameResultsEvent {
   const factory GameResultsEvent.loadMoreItems(GameResultType type) =
       LoadMoreItems;
 
-  const factory GameResultsEvent.gameResultTapped(GameResultResponse item) =
-      GameResultTapped;
+  const factory GameResultsEvent.gameResultTapped(
+      SinglePlayerGameResultResponse item) = GameResultTapped;
 }

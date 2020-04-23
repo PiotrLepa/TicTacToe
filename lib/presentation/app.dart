@@ -8,8 +8,8 @@ import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
-import 'package:tictactoe/domain/bloc/game/game_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
+import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
 
 class App extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
@@ -22,8 +22,8 @@ class App extends StatelessWidget {
           create: (context) =>
               getIt.get<HomeBloc>()..add(HomeEvent.appStarted()),
         ),
-        BlocProvider<GameBloc>(
-          create: (context) => getIt.get<GameBloc>(),
+        BlocProvider<SinglePlayerGameBloc>(
+          create: (context) => getIt.get<SinglePlayerGameBloc>(),
         ),
       ],
       child: MaterialApp(

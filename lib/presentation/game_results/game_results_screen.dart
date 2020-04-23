@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_type.dart';
+import 'package:tictactoe/presentation/game_results/game_result_type.dart';
 import 'package:tictactoe/presentation/game_results/widgets/game_result_page.dart';
 import 'package:tictactoe/presentation/game_results/widgets/game_results_tab_bar.dart';
 

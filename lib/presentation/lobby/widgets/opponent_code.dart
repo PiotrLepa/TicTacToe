@@ -26,6 +26,7 @@ class _OpponentCodeState extends State<OpponentCode> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = widget.isLoading;
     return Column(
       children: <Widget>[
         AppFormField(
@@ -38,14 +39,14 @@ class _OpponentCodeState extends State<OpponentCode> {
         AppSeparator.vertical(height: 16),
         ProgressButton(
           onPressed: () {
-            setState(() {});
+            FocusScope.of(context).unfocus();
             context
                 .bloc<LobbyBloc>()
                 .add(LobbyEvent.startGamePressed(_opponentCodeController.text));
           },
           text: context.translateKey('lobbyStartGameButtonLabel'),
           loadingText: context.translateKey('lobbyStartGameButtonLoadingLabel'),
-          isLoading: widget.isLoading,
+          isLoading: isLoading,
         ),
       ],
     );

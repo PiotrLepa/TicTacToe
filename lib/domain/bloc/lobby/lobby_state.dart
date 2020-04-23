@@ -12,6 +12,9 @@ abstract class LobbyState with _$LobbyState {
     @required RawKeyString errorKey,
   }) = RenderOpponentCodeInputError;
 
+  const factory LobbyState.createGameLoading({@required String playerCode}) =
+      CreateGameLoading;
+
   const factory LobbyState.createGameSuccess({@required String playerCode}) =
       CreateGameSuccess;
 

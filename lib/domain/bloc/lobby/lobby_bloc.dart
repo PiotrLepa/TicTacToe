@@ -7,9 +7,7 @@ import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'lobby_bloc.freezed.dart';
-
 part 'lobby_event.dart';
-
 part 'lobby_state.dart';
 
 @injectable
@@ -55,7 +53,11 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     final request = fetch(_multiplayerGameRepository.createGame(opponentCode));
     await for (final requestState in request) {
       yield* requestState.when(
-        progress: () async* {},
+        progress: () async* {
+          yield LobbyState.createGameLoading(
+            playerCode: state.playerCode,
+          );
+        },
         success: (response) async* {
           yield LobbyState.createGameSuccess(
             playerCode: state.playerCode,

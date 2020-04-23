@@ -30,6 +30,11 @@ class LobbyScreen extends StatelessWidget {
                 opponentCodeInputError: renderOpponentCodeInputError.errorKey,
                 isLoading: false,
               ),
+              createGameLoading: (createGameLoading) => LobbyPage(
+                playerCode: createGameLoading.playerCode,
+                opponentCodeInputError: null,
+                isLoading: true,
+              ),
               createGameSuccess: (createGameSuccess) => LobbyPage(
                 playerCode: createGameSuccess.playerCode,
                 opponentCodeInputError: null,

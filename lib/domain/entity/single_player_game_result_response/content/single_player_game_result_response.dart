@@ -1,22 +1,22 @@
-library game_response;
+library single_player_game_result_response;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
-import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 
-part 'game_response.freezed.dart';
+part 'single_player_game_result_response.freezed.dart';
 
 @freezed
-abstract class GameResponse with _$GameResponse {
-  const factory GameResponse({
+abstract class SinglePlayerGameResultResponse
+    with _$SinglePlayerGameResultResponse {
+  const factory SinglePlayerGameResultResponse({
     @required int gameId,
     @required GameStatus status,
     @required DifficultyLevel difficultyLevel,
     @required GameMark playerMark,
     @required GameMark computerMark,
-    @required KtList<GameMove> moves,
-  }) = _GameResponse;
+    @required String startDate,
+    @required String endDate,
+  }) = _SinglePlayerGameResultResponse;
 }
