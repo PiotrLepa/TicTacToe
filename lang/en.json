@@ -19,6 +19,7 @@
   "pageGameResults": "Results",
   "pageSettings": "Settings",
   "startGameGameWithComputer": "Game with computer",
+  "startGameMultiplayerGame": "Multiplayer game",
   "gameScreenTitle": "Game with computer",
   "gameScreenPlayerMark": "You play as:",
   "gameScreenStatusPlayerWon": "You won",
@@ -46,5 +47,6 @@
   "gameResultsWinnerPlayer": "Player",
   "gameResultsWinnerComputer": "Computer",
   "gameResultsWinnerDraw": "Draw",
-  "gameResultsGameTime": "Game time:"
+  "gameResultsGameTime": "Game time:",
+  "lobbyAppBarTitle": "Lobby"
 }

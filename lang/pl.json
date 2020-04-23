@@ -19,6 +19,7 @@
   "pageGameResults": "Wyniki",
   "pageSettings": "Ustawienia",
   "startGameGameWithComputer": "Gra z komputerem",
+  "startGameMultiplayerGame": "Gra wieloosobowa",
   "gameScreenTitle": "Gra z komputerem",
   "gameScreenPlayerMark": "Grasz jako:",
   "gameScreenStatusPlayerWon": "Wygrałeś",
@@ -46,5 +47,6 @@
   "gameResultsWinnerPlayer": "Gracz",
   "gameResultsWinnerComputer": "Komputer",
   "gameResultsWinnerDraw": "Remis",
-  "gameResultsGameTime": "Czas rozgrywki:"
+  "gameResultsGameTime": "Czas rozgrywki:",
+  "lobbyAppBarTitle": "Poczekalnia"
 }

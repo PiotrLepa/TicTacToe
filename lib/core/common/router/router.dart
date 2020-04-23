@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:tictactoe/presentation/game/game_screen.dart';
 import 'package:tictactoe/presentation/home/home_screen.dart';
+import 'package:tictactoe/presentation/lobby/lobby_screen.dart';
 import 'package:tictactoe/presentation/login/login_screen.dart';
 import 'package:tictactoe/presentation/registration/registration_screen.dart';
 import 'package:tictactoe/presentation/start/start_screen.dart';
@@ -17,4 +18,6 @@ class $Router {
   HomeScreen homeScreen;
 
   GameScreen gameScreen;
+
+  LobbyScreen lobbyScreen;
 }
