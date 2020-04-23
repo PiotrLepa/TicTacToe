@@ -14,6 +14,7 @@ abstract class LoginRequestModel
     @JsonKey(name: "username") @required String email,
     @required String password,
     @JsonKey(name: "grant_type") @required String grantType,
+    @JsonKey(name: "device_token") @required String deviceToken,
   }) = _LoginRequestModel;
 
   factory LoginRequestModel.fromJson(Map<String, dynamic> json) =>

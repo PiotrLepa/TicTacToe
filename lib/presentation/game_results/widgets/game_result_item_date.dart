@@ -3,11 +3,11 @@ import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 
 class GameResultItemDate extends StatelessWidget {
-  final int gameTime;
+  final String gameDateTime;
 
   const GameResultItemDate({
     Key key,
-    @required this.gameTime,
+    @required this.gameDateTime,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class GameResultItemDate extends StatelessWidget {
   }
 
   String _formatTime() {
-    final date = DateTime.fromMicrosecondsSinceEpoch(gameTime * 1000);
-    return '${date.hour} : ${date.minute}';
+    final parsedDate = DateTime.parse(gameDateTime).toLocal();
+    return '${parsedDate.hour} : ${parsedDate.minute}';
   }
 }

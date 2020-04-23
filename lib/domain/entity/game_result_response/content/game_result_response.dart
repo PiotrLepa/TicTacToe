@@ -15,7 +15,7 @@ abstract class GameResultResponse with _$GameResultResponse {
     @required DifficultyLevel difficultyLevel,
     @required GameMark playerMark,
     @required GameMark computerMark,
-    @required int startDate,
-    @required int endDate,
+    @required String startDate,
+    @required String endDate,
   }) = _GameResultResponse;
 }

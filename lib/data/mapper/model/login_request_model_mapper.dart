@@ -11,5 +11,6 @@ class LoginRequestModelMapper
         email: entity.email,
         password: entity.password,
         grantType: entity.grantType,
+        deviceToken: entity.deviceToken,
       );
 }

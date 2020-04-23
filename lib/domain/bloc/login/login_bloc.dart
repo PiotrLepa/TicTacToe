@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -19,10 +20,12 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository _loginRepository;
   final OauthTokensStorage _oauthTokensStorage;
+  final FirebaseMessaging _firebaseMessaging;
 
   LoginBloc(
     this._loginRepository,
     this._oauthTokensStorage,
+    this._firebaseMessaging,
   );
 
   @override
@@ -52,10 +55,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _login(String email, String password) async* {
+    final deviceToken = await _getDeviceToken();
+    if (deviceToken == null) {
+      yield LoginState.error(KeyString('apiErrorUnknown'));
+      return;
+    }
     final entity = LoginRequest(
       email: email,
       password: password,
       grantType: oauthGrantTypePassword,
+      deviceToken: deviceToken,
     );
     final request = fetch(_loginRepository.login(entity));
     await for (final state in request) {
@@ -80,7 +89,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _navigateToHome() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
       Routes.homeScreen,
-      (route) => false,
+          (route) => false,
     );
+  }
+
+  Future<String> _getDeviceToken() async {
+    return _firebaseMessaging
+        .getToken()
+        .catchError((error) => Future.value(null));
   }
 }

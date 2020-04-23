@@ -33,7 +33,7 @@ class GameResultItem extends StatelessWidget {
           ),
           Expanded(
             child: GameResultItemDate(
-              gameTime: data.startDate,
+              gameDateTime: data.startDate,
             ),
           )
         ],

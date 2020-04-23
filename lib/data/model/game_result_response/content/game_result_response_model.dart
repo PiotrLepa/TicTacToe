@@ -17,8 +17,8 @@ abstract class GameResultResponseModel with _$GameResultResponseModel {
     @required DifficultyLevelModel difficultyLevel,
     @required GameMarkModel playerMark,
     @required GameMarkModel computerMark,
-    @required int startDate,
-    @required int endDate,
+    @required String startDate,
+    @required String endDate,
   }) = _GameResultResponseModel;
 
   factory GameResultResponseModel.fromJson(Map<String, dynamic> json) =>

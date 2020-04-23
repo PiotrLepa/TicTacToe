@@ -18,9 +18,6 @@ Future<void> main() async {
 }
 
 Future<dynamic> firebaseBackgroundMessageHandler() {
-  FirebaseMessaging().getToken().then((token) {
-    logger.d('firebase token: $token');
-  });
   FirebaseMessaging().configure(
     onMessage: (Map<String, dynamic> message) async {
       logger.d('on message $message');
@@ -32,4 +29,8 @@ Future<dynamic> firebaseBackgroundMessageHandler() {
       logger.d('on launch $message');
     },
   );
+}
+
+Future<dynamic> onBackgroundMessage(Map<String, dynamic> message) {
+  logger.d('on background message $message');
 }

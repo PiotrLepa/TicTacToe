@@ -42,7 +42,7 @@ class NetworkService extends BaseNetworkService {
     DifficultyLevelModel difficultyLevel,
   ) =>
       post(
-        "/game/create",
+        "/single-player/create",
         queryParameters: {
           "difficulty_level": enumToString(difficultyLevel),
         },
@@ -54,12 +54,12 @@ class NetworkService extends BaseNetworkService {
     int fieldIndex,
   ) =>
       put(
-        "/game/$gameId/move/$fieldIndex",
+        "/single-player/$gameId/move/$fieldIndex",
         secured: true,
       );
 
   Future<GameResultPagedResponseModel> getUserGameResults(int page) => get(
-        "/game/user-results",
+    "/game-result/single-player/user",
         queryParameters: {
           "page": page,
           "size": pagination_elements_per_page,
@@ -68,11 +68,11 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<GameResultPagedResponseModel> getAllGameResults(int page) => get(
-        "/game/all-results",
-        queryParameters: {
-          "page": page,
-          "size": pagination_elements_per_page,
-        },
-        secured: true,
+    "/game-result/single-player/all",
+    queryParameters: {
+      "page": page,
+      "size": pagination_elements_per_page,
+    },
+    secured: true,
       );
 }
