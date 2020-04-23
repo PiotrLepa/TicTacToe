@@ -20,11 +20,13 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository _loginRepository;
   final OauthTokensStorage _oauthTokensStorage;
+  final Validator _validator;
   final FirebaseMessaging _firebaseMessaging;
 
   LoginBloc(
     this._loginRepository,
     this._oauthTokensStorage,
+    this._validator,
     this._firebaseMessaging,
   );
 
@@ -42,8 +44,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Stream<LoginState> _mapLoginEvent(Login event) async* {
-    final emailValidation = Validators.validateEmail(event.email);
-    final passwordValidation = Validators.validatePassword(event.password);
+    final emailValidation = _validator.validateEmail(event.email);
+    final passwordValidation = _validator.validatePassword(event.password);
     if (emailValidation != null || passwordValidation != null) {
       yield LoginState.renderInputsErrors(
         emailErrorKey: emailValidation,

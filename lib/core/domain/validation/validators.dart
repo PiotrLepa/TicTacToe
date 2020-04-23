@@ -1,10 +1,12 @@
+import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 
-class Validators {
+@lazySingleton
+class Validator {
   static final emailRegex = RegExp(
       r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 
-  static RawKeyString validateUsername(String value) {
+  RawKeyString validateUsername(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');
     } else if (value.length < 3) {
@@ -14,7 +16,7 @@ class Validators {
     }
   }
 
-  static RawKeyString validateEmail(String value) {
+  RawKeyString validateEmail(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');
     } else if (!emailRegex.hasMatch(value)) {
@@ -24,11 +26,21 @@ class Validators {
     }
   }
 
-  static RawKeyString validatePassword(String value) {
+  RawKeyString validatePassword(String value) {
     if (value.isEmpty) {
       return KeyString('emptyFieldError');
     } else if (value.length < 6) {
       return KeyString('passwordTooShortError');
+    } else {
+      return null;
+    }
+  }
+
+  RawKeyString validateOpponentCode(String value) {
+    if (value.isEmpty) {
+      return KeyString('emptyFieldError');
+    } else if (value.length != 8) {
+      return KeyString('opponentCodeLengthError');
     } else {
       return null;
     }

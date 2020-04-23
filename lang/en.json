@@ -10,6 +10,7 @@
   "invalidEmailError": "Incorrect email address",
   "passwordTooShortError": "Password must be at least 6 characters",
   "usernameTooShortError": "Username must be at least 3 characters",
+  "opponentCodeLengthError": "Opponent code must be 8 characters",
   "errorFlushbarTitle": "Something get wrong",
   "successFlushbarTitle": "Success",
   "difficultyLevelEasy": "Easy",

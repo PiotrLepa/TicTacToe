@@ -38,7 +38,7 @@ class NetworkService extends BaseNetworkService {
         data: request,
       );
 
-  Future<GameResponseModel> createGame(
+  Future<GameResponseModel> singlePlayerCreateGame(
     DifficultyLevelModel difficultyLevel,
   ) =>
       post(
@@ -49,7 +49,7 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<GameResponseModel> setMove(
+  Future<GameResponseModel> singlePlayerSetMove(
     int gameId,
     int fieldIndex,
   ) =>
@@ -58,8 +58,19 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
+  Future<void> multiplayerCreateGame(
+    String opponentCode,
+  ) =>
+      post(
+        "/multiplayer/create",
+        queryParameters: {
+          "opponent_code": opponentCode,
+        },
+        secured: true,
+      );
+
   Future<GameResultPagedResponseModel> getUserGameResults(int page) => get(
-    "/game-result/single-player/user",
+        "/game-result/single-player/user",
         queryParameters: {
           "page": page,
           "size": pagination_elements_per_page,

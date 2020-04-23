@@ -13,7 +13,7 @@ import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 import 'package:tictactoe/domain/entity/game_response/game_response.dart';
-import 'package:tictactoe/domain/repository/game_repository.dart';
+import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
 part 'game_bloc.freezed.dart';
 part 'game_event.dart';
@@ -21,7 +21,7 @@ part 'game_state.dart';
 
 @injectable
 class GameBloc extends Bloc<GameEvent, GameState> {
-  final GameRepository _gameRepository;
+  final SinglePlayerGameRepository _gameRepository;
 
   GameResponse _gameResponse;
 

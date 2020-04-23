@@ -10,6 +10,7 @@
   "invalidEmailError": "Niepoprawny adres e-mail",
   "passwordTooShortError": "Hasło musi mieć conajmniej 6 znaków",
   "usernameTooShortError": "Nazwa użytkownika musi mieć conajmniej 3 znaki",
+  "opponentCodeLengthError": "Kod przeciwnika musi mieć 8 znaków",
   "errorFlushbarTitle": "Coś poszło nie tak",
   "successFlushbarTitle": "Sukces",
   "difficultyLevelEasy": "Łatwy",

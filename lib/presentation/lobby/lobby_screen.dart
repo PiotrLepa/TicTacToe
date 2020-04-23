@@ -3,18 +3,43 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
+import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 import 'package:tictactoe/presentation/lobby/widgets/lobby_page.dart';
 
 class LobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<LobbyBloc>(),
+      create: (context) => getIt<LobbyBloc>()..add(LobbyEvent.screenStarted()),
       child: Scaffold(
-          appBar: AppBar(
-            title: Text(context.translateKey('lobbyAppBarTitle')),
-          ),
-          body: LobbyPage()),
+        appBar: AppBar(
+          title: Text(context.translateKey('lobbyAppBarTitle')),
+        ),
+        body: BlocBuilder<LobbyBloc, LobbyState>(
+          builder: (context, state) {
+            return state.map(
+              loading: (loading) => Center(child: LoadingIndicator()),
+              renderPlayerCode: (renderPlayerCode) => LobbyPage(
+                playerCode: renderPlayerCode.playerCode,
+                opponentCodeInputError: null,
+                isLoading: false,
+              ),
+              renderOpponentCodeInputError: (renderOpponentCodeInputError) =>
+                  LobbyPage(
+                playerCode: renderOpponentCodeInputError.playerCode,
+                opponentCodeInputError: renderOpponentCodeInputError.errorKey,
+                isLoading: false,
+              ),
+              createGameSuccess: (createGameSuccess) => LobbyPage(
+                playerCode: createGameSuccess.playerCode,
+                opponentCodeInputError: null,
+                isLoading: false,
+              ),
+              error: (error) => Text("TODO error"), // TODO,
+            );
+          },
+        ),
+      ),
     );
   }
 }
