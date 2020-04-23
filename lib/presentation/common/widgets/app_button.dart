@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class GameTypeButton extends StatelessWidget {
+class AppButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
 
-  const GameTypeButton({
+  const AppButton({
     Key key,
     @required this.text,
     @required this.onPressed,

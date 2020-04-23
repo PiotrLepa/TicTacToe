@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/presentation/util/app_modal_bottom_sheet.dart';
+import 'package:tictactoe/presentation/common/widgets/app_button.dart';
 import 'package:tictactoe/presentation/start_game/widgets/game_difficulty_level_buttons.dart';
-import 'package:tictactoe/presentation/start_game/widgets/game_type_button.dart';
 
 class StartGameScreen extends StatelessWidget {
   @override
@@ -19,7 +19,7 @@ class StartGameScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              GameTypeButton(
+              AppButton(
                 text: context.translateKey('startGameGameWithComputer'),
                 onPressed: () {
                   showAppModalBottomSheet(
@@ -29,7 +29,7 @@ class StartGameScreen extends StatelessWidget {
                 },
               ),
               SizedBox(height: 30),
-              GameTypeButton(
+              AppButton(
                 text: context.translateKey('startGameMultiplayerGame'),
                 onPressed: () => _pushLobbyScreen(),
               ),

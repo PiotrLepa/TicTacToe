@@ -33,13 +33,13 @@
   "fieldPasswordHint": "Password",
   "fieldRepeatPasswordHint": "Repeat password",
   "loginScreenLoginButton": "Log in",
-  "loginScreenLoadingButton": "Logging in",
+  "loginScreenLoadingButton": "Logging in...",
   "startScreenTitle": "Join to us",
   "startScreenRegistrationButton": "Registration",
   "startScreenLoginButton": "Login",
   "registrationScreenToolbar": "Registration",
   "registrationScreenButton": "Sign in",
-  "registrationScreenLoadingButton": "Signing in",
+  "registrationScreenLoadingButton": "Signing in...",
   "registrationScreenRegistrationSuccess": "Log in to your account to use the application",
   "gameResultsUserTab": "Yours",
   "gameResultsAllTab": "All",
@@ -48,5 +48,9 @@
   "gameResultsWinnerComputer": "Computer",
   "gameResultsWinnerDraw": "Draw",
   "gameResultsGameTime": "Game time:",
-  "lobbyAppBarTitle": "Lobby"
+  "lobbyAppBarTitle": "Lobby",
+  "lobbyPlayerCodeLabel": "Your code:",
+  "lobbyOpponentCodeInputLabel": "Enter opponent code",
+  "lobbyStartGameButtonLabel": "Start game",
+  "lobbyStartGameButtonLoadingLabel": "Starting game..."
 }
