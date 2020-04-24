@@ -8,6 +8,7 @@ class AppFormField extends StatelessWidget {
   final TextEditingController controller;
   final RawKeyString errorText;
   final TextInputType type;
+  final int maxLength;
   final bool obscureText;
 
   const AppFormField({
@@ -16,6 +17,7 @@ class AppFormField extends StatelessWidget {
     this.controller,
     this.errorText,
     this.type,
+    this.maxLength,
     this.obscureText = false,
   }) : super(key: key);
 
@@ -32,6 +34,7 @@ class AppFormField extends StatelessWidget {
         controller: controller,
         keyboardType: type,
         cursorColor: formColor,
+        maxLength: maxLength,
         decoration: InputDecoration(
           labelText: labelText,
           errorText: _getValidationText(context),

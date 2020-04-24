@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tictactoe/core/data/network/interceptor/bearer_token_interceptor.dart';
@@ -15,6 +16,8 @@ abstract class NetworkClient {
   @preResolve
   Future<SharedPreferences> get sharedPreferences =>
       SharedPreferences.getInstance();
+
+  FirebaseMessaging get firebaseMessaging => FirebaseMessaging();
 
   @lazySingleton
   @Named(defaultNetworkClient)

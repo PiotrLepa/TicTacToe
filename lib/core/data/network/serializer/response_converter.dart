@@ -23,9 +23,14 @@ class ResponseConverter {
   }
 
   dynamic _decodeJson<T>(entity) {
-    if (entity is Iterable) return _decodeList<T>(entity.toKtList());
-
-    if (entity is Map) return _decodeMap<T>(entity);
+    if (T.toString() == "void") {
+      // TOOO better way to check if T is void?
+      return;
+    } else if (entity is Iterable) {
+      return _decodeList<T>(entity.toKtList());
+    } else if (entity is Map) {
+      return _decodeMap<T>(entity);
+    }
 
     return entity;
   }

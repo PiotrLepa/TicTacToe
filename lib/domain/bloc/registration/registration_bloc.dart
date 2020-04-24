@@ -16,8 +16,12 @@ part 'registration_state.dart';
 @injectable
 class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   final RegistrationRepository _registrationRepository;
+  final Validator _validator;
 
-  RegistrationBloc(this._registrationRepository);
+  RegistrationBloc(
+    this._registrationRepository,
+    this._validator,
+  );
 
   @override
   RegistrationState get initialState => RegistrationState.nothing();
@@ -32,11 +36,11 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   }
 
   Stream<RegistrationState> _mapRegisterEvent(Register event) async* {
-    final emailValidation = Validators.validateEmail(event.email);
-    final usernameValidation = Validators.validateUsername(event.username);
-    final passwordValidation = Validators.validatePassword(event.password);
+    final emailValidation = _validator.validateEmail(event.email);
+    final usernameValidation = _validator.validateUsername(event.username);
+    final passwordValidation = _validator.validatePassword(event.password);
     final repeatedPasswordValidation =
-        Validators.validatePassword(event.repeatedPassword);
+    _validator.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,

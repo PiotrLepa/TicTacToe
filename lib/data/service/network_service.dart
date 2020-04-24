@@ -6,12 +6,12 @@ import 'package:tictactoe/core/data/network/serializer/response_converter.dart';
 import 'package:tictactoe/core/data/network/service/base_network_service.dart';
 import 'package:tictactoe/core/injection/injection_names.dart';
 import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_model.dart';
-import 'package:tictactoe/data/model/game_response/game_response_model.dart';
-import 'package:tictactoe/data/model/game_result_response/game_result_paged_response_model.dart';
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/registration_request/registration_request_model.dart';
 import 'package:tictactoe/data/model/registration_response/registration_response_model.dart';
+import 'package:tictactoe/data/model/single_player_game_response/single_player_game_response_model.dart';
+import 'package:tictactoe/data/model/single_player_game_result_response/single_player_game_result_paged_response_model.dart';
 
 @lazySingleton
 class NetworkService extends BaseNetworkService {
@@ -38,28 +38,36 @@ class NetworkService extends BaseNetworkService {
         data: request,
       );
 
-  Future<GameResponseModel> createGame(
-    DifficultyLevelModel difficultyLevel,
-  ) =>
+  Future<SinglePlayerGameResponseModel> singlePlayerCreateGame(
+      DifficultyLevelModel difficultyLevel,) =>
       post(
-        "/game/create",
+        "/single-player/create",
         queryParameters: {
           "difficulty_level": enumToString(difficultyLevel),
         },
         secured: true,
       );
 
-  Future<GameResponseModel> setMove(
-    int gameId,
-    int fieldIndex,
-  ) =>
+  Future<SinglePlayerGameResponseModel> singlePlayerSetMove(int gameId,
+      int fieldIndex,) =>
       put(
-        "/game/$gameId/move/$fieldIndex",
+        "/single-player/$gameId/move/$fieldIndex",
         secured: true,
       );
 
-  Future<GameResultPagedResponseModel> getUserGameResults(int page) => get(
-        "/game/user-results",
+  Future<void> multiplayerCreateGame(String opponentCode,) =>
+      post(
+        "/multiplayer/create",
+        queryParameters: {
+          "opponent_code": opponentCode,
+        },
+        secured: true,
+      );
+
+  Future<SinglePlayerGameResultPagedResponseModel> getUserGameResults(
+      int page) =>
+      get(
+        "/game-result/single-player/user",
         queryParameters: {
           "page": page,
           "size": pagination_elements_per_page,
@@ -67,8 +75,10 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<GameResultPagedResponseModel> getAllGameResults(int page) => get(
-        "/game/all-results",
+  Future<SinglePlayerGameResultPagedResponseModel> getAllGameResults(
+      int page) =>
+      get(
+        "/game-result/single-player/all",
         queryParameters: {
           "page": page,
           "size": pagination_elements_per_page,

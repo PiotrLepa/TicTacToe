@@ -10,5 +10,6 @@ abstract class LoginRequest with _$LoginRequest {
     @required String email,
     @required String password,
     @required String grantType,
+    @required String deviceToken,
   }) = _LoginRequest;
 }

@@ -7,18 +7,20 @@ import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/bloc/pagination_handler.dart';
-import 'package:tictactoe/domain/entity/game_result_response/content/game_result_response.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_paged_response.dart';
-import 'package:tictactoe/domain/entity/game_result_response/game_result_type.dart';
+import 'package:tictactoe/domain/entity/single_player_game_result_response/content/single_player_game_result_response.dart';
+import 'package:tictactoe/domain/entity/single_player_game_result_response/single_player_game_result_paged_response.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
+import 'package:tictactoe/presentation/game_results/game_result_type.dart';
 
 part 'game_results_bloc.freezed.dart';
+
 part 'game_results_event.dart';
+
 part 'game_results_state.dart';
 
 @injectable
 class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
-    with PaginationHandler<GameResultResponse> {
+    with PaginationHandler<SinglePlayerGameResultResponse> {
   final GameResultRepository _gameResultRepository;
 
   GameResultsBloc(this._gameResultRepository);
@@ -81,7 +83,8 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
   }
 
   // ignore: missing_return
-  Future<GameResultPagedResponse> _getFetchCall(int page, GameResultType type) {
+  Future<SinglePlayerGameResultPagedResponse> _getFetchCall(int page,
+      GameResultType type) {
     switch (type) {
       case GameResultType.all:
         return _gameResultRepository.getAllGameResults(page);
@@ -91,7 +94,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
   }
 
   Stream<GameResultsState> _renderGameResults(
-      GameResultPagedResponse response,) async* {
+      SinglePlayerGameResultPagedResponse response,) async* {
     onPageFetched(
       page: response.pageNumber,
       hasReachedEnd: response.lastPage,
