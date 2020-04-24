@@ -21,7 +21,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   );
 
   @override
-  LobbyState get initialState => LobbyState.loading(playerCode: "");
+  LobbyState get initialState => LobbyState.loading();
 
   @override
   Stream<LobbyState> mapEventToState(LobbyEvent event) async* {
@@ -34,14 +34,13 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   Stream<LobbyState> _mapScreenStartedEvent(ScreenStarted event) async* {
     // TODO fetch user profile
     await Future.delayed(Duration(seconds: 1));
-    yield LobbyState.renderPlayerCode(playerCode: '87945387');
+    yield LobbyState.renderPage(playerCode: '87945387');
   }
 
   Stream<LobbyState> _mapStartGamePressedEvent(StartGamePressed event) async* {
     final codeValidation = _validator.validateOpponentCode(event.opponentCode);
     if (codeValidation != null) {
       yield LobbyState.renderOpponentCodeInputError(
-        playerCode: state.playerCode,
         errorKey: codeValidation,
       );
     } else {
@@ -54,21 +53,14 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     await for (final requestState in request) {
       yield* requestState.when(
         progress: () async* {
-          yield LobbyState.createGameLoading(
-            playerCode: state.playerCode,
-          );
+          yield LobbyState.createGameLoading();
         },
         success: (response) async* {
-          yield LobbyState.createGameSuccess(
-            playerCode: state.playerCode,
-          );
+          yield LobbyState.createGameSuccess();
           _pushMultiplayerGameScreen();
         },
         error: (errorMessage) async* {
-          yield LobbyState.error(
-            playerCode: state.playerCode,
-            errorMessage: errorMessage,
-          );
+          yield LobbyState.createGameError(errorMessage);
         },
       );
     }

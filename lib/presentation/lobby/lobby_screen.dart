@@ -16,31 +16,16 @@ class LobbyScreen extends StatelessWidget {
           title: Text(context.translateKey('lobbyAppBarTitle')),
         ),
         body: BlocBuilder<LobbyBloc, LobbyState>(
+          condition: (oldState, newState) =>
+              newState is Loading ||
+              newState is Error ||
+              newState is RenderPage,
           builder: (context, state) {
-            return state.map(
-              loading: (loading) => Center(child: LoadingIndicator()),
-              renderPlayerCode: (renderPlayerCode) => LobbyPage(
-                playerCode: renderPlayerCode.playerCode,
-                opponentCodeInputError: null,
-                isLoading: false,
-              ),
-              renderOpponentCodeInputError: (renderOpponentCodeInputError) =>
-                  LobbyPage(
-                playerCode: renderOpponentCodeInputError.playerCode,
-                opponentCodeInputError: renderOpponentCodeInputError.errorKey,
-                isLoading: false,
-              ),
-              createGameLoading: (createGameLoading) => LobbyPage(
-                playerCode: createGameLoading.playerCode,
-                opponentCodeInputError: null,
-                isLoading: true,
-              ),
-              createGameSuccess: (createGameSuccess) => LobbyPage(
-                playerCode: createGameSuccess.playerCode,
-                opponentCodeInputError: null,
-                isLoading: false,
-              ),
-              error: (error) => Text("TODO error"), // TODO,
+            return state.maybeMap(
+              loading: (mappedState) => Center(child: LoadingIndicator()),
+              renderPage: (mappedState) => LobbyPage(),
+              error: (mappedState) => Text("TODO error"), // TODO,
+              orElse: () => Container(),
             );
           },
         ),

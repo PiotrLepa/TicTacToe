@@ -9,12 +9,12 @@ import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
 
 class OpponentCode extends StatefulWidget {
   final RawKeyString inputError;
-  final bool isLoading;
+  final isLoading;
 
   const OpponentCode({
     Key key,
-    @required this.inputError,
-    @required this.isLoading,
+    this.inputError,
+    this.isLoading = false,
   }) : super(key: key);
 
   @override
@@ -26,7 +26,6 @@ class _OpponentCodeState extends State<OpponentCode> {
 
   @override
   Widget build(BuildContext context) {
-    bool isLoading = widget.isLoading;
     return Column(
       children: <Widget>[
         AppFormField(
@@ -46,7 +45,7 @@ class _OpponentCodeState extends State<OpponentCode> {
           },
           text: context.translateKey('lobbyStartGameButtonLabel'),
           loadingText: context.translateKey('lobbyStartGameButtonLoadingLabel'),
-          isLoading: isLoading,
+          isLoading: widget.isLoading,
         ),
       ],
     );
