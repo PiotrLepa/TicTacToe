@@ -10,6 +10,7 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
+import 'package:tictactoe/presentation/common/widgets/GameRequestListener.dart';
 
 class App extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
@@ -36,7 +37,11 @@ class App extends StatelessWidget {
         supportedLocales: _localeProvider.getSupportedLocales().asList(),
         theme: ThemeProvider(isDark: false).getThemeData(),
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
-        builder: ExtendedNavigator<Router>(router: Router()),
+        builder: (BuildContext context, Widget widget) {
+          return GameRequestListener(
+            child: ExtendedNavigator<Router>(router: Router()),
+          );
+        },
       ),
     );
   }

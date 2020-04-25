@@ -49,14 +49,14 @@ packages:
       name: auto_route_generator
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.4.4"
+    version: "0.4.5"
   bloc:
     dependency: transitive
     description:
       name: bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "4.0.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -98,14 +98,14 @@ packages:
       name: build_runner
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.8.1"
+    version: "1.9.0"
   build_runner_core:
     dependency: transitive
     description:
       name: build_runner_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.0"
+    version: "5.1.0"
   built_collection:
     dependency: transitive
     description:
@@ -264,11 +264,25 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.0"
+    version: "4.0.0"
   flutter_cupertino_localizations:
     dependency: "direct main"
     description:
       name: flutter_cupertino_localizations
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  flutter_local_notifications:
+    dependency: "direct main"
+    description:
+      name: flutter_local_notifications
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.1"
+  flutter_local_notifications_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
@@ -300,7 +314,7 @@ packages:
       name: freezed
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.10.6"
+    version: "0.10.7"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -426,7 +440,7 @@ packages:
       name: logger
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.3"
+    version: "0.9.1"
   logging:
     dependency: transitive
     description:
@@ -559,7 +573,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.3"
+    version: "4.0.5"
   pub_semver:
     dependency: transitive
     description:
@@ -581,20 +595,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-  rxdart:
-    dependency: transitive
-    description:
-      name: rxdart
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.23.1"
   shared_preferences:
     dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.6+3"
+    version: "0.5.7"
   shared_preferences_macos:
     dependency: transitive
     description:
@@ -742,4 +749,4 @@ packages:
     version: "2.2.0"
 sdks:
   dart: ">=2.7.0 <3.0.0"
-  flutter: ">=1.12.13+hotfix.4 <2.0.0"
+  flutter: ">=1.12.13+hotfix.5 <2.0.0"

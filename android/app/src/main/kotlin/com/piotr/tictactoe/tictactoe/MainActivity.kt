@@ -6,7 +6,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.GeneratedPluginRegistrant
 
 class MainActivity: FlutterActivity() {
-    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
-        GeneratedPluginRegistrant.registerWith(flutterEngine)
-    }
+//    override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
+//        GeneratedPluginRegistrant.registerWith(flutterEngine)
+//    } TODO BUG: in firebase messaging plugin on message callback is called twice, uncomment this after flutter hotfix
 }
