@@ -1,3 +1,4 @@
+import 'package:tictactoe/core/common/notification/data/game_request_notification_data.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/data/model/common/game_move/game_move_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
@@ -16,4 +17,5 @@ const Map<Type, Object Function(Map<String, dynamic> json)> jsonFactories = {
       SinglePlayerGameResultPagedResponseModel.fromJsonFactory,
   SinglePlayerGameResultResponseModel:
       SinglePlayerGameResultResponseModel.fromJsonFactory,
+  GameRequestNotificationData: GameRequestNotificationData.fromJsonFactory,
 };
