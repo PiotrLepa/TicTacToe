@@ -9,7 +9,6 @@ import 'package:tictactoe/data/model/common/difficulty_level/difficulty_level_mo
 import 'package:tictactoe/data/model/login_request/login_request_model.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/registration_request/registration_request_model.dart';
-import 'package:tictactoe/data/model/registration_response/registration_response_model.dart';
 import 'package:tictactoe/data/model/single_player_game_response/single_player_game_response_model.dart';
 import 'package:tictactoe/data/model/single_player_game_result_response/single_player_game_result_paged_response_model.dart';
 
@@ -30,7 +29,7 @@ class NetworkService extends BaseNetworkService {
         headers: {authorizationHeader: basicKey},
       );
 
-  Future<RegistrationResponseModel> register(
+  Future<void> register(
     RegistrationRequestModel request,
   ) =>
       post(
@@ -65,7 +64,7 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<SinglePlayerGameResultPagedResponseModel> getUserGameResults(
-      int page) =>
+      int page,) =>
       get(
         "/game-result/single-player/user",
         queryParameters: {
@@ -76,7 +75,7 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<SinglePlayerGameResultPagedResponseModel> getAllGameResults(
-      int page) =>
+      int page,) =>
       get(
         "/game-result/single-player/all",
         queryParameters: {

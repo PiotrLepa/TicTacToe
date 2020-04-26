@@ -17,22 +17,22 @@ class FirebaseMessagingService {
   );
 
   Stream<GameInvitationModel> getGameInvitations() {
-    final streamController = StreamController<GameInvitationModel>();
+    final _messageController = StreamController<GameInvitationModel>();
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
         logger.d('on message $message');
-        streamController.add(_decodeMessage(message));
+        _messageController.add(_decodeMessage(message));
       },
       onLaunch: (Map<String, dynamic> message) async {
         logger.d('on launch $message');
-        streamController.add(_decodeMessage(message));
+        _messageController.add(_decodeMessage(message));
       },
       onResume: (Map<String, dynamic> message) async {
         logger.d('on launch $message');
-        streamController.add(_decodeMessage(message));
+        _messageController.add(_decodeMessage(message));
       },
     );
-    return streamController.stream;
+    return _messageController.stream;
   }
 
   GameInvitationModel _decodeMessage(Map<String, dynamic> message) {
