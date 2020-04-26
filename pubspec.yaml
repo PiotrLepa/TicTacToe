@@ -50,8 +50,6 @@ dependencies:
 
   flutter_svg: ^0.17.4
 
-  flutter_local_notifications: ^1.4.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -14,7 +14,7 @@ class ModelDecoder {
     } else if (data is Iterable) {
       return _decodeList<T>(data.toKtList());
     } else if (data is Map) {
-      return _decodeMap<T>(data);
+      return _decodeMap<T>(data.cast<String, dynamic>());
     } else {
       return data;
     }
