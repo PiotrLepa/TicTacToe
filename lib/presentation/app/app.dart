@@ -11,7 +11,7 @@ import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
-import 'package:tictactoe/presentation/common/widgets/game_invitation_listener.dart';
+import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_listener.dart';
 
 class App extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();

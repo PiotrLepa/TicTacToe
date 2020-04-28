@@ -1,0 +1,15 @@
+import 'package:flutter/material.dart';
+
+class GameInvitationTitle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      "Piotrek wants to play with you",
+      style: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 24,
+        color: Colors.white,
+      ),
+    );
+  }
+}
