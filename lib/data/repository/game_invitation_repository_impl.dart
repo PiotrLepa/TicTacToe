@@ -16,9 +16,7 @@ class GameInvitationRepositoryImpl implements GameInvitationRepository {
   );
 
   @override
-  Stream<GameInvitation> getGameInvitations() {
-    return _firebaseMessagingService
-        .getGameInvitations()
-        .map(_gameInvitationEntityMapper.toEntity);
-  }
+  Stream<GameInvitation> getGameInvitations() => _firebaseMessagingService
+      .getGameInvitations()
+      .map(_gameInvitationEntityMapper.toEntity);
 }

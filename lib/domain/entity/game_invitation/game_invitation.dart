@@ -12,5 +12,6 @@ abstract class GameInvitation with _$GameInvitation {
     @required int gameId,
     @required GameMark yourMark,
     @required MultiplayerPlayerType playerType,
+    @required String body,
   }) = _GameInvitation;
 }

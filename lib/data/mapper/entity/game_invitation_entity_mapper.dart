@@ -22,5 +22,6 @@ class GameInvitationEntityMapper
         yourMark: _gameMarkEntityMapper.toEntity(model.yourMark),
         playerType:
             _multiplayerPlayerTypeEntityMapper.toEntity(model.playerType),
+        body: model.body,
       );
 }

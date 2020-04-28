@@ -18,6 +18,7 @@ class GameInvitationListener extends StatefulWidget {
 
 class _GameInvitationListenerState extends State<GameInvitationListener> {
   final _itemFaderKey = GlobalKey<ItemFaderState>();
+  String _body = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
       listener: (context, state) {
         state.maybeMap(
           showGameInvitation: (mappedState) {
+            _body = mappedState.data.body;
             _itemFaderKey.currentState.show();
           },
           orElse: () {},
@@ -37,6 +39,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
             key: _itemFaderKey,
             child: SafeArea(
               child: GameInvitationWidget(
+                body: _body,
                 onButtonPressed: () {
                   _itemFaderKey.currentState.hide();
                 },

@@ -3,10 +3,12 @@ import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitati
 import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_title.dart';
 
 class GameInvitationWidget extends StatelessWidget {
+  final String body;
   final VoidCallback onButtonPressed;
 
   const GameInvitationWidget({
     Key key,
+    @required this.body,
     @required this.onButtonPressed,
   }) : super(key: key);
 
@@ -33,7 +35,7 @@ class GameInvitationWidget extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SizedBox(height: 16),
-                  GameInvitationTitle(),
+                  GameInvitationTitle(title: body),
                   SizedBox(height: 12),
                   GameInvitationButtons(onButtonPressed: onButtonPressed),
                   SizedBox(height: 8),
