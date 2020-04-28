@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/extension/build_context_extension.dart';
 
 class GameInvitationButtons extends StatelessWidget {
   final VoidCallback onButtonPressed;
@@ -15,7 +16,7 @@ class GameInvitationButtons extends StatelessWidget {
       children: <Widget>[
         FlatButton(
           child: Text(
-            'Decline',
+            context.translateKey('gameInvitationDeclineButton'),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
@@ -28,11 +29,13 @@ class GameInvitationButtons extends StatelessWidget {
         ),
         FlatButton(
           child: Text(
-            'Accept',
+            context.translateKey('gameInvitationPlayButton'),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Theme.of(context).primaryColor,
+              color: Theme
+                  .of(context)
+                  .primaryColor,
             ),
           ),
           onPressed: () {

@@ -53,5 +53,7 @@
   "lobbyPlayerCodeLabel": "Your code:",
   "lobbyOpponentCodeInputLabel": "Enter opponent code",
   "lobbyStartGameButtonLabel": "Start game",
-  "lobbyStartGameButtonLoadingLabel": "Starting game..."
+  "lobbyStartGameButtonLoadingLabel": "Starting game...",
+  "gameInvitationPlayButton": "Play",
+  "gameInvitationDeclineButton": "Decline"
 }

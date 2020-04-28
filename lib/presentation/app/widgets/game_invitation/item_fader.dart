@@ -9,10 +9,10 @@ class ItemFader extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ItemFaderState createState() => _ItemFaderState();
+  ItemFaderState createState() => ItemFaderState();
 }
 
-class _ItemFaderState extends State<ItemFader>
+class ItemFaderState extends State<ItemFader>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
@@ -43,7 +43,7 @@ class _ItemFaderState extends State<ItemFader>
       child: widget.child,
       builder: (context, child) {
         return Transform.translate(
-          offset: Offset(0, 64 * _animation.value),
+          offset: Offset(0, 50 * _animation.value),
           child: Opacity(
             opacity: _animation.value,
             child: child,

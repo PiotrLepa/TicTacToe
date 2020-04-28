@@ -5,6 +5,7 @@ class GameInvitationTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       "Piotrek wants to play with you",
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 24,

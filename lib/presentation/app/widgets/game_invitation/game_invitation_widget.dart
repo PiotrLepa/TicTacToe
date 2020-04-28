@@ -34,7 +34,7 @@ class GameInvitationWidget extends StatelessWidget {
                 children: <Widget>[
                   SizedBox(height: 16),
                   GameInvitationTitle(),
-                  SizedBox(height: 16),
+                  SizedBox(height: 12),
                   GameInvitationButtons(onButtonPressed: onButtonPressed),
                   SizedBox(height: 8),
                 ],
