@@ -65,6 +65,8 @@ dev_dependencies:
   # Data classes
   freezed: ^0.10.7
 
+  stomp_dart_client: ^0.3.2
+
 # The following section is specific to Flutter.
 flutter:
   uses-material-design: true

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 
 class GameInvitationButtons extends StatelessWidget {
-  final VoidCallback onButtonPressed;
+  final VoidCallback onPlayPressed;
+  final VoidCallback onDeclinePressed;
 
   const GameInvitationButtons({
     Key key,
-    @required this.onButtonPressed,
+    @required this.onPlayPressed,
+    @required this.onDeclinePressed,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class GameInvitationButtons extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            onButtonPressed();
+            onDeclinePressed();
           },
         ),
         FlatButton(
@@ -39,7 +41,7 @@ class GameInvitationButtons extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            onButtonPressed();
+            onPlayPressed();
           },
         )
       ],

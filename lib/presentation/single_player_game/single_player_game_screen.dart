@@ -54,7 +54,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       loading: (mappedState) => Center(
         child: LoadingIndicator(),
       ),
-      renderGame: (mappedState) => SinglePlayerGamePage(
+      renderGame: (mappedState) => GamePage(
           playerMark: mappedState.playerMark,
           moves: mappedState.moves,
           isLoadingVisible: _isFieldLoadingVisible,

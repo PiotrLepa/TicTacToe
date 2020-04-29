@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,17 +5,14 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
-import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
+import 'package:tictactoe/domain/entity/common/multiplayer_game_status/multiplayer_game_status.dart';
 import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_game_response.dart';
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'multiplayer_game_bloc.freezed.dart';
-
 part 'multiplayer_game_event.dart';
-
 part 'multiplayer_game_state.dart';
 
 @injectable
@@ -36,16 +32,16 @@ class MultiplayerGameBloc
     MultiplayerGameEvent event,
   ) async* {
     yield* event.map(
-      createGame: _onCreateGame,
+      screenStarted: _onScreenStarted,
       onFieldTapped: _onFieldTapped,
       restartGame: _onRestartGame,
     );
   }
 
-  Stream<MultiplayerGameState> _onCreateGame(CreateGame event) async* {
-    ExtendedNavigator.ofRouter<Router>().pop();
-    _pushGameScreen();
-    yield* _createGame(event.opponentCode);
+  Stream<MultiplayerGameState> _onScreenStarted(ScreenStarted event) async* {
+    yield* _observeGame(event.gameId);
+    await Future.delayed(Duration(seconds: 2));
+    yield* _joinToGame(event.gameId);
   }
 
   Stream<MultiplayerGameState> _onFieldTapped(OnFieldTapped event) async* {
@@ -53,29 +49,21 @@ class MultiplayerGameBloc
   }
 
   Stream<MultiplayerGameState> _onRestartGame(RestartGame event) async* {
-    yield* _createGame(event.opponentCode);
+//    yield* _createGame(event.opponentCode);
   }
 
-  Stream<MultiplayerGameState> _createGame(String opponentCode) async* {
-    final request = fetch(_gameRepository.createGame(opponentCode));
-    await for (final state in request) {
-      yield* state.when(
-        progress: () async* {
-          yield MultiplayerGameState.loading();
-        },
-        success: (response) async* {},
-        error: (errorMessage) async* {
-          yield MultiplayerGameState.error(errorMessage);
-        },
-      );
-    }
+  Stream<MultiplayerGameState> _observeGame(int gameId) async* {
+    yield* _gameRepository.getMultiplayerGame(gameId).map((game) {
+      _gameResponse = game;
+      return MultiplayerGameState.renderGame(game);
+    });
   }
 
   Stream<MultiplayerGameState> _setMove(int gameId, int fieldIndex) async* {
-//    if (_gameResponse.status != GameStatus.onGoing ||
-//        !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
-//      return;
-//    } // TODO
+    if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
+        !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
+      return;
+    }
     final request = fetch(_gameRepository.setMove(gameId, fieldIndex));
     await for (final state in request) {
       yield* state.when(
@@ -93,7 +81,14 @@ class MultiplayerGameBloc
   bool _isFieldEmpty(KtList<GameMove> moves, int fieldIndex) =>
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
-  void _pushGameScreen() {
-    ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen();
+  Stream<MultiplayerGameState> _joinToGame(int gameId) async* {
+    final request = fetch(_gameRepository.joinToGame(gameId));
+    await for (final state in request) {
+      yield* state.when(
+        progress: () async* {},
+        success: (response) async* {},
+        error: (errorMessage) async* {},
+      );
+    }
   }
 }

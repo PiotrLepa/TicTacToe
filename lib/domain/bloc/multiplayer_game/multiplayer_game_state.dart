@@ -6,10 +6,9 @@ abstract class MultiplayerGameState with _$MultiplayerGameState {
 
   const factory MultiplayerGameState.moveLoading() = MoveLoading;
 
-  const factory MultiplayerGameState.renderGame({
-    @required GameMark playerMark,
-    @required KtList<GameMove> moves,
-  }) = RenderGame;
+  const factory MultiplayerGameState.renderGame(
+    MultiplayerGameResponse game,
+  ) = RenderGame;
 
   const factory MultiplayerGameState.gameWon() = GameWon;
 

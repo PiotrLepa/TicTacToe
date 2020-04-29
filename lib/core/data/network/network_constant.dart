@@ -1,4 +1,5 @@
 const baseUrl = 'https://piotrlepa-tictactoe.herokuapp.com';
+const webSocketUrl = 'ws://piotrlepa-tictactoe.herokuapp.com';
 const authorizationHeader = 'authorization';
 const basicKey = 'Basic dGljdGFjdG9lOnRpY3RhY3RvZVNlY3JldA==';
 const securedHeaderKey = 'secured';

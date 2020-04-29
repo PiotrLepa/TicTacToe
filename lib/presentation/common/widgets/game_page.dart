@@ -6,13 +6,13 @@ import 'package:tictactoe/presentation/common/widgets/game_board.dart';
 import 'package:tictactoe/presentation/common/widgets/game_player_mark.dart';
 import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 
-class SinglePlayerGamePage extends StatelessWidget {
+class GamePage extends StatelessWidget {
   final GameMark playerMark;
   final KtList<GameMove> moves;
   final bool isLoadingVisible;
   final Function(int index) onFieldTapped;
 
-  const SinglePlayerGamePage({
+  const GamePage({
     Key key,
     @required this.playerMark,
     @required this.moves,

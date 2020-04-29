@@ -4,12 +4,14 @@ import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitati
 
 class GameInvitationWidget extends StatelessWidget {
   final String body;
-  final VoidCallback onButtonPressed;
+  final VoidCallback onPlayPressed;
+  final VoidCallback onDeclinePressed;
 
   const GameInvitationWidget({
     Key key,
     @required this.body,
-    @required this.onButtonPressed,
+    @required this.onPlayPressed,
+    @required this.onDeclinePressed,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,10 @@ class GameInvitationWidget extends StatelessWidget {
                   SizedBox(height: 16),
                   GameInvitationTitle(title: body),
                   SizedBox(height: 12),
-                  GameInvitationButtons(onButtonPressed: onButtonPressed),
+                  GameInvitationButtons(
+                    onPlayPressed: onPlayPressed,
+                    onDeclinePressed: onDeclinePressed,
+                  ),
                   SizedBox(height: 8),
                 ],
               ),

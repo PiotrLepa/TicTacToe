@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
+import 'package:tictactoe/domain/entity/game_invitation/game_invitation.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/bouncing_widget.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_widget.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/item_fader.dart';
@@ -19,7 +22,7 @@ class GameInvitationListener extends StatefulWidget {
 
 class _GameInvitationListenerState extends State<GameInvitationListener> {
   final _itemFaderKey = GlobalKey<ItemFaderState>();
-  String _body = '';
+  GameInvitation _gameData;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
         state.maybeMap(
           showGameInvitation: (mappedState) {
             setState(() {
-              _body = mappedState.data.body;
+              _gameData = mappedState.data;
             });
             _itemFaderKey.currentState.show();
           },
@@ -44,8 +47,12 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
               key: _itemFaderKey,
               child: SafeArea(
                 child: GameInvitationWidget(
-                  body: _body,
-                  onButtonPressed: () {
+                  body: _gameData?.body ?? "",
+                  onPlayPressed: () {
+                    _itemFaderKey.currentState.hide();
+                    _pushGameScreen();
+                  },
+                  onDeclinePressed: () {
                     _itemFaderKey.currentState.hide();
                   },
                 ),
@@ -54,6 +61,14 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
           ),
         ],
       ),
+    );
+  }
+
+  void _pushGameScreen() {
+    ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
+      gameId: _gameData.gameId,
+      playerMark: _gameData.yourMark,
+      playerType: _gameData.playerType,
     );
   }
 }
