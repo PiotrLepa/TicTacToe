@@ -16,9 +16,7 @@ import 'package:tictactoe/domain/entity/single_player_game_response/single_playe
 import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
 part 'single_player_game_bloc.freezed.dart';
-
 part 'single_player_game_event.dart';
-
 part 'single_player_game_state.dart';
 
 @injectable
@@ -122,7 +120,7 @@ class SinglePlayerGameBloc
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
-    ExtendedNavigator.ofRouter<Router>().pushGameScreen(
+    ExtendedNavigator.ofRouter<Router>().pushSinglePlayerGameScreen(
       difficultyLevel: difficultyLevel,
     );
   }

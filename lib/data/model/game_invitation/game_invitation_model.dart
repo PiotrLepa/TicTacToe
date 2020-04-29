@@ -13,7 +13,7 @@ abstract class GameInvitationModel with _$GameInvitationModel {
     @required String gameId,
     @required GameMarkModel yourMark,
     @required MultiplayerPlayerTypeModel playerType,
-    String body,
+    @required String body,
   }) = _GameInvitationModel;
 
   factory GameInvitationModel.fromJson(Map<String, dynamic> json) =>

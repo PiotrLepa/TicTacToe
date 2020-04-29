@@ -36,13 +36,6 @@ class FirebaseMessagingService {
   }
 
   GameInvitationModel _decodeMessage(Map<String, dynamic> message) {
-    final GameInvitationModel model =
-        _modelDecoder.decode<GameInvitationModel>(message['data']);
-    return model.copyWith(body: _decodeBody(message));
-  }
-
-  String _decodeBody(Map<String, dynamic> message) {
-    final notification = message['notification'];
-    return notification['body'];
+    return _modelDecoder.decode<GameInvitationModel>(message['data']);
   }
 }

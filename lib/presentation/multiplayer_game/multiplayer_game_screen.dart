@@ -4,24 +4,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/domain/bloc/multiplayer_game/multiplayer_game_bloc.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
-import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/presentation/common/widgets/game_page.dart';
 import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 
-class SinglePlayerGameScreen extends StatefulWidget {
-  final DifficultyLevel difficultyLevel;
-
-  const SinglePlayerGameScreen({
-    Key key,
-    @required this.difficultyLevel,
-  }) : super(key: key);
-
+class MultiplayerGameScreen extends StatefulWidget {
   @override
-  _SinglePlayerGameScreenState createState() => _SinglePlayerGameScreenState();
+  _MultiplayerGameScreenState createState() => _MultiplayerGameScreenState();
 }
 
-class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
+class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
   bool _isFieldLoadingVisible = false;
 
   @override
@@ -32,11 +25,11 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: BlocListener<SinglePlayerGameBloc, SinglePlayerGameState>(
+        child: BlocListener<MultiplayerGameBloc, MultiplayerGameState>(
           listener: (context, state) {
             _respondForState(state, context);
           },
-          child: BlocBuilder<SinglePlayerGameBloc, SinglePlayerGameState>(
+          child: BlocBuilder<MultiplayerGameBloc, MultiplayerGameState>(
             condition: (oldState, newState) {
               return newState is Loading || newState is RenderGame;
             },
@@ -49,7 +42,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
     );
   }
 
-  Widget _renderForState(SinglePlayerGameState state, BuildContext context) {
+  Widget _renderForState(MultiplayerGameState state, BuildContext context) {
     return state.maybeMap(
       loading: (mappedState) => Center(
         child: LoadingIndicator(),
@@ -65,7 +58,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
     );
   }
 
-  void _respondForState(SinglePlayerGameState state, BuildContext context) {
+  void _respondForState(MultiplayerGameState state, BuildContext context) {
     state.maybeMap(
       moveLoading: (mappedState) {
         setState(() {
@@ -99,16 +92,16 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       },
       moveError: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
         setState(() {
           _isFieldLoadingVisible = false;
         });
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
       },
       orElse: () {},
     );
@@ -116,27 +109,25 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
 
   Future<void> _showRestartGameFlushBar(String message) async {
     getIt.get<FlushbarHelper>().show(
-      title: message,
-      message: context.translateKey('gameScreenPlayAgainQuestion'),
-      isDismissible: false,
-      infinityDuration: true,
-      icon: Icon(
-        Icons.videogame_asset,
-        color: Colors.white,
-      ),
-      mainButton: FlatButton(
-        onPressed: () {
-          getIt.get<FlushbarHelper>().dismiss();
-          context.bloc<SinglePlayerGameBloc>().add(
-              SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
-        },
-        child: Text(
-          context.translateKey('gameScreenPlayAgain'),
-          style: TextStyle(color: Theme
-              .of(context)
-              .primaryColor),
-        ),
-      ),
-    );
+          title: message,
+          message: context.translateKey('gameScreenPlayAgainQuestion'),
+          isDismissible: false,
+          infinityDuration: true,
+          icon: Icon(
+            Icons.videogame_asset,
+            color: Colors.white,
+          ),
+          mainButton: FlatButton(
+            onPressed: () {
+              getIt.get<FlushbarHelper>().dismiss();
+              context.bloc<SinglePlayerGameBloc>().add(
+                  SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
+            },
+            child: Text(
+              context.translateKey('gameScreenPlayAgain'),
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        );
   }
 }

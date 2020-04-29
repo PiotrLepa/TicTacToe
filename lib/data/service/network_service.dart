@@ -38,7 +38,8 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<SinglePlayerGameResponseModel> singlePlayerCreateGame(
-      DifficultyLevelModel difficultyLevel,) =>
+    DifficultyLevelModel difficultyLevel,
+  ) =>
       post(
         "/single-player/create",
         queryParameters: {
@@ -47,14 +48,18 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
-  Future<SinglePlayerGameResponseModel> singlePlayerSetMove(int gameId,
-      int fieldIndex,) =>
+  Future<SinglePlayerGameResponseModel> singlePlayerSetMove(
+    int gameId,
+    int fieldIndex,
+  ) =>
       put(
         "/single-player/$gameId/move/$fieldIndex",
         secured: true,
       );
 
-  Future<void> multiplayerCreateGame(String opponentCode,) =>
+  Future<void> multiplayerCreateGame(
+    String opponentCode,
+  ) =>
       post(
         "/multiplayer/create",
         queryParameters: {
@@ -63,8 +68,29 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
+  Future<void> multiplayerJoinToGame(
+    int gameId,
+  ) =>
+      post(
+        "/multiplayer/join",
+        queryParameters: {
+          "game_id": gameId,
+        },
+        secured: true,
+      );
+
+  Future<void> multiplayerSetMove(
+    int gameId,
+    int fieldIndex,
+  ) =>
+      put(
+        "/multiplayer/$gameId/move/$fieldIndex",
+        secured: true,
+      );
+
   Future<SinglePlayerGameResultPagedResponseModel> getUserGameResults(
-      int page,) =>
+    int page,
+  ) =>
       get(
         "/game-result/single-player/user",
         queryParameters: {

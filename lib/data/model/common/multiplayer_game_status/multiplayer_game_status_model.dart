@@ -1,0 +1,8 @@
+enum MultiplayerGameStatusModel {
+  CREATED,
+  ON_GOING,
+  FIRST_PLAYER_WON,
+  SECOND_PLAYER_WON,
+  DRAW,
+  PLAYER_LEFT_GAME,
+}

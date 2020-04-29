@@ -17,4 +17,12 @@ class MultiplayerGameRepositoryImpl implements MultiplayerGameRepository {
   @override
   Future<void> createGame(String opponentCode) =>
       _service.multiplayerCreateGame(opponentCode).handleNetworkError();
+
+  @override
+  Future<void> joinToGame(int gameId) =>
+      _service.multiplayerJoinToGame(gameId).handleNetworkError();
+
+  @override
+  Future<void> setMove(int gameId, int fieldIndex) =>
+      _service.multiplayerSetMove(gameId, fieldIndex).handleNetworkError();
 }

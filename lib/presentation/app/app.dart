@@ -10,6 +10,7 @@ import 'package:tictactoe/core/presentation/localization/app_localizations.dart'
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
+import 'package:tictactoe/domain/bloc/multiplayer_game/multiplayer_game_bloc.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_listener.dart';
 
@@ -30,6 +31,9 @@ class App extends StatelessWidget {
         ),
         BlocProvider<SinglePlayerGameBloc>(
           create: (context) => getIt.get<SinglePlayerGameBloc>(),
+        ),
+        BlocProvider<MultiplayerGameBloc>(
+          create: (context) => getIt.get<MultiplayerGameBloc>(),
         ),
       ],
       child: MaterialApp(
