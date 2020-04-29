@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
+import 'package:tictactoe/presentation/app/widgets/game_invitation/bouncing_widget.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_widget.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/item_fader.dart';
 
@@ -26,7 +27,9 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
       listener: (context, state) {
         state.maybeMap(
           showGameInvitation: (mappedState) {
-            _body = mappedState.data.body;
+            setState(() {
+              _body = mappedState.data.body;
+            });
             _itemFaderKey.currentState.show();
           },
           orElse: () {},
@@ -35,14 +38,17 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
       child: Stack(
         children: <Widget>[
           widget.child,
-          ItemFader(
-            key: _itemFaderKey,
-            child: SafeArea(
-              child: GameInvitationWidget(
-                body: _body,
-                onButtonPressed: () {
-                  _itemFaderKey.currentState.hide();
-                },
+          BouncingWidget(
+            duration: Duration(milliseconds: 1000),
+            child: ItemFader(
+              key: _itemFaderKey,
+              child: SafeArea(
+                child: GameInvitationWidget(
+                  body: _body,
+                  onButtonPressed: () {
+                    _itemFaderKey.currentState.hide();
+                  },
+                ),
               ),
             ),
           ),
