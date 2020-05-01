@@ -35,23 +35,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       appBar: AppBar(
         title: Text(context.translateKey('gameScreenTitle')),
       ),
-      body: BlocProvider(
+      body: BlocProvider<MultiplayerGameBloc>(
         create: (context) => getIt.get<MultiplayerGameBloc>()
           ..add(MultiplayerGameEvent.screenStarted(widget.gameId)),
         child: Padding(
           padding: const EdgeInsets.all(12),
-          child: BlocListener<MultiplayerGameBloc, MultiplayerGameState>(
+          child: BlocConsumer<MultiplayerGameBloc, MultiplayerGameState>(
             listener: (context, state) {
               _respondForState(state, context);
             },
-            child: BlocBuilder<MultiplayerGameBloc, MultiplayerGameState>(
-              condition: (oldState, newState) {
-                return newState is Loading || newState is RenderGame;
-              },
-              builder: (context, state) {
-                return _renderForState(state, context);
-              },
-            ),
+            buildWhen: (oldState, newState) =>
+                newState is Loading || newState is RenderGame,
+            builder: (context, state) {
+              return _renderForState(state, context);
+            },
           ),
         ),
       ),
@@ -67,13 +64,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       renderGame: (mappedState) {
         final game = mappedState.game;
         return GamePage(
-            playerMark: GameMark.x,
-            moves: game.moves,
-            isLoadingVisible: _isFieldLoadingVisible,
-            onFieldTapped: (index) =>
-                context
-                    .bloc<MultiplayerGameBloc>()
-                    .add(MultiplayerGameEvent.onFieldTapped(index)));
+          playerMark: GameMark.x,
+          moves: game.moves,
+          isLoadingVisible: _isFieldLoadingVisible,
+          onFieldTapped: (index) =>
+              context
+                  .bloc<MultiplayerGameBloc>()
+                  .add(MultiplayerGameEvent.onFieldTapped(index)),
+        );
       },
       orElse: () => Container(),
     );

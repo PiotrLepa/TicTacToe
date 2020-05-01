@@ -72,7 +72,7 @@ class NetworkService extends BaseNetworkService {
   Future<void> multiplayerJoinToGame(
     int gameId,
   ) =>
-      post(
+      put(
         "/multiplayer/join",
         queryParameters: {
           "game_id": gameId,

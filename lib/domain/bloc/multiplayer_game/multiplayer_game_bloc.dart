@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,8 +18,7 @@ part 'multiplayer_game_event.dart';
 part 'multiplayer_game_state.dart';
 
 @injectable
-class MultiplayerGameBloc
-    extends Bloc<MultiplayerGameEvent, MultiplayerGameState> {
+class MultiplayerGameBloc extends Bloc<MultiplayerGameEvent, MultiplayerGameState> {
   final MultiplayerGameRepository _gameRepository;
 
   MultiplayerGameResponse _gameResponse;
@@ -28,20 +29,25 @@ class MultiplayerGameBloc
   MultiplayerGameState get initialState => MultiplayerGameState.loading();
 
   @override
-  Stream<MultiplayerGameState> mapEventToState(
-    MultiplayerGameEvent event,
-  ) async* {
+  Stream<MultiplayerGameState> mapEventToState(MultiplayerGameEvent event,) async* {
     yield* event.map(
       screenStarted: _onScreenStarted,
       onFieldTapped: _onFieldTapped,
+      onNewGameState: _onNewsGameState,
       restartGame: _onRestartGame,
     );
   }
 
   Stream<MultiplayerGameState> _onScreenStarted(ScreenStarted event) async* {
-    yield* _observeGame(event.gameId);
+    _observeGameEvents(event.gameId).listen((gameState) => add(gameState));
+
+    // make sure STOMP client has enough time to connect with server socket
     await Future.delayed(Duration(seconds: 2));
     yield* _joinToGame(event.gameId);
+  }
+
+  Stream<MultiplayerGameState> _onNewsGameState(OnNewGameState event) async* {
+    yield MultiplayerGameState.renderGame(event.game);
   }
 
   Stream<MultiplayerGameState> _onFieldTapped(OnFieldTapped event) async* {
@@ -52,10 +58,10 @@ class MultiplayerGameBloc
 //    yield* _createGame(event.opponentCode);
   }
 
-  Stream<MultiplayerGameState> _observeGame(int gameId) async* {
+  Stream<MultiplayerGameEvent> _observeGameEvents(int gameId) async* {
     yield* _gameRepository.getMultiplayerGame(gameId).map((game) {
       _gameResponse = game;
-      return MultiplayerGameState.renderGame(game);
+      return MultiplayerGameEvent.onNewGameState(game);
     });
   }
 

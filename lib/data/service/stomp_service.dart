@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,11 +24,11 @@ class StompService {
     _connectToSocket(
       onConnected: (client) {
         client.subscribe(
-          destination: '/game-status/$gameId"',
+          destination: '/game-status/$gameId',
           callback: (frame) {
-            logger.d(frame);
-            final model =
-                _modelDecoder.decode<MultiplayerGameResponseModel>(frame.body);
+            logger.d("game status: " + frame.body);
+            final model = _modelDecoder
+                .decode<MultiplayerGameResponseModel>(jsonDecode(frame.body));
             _controller.add(model);
           },
         );
@@ -43,14 +44,36 @@ class StompService {
   }) =>
       StompClient(
         config: StompConfig(
-            url: webSocketUrl + "/multiplayer-socket",
-            onConnect: (client, frame) {
-              logger.d("socket connected" + frame.toString());
-              onConnected(client);
-            },
-            onStompError: (error) {
-              logger.d("stomp error" + error.toString());
-              onError();
-            }),
+          url: webSocketUrl + "/multiplayer-socket",
+          onConnect: (client, frame) {
+            logger.d("socket connected" + frame.body);
+            onConnected(client);
+          },
+          onStompError: (error) {
+            logger.d("stomp error" + error.toString());
+            onError();
+          },
+          onDebugMessage: (message) {
+            logger.d("onDebugMessage" + message);
+          },
+          onWebSocketDone: () {
+            logger.d("onWebSocketDone");
+          },
+          onDisconnect: (stompFrame) {
+            logger.d("onDisconnect");
+          },
+          onUnhandledFrame: (stompFrame) {
+            logger.d("onUnhandledFrame");
+          },
+          onUnhandledMessage: (stompFrame) {
+            logger.d("onUnhandledMessage");
+          },
+          onUnhandledReceipt: (stompFrame) {
+            logger.d("onUnhandledReceipt");
+          },
+          onWebSocketError: (stompFrame) {
+            logger.d("onWebSocketError");
+          },
+        ),
       )..activate();
 }

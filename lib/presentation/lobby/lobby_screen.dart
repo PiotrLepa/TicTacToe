@@ -9,7 +9,7 @@ import 'package:tictactoe/presentation/lobby/widgets/lobby_page.dart';
 class LobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
+    return BlocProvider<LobbyBloc>(
       create: (context) => getIt<LobbyBloc>()..add(LobbyEvent.screenStarted()),
       child: Scaffold(
         appBar: AppBar(
