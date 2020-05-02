@@ -7,8 +7,8 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/multiplayer_game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/multiplayer_player_type/multiplayer_player_type.dart';
-import 'package:tictactoe/presentation/common/widgets/game_page.dart';
 import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
+import 'package:tictactoe/presentation/multiplayer_game/widgets/multiplayer_game_page.dart';
 
 class MultiplayerGameScreen extends StatefulWidget {
   final int gameId;
@@ -33,7 +33,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.translateKey('gameScreenTitle')),
+        title: Text(context.translateKey('multiplayerGameScreenTitle')),
       ),
       body: BlocProvider<MultiplayerGameBloc>(
         create: (context) => getIt.get<MultiplayerGameBloc>()
@@ -47,7 +47,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
             buildWhen: (oldState, newState) =>
                 newState is Loading || newState is RenderGame,
             builder: (context, state) {
-              return _renderForState(state, context);
+              return _buildForState(state, context);
             },
           ),
         ),
@@ -55,22 +55,20 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
     );
   }
 
-  Widget _renderForState(MultiplayerGameState state, BuildContext context) {
+  Widget _buildForState(MultiplayerGameState state, BuildContext context) {
     return state.maybeMap(
-      loading: (mappedState) =>
-          Center(
-            child: LoadingIndicator(),
-          ),
+      loading: (mappedState) => Center(
+        child: LoadingIndicator(),
+      ),
       renderGame: (mappedState) {
-        final game = mappedState.game;
-        return GamePage(
-          playerMark: GameMark.x,
-          moves: game.moves,
+        return MultiplayerGamePage(
+          gameData: mappedState.game,
+          playerMark: widget.playerMark,
+          playerType: widget.playerType,
           isLoadingVisible: _isFieldLoadingVisible,
-          onFieldTapped: (index) =>
-              context
-                  .bloc<MultiplayerGameBloc>()
-                  .add(MultiplayerGameEvent.onFieldTapped(index)),
+          onFieldTapped: (index) => context
+              .bloc<MultiplayerGameBloc>()
+              .add(MultiplayerGameEvent.onFieldTapped(index)),
         );
       },
       orElse: () => Container(),
@@ -94,14 +92,14 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusPlayerWon'));
+            context.translateKey('gameScreenStatusWon'));
       },
       gameLost: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusComputerWon'));
+            context.translateKey('gameScreenStatusLost'));
       },
       draw: (mappedState) {
         setState(() {

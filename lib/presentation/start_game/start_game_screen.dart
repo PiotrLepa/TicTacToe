@@ -20,7 +20,7 @@ class StartGameScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AppButton(
-                text: context.translateKey('startGameGameWithComputer'),
+                text: context.translateKey('singlePlayerGameScreenTitle'),
                 onPressed: () {
                   showAppModalBottomSheet(
                     context: context,
@@ -30,7 +30,7 @@ class StartGameScreen extends StatelessWidget {
               ),
               SizedBox(height: 30),
               AppButton(
-                text: context.translateKey('startGameMultiplayerGame'),
+                text: context.translateKey('multiplayerGameScreenTitle'),
                 onPressed: () => _pushLobbyScreen(),
               ),
             ],

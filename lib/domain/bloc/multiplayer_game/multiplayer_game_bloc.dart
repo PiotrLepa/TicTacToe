@@ -29,36 +29,46 @@ class MultiplayerGameBloc extends Bloc<MultiplayerGameEvent, MultiplayerGameStat
   MultiplayerGameState get initialState => MultiplayerGameState.loading();
 
   @override
-  Stream<MultiplayerGameState> mapEventToState(MultiplayerGameEvent event,) async* {
+  Stream<MultiplayerGameState> mapEventToState(
+    MultiplayerGameEvent event,
+  ) async* {
     yield* event.map(
-      screenStarted: _onScreenStarted,
-      onFieldTapped: _onFieldTapped,
-      onNewGameState: _onNewsGameState,
-      restartGame: _onRestartGame,
+      screenStarted: _mapOnScreenStartedEvent,
+      onFieldTapped: _mapOnFieldTappedEvent,
+      onNewGameState: _mapOnNewsGameStateEvent,
+      restartGame: _mapOnRestartGameEvent,
     );
   }
 
-  Stream<MultiplayerGameState> _onScreenStarted(ScreenStarted event) async* {
-    _observeGameEvents(event.gameId).listen((gameState) => add(gameState));
+  Stream<MultiplayerGameState> _mapOnScreenStartedEvent(
+      ScreenStarted event) async* {
+    _getGameEvents(event.gameId).listen((gameState) => add(gameState));
 
     // make sure STOMP client has enough time to connect with server socket
     await Future.delayed(Duration(seconds: 2));
     yield* _joinToGame(event.gameId);
   }
 
-  Stream<MultiplayerGameState> _onNewsGameState(OnNewGameState event) async* {
+  Stream<MultiplayerGameState> _mapOnNewsGameStateEvent(
+      OnNewGameState event) async* {
     yield MultiplayerGameState.renderGame(event.game);
   }
 
-  Stream<MultiplayerGameState> _onFieldTapped(OnFieldTapped event) async* {
+  Stream<MultiplayerGameState> _mapOnFieldTappedEvent(
+      OnFieldTapped event) async* {
+    if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
+        !_isFieldEmpty(_gameResponse.moves, event.index)) {
+      return;
+    }
     yield* _setMove(_gameResponse.gameId, event.index);
   }
 
-  Stream<MultiplayerGameState> _onRestartGame(RestartGame event) async* {
+  Stream<MultiplayerGameState> _mapOnRestartGameEvent(
+      RestartGame event) async* {
 //    yield* _createGame(event.opponentCode);
   }
 
-  Stream<MultiplayerGameEvent> _observeGameEvents(int gameId) async* {
+  Stream<MultiplayerGameEvent> _getGameEvents(int gameId) async* {
     yield* _gameRepository.getMultiplayerGame(gameId).map((game) {
       _gameResponse = game;
       return MultiplayerGameEvent.onNewGameState(game);
@@ -66,10 +76,6 @@ class MultiplayerGameBloc extends Bloc<MultiplayerGameEvent, MultiplayerGameStat
   }
 
   Stream<MultiplayerGameState> _setMove(int gameId, int fieldIndex) async* {
-    if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
-        !_isFieldEmpty(_gameResponse.moves, fieldIndex)) {
-      return;
-    }
     final request = fetch(_gameRepository.setMove(gameId, fieldIndex));
     await for (final state in request) {
       yield* state.when(
