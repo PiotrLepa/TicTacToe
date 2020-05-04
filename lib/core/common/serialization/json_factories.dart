@@ -7,6 +7,7 @@ import 'package:tictactoe/data/model/multiplayer_game_response/multiplayer_game_
 import 'package:tictactoe/data/model/single_player_game_response/single_player_game_response_model.dart';
 import 'package:tictactoe/data/model/single_player_game_result_response/content/single_player_game_result_response_model.dart';
 import 'package:tictactoe/data/model/single_player_game_result_response/single_player_game_result_paged_response_model.dart';
+import 'package:tictactoe/data/model/user_profile_response/user_profile_response_model.dart';
 
 const Map<Type, Object Function(Map<String, dynamic> json)> jsonFactories = {
   ErrorResponse: ErrorResponse.fromJsonFactory,
@@ -21,4 +22,5 @@ const Map<Type, Object Function(Map<String, dynamic> json)> jsonFactories = {
   MultiplayerGameResponseModel: MultiplayerGameResponseModel.fromJsonFactory,
   MultiplayerGameCreatedResponseModel:
       MultiplayerGameCreatedResponseModel.fromJsonFactory,
+  UserProfileResponseModel: UserProfileResponseModel.fromJsonFactory,
 };

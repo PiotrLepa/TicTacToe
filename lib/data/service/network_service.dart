@@ -12,6 +12,7 @@ import 'package:tictactoe/data/model/multiplayer_game_created_response/multiplay
 import 'package:tictactoe/data/model/registration_request/registration_request_model.dart';
 import 'package:tictactoe/data/model/single_player_game_response/single_player_game_response_model.dart';
 import 'package:tictactoe/data/model/single_player_game_result_response/single_player_game_result_paged_response_model.dart';
+import 'package:tictactoe/data/model/user_profile_response/user_profile_response_model.dart';
 
 @lazySingleton
 class NetworkService extends BaseNetworkService {
@@ -36,6 +37,11 @@ class NetworkService extends BaseNetworkService {
       post(
         "/user/register",
         data: request,
+      );
+
+  Future<UserProfileResponseModel> getUserProfile() => get(
+        "/user/profile",
+        secured: true,
       );
 
   Future<SinglePlayerGameResponseModel> singlePlayerCreateGame(

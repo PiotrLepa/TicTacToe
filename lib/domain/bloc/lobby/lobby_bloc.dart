@@ -8,6 +8,7 @@ import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/multiplayer_game_created_response/multiplayer_game_created_response.dart';
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
+import 'package:tictactoe/domain/repository/user_repository.dart';
 
 part 'lobby_bloc.freezed.dart';
 part 'lobby_event.dart';
@@ -16,10 +17,12 @@ part 'lobby_state.dart';
 @injectable
 class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   final MultiplayerGameRepository _multiplayerGameRepository;
+  final UserRepository _userRepository;
   final Validator _validator;
 
   LobbyBloc(
     this._multiplayerGameRepository,
+    this._userRepository,
     this._validator,
   );
 
@@ -35,9 +38,22 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   }
 
   Stream<LobbyState> _mapScreenStartedEvent(ScreenStarted event) async* {
-    // TODO fetch user profile
-    await Future.delayed(Duration(seconds: 1));
-    yield LobbyState.renderPage(playerCode: '87945387');
+    final request = fetch(_userRepository.getUserProfile());
+    await for (final requestState in request) {
+      yield* requestState.when(
+        progress: () async* {
+          yield LobbyState.loading();
+        },
+        success: (response) async* {
+          yield LobbyState.renderPage(
+            playerCode: response.playerCode,
+          );
+        },
+        error: (errorMessage) async* {
+          yield LobbyState.error(errorMessage);
+        },
+      );
+    }
   }
 
   Stream<LobbyState> _mapStartGamePressedEvent(StartGamePressed event) async* {
