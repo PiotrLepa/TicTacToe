@@ -59,5 +59,6 @@
   "lobbyStartGameButtonLabel": "Rozpocznij grę",
   "lobbyStartGameButtonLoadingLabel": "Rozpoczynanie gry..",
   "gameInvitationPlayButton": "Zagraj",
-  "gameInvitationPlayDecline": "Odrzuć"
+  "gameInvitationPlayDecline": "Odrzuć",
+  "multiplayerGameWaitingForOpponent": "Oczekiwanie na przeciwnika"
 }

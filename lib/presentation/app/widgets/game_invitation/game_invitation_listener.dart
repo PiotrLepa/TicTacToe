@@ -69,6 +69,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
       gameId: _gameData.gameId,
       playerMark: _gameData.yourMark,
       playerType: _gameData.playerType,
+      fromNotification: true,
     );
   }
 }

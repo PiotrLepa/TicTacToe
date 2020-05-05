@@ -5,14 +5,13 @@ import 'package:tictactoe/data/model/common/game_mark/game_mark_model.dart';
 import 'package:tictactoe/data/model/common/multiplayer_player_type/multiplayer_player_type_model.dart';
 
 part 'multiplayer_game_created_response_model.freezed.dart';
-
 part 'multiplayer_game_created_response_model.g.dart';
 
 @freezed
 abstract class MultiplayerGameCreatedResponseModel
     with _$MultiplayerGameCreatedResponseModel {
   const factory MultiplayerGameCreatedResponseModel({
-    @required String gameId,
+    @required int gameId,
     @required GameMarkModel yourMark,
     @required MultiplayerPlayerTypeModel playerType,
   }) = _MultiplayerGameCreatedResponseModel;

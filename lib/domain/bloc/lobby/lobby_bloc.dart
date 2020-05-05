@@ -90,6 +90,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
       gameId: response.gameId,
       playerMark: response.yourMark,
       playerType: response.playerType,
+      fromNotification: false,
     );
   }
 }

@@ -22,7 +22,7 @@ class MultiplayerGameCreatedResponseEntityMapper
   MultiplayerGameCreatedResponse toEntity(
           MultiplayerGameCreatedResponseModel model) =>
       MultiplayerGameCreatedResponse(
-        gameId: int.parse(model.gameId),
+        gameId: model.gameId,
         yourMark: _gameMarkEntityMapper.toEntity(model.yourMark),
         playerType:
             _multiplayerPlayerTypeEntityMapper.toEntity(model.playerType),

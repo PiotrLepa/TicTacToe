@@ -18,7 +18,8 @@ part 'multiplayer_game_event.dart';
 part 'multiplayer_game_state.dart';
 
 @injectable
-class MultiplayerGameBloc extends Bloc<MultiplayerGameEvent, MultiplayerGameState> {
+class MultiplayerGameBloc
+    extends Bloc<MultiplayerGameEvent, MultiplayerGameState> {
   final MultiplayerGameRepository _gameRepository;
 
   MultiplayerGameResponse _gameResponse;
@@ -41,16 +42,21 @@ class MultiplayerGameBloc extends Bloc<MultiplayerGameEvent, MultiplayerGameStat
   }
 
   Stream<MultiplayerGameState> _mapOnScreenStartedEvent(
-      ScreenStarted event) async* {
+    ScreenStarted event,
+  ) async* {
     _getGameEvents(event.gameId).listen((gameState) => add(gameState));
 
-    // make sure STOMP client has enough time to connect with server socket
-    await Future.delayed(Duration(seconds: 2));
-    yield* _joinToGame(event.gameId);
+    if (event.fromNotification) {
+      // make sure STOMP client has enough time to connect with server socket
+      await Future.delayed(Duration(seconds: 2));
+      yield* _joinToGame(event.gameId);
+    } else {
+      yield MultiplayerGameState.renderWaitingForOpponent();
+    }
   }
 
   Stream<MultiplayerGameState> _mapOnNewsGameStateEvent(
-      OnNewGameState event) async* {
+      OnNewGameState event,) async* {
     yield MultiplayerGameState.renderGame(event.game);
   }
 

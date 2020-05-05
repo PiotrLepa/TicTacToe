@@ -6,6 +6,9 @@ abstract class MultiplayerGameState with _$MultiplayerGameState {
 
   const factory MultiplayerGameState.moveLoading() = MoveLoading;
 
+  const factory MultiplayerGameState.renderWaitingForOpponent() =
+      RenderWaitingForOpponent;
+
   const factory MultiplayerGameState.renderGame(
     MultiplayerGameResponse game,
   ) = RenderGame;
