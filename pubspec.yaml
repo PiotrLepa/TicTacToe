@@ -16,8 +16,9 @@ dependencies:
   cupertino_icons: ^0.1.3
 
   # Networking
-  http: ^0.12.0+4
+  http: ^0.12.1
   dio: ^3.0.9
+  stomp_dart_client: ^0.3.2
   data_connection_checker: ^0.3.4
 
   # Firebase
@@ -26,7 +27,7 @@ dependencies:
   firebase_messaging: ^6.0.13
 
   # State management
-  flutter_bloc: ^3.2.0
+  flutter_bloc: ^4.0.0
 
   # Dependency Injection
   get_it: ^4.0.1
@@ -36,7 +37,7 @@ dependencies:
   auto_route: ^0.4.4
 
   # Logging
-  logger: ^0.8.3
+  logger: ^0.9.1
 
   # Data classes & json serialization
   kt_dart: ^0.7.0+1
@@ -44,11 +45,12 @@ dependencies:
   json_serializable: ^3.3.0
 
   # Storage
-  shared_preferences: ^0.5.6+3
+  shared_preferences: ^0.5.7
 
   flushbar: ^1.9.1
 
   flutter_svg: ^0.17.4
+
 
 dev_dependencies:
   flutter_test:
@@ -58,12 +60,12 @@ dev_dependencies:
   mockito: ^4.1.1
 
   # Generators
-  build_runner: ^1.8.1
+  build_runner: ^1.9.0
   injectable_generator: ^0.3.4
-  auto_route_generator: ^0.4.4
+  auto_route_generator: ^0.4.5
 
   # Data classes
-  freezed: ^0.10.6
+  freezed: ^0.10.7
 
 # The following section is specific to Flutter.
 flutter:

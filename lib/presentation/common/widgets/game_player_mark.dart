@@ -23,9 +23,6 @@ class GamePlayerMark extends StatelessWidget {
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(
-          height: 12,
-        ),
         Text(
           playerMark == GameMark.x ? "X" : "O",
           style: TextStyle(

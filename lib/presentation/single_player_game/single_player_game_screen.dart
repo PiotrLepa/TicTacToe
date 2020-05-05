@@ -28,7 +28,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.translateKey('gameScreenTitle')),
+        title: Text(context.translateKey('singlePlayerGameScreenTitle')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
@@ -41,7 +41,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
               return newState is Loading || newState is RenderGame;
             },
             builder: (context, state) {
-              return _renderForState(state, context);
+              return _buildForState(state, context);
             },
           ),
         ),
@@ -49,7 +49,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
     );
   }
 
-  Widget _renderForState(SinglePlayerGameState state, BuildContext context) {
+  Widget _buildForState(SinglePlayerGameState state, BuildContext context) {
     return state.maybeMap(
       loading: (mappedState) => Center(
         child: LoadingIndicator(),
@@ -82,14 +82,14 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusPlayerWon'));
+            context.translateKey('gameScreenStatusWon'));
       },
       computerWon: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
         _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusComputerWon'));
+            context.translateKey('gameScreenStatusLost'));
       },
       draw: (mappedState) {
         setState(() {

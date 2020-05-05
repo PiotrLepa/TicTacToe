@@ -8,8 +8,10 @@ import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
+import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
+import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_listener.dart';
 
 class App extends StatelessWidget {
   final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
@@ -18,6 +20,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<GameInvitationBloc>(
+          create: (context) => getIt.get<GameInvitationBloc>()
+            ..add(GameInvitationEvent.screenStarted()),
+        ),
         BlocProvider<HomeBloc>(
           create: (context) =>
               getIt.get<HomeBloc>()..add(HomeEvent.appStarted()),
@@ -36,7 +42,11 @@ class App extends StatelessWidget {
         supportedLocales: _localeProvider.getSupportedLocales().asList(),
         theme: ThemeProvider(isDark: false).getThemeData(),
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
-        builder: ExtendedNavigator<Router>(router: Router()),
+        builder: (BuildContext context, Widget widget) {
+          return GameInvitationListener(
+            child: ExtendedNavigator<Router>(router: Router()),
+          );
+        },
       ),
     );
   }

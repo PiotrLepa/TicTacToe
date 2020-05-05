@@ -1,7 +1,7 @@
 library refresh_token_request_model;
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/core/data/network/serializer/serializable.dart';
+import 'package:tictactoe/core/common/serialization/serializable.dart';
 
 part 'refresh_token_request_model.freezed.dart';
 part 'refresh_token_request_model.g.dart';
