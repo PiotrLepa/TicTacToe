@@ -8,23 +8,33 @@ import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
+import 'package:tictactoe/domain/bloc/multiplayer_game/entity/multiplayer_game_combined_status.dart';
+import 'package:tictactoe/domain/bloc/multiplayer_game/utils/game_status_helper.dart';
 import 'package:tictactoe/domain/entity/common/game_move/game_move.dart';
 import 'package:tictactoe/domain/entity/common/multiplayer_game_status/multiplayer_game_status.dart';
+import 'package:tictactoe/domain/entity/common/multiplayer_player_type/multiplayer_player_type.dart';
 import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_game_response.dart';
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'multiplayer_game_bloc.freezed.dart';
+
 part 'multiplayer_game_event.dart';
+
 part 'multiplayer_game_state.dart';
 
 @injectable
 class MultiplayerGameBloc
     extends Bloc<MultiplayerGameEvent, MultiplayerGameState> {
   final MultiplayerGameRepository _gameRepository;
+  final GameStatusCombiner _gameStatusCombiner;
 
   MultiplayerGameResponse _gameResponse;
+  MultiplayerPlayerType _playerType;
 
-  MultiplayerGameBloc(this._gameRepository);
+  MultiplayerGameBloc(
+    this._gameRepository,
+    this._gameStatusCombiner,
+  );
 
   @override
   MultiplayerGameState get initialState => MultiplayerGameState.loading();
@@ -36,7 +46,7 @@ class MultiplayerGameBloc
     yield* event.map(
       screenStarted: _mapOnScreenStartedEvent,
       onFieldTapped: _mapOnFieldTappedEvent,
-      onNewGameState: _mapOnNewsGameStateEvent,
+      onNewGameState: _mapOnNewGameStateEvent,
       restartGame: _mapOnRestartGameEvent,
     );
   }
@@ -44,7 +54,8 @@ class MultiplayerGameBloc
   Stream<MultiplayerGameState> _mapOnScreenStartedEvent(
     ScreenStarted event,
   ) async* {
-    _getGameEvents(event.gameId).listen((gameState) => add(gameState));
+    _playerType = event.playerType;
+    _getGameEvents(event.gameId).listen((gameEvent) => add(gameEvent));
 
     if (event.fromNotification) {
       // make sure STOMP client has enough time to connect with server socket
@@ -55,22 +66,32 @@ class MultiplayerGameBloc
     }
   }
 
-  Stream<MultiplayerGameState> _mapOnNewsGameStateEvent(
+  Stream<MultiplayerGameState> _mapOnNewGameStateEvent(
       OnNewGameState event,) async* {
-    yield MultiplayerGameState.renderGame(event.game);
+    final game = event.game;
+    final status = _gameStatusCombiner.getCombinedStatus(
+      _playerType,
+      game.status,
+      game.currentTurn,
+    );
+    yield MultiplayerGameState.renderGame(
+      status: status,
+      moves: game.moves,
+    );
   }
 
   Stream<MultiplayerGameState> _mapOnFieldTappedEvent(
-      OnFieldTapped event) async* {
+      OnFieldTapped event,) async* {
     if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
-        !_isFieldEmpty(_gameResponse.moves, event.index)) {
+        !_isFieldEmpty(_gameResponse.moves, event.index) ||
+        _gameResponse.currentTurn != _playerType) {
       return;
     }
     yield* _setMove(_gameResponse.gameId, event.index);
   }
 
   Stream<MultiplayerGameState> _mapOnRestartGameEvent(
-      RestartGame event) async* {
+      RestartGame event,) async* {
 //    yield* _createGame(event.opponentCode);
   }
 
@@ -81,7 +102,8 @@ class MultiplayerGameBloc
     });
   }
 
-  Stream<MultiplayerGameState> _setMove(int gameId, int fieldIndex) async* {
+  Stream<MultiplayerGameState> _setMove(int gameId,
+      int fieldIndex,) async* {
     final request = fetch(_gameRepository.setMove(gameId, fieldIndex));
     await for (final state in request) {
       yield* state.when(
@@ -96,10 +118,11 @@ class MultiplayerGameBloc
     }
   }
 
-  bool _isFieldEmpty(KtList<GameMove> moves, int fieldIndex) =>
+  bool _isFieldEmpty(KtList<GameMove> moves,
+      int fieldIndex,) =>
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
-  Stream<MultiplayerGameState> _joinToGame(int gameId) async* {
+  Stream<MultiplayerGameState> _joinToGame(int gameId,) async* {
     final request = fetch(_gameRepository.joinToGame(gameId));
     await for (final state in request) {
       yield* state.when(

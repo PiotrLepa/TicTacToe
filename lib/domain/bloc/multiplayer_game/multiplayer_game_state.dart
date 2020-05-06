@@ -9,15 +9,12 @@ abstract class MultiplayerGameState with _$MultiplayerGameState {
   const factory MultiplayerGameState.renderWaitingForOpponent() =
       RenderWaitingForOpponent;
 
-  const factory MultiplayerGameState.renderGame(
-    MultiplayerGameResponse game,
-  ) = RenderGame;
+  const factory MultiplayerGameState.renderGame({
+    @required MultiplayerGameCombinedStatus status,
+    @required KtList<GameMove> moves,
+  }) = RenderGame;
 
-  const factory MultiplayerGameState.gameWon() = GameWon;
-
-  const factory MultiplayerGameState.gameLost() = GameLost;
-
-  const factory MultiplayerGameState.draw() = Draw;
+  const factory MultiplayerGameState.opponentLeftGame() = OpponentLeftGame;
 
   const factory MultiplayerGameState.error(RawKeyString errorMessage) = Error;
 
