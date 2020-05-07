@@ -88,6 +88,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   void _pushGameScreen(MultiplayerGameCreatedResponse response) {
     ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
       gameId: response.gameId,
+      socketDestination: response.socketDestination,
       playerMark: response.yourMark,
       playerType: response.playerType,
       fromNotification: false,

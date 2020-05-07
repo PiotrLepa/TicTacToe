@@ -14,6 +14,7 @@ import 'package:tictactoe/presentation/multiplayer_game/widgets/waiting_for_oppo
 
 class MultiplayerGameScreen extends StatefulWidget {
   final int gameId;
+  final String socketDestination;
   final GameMark playerMark;
   final MultiplayerPlayerType playerType;
   final bool fromNotification;
@@ -21,6 +22,7 @@ class MultiplayerGameScreen extends StatefulWidget {
   const MultiplayerGameScreen({
     Key key,
     @required this.gameId,
+    @required this.socketDestination,
     @required this.playerMark,
     @required this.playerType,
     @required this.fromNotification,
@@ -43,6 +45,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
         create: (context) => getIt.get<MultiplayerGameBloc>()
           ..add(MultiplayerGameEvent.screenStarted(
             gameId: widget.gameId,
+            socketDestination: widget.socketDestination,
             playerType: widget.playerType,
             fromNotification: widget.fromNotification,
           )),

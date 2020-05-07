@@ -18,12 +18,13 @@ class StompService {
     this._modelDecoder,
   );
 
-  Stream<MultiplayerGameResponseModel> getMultiplayerGame(int gameId) {
+  Stream<MultiplayerGameResponseModel> getMultiplayerGame(
+      String socketDestination) {
     final _controller = StreamController<MultiplayerGameResponseModel>();
     _connectToSocket().then((client) {
       _pingPeriodicallyToSocket(client);
       client.subscribe(
-        destination: '/game-status/$gameId',
+        destination: '/game-status/$socketDestination',
         callback: (frame) {
           logger.d("game status: " + frame.body);
           final model = _modelDecoder

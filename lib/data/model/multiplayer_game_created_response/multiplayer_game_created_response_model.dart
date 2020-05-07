@@ -12,12 +12,14 @@ abstract class MultiplayerGameCreatedResponseModel
     with _$MultiplayerGameCreatedResponseModel {
   const factory MultiplayerGameCreatedResponseModel({
     @required int gameId,
+    @required String socketDestination,
     @required GameMarkModel yourMark,
     @required MultiplayerPlayerTypeModel playerType,
   }) = _MultiplayerGameCreatedResponseModel;
 
   factory MultiplayerGameCreatedResponseModel.fromJson(
-          Map<String, dynamic> json) =>
+    Map<String, dynamic> json,
+  ) =>
       _$MultiplayerGameCreatedResponseModelFromJson(json);
 
   static const fromJsonFactory = _$MultiplayerGameCreatedResponseModelFromJson;

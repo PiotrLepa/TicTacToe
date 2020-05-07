@@ -55,7 +55,8 @@ class MultiplayerGameBloc
     ScreenStarted event,
   ) async* {
     _playerType = event.playerType;
-    _getGameEvents(event.gameId).listen((gameEvent) => add(gameEvent));
+    _getGameEvents(event.socketDestination)
+        .listen((gameEvent) => add(gameEvent));
 
     if (event.fromNotification) {
       // make sure STOMP client has enough time to connect with server socket
@@ -83,8 +84,8 @@ class MultiplayerGameBloc
   Stream<MultiplayerGameState> _mapOnFieldTappedEvent(
       OnFieldTapped event,) async* {
     if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
-        !_isFieldEmpty(_gameResponse.moves, event.index) ||
-        _gameResponse.currentTurn != _playerType) {
+        _gameResponse.currentTurn != _playerType ||
+        !_isFieldEmpty(_gameResponse.moves, event.index)) {
       return;
     }
     yield* _setMove(_gameResponse.gameId, event.index);
@@ -95,8 +96,8 @@ class MultiplayerGameBloc
 //    yield* _createGame(event.opponentCode);
   }
 
-  Stream<MultiplayerGameEvent> _getGameEvents(int gameId) async* {
-    yield* _gameRepository.getMultiplayerGame(gameId).map((game) {
+  Stream<MultiplayerGameEvent> _getGameEvents(String socketDestination) async* {
+    yield* _gameRepository.getMultiplayerGame(socketDestination).map((game) {
       _gameResponse = game;
       return MultiplayerGameEvent.onNewGameState(game);
     });

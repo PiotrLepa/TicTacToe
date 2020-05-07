@@ -19,6 +19,7 @@ class GameInvitationEntityMapper
   @override
   GameInvitation toEntity(GameInvitationModel model) => GameInvitation(
         gameId: int.parse(model.gameId),
+        socketDestination: model.socketDestination,
         yourMark: _gameMarkEntityMapper.toEntity(model.yourMark),
         playerType:
             _multiplayerPlayerTypeEntityMapper.toEntity(model.playerType),

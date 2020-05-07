@@ -11,6 +11,7 @@ part 'game_invitation_model.g.dart';
 abstract class GameInvitationModel with _$GameInvitationModel {
   const factory GameInvitationModel({
     @required String gameId,
+    @required String socketDestination,
     @required GameMarkModel yourMark,
     @required MultiplayerPlayerTypeModel playerType,
     @required String body,

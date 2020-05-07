@@ -10,6 +10,7 @@ part 'game_invitation.freezed.dart';
 abstract class GameInvitation with _$GameInvitation {
   const factory GameInvitation({
     @required int gameId,
+    @required String socketDestination,
     @required GameMark yourMark,
     @required MultiplayerPlayerType playerType,
     @required String body,
