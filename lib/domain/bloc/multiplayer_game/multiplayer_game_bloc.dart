@@ -17,9 +17,7 @@ import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_ga
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'multiplayer_game_bloc.freezed.dart';
-
 part 'multiplayer_game_event.dart';
-
 part 'multiplayer_game_state.dart';
 
 @injectable
@@ -68,7 +66,8 @@ class MultiplayerGameBloc
   }
 
   Stream<MultiplayerGameState> _mapOnNewGameStateEvent(
-      OnNewGameState event,) async* {
+    OnNewGameState event,
+  ) async* {
     final game = event.game;
     final status = _gameStatusCombiner.getCombinedStatus(
       _playerType,
@@ -93,11 +92,18 @@ class MultiplayerGameBloc
 
   Stream<MultiplayerGameState> _mapOnRestartGameEvent(
       RestartGame event,) async* {
-//    yield* _createGame(event.opponentCode);
+    yield* _restartGame(event.gameId);
   }
 
-  Stream<MultiplayerGameEvent> _getGameEvents(String socketDestination) async* {
-    yield* _gameRepository.getMultiplayerGame(socketDestination).map((game) {
+
+  @override
+  Future<Function> close() {
+    return super.close();
+  }
+
+  Stream<MultiplayerGameEvent> _getGameEvents(
+      String socketDestination,) async* {
+    yield* _gameRepository.getGameData(socketDestination).map((game) {
       _gameResponse = game;
       return MultiplayerGameEvent.onNewGameState(game);
     });
@@ -130,6 +136,26 @@ class MultiplayerGameBloc
         progress: () async* {},
         success: (response) async* {},
         error: (errorMessage) async* {},
+      );
+    }
+  }
+
+  Stream<MultiplayerGameState> _restartGame(int gameId) async* {
+    final request = fetch(_gameRepository.restart(gameId));
+    await for (final requestState in request) {
+      yield* requestState.when(
+        progress: () async* {
+          final blocState = state;
+          if (blocState is RenderGame) {
+            yield blocState.copyWith(
+              status: MultiplayerGameCombinedStatus.waitingForOpponentToConnect,
+            );
+          }
+        },
+        success: (response) async* {},
+        error: (errorMessage) async* {
+          yield MultiplayerGameState.error(errorMessage);
+        },
       );
     }
   }

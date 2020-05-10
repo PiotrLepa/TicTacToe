@@ -53,7 +53,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
           padding: const EdgeInsets.all(12),
           child: BlocConsumer<MultiplayerGameBloc, MultiplayerGameState>(
             listener: (context, state) {
-              _respondForState(state, context);
+              _respondForState(context, state);
             },
             buildWhen: (oldState, newState) =>
                 newState is Loading ||
@@ -89,7 +89,10 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
     );
   }
 
-  void _respondForState(MultiplayerGameState state, BuildContext context) {
+  void _respondForState(
+    BuildContext context,
+    MultiplayerGameState state,
+  ) {
     state.maybeMap(
       moveLoading: (mappedState) {
         setState(() {
@@ -107,15 +110,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
             break;
           case MultiplayerGameCombinedStatus.won:
             _showRestartGameFlushBar(
-                context.translateKey('gameScreenStatusWon'));
+                context, context.translateKey('gameScreenStatusWon'));
             break;
           case MultiplayerGameCombinedStatus.lost:
             _showRestartGameFlushBar(
-                context.translateKey('gameScreenStatusLost'));
+                context, context.translateKey('gameScreenStatusLost'));
             break;
           case MultiplayerGameCombinedStatus.draw:
             _showRestartGameFlushBar(
-                context.translateKey('gameScreenStatusDraw'));
+                context, context.translateKey('gameScreenStatusDraw'));
             break;
           case MultiplayerGameCombinedStatus.opponentLeftGame:
             break;
@@ -131,29 +134,30 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: mappedState.errorMessage,
-            );
+          message: mappedState.errorMessage,
+        );
       },
       orElse: () {},
     );
   }
 
-  Future<void> _showRestartGameFlushBar(String message) async {
+  Future<void> _showRestartGameFlushBar(BuildContext context,
+      String message,) async {
     getIt.get<FlushbarHelper>().show(
-          title: message,
-          message: context.translateKey('gameScreenPlayAgainQuestion'),
-          isDismissible: false,
-          infinityDuration: true,
-          icon: Icon(
-            Icons.videogame_asset,
-            color: Colors.white,
-          ),
-          mainButton: FlatButton(
+      title: message,
+      message: context.translateKey('gameScreenPlayAgainQuestion'),
+      isDismissible: false,
+      infinityDuration: true,
+      icon: Icon(
+        Icons.videogame_asset,
+        color: Colors.white,
+      ),
+      mainButton: FlatButton(
             onPressed: () {
               getIt.get<FlushbarHelper>().dismiss();
               context
                   .bloc<MultiplayerGameBloc>()
-                  .add(MultiplayerGameEvent.restartGame());
+                  .add(MultiplayerGameEvent.restartGame(widget.gameId));
             },
             child: Text(
               context.translateKey('gameScreenPlayAgain'),

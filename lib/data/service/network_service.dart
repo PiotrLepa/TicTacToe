@@ -95,6 +95,14 @@ class NetworkService extends BaseNetworkService {
         secured: true,
       );
 
+  Future<void> multiplayerRestartGame(
+    int gameId,
+  ) =>
+      put(
+        "/multiplayer/$gameId/restart",
+        secured: true,
+      );
+
   Future<SinglePlayerGameResultPagedResponseModel> getUserGameResults(
     int page,
   ) =>

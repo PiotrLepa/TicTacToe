@@ -13,7 +13,7 @@ abstract class MultiplayerGameEvent with _$MultiplayerGameEvent {
     MultiplayerGameResponse game,
   ) = OnNewGameState;
 
-  const factory MultiplayerGameEvent.restartGame() = RestartGame;
+  const factory MultiplayerGameEvent.restartGame(int gameId) = RestartGame;
 
   const factory MultiplayerGameEvent.onFieldTapped(int index) = OnFieldTapped;
 }

@@ -42,9 +42,12 @@ class MultiplayerGameRepositoryImpl implements MultiplayerGameRepository {
       .handleNetworkError();
 
   @override
-  Stream<MultiplayerGameResponse> getMultiplayerGame(
-          String socketDestination) =>
+  Stream<MultiplayerGameResponse> getGameData(String socketDestination) =>
       _stompService
           .getMultiplayerGame(socketDestination)
           .map(_gameEntityMapper.toEntity);
+
+  @override
+  Future<void> restart(int gameId) =>
+      _networkService.multiplayerRestartGame(gameId).handleNetworkError();
 }
