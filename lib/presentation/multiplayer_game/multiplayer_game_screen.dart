@@ -157,7 +157,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
               getIt.get<FlushbarHelper>().dismiss();
               context
                   .bloc<MultiplayerGameBloc>()
-                  .add(MultiplayerGameEvent.restartGame(widget.gameId));
+                  .add(MultiplayerGameEvent.restartGame());
             },
             child: Text(
               context.translateKey('gameScreenPlayAgain'),

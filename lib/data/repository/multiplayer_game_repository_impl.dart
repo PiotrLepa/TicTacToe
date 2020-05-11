@@ -48,6 +48,8 @@ class MultiplayerGameRepositoryImpl implements MultiplayerGameRepository {
           .map(_gameEntityMapper.toEntity);
 
   @override
-  Future<void> restart(int gameId) =>
-      _networkService.multiplayerRestartGame(gameId).handleNetworkError();
+  Future<MultiplayerGameResponse> restart(int gameId) => _networkService
+      .multiplayerRestartGame(gameId)
+      .then(_gameEntityMapper.toEntity)
+      .handleNetworkError();
 }

@@ -17,7 +17,9 @@ import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_ga
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'multiplayer_game_bloc.freezed.dart';
+
 part 'multiplayer_game_event.dart';
+
 part 'multiplayer_game_state.dart';
 
 @injectable
@@ -26,8 +28,10 @@ class MultiplayerGameBloc
   final MultiplayerGameRepository _gameRepository;
   final GameStatusCombiner _gameStatusCombiner;
 
+  int _gameId;
   MultiplayerGameResponse _gameResponse;
   MultiplayerPlayerType _playerType;
+  StreamSubscription _gameSubscription;
 
   MultiplayerGameBloc(
     this._gameRepository,
@@ -39,8 +43,7 @@ class MultiplayerGameBloc
 
   @override
   Stream<MultiplayerGameState> mapEventToState(
-    MultiplayerGameEvent event,
-  ) async* {
+      MultiplayerGameEvent event,) async* {
     yield* event.map(
       screenStarted: _mapOnScreenStartedEvent,
       onFieldTapped: _mapOnFieldTappedEvent,
@@ -49,11 +52,17 @@ class MultiplayerGameBloc
     );
   }
 
+  @override
+  Future<Function> close() {
+    _gameSubscription?.cancel();
+    return super.close();
+  }
+
   Stream<MultiplayerGameState> _mapOnScreenStartedEvent(
-    ScreenStarted event,
-  ) async* {
+      ScreenStarted event,) async* {
+    _gameId = event.gameId;
     _playerType = event.playerType;
-    _getGameEvents(event.socketDestination)
+    _gameSubscription = _getGameEvents(event.socketDestination)
         .listen((gameEvent) => add(gameEvent));
 
     if (event.fromNotification) {
@@ -68,15 +77,15 @@ class MultiplayerGameBloc
   Stream<MultiplayerGameState> _mapOnNewGameStateEvent(
     OnNewGameState event,
   ) async* {
-    final game = event.game;
+    _gameResponse = event.game;
     final status = _gameStatusCombiner.getCombinedStatus(
       _playerType,
-      game.status,
-      game.currentTurn,
+      _gameResponse.status,
+      _gameResponse.currentTurn,
     );
     yield MultiplayerGameState.renderGame(
       status: status,
-      moves: game.moves,
+      moves: _gameResponse.moves,
     );
   }
 
@@ -87,18 +96,12 @@ class MultiplayerGameBloc
         !_isFieldEmpty(_gameResponse.moves, event.index)) {
       return;
     }
-    yield* _setMove(_gameResponse.gameId, event.index);
+    yield* _setMove(_gameId, event.index);
   }
 
   Stream<MultiplayerGameState> _mapOnRestartGameEvent(
       RestartGame event,) async* {
-    yield* _restartGame(event.gameId);
-  }
-
-
-  @override
-  Future<Function> close() {
-    return super.close();
+    yield* _restartGame(_gameId);
   }
 
   Stream<MultiplayerGameEvent> _getGameEvents(
@@ -152,7 +155,9 @@ class MultiplayerGameBloc
             );
           }
         },
-        success: (response) async* {},
+        success: (response) async* {
+          _gameId = response.gameId;
+        },
         error: (errorMessage) async* {
           yield MultiplayerGameState.error(errorMessage);
         },

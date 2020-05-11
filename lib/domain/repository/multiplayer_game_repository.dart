@@ -10,5 +10,5 @@ abstract class MultiplayerGameRepository {
 
   Stream<MultiplayerGameResponse> getGameData(String socketDestination);
 
-  Future<void> restart(int gameId);
+  Future<MultiplayerGameResponse> restart(int gameId);
 }
