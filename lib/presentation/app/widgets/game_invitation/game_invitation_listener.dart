@@ -67,6 +67,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
   void _pushGameScreen() {
     ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
       gameId: _gameData.gameId,
+      socketDestination: _gameData.socketDestination,
       playerMark: _gameData.yourMark,
       playerType: _gameData.playerType,
       fromNotification: true,

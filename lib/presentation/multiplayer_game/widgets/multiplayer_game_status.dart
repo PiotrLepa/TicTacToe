@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
-import 'package:tictactoe/domain/entity/common/multiplayer_game_status/multiplayer_game_status.dart';
-import 'package:tictactoe/domain/entity/common/multiplayer_player_type/multiplayer_player_type.dart';
+import 'package:tictactoe/domain/bloc/multiplayer_game/entity/multiplayer_game_combined_status.dart';
 
 class GameStatus extends StatelessWidget {
-  final MultiplayerPlayerType player;
-  final MultiplayerPlayerType currentTurn;
-  final MultiplayerGameStatus gameStatus;
+  final MultiplayerGameCombinedStatus status;
 
   const GameStatus({
     Key key,
-    @required this.player,
-    @required this.currentTurn,
-    @required this.gameStatus,
+    @required this.status,
   }) : super(key: key);
 
   @override
@@ -28,56 +23,23 @@ class GameStatus extends StatelessWidget {
     );
   }
 
+  // ignore: missing_return
   String _getTextForStatus(BuildContext context) {
-    switch (gameStatus) {
-      case MultiplayerGameStatus.created:
+    switch (status) {
+      case MultiplayerGameCombinedStatus.waitingForOpponentToConnect:
         return context.translateKey('multiplayerGameStatusWaitingForOpponent');
-      case MultiplayerGameStatus.onGoing:
-        return _getTextForCurrentTurn(context);
-      case MultiplayerGameStatus.firstPlayerWon:
-        return _getGameEndText(context);
-      case MultiplayerGameStatus.secondPlayerWon:
-        return _getGameEndText(context);
-      case MultiplayerGameStatus.draw:
-        return _getGameEndText(context);
-      case MultiplayerGameStatus.playerLeftGame:
-        return context.translateKey('multiplayerGameStatusOpponentLeftGame');
-    }
-  }
-
-  String _getTextForCurrentTurn(BuildContext context) {
-    if (player == currentTurn) {
-      return context.translateKey('multiplayerGameStatusYourTurn');
-    } else {
-      return context.translateKey('multiplayerGameStatusOpponentTurn');
-    }
-  }
-
-  String _getGameEndText(BuildContext context) {
-    switch (gameStatus) {
-      case MultiplayerGameStatus.created:
-      case MultiplayerGameStatus.onGoing:
-      case MultiplayerGameStatus.playerLeftGame:
-        break;
-      case MultiplayerGameStatus.firstPlayerWon:
-        return _getGameEndTextForPlayer(
-            context, MultiplayerPlayerType.firstPlayer);
-      case MultiplayerGameStatus.secondPlayerWon:
-        return _getGameEndTextForPlayer(
-            context, MultiplayerPlayerType.secondPlayer);
-      case MultiplayerGameStatus.draw:
+      case MultiplayerGameCombinedStatus.yourTurn:
+        return context.translateKey('multiplayerGameStatusYourTurn');
+      case MultiplayerGameCombinedStatus.opponentTurn:
+        return context.translateKey('multiplayerGameStatusOpponentTurn');
+      case MultiplayerGameCombinedStatus.won:
+        return context.translateKey('gameScreenStatusWon');
+      case MultiplayerGameCombinedStatus.lost:
+        return context.translateKey('gameScreenStatusLost');
+      case MultiplayerGameCombinedStatus.draw:
         return context.translateKey('gameScreenStatusDraw');
-    }
-  }
-
-  String _getGameEndTextForPlayer(
-    BuildContext context,
-    MultiplayerPlayerType playerToCheck,
-  ) {
-    if (player == playerToCheck) {
-      return context.translateKey('gameScreenStatusWon');
-    } else {
-      return context.translateKey('gameScreenStatusLost');
+      case MultiplayerGameCombinedStatus.opponentLeftGame:
+        return context.translateKey('multiplayerGameStatusOpponentLeftGame');
     }
   }
 }

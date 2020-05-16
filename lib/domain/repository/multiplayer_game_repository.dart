@@ -8,5 +8,7 @@ abstract class MultiplayerGameRepository {
 
   Future<void> setMove(int gameId, int fieldIndex);
 
-  Stream<MultiplayerGameResponse> getMultiplayerGame(int gameId);
+  Stream<MultiplayerGameResponse> getGameData(String socketDestination);
+
+  Future<MultiplayerGameResponse> restart(int gameId);
 }

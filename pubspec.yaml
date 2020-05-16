@@ -47,6 +47,9 @@ dependencies:
   # Storage
   shared_preferences: ^0.5.7
 
+  # Date formatter
+  intl: ^0.16.0
+
   flushbar: ^1.9.1
 
   flutter_svg: ^0.17.4

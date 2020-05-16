@@ -11,6 +11,7 @@ abstract class MultiplayerGameCreatedResponse
     with _$MultiplayerGameCreatedResponse {
   const factory MultiplayerGameCreatedResponse({
     @required int gameId,
+    @required String socketDestination,
     @required GameMark yourMark,
     @required MultiplayerPlayerType playerType,
   }) = _MultiplayerGameCreatedResponse;

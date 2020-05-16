@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/date_time/date_time_formatter.dart';
 
 class GameResultItemDate extends StatelessWidget {
   final String gameDateTime;
+  final formatter = getIt<DateTimeFormatter>();
 
-  const GameResultItemDate({
+  GameResultItemDate({
     Key key,
     @required this.gameDateTime,
   }) : super(key: key);
@@ -34,8 +37,5 @@ class GameResultItemDate extends StatelessWidget {
     );
   }
 
-  String _formatTime() {
-    final parsedDate = DateTime.parse(gameDateTime).toLocal();
-    return '${parsedDate.hour} : ${parsedDate.minute}';
-  }
+  String _formatTime() => formatter.format(gameDateTime, 'hh : mm');
 }
