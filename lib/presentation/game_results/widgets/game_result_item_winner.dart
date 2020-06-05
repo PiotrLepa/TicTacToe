@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 
 class GameResultItemWinner extends StatelessWidget {
@@ -19,7 +20,7 @@ class GameResultItemWinner extends StatelessWidget {
           context.translateKey('gameResultsWinnerLabel'),
           style: TextStyle(
             fontSize: 18,
-            color: Colors.white,
+            color: ThemeProvider.of(context).textColor,
           ),
         ),
         Text(

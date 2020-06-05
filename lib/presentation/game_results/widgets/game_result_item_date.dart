@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/date_time/date_time_formatter.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 
 class GameResultItemDate extends StatelessWidget {
   final String gameDateTime;
@@ -30,7 +31,7 @@ class GameResultItemDate extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 20,
-            color: Colors.white,
+            color: ThemeProvider.of(context).textColor,
           ),
         ),
       ],
