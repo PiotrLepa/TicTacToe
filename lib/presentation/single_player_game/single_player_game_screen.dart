@@ -32,19 +32,13 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12),
-        child: BlocListener<SinglePlayerGameBloc, SinglePlayerGameState>(
-          listener: (context, state) {
-            _respondForState(state, context);
-          },
-          child: BlocBuilder<SinglePlayerGameBloc, SinglePlayerGameState>(
-            condition: (oldState, newState) {
-              return newState is Loading || newState is RenderGame;
+        child: BlocConsumer<SinglePlayerGameBloc, SinglePlayerGameState>(
+            listener: (context, state) {
+              _respondForState(state, context);
             },
-            builder: (context, state) {
-              return _buildForState(state, context);
-            },
-          ),
-        ),
+            buildWhen: (oldState, newState) =>
+                newState is Loading || newState is RenderGame,
+            builder: (context, state) => _buildForState(state, context)),
       ),
     );
   }
@@ -81,15 +75,13 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
         setState(() {
           _isFieldLoadingVisible = false;
         });
-        _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusWon'));
+        _showRestartGameFlushBar(context.translateKey('gameScreenStatusWon'));
       },
       computerWon: (mappedState) {
         setState(() {
           _isFieldLoadingVisible = false;
         });
-        _showRestartGameFlushBar(
-            context.translateKey('gameScreenStatusLost'));
+        _showRestartGameFlushBar(context.translateKey('gameScreenStatusLost'));
       },
       draw: (mappedState) {
         setState(() {
