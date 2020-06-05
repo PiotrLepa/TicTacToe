@@ -13,9 +13,7 @@ import 'package:tictactoe/domain/repository/game_result_repository.dart';
 import 'package:tictactoe/presentation/game_results/game_result_type.dart';
 
 part 'game_results_bloc.freezed.dart';
-
 part 'game_results_event.dart';
-
 part 'game_results_state.dart';
 
 @injectable
@@ -35,13 +33,12 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     yield* event.map(
       screenStarted: _mapScreenStartedEvent,
       loadMoreItems: _mapLoadMoreItemsEvent,
+      onRefreshSwiped: _mapOnRefreshSwiped,
       gameResultTapped: _mapGameResultTappedEvent,
     );
   }
 
-  Stream<GameResultsState> _mapScreenStartedEvent(
-    ScreenStarted event,
-  ) async* {
+  Stream<GameResultsState> _mapScreenStartedEvent(ScreenStarted event,) async* {
     yield* _fetchGameResults(0, event.type);
   }
 
@@ -51,10 +48,13 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     }
   }
 
-  Stream<GameResultsState> _fetchGameResults(
-    int page,
-    GameResultType type,
-  ) async* {
+  Stream<GameResultsState> _mapOnRefreshSwiped(OnRefreshSwiped event) async* {
+    clearPagination();
+    yield* _fetchGameResults(0, event.type);
+  }
+
+  Stream<GameResultsState> _fetchGameResults(int page,
+      GameResultType type,) async* {
     final fetchResult = pagedFetch(
       page: page,
       call: _getFetchCall(page, type),

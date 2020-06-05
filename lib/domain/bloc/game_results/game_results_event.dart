@@ -8,6 +8,9 @@ abstract class GameResultsEvent with _$GameResultsEvent {
   const factory GameResultsEvent.loadMoreItems(GameResultType type) =
       LoadMoreItems;
 
+  const factory GameResultsEvent.onRefreshSwiped(GameResultType type) =
+      OnRefreshSwiped;
+
   const factory GameResultsEvent.gameResultTapped(
       SinglePlayerGameResultResponse item) = GameResultTapped;
 }

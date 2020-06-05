@@ -21,4 +21,10 @@ mixin PaginationHandler<T> {
   int getNextPage() => _page + 1;
 
   bool hasMorePages() => !_hasReachedEnd;
+
+  void clearPagination() {
+    _page = 0;
+    _hasReachedEnd = false;
+    _fetchedItems = KtMutableList.empty();
+  }
 }

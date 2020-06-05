@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,27 +27,49 @@ class _GameResultsState extends State<GameResults>
   @override
   bool get wantKeepAlive => true;
 
+  Completer<void> _refreshCompleter;
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshCompleter = Completer<void>();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return BlocProvider<GameResultsBloc>(
       create: (context) => getIt<GameResultsBloc>()
         ..add(GameResultsEvent.screenStarted(widget.type)),
-      child: BlocBuilder<GameResultsBloc, GameResultsState>(
-        condition: (oldState, newState) => newState is! AdditionalLoading,
+      child: BlocConsumer<GameResultsBloc, GameResultsState>(
+        listener: (context, state) {
+          if (state is RenderGameResults) {
+            _refreshCompleter?.complete();
+            _refreshCompleter = Completer();
+          }
+        },
+        buildWhen: (oldState, newState) => newState is! AdditionalLoading,
         builder: (context, state) {
           return state.maybeMap(
             loading: (mappedState) => Center(
               child: LoadingIndicator(),
             ),
-            renderGameResults: (mappedState) => GameResultList(
-              data: mappedState.gameResults,
-              hasReachedEnd: mappedState.hasReachedEnd,
-              loadMoreItemsCallback: () {
+            renderGameResults: (mappedState) => RefreshIndicator(
+              onRefresh: () {
                 context
                     .bloc<GameResultsBloc>()
-                    .add(GameResultsEvent.loadMoreItems(widget.type));
+                    .add(GameResultsEvent.onRefreshSwiped(widget.type));
+                return _refreshCompleter.future;
               },
+              child: GameResultList(
+                data: mappedState.gameResults,
+                hasReachedEnd: mappedState.hasReachedEnd,
+                loadMoreItemsCallback: () {
+                  context
+                      .bloc<GameResultsBloc>()
+                      .add(GameResultsEvent.loadMoreItems(widget.type));
+                },
+              ),
             ),
             error: (mappedState) => Center(
               child: Text(
