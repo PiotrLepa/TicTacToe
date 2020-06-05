@@ -16,6 +16,7 @@ class ItemFaderState extends State<ItemFader>
     with SingleTickerProviderStateMixin {
   AnimationController _controller;
   Animation _animation;
+  bool _isVisible = false;
 
   @override
   void initState() {
@@ -44,9 +45,12 @@ class ItemFaderState extends State<ItemFader>
       builder: (context, child) {
         return Transform.translate(
           offset: Offset(0, 50 * _animation.value),
-          child: Opacity(
-            opacity: _animation.value,
-            child: child,
+          child: Visibility(
+            visible: _isVisible,
+            child: Opacity(
+              opacity: _animation.value,
+              child: child,
+            ),
           ),
         );
       },
@@ -55,12 +59,14 @@ class ItemFaderState extends State<ItemFader>
 
   void show() {
     setState(() {
+      _isVisible = true;
       _controller.forward();
     });
   }
 
   void hide() {
     setState(() {
+      _isVisible = false;
       _controller.reverse();
     });
   }
