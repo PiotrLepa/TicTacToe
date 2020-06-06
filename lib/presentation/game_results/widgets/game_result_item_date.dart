@@ -38,5 +38,5 @@ class GameResultItemDate extends StatelessWidget {
     );
   }
 
-  String _formatTime() => formatter.format(gameDateTime, 'hh : mm');
+  String _formatTime() => formatter.format(gameDateTime, 'jm');
 }
