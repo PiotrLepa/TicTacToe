@@ -16,6 +16,7 @@ class WaitingForOpponent extends StatelessWidget {
         AppSeparator.vertical(height: 32),
         Text(
           context.translateKey('multiplayerGameWaitingForOpponent'),
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 36,
             color: Theme.of(context).primaryColor,
