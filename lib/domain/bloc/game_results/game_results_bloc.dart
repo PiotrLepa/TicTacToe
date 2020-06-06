@@ -31,15 +31,10 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     GameResultsEvent event,
   ) async* {
     yield* event.map(
-      screenStarted: _mapScreenStartedEvent,
       loadMoreItems: _mapLoadMoreItemsEvent,
       onRefreshSwiped: _mapOnRefreshSwiped,
       gameResultTapped: _mapGameResultTappedEvent,
     );
-  }
-
-  Stream<GameResultsState> _mapScreenStartedEvent(ScreenStarted event,) async* {
-    yield* _fetchGameResults(0, event.type);
   }
 
   Stream<GameResultsState> _mapLoadMoreItemsEvent(LoadMoreItems event) async* {
@@ -53,8 +48,10 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     yield* _fetchGameResults(0, event.type);
   }
 
-  Stream<GameResultsState> _fetchGameResults(int page,
-      GameResultType type,) async* {
+  Stream<GameResultsState> _fetchGameResults(
+    int page,
+    GameResultType type,
+  ) async* {
     final fetchResult = pagedFetch(
       page: page,
       call: _getFetchCall(page, type),
