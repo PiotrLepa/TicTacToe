@@ -15,6 +15,7 @@ class GameStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _getTextForStatus(context),
+      textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 36,
         fontWeight: FontWeight.bold,
