@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/domain/bloc/game_results/game_results_bloc.dart';
@@ -80,6 +81,9 @@ class _GameResultsState extends State<GameResults>
       error: (mappedState) {
         _refreshCompleter?.complete();
         _refreshCompleter = Completer();
+        getIt.get<FlushbarHelper>().showError(
+              message: mappedState.errorMessage,
+            );
       },
       orElse: () {},
     );

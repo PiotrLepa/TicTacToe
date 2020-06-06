@@ -38,7 +38,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
   }
 
-  Stream<HomeState> _mapAppStartedEvent(AppStarted event) async* {
+  Stream<HomeState> _mapAppStartedEvent(
+    AppStarted event,
+  ) async* {
     final accessToken = await _oauthTokensStorage.accessToken;
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
@@ -55,7 +57,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapOnBottomNavigationTappedEvent(
-      OnBottomNavigationTapped event) async* {
+      OnBottomNavigationTapped event,) async* {
     yield HomeState.updatePage(
       pageTitle: pageTitles[event.index],
       index: event.index,
