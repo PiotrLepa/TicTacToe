@@ -54,28 +54,32 @@ class _GameResultsState extends State<GameResults>
             loading: (mappedState) => Center(
               child: LoadingIndicator(),
             ),
-            renderGameResults: (mappedState) => RefreshIndicator(
-              onRefresh: () {
-                context
-                    .bloc<GameResultsBloc>()
-                    .add(GameResultsEvent.onRefreshSwiped(widget.type));
-                return _refreshCompleter.future;
-              },
-              child: GameResultList(
-                data: mappedState.gameResults,
-                hasReachedEnd: mappedState.hasReachedEnd,
-                loadMoreItemsCallback: () {
+            renderGameResults: (mappedState) {
+              return RefreshIndicator(
+                onRefresh: () {
                   context
                       .bloc<GameResultsBloc>()
-                      .add(GameResultsEvent.loadMoreItems(widget.type));
+                      .add(GameResultsEvent.onRefreshSwiped(widget.type));
+                  return _refreshCompleter.future;
                 },
-              ),
-            ),
-            error: (mappedState) => Center(
-              child: Text(
-                context.translate(mappedState.errorMessage),
-              ),
-            ),
+                child: GameResultList(
+                  data: mappedState.gameResults,
+                  hasReachedEnd: mappedState.hasReachedEnd,
+                  loadMoreItemsCallback: () {
+                    context
+                        .bloc<GameResultsBloc>()
+                        .add(GameResultsEvent.loadMoreItems(widget.type));
+                  },
+                ),
+              );
+            },
+            error: (mappedState) {
+              return Center(
+                child: Text(
+                  context.translate(mappedState.errorMessage),
+                ),
+              );
+            },
             orElse: () => Container(),
           );
         },

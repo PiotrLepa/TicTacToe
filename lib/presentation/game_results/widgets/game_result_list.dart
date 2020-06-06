@@ -22,6 +22,7 @@ class GameResultList extends StatelessWidget {
     return PagedListView(
       data: data,
       hasReachedEnd: hasReachedEnd,
+      physics: AlwaysScrollableScrollPhysics(),
       itemBuilder: (context, itemData, index) {
         return GameResultItem(data: itemData);
       },

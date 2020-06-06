@@ -7,6 +7,7 @@ class PagedListView<T> extends StatefulWidget {
   final KtList<T> data;
   final bool hasReachedEnd;
   final VoidCallback loadMoreItemsCallback;
+  final ScrollPhysics physics;
   final Widget Function(BuildContext, T, int) itemBuilder;
   final Widget Function(BuildContext, int) separatorBuilder;
 
@@ -15,6 +16,7 @@ class PagedListView<T> extends StatefulWidget {
     @required this.data,
     @required this.hasReachedEnd,
     @required this.itemBuilder,
+    this.physics,
     this.separatorBuilder,
     @required this.loadMoreItemsCallback,
   }) : super(key: key) {
@@ -36,6 +38,7 @@ class _PagedListViewState extends State<PagedListView> {
     final data = widget.data;
     return ListView.separated(
       controller: widget._scrollController,
+      physics: widget.physics,
       itemCount: calculateListItemCount(),
       itemBuilder: (context, index) {
         if (index >= data.size) {
