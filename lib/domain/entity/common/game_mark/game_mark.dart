@@ -1,0 +1,4 @@
+enum GameMark {
+  x,
+  o,
+}
