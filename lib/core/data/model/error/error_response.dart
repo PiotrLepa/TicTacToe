@@ -8,8 +8,8 @@ part 'error_response.g.dart';
 @freezed
 abstract class ErrorResponse with _$ErrorResponse {
   const factory ErrorResponse({
-    @required int code,
-    @required String developerMessage,
+    required int code,
+    required String developerMessage,
     String printableMessage,
   }) = _ErrorResponse;
 

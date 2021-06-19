@@ -13,11 +13,11 @@ class SinglePlayerGamePage extends StatelessWidget {
   final Function(int index) onFieldTapped;
 
   const SinglePlayerGamePage({
-    Key key,
-    @required this.playerMark,
-    @required this.moves,
-    @required this.isLoadingVisible,
-    @required this.onFieldTapped,
+    Key? key,
+    required this.playerMark,
+    required this.moves,
+    required this.isLoadingVisible,
+    required this.onFieldTapped,
   }) : super(key: key);
 
   @override

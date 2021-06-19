@@ -7,8 +7,8 @@ abstract class GameResultsState with _$GameResultsState {
   const factory GameResultsState.additionalLoading() = AdditionalLoading;
 
   const factory GameResultsState.renderGameResults({
-    @required KtList<SinglePlayerGameResultResponse> gameResults,
-    @required bool hasReachedEnd,
+    required KtList<SinglePlayerGameResultResponse> gameResults,
+    required bool hasReachedEnd,
   }) = RenderGameResults;
 
   const factory GameResultsState.error(RawKeyString errorMessage) = Error;

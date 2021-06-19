@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/common/router/router.gr.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/app_localizations.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
@@ -14,7 +15,7 @@ import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc
 import 'package:tictactoe/presentation/app/widgets/game_invitation/game_invitation_listener.dart';
 
 class App extends StatelessWidget {
-  final LocaleProvider _localeProvider = getIt.get<LocaleProvider>();
+  final _appRouter = AppRouter(navigatorKey);
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +33,13 @@ class App extends StatelessWidget {
           create: (context) => getIt.get<SinglePlayerGameBloc>(),
         ),
       ],
-      child: MaterialApp(
-        localizationsDelegates: [
-          AppLocalizations.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: _localeProvider.getSupportedLocales().asList(),
+      child: MaterialApp.router(
+        routerDelegate: _appRouter.delegate(),
+        routeInformationParser: _appRouter.defaultRouteParser(),
+        localizationsDelegates: AutoLocalizedData.localizationsDelegates,
+        supportedLocales: AutoLocalizedData.supportedLocales,
         theme: ThemeProvider(isDark: false).getThemeData(),
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
-        builder: (BuildContext context, Widget widget) {
-          return GameInvitationListener(
-            child: ExtendedNavigator<Router>(router: Router()),
-          );
-        },
       ),
     );
   }

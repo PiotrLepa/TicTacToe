@@ -5,8 +5,7 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/domain/entity/single_player_game_result_response/single_player_game_result_paged_response.dart';
 import 'package:tictactoe/domain/repository/game_result_repository.dart';
 
-@RegisterAs(GameResultRepository)
-@lazySingleton
+@LazySingleton(as: GameResultRepository)
 class GameResultRepositoryImpl implements GameResultRepository {
   final NetworkService _service;
   final SinglePlayerGameResultPagedResponseEntityMapper

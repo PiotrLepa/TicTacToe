@@ -20,12 +20,12 @@ class MultiplayerGameScreen extends StatefulWidget {
   final bool fromNotification;
 
   const MultiplayerGameScreen({
-    Key key,
-    @required this.gameId,
-    @required this.socketDestination,
-    @required this.playerMark,
-    @required this.playerType,
-    @required this.fromNotification,
+    Key? key,
+    required this.gameId,
+    required this.socketDestination,
+    required this.playerMark,
+    required this.playerType,
+    required this.fromNotification,
   }) : super(key: key);
 
   @override

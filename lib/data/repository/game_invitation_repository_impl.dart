@@ -4,8 +4,7 @@ import 'package:tictactoe/data/service/firebase_messaging_service.dart';
 import 'package:tictactoe/domain/entity/game_invitation/game_invitation.dart';
 import 'package:tictactoe/domain/repository/game_invitation_repository.dart';
 
-@RegisterAs(GameInvitationRepository)
-@lazySingleton
+@LazySingleton(as: GameInvitationRepository)
 class GameInvitationRepositoryImpl implements GameInvitationRepository {
   final FirebaseMessagingService _firebaseMessagingService;
   final GameInvitationEntityMapper _gameInvitationEntityMapper;

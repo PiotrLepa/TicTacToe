@@ -7,8 +7,7 @@ import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/entity/login_response/login_response.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
 
-@RegisterAs(LoginRepository)
-@lazySingleton
+@LazySingleton(as: LoginRepository)
 class LoginRepositoryImpl implements LoginRepository {
   final NetworkService _service;
   final LoginRequestModelMapper _loginRequestModelMapper;

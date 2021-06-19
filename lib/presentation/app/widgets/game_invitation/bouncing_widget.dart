@@ -6,9 +6,9 @@ class BouncingWidget extends StatefulWidget {
   final Duration duration;
 
   const BouncingWidget({
-    Key key,
-    @required this.child,
-    @required this.duration,
+    Key? key,
+    required this.child,
+    required this.duration,
   }) : super(key: key);
 
   @override

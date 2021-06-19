@@ -5,7 +5,7 @@ class GameResultTab extends StatelessWidget {
   final String text;
 
   const GameResultTab({
-    Key key,
+    Key? key,
     this.text,
   }) : super(key: key);
 

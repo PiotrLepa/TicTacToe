@@ -1,30 +1,27 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:flushbar/flushbar_route.dart' as flushbarRoute;
+import 'package:another_flushbar/flushbar_route.dart' as flushbar_route;
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/error_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/success_flushbar.dart';
 
 @lazySingleton
 class FlushbarHelper {
-  BuildContext get _context => ExtendedNavigator.ofRouter<Router>().context;
+  BuildContext get _context => navigatorKey.currentContext!;
 
-  bool _isFlushbarVisible = false;
+  AppFlushbar? _currentFlushbar;
 
   void dismiss() {
-    if (_isFlushbarVisible) {
-      _isFlushbarVisible = false;
-      ExtendedNavigator.ofRouter<Router>().pop();
-    }
+    _currentFlushbar?.dismiss();
+    _currentFlushbar = null;
   }
 
   Future<void> showError({
-    @required RawKeyString message,
-    RawKeyString title,
+    required PlainLocalizedString message,
+    PlainLocalizedString? title,
   }) =>
       _showFlushbar(
         flushbar: ErrorFlushbar(
@@ -36,8 +33,8 @@ class FlushbarHelper {
       );
 
   Future<void> showSuccess({
-    @required String message,
-    String title,
+    required PlainLocalizedString message,
+    PlainLocalizedString? title,
   }) =>
       _showFlushbar(
         flushbar: SuccessFlushbar(
@@ -49,12 +46,12 @@ class FlushbarHelper {
       );
 
   Future<void> show({
-    String title,
-    String message,
-    Color backgroundColor,
-    Widget icon,
-    FlatButton mainButton,
-    bool infinityDuration = false,
+    required Widget title,
+    required Widget message,
+    required Color backgroundColor,
+    required Widget icon,
+    required TextButton mainButton,
+    Duration duration = const Duration(seconds: 3),
     bool isDismissible = true,
   }) =>
       _showFlushbar(
@@ -64,22 +61,19 @@ class FlushbarHelper {
           backgroundColor: backgroundColor,
           icon: icon,
           mainButton: mainButton,
-          infinityDuration: infinityDuration,
+          duration: duration,
           isDismissible: isDismissible,
           onDismiss: _onFlushbarDismiss,
         ),
       );
 
   Future<void> _showFlushbar({
-    @required AppFlushbar flushbar,
+    required AppFlushbar flushbar,
   }) async {
-    if (_isFlushbarVisible) {
-      return;
-    }
-    _isFlushbarVisible = true;
-    await Future.delayed(Duration(milliseconds: 200));
-    return ExtendedNavigator.ofRouter<Router>().push(
-      flushbarRoute.showFlushbar(
+    _currentFlushbar?.dismiss();
+    _currentFlushbar = flushbar;
+    return navigatorKey.currentState?.push<void>(
+      flushbar_route.showFlushbar<void>(
         context: _context,
         flushbar: flushbar,
       ),
@@ -87,6 +81,6 @@ class FlushbarHelper {
   }
 
   void _onFlushbarDismiss() {
-    _isFlushbarVisible = false;
+    _currentFlushbar = null;
   }
 }

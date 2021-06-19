@@ -50,7 +50,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       post(
         "/single-player/create",
-        queryParameters: {
+        params: {
           "difficulty_level": enumToString(difficultyLevel),
         },
         secured: true,
@@ -70,7 +70,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       post(
         "/multiplayer/create",
-        queryParameters: {
+        params: {
           "opponent_code": opponentCode,
         },
         secured: true,
@@ -81,7 +81,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       put(
         "/multiplayer/join",
-        queryParameters: {
+        params: {
           "game_id": gameId,
         },
         secured: true,
@@ -109,7 +109,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       get(
         "/game-result/single-player/user",
-        queryParameters: {
+        params: {
           "page": page,
           "size": pagination_elements_per_page,
         },
@@ -117,10 +117,11 @@ class NetworkService extends BaseNetworkService {
       );
 
   Future<SinglePlayerGameResultPagedResponseModel> getAllGameResults(
-      int page,) =>
+    int page,
+  ) =>
       get(
         "/game-result/single-player/all",
-        queryParameters: {
+        params: {
           "page": page,
           "size": pagination_elements_per_page,
         },

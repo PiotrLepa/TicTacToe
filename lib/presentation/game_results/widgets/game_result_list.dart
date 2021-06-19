@@ -11,10 +11,10 @@ class GameResultList extends StatelessWidget {
   final VoidCallback loadMoreItemsCallback;
 
   const GameResultList({
-    Key key,
-    @required this.data,
-    @required this.hasReachedEnd,
-    @required this.loadMoreItemsCallback,
+    Key? key,
+    required this.data,
+    required this.hasReachedEnd,
+    required this.loadMoreItemsCallback,
   }) : super(key: key);
 
   @override

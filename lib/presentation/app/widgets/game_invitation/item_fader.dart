@@ -4,7 +4,7 @@ class ItemFader extends StatefulWidget {
   final Widget child;
 
   const ItemFader({
-    Key key,
+    Key? key,
     this.child,
   }) : super(key: key);
 
@@ -46,11 +46,11 @@ class ItemFaderState extends State<ItemFader>
         return Transform.translate(
           offset: Offset(0, 50 * _animation.value),
           child: Visibility(
-            visible: _isVisible,
-            child: Opacity(
-              opacity: _animation.value,
-              child: child,
-            ),
+              visible: _isVisible,
+              child: Opacity(
+                opacity: _animation.value,
+                child: child,
+              ), h
           ),
         );
       },

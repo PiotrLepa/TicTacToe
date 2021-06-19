@@ -4,7 +4,7 @@ class ScrollableWidget extends StatelessWidget {
   final Widget child;
 
   const ScrollableWidget({
-    Key key,
+    Key? key,
     this.child,
   }) : super(key: key);
 

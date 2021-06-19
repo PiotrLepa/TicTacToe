@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 Future<T> showAppModalBottomSheet<T>({
-  @required BuildContext context,
-  @required WidgetBuilder builder,
+  required BuildContext context,
+  required WidgetBuilder builder,
 }) =>
     showModalBottomSheet(
       context: context,

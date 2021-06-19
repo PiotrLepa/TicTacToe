@@ -6,8 +6,8 @@ class PlayerCode extends StatelessWidget {
   final String playerCode;
 
   const PlayerCode({
-    Key key,
-    @required this.playerCode,
+    Key? key,
+    required this.playerCode,
   }) : super(key: key);
 
   @override

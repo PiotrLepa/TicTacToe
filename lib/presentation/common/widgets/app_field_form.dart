@@ -12,8 +12,8 @@ class AppFormField extends StatelessWidget {
   final bool obscureText;
 
   const AppFormField({
-    Key key,
-    @required this.labelText,
+    Key? key,
+    required this.labelText,
     this.controller,
     this.errorText,
     this.type,

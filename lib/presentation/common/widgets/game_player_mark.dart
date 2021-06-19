@@ -7,8 +7,8 @@ class GamePlayerMark extends StatelessWidget {
   final GameMark playerMark;
 
   const GamePlayerMark({
-    Key key,
-    @required this.playerMark,
+    Key? key,
+    required this.playerMark,
   }) : super(key: key);
 
   @override

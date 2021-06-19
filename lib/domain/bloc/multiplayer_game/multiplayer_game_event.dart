@@ -3,10 +3,10 @@ part of 'multiplayer_game_bloc.dart';
 @freezed
 abstract class MultiplayerGameEvent with _$MultiplayerGameEvent {
   const factory MultiplayerGameEvent.screenStarted({
-    @required int gameId,
-    @required String socketDestination,
-    @required MultiplayerPlayerType playerType,
-    @required bool fromNotification,
+    required int gameId,
+    required String socketDestination,
+    required MultiplayerPlayerType playerType,
+    required bool fromNotification,
   }) = ScreenStarted;
 
   const factory MultiplayerGameEvent.onNewGameState(

@@ -10,8 +10,8 @@ class GameResultItemDate extends StatelessWidget {
   final formatter = getIt<DateTimeFormatter>();
 
   GameResultItemDate({
-    Key key,
-    @required this.gameDateTime,
+    Key? key,
+    required this.gameDateTime,
   }) : super(key: key);
 
   @override

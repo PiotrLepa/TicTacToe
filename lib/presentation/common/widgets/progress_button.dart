@@ -8,11 +8,11 @@ class ProgressButton extends StatelessWidget {
   final bool isLoading;
 
   const ProgressButton({
-    Key key,
-    @required this.text,
-    @required this.loadingText,
-    @required this.isLoading,
-    @required this.onPressed,
+    Key? key,
+    required this.text,
+    required this.loadingText,
+    required this.isLoading,
+    required this.onPressed,
   }) : super(key: key);
 
   @override

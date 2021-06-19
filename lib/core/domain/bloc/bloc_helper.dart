@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:tictactoe/core/common/logger/logger.dart';
 import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 import 'package:tictactoe/core/domain/call_state/call_state.dart';
@@ -22,8 +21,8 @@ Stream<CallState<T>> fetch<T>(
 }
 
 Stream<PagedCallState<T>> pagedFetch<T>({
-  @required Future<T> call,
-  @required int page,
+  required Future<T> call,
+  required int page,
 }) async* {
   try {
     if (page == 0) {

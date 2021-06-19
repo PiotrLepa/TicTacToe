@@ -9,9 +9,9 @@ class GameBoard extends StatelessWidget {
   final KtList<GameMove> moves;
 
   const GameBoard({
-    Key key,
-    @required this.onFieldTapped,
-    @required this.moves,
+    Key? key,
+    required this.onFieldTapped,
+    required this.moves,
   }) : super(key: key);
 
   @override

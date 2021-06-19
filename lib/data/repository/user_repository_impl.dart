@@ -5,8 +5,7 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/domain/entity/user_profile_response/user_profile_response.dart';
 import 'package:tictactoe/domain/repository/user_repository.dart';
 
-@RegisterAs(UserRepository)
-@lazySingleton
+@LazySingleton(as: UserRepository)
 class UserRepositoryImpl implements UserRepository {
   final NetworkService _service;
   final UserProfileEntityMapper _userProfileEntityMapper;

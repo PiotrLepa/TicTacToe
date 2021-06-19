@@ -10,8 +10,8 @@ abstract class MultiplayerGameState with _$MultiplayerGameState {
       RenderWaitingForOpponent;
 
   const factory MultiplayerGameState.renderGame({
-    @required MultiplayerGameCombinedStatus status,
-    @required KtList<GameMove> moves,
+    required MultiplayerGameCombinedStatus status,
+    required KtList<GameMove> moves,
   }) = RenderGame;
 
   const factory MultiplayerGameState.opponentLeftGame() = OpponentLeftGame;

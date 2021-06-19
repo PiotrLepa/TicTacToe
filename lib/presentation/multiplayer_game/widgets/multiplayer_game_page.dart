@@ -18,13 +18,13 @@ class MultiplayerGamePage extends StatelessWidget {
   final Function(int index) onFieldTapped;
 
   const MultiplayerGamePage({
-    Key key,
-    @required this.playerType,
-    @required this.playerMark,
-    @required this.status,
-    @required this.moves,
-    @required this.isLoadingVisible,
-    @required this.onFieldTapped,
+    Key? key,
+    required this.playerType,
+    required this.playerMark,
+    required this.status,
+    required this.moves,
+    required this.isLoadingVisible,
+    required this.onFieldTapped,
   }) : super(key: key);
 
   @override

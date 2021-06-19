@@ -15,17 +15,17 @@ abstract class BaseNetworkService {
 
   Future<T> get<T>(
     String path, {
-    Serializable data,
-    Map<String, dynamic> queryParameters,
-    Map<String, dynamic> headers,
-    String contentType,
+    Serializable? data,
+    Map<String, String>? params,
+    Map<String, String>? headers,
+    String? contentType,
     bool secured = false,
   }) =>
-      _responseConverter.decodeResponse(createRequest(
-        "GET",
+      _responseConverter.decodeResponse(createRequest<dynamic>(
+        'GET',
         path,
         data: data,
-        queryParameters: queryParameters,
+        params: params,
         headers: headers,
         contentType: contentType,
         secured: secured,
@@ -33,17 +33,17 @@ abstract class BaseNetworkService {
 
   Future<KtList<T>> getList<T>(
     String path, {
-    Serializable data,
-    Map<String, dynamic> queryParameters,
-    Map<String, dynamic> headers,
-    String contentType,
+    Serializable? data,
+    Map<String, String>? params,
+    Map<String, String>? headers,
+    String? contentType,
     bool secured = false,
   }) =>
-      _responseConverter.decodeResponseList(createRequest(
-        "GET",
+      _responseConverter.decodeResponseList(createRequest<dynamic>(
+        'GET',
         path,
         data: data,
-        queryParameters: queryParameters,
+        params: params,
         headers: headers,
         contentType: contentType,
         secured: secured,
@@ -51,17 +51,17 @@ abstract class BaseNetworkService {
 
   Future<T> post<T>(
     String path, {
-    Serializable data,
-    Map<String, dynamic> queryParameters,
-    Map<String, dynamic> headers,
-    String contentType,
+    Serializable? data,
+    Map<String, String>? params,
+    Map<String, String>? headers,
+    String? contentType,
     bool secured = false,
   }) =>
-      _responseConverter.decodeResponse(createRequest(
-        "POST",
+      _responseConverter.decodeResponse(createRequest<dynamic>(
+        'POST',
         path,
         data: data,
-        queryParameters: queryParameters,
+        params: params,
         headers: headers,
         contentType: contentType,
         secured: secured,
@@ -69,17 +69,17 @@ abstract class BaseNetworkService {
 
   Future<T> put<T>(
     String path, {
-    Serializable data,
-    Map<String, dynamic> queryParameters,
-    Map<String, dynamic> headers,
-    String contentType,
+    Serializable? data,
+    Map<String, String>? params,
+    Map<String, String>? headers,
+    String? contentType,
     bool secured = false,
   }) =>
-      _responseConverter.decodeResponse(createRequest(
-        "PUT",
+      _responseConverter.decodeResponse(createRequest<dynamic>(
+        'PUT',
         path,
         data: data,
-        queryParameters: queryParameters,
+        params: params,
         headers: headers,
         contentType: contentType,
         secured: secured,
@@ -88,15 +88,15 @@ abstract class BaseNetworkService {
   Future<Response<T>> createRequest<T>(
     String method,
     String path, {
-    Serializable data,
-    Map<String, dynamic> queryParameters,
-    Map<String, dynamic> headers,
-    String contentType,
+    Serializable? data,
+    Map<String, String>? params,
+    Map<String, String>? headers,
+    String? contentType,
     bool secured = false,
   }) async =>
       _dio.request(path,
           data: data?.toJson(),
-          queryParameters: queryParameters,
+          queryParameters: params,
           options: Options(
             method: method,
             headers: _addSecuredHeader(headers ?? {}, secured),

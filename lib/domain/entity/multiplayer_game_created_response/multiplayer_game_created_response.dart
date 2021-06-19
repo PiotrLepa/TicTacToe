@@ -1,5 +1,3 @@
-library multiplayer_game_created_response;
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 import 'package:tictactoe/domain/entity/common/multiplayer_player_type/multiplayer_player_type.dart';
@@ -7,12 +5,11 @@ import 'package:tictactoe/domain/entity/common/multiplayer_player_type/multiplay
 part 'multiplayer_game_created_response.freezed.dart';
 
 @freezed
-abstract class MultiplayerGameCreatedResponse
-    with _$MultiplayerGameCreatedResponse {
+class MultiplayerGameCreatedResponse with _$MultiplayerGameCreatedResponse {
   const factory MultiplayerGameCreatedResponse({
-    @required int gameId,
-    @required String socketDestination,
-    @required GameMark yourMark,
-    @required MultiplayerPlayerType playerType,
+    required int gameId,
+    required String socketDestination,
+    required GameMark yourMark,
+    required MultiplayerPlayerType playerType,
   }) = _MultiplayerGameCreatedResponse;
 }

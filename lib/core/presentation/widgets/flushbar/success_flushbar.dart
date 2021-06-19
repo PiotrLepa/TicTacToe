@@ -1,21 +1,34 @@
-// ignore: must_be_immutable
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 
 // ignore: must_be_immutable
 class SuccessFlushbar extends AppFlushbar {
   SuccessFlushbar({
-    Key key,
-    @required BuildContext context,
-    @required String message,
-    @required VoidCallback onDismiss,
-    String title,
+    Key? key,
+    required BuildContext context,
+    required PlainLocalizedString message,
+    required VoidCallback onDismiss,
+    PlainLocalizedString? title,
   }) : super(
-    title: title ?? context.translateKey('successFlushbarTitle'),
-          message: message,
-          backgroundColor: Theme.of(context).primaryColor,
+          key: key,
+          title: Text(
+            context.translate(title ?? Strings.successFlushbarTitle),
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+              color: ThemeProvider.of(context).textColorInverted,
+            ),
+          ),
+          message: Text(
+            message.get(context),
+            style: TextStyle(
+              fontSize: 14,
+              color: ThemeProvider.of(context).textColorInverted,
+            ),
+          ),
+          backgroundColor: ThemeProvider.of(context).accentColor,
           onDismiss: onDismiss,
         );
 }

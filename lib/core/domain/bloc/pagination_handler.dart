@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:kt_dart/collection.dart';
 
 mixin PaginationHandler<T> {
@@ -7,9 +6,9 @@ mixin PaginationHandler<T> {
   KtMutableList<T> _fetchedItems = KtMutableList.empty();
 
   void onPageFetched({
-    @required int page,
-    @required hasReachedEnd,
-    @required KtList<T> items,
+    required int page,
+    required hasReachedEnd,
+    required KtList<T> items,
   }) {
     _page = page;
     _hasReachedEnd = hasReachedEnd;

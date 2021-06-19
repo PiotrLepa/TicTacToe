@@ -16,7 +16,7 @@ class GameResults extends StatefulWidget {
   final GameResultType type;
 
   const GameResults({
-    Key key,
+    Key? key,
     this.type,
   }) : super(key: key);
 

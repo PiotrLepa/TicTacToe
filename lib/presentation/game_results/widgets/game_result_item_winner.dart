@@ -8,8 +8,8 @@ class GameResultItemWinner extends StatelessWidget {
   final GameStatus gameStatus;
 
   const GameResultItemWinner({
-    Key key,
-    @required this.gameStatus,
+    Key? key,
+    required this.gameStatus,
   }) : super(key: key);
 
   @override

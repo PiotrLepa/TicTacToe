@@ -8,7 +8,7 @@ class GameResultItem extends StatelessWidget {
   final SinglePlayerGameResultResponse data;
 
   const GameResultItem({
-    Key key,
+    Key? key,
     this.data,
   }) : super(key: key);
 

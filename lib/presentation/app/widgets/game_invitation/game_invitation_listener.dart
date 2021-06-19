@@ -12,8 +12,8 @@ class GameInvitationListener extends StatefulWidget {
   final Widget child;
 
   const GameInvitationListener({
-    Key key,
-    @required this.child,
+    Key? key,
+    required this.child,
   }) : super(key: key);
 
   @override

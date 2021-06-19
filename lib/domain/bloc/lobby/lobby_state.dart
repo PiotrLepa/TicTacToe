@@ -5,11 +5,11 @@ abstract class LobbyState with _$LobbyState {
   const factory LobbyState.loading() = Loading;
 
   const factory LobbyState.renderPage({
-    @required String playerCode,
+    required String playerCode,
   }) = RenderPage;
 
   const factory LobbyState.renderOpponentCodeInputError({
-    @required RawKeyString errorKey,
+    required RawKeyString errorKey,
   }) = RenderOpponentCodeInputError;
 
   const factory LobbyState.createGameLoading() = CreateGameLoading;

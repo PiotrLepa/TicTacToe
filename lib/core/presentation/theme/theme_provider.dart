@@ -25,7 +25,7 @@ class ThemeProvider {
     );
   }
 
-  ThemeProvider({@required this.isDark});
+  ThemeProvider({required this.isDark});
 
   ThemeData getThemeData() {
     return ThemeData(
@@ -41,12 +41,15 @@ class ThemeProvider {
           fontWeight: FontWeight.bold,
         ),
       ),
-      buttonTheme: ButtonThemeData(
-        padding: EdgeInsets.all(12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
         ),
-        buttonColor: primaryColor,
       ),
       appBarTheme: AppBarTheme(
         brightness: isDark ? Brightness.dark : Brightness.light,

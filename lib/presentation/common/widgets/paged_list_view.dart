@@ -12,13 +12,13 @@ class PagedListView<T> extends StatefulWidget {
   final Widget Function(BuildContext, int) separatorBuilder;
 
   PagedListView({
-    Key key,
-    @required this.data,
-    @required this.hasReachedEnd,
-    @required this.itemBuilder,
+    Key? key,
+    required this.data,
+    required this.hasReachedEnd,
+    required this.itemBuilder,
     this.physics,
     this.separatorBuilder,
-    @required this.loadMoreItemsCallback,
+    required this.loadMoreItemsCallback,
   }) : super(key: key) {
     _scrollController.addListener(() {
       final position = _scrollController.position;

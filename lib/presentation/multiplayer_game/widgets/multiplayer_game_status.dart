@@ -7,8 +7,8 @@ class GameStatus extends StatelessWidget {
   final MultiplayerGameCombinedStatus status;
 
   const GameStatus({
-    Key key,
-    @required this.status,
+    Key? key,
+    required this.status,
   }) : super(key: key);
 
   @override

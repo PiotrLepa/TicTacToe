@@ -1,4 +1,4 @@
-import 'package:auto_route/auto_route_annotations.dart';
+import 'package:auto_route/annotations.dart';
 import 'package:tictactoe/presentation/home/home_screen.dart';
 import 'package:tictactoe/presentation/lobby/lobby_screen.dart';
 import 'package:tictactoe/presentation/login/login_screen.dart';
@@ -7,20 +7,15 @@ import 'package:tictactoe/presentation/registration/registration_screen.dart';
 import 'package:tictactoe/presentation/single_player_game/single_player_game_screen.dart';
 import 'package:tictactoe/presentation/start/start_screen.dart';
 
-@MaterialAutoRouter(generateNavigationHelperExtension: true)
-class $Router {
-  StartScreen startScreen;
-
-  RegistrationScreen registrationScreen;
-
-  LoginScreen loginScreen;
-
-  @initial
-  HomeScreen homeScreen;
-
-  SinglePlayerGameScreen singlePlayerGameScreen;
-
-  MultiplayerGameScreen multiplayerGameScreen;
-
-  LobbyScreen lobbyScreen;
-}
+@MaterialAutoRouter(
+  routes: <AutoRoute>[
+    MaterialRoute<void>(page: HomeScreen, initial: true),
+    MaterialRoute<void>(page: StartScreen),
+    MaterialRoute<void>(page: RegistrationScreen),
+    MaterialRoute<void>(page: LoginScreen),
+    MaterialRoute<void>(page: SinglePlayerGameScreen),
+    MaterialRoute<void>(page: MultiplayerGameScreen),
+    MaterialRoute<void>(page: LobbyScreen),
+  ],
+)
+class $AppRouter {}

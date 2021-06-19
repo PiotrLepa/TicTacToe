@@ -5,8 +5,7 @@ import 'package:tictactoe/data/service/network_service.dart';
 import 'package:tictactoe/domain/entity/reqistration_request/registration_request.dart';
 import 'package:tictactoe/domain/repository/registration_repository.dart';
 
-@RegisterAs(RegistrationRepository)
-@lazySingleton
+@LazySingleton(as: RegistrationRepository)
 class RegistrationRepositoryImpl implements RegistrationRepository {
   final NetworkService _service;
   final RegistrationRequestModelMapper _registrationRequestModelMapper;

@@ -13,8 +13,8 @@ class SinglePlayerGameScreen extends StatefulWidget {
   final DifficultyLevel difficultyLevel;
 
   const SinglePlayerGameScreen({
-    Key key,
-    @required this.difficultyLevel,
+    Key? key,
+    required this.difficultyLevel,
   }) : super(key: key);
 
   @override

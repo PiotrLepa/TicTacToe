@@ -9,8 +9,7 @@ import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level
 import 'package:tictactoe/domain/entity/single_player_game_response/single_player_game_response.dart';
 import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
-@RegisterAs(SinglePlayerGameRepository)
-@lazySingleton
+@LazySingleton(as: SinglePlayerGameRepository)
 class SinglePlayerGameRepositoryImpl implements SinglePlayerGameRepository {
   final NetworkService _service;
   final DifficultyLevelModelMapper _difficultyLevelModelMapper;

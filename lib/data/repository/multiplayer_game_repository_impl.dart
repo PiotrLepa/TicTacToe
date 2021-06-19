@@ -10,8 +10,7 @@ import 'package:tictactoe/domain/entity/multiplayer_game_created_response/multip
 import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_game_response.dart';
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
-@RegisterAs(MultiplayerGameRepository)
-@lazySingleton
+@LazySingleton(as: MultiplayerGameRepository)
 class MultiplayerGameRepositoryImpl implements MultiplayerGameRepository {
   final NetworkService _networkService;
   final StompService _stompService;

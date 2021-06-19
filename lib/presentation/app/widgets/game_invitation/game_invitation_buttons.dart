@@ -6,9 +6,9 @@ class GameInvitationButtons extends StatelessWidget {
   final VoidCallback onDeclinePressed;
 
   const GameInvitationButtons({
-    Key key,
-    @required this.onPlayPressed,
-    @required this.onDeclinePressed,
+    Key? key,
+    required this.onPlayPressed,
+    required this.onDeclinePressed,
   }) : super(key: key);
 
   @override

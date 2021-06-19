@@ -9,8 +9,8 @@ abstract class SinglePlayerGameState with _$SinglePlayerGameState {
   const factory SinglePlayerGameState.moveLoading() = MoveLoading;
 
   const factory SinglePlayerGameState.renderGame({
-    @required GameMark playerMark,
-    @required KtList<GameMove> moves,
+    required GameMark playerMark,
+    required KtList<GameMove> moves,
   }) = RenderGame;
 
   const factory SinglePlayerGameState.playerWon() = PlayerWon;
