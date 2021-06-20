@@ -111,7 +111,7 @@ class NetworkService extends BaseNetworkService {
         '/game-result/single-player/user',
         params: {
           'page': page.toString(),
-          'size': pagination_elements_per_page.toString(),
+          'size': paginationElementsPerPage.toString(),
         },
         secured: true,
       );
@@ -123,7 +123,7 @@ class NetworkService extends BaseNetworkService {
         '/game-result/single-player/all',
         params: {
           'page': page.toString(),
-          'size': pagination_elements_per_page.toString(),
+          'size': paginationElementsPerPage.toString(),
         },
         secured: true,
       );

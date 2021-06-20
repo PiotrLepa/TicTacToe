@@ -107,26 +107,27 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
   }
 
   Future<void> _showRestartGameFlushBar(String message) async {
-    getIt.get<FlushbarHelper>().show(
-          title: message,
-          message: context.translateKey('gameScreenPlayAgainQuestion'),
-          isDismissible: false,
-          infinityDuration: true,
-          icon: const Icon(
-            Icons.videogame_asset,
-            color: Colors.white,
-          ),
-          mainButton: FlatButton(
-            onPressed: () {
-              getIt.get<FlushbarHelper>().dismiss();
-              context.read<SinglePlayerGameBloc>().add(
-                  SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
-            },
-            child: Text(
-              context.translateKey('gameScreenPlayAgain'),
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            ),
-          ),
-        );
+    // TODO
+    // getIt.get<FlushbarHelper>().show(
+    //       title: message,
+    //       message: context.translateKey('gameScreenPlayAgainQuestion'),
+    //       isDismissible: false,
+    //       infinityDuration: true,
+    //       icon: const Icon(
+    //         Icons.videogame_asset,
+    //         color: Colors.white,
+    //       ),
+    //       mainButton: FlatButton(
+    //         onPressed: () {
+    //           getIt.get<FlushbarHelper>().dismiss();
+    //           context.read<SinglePlayerGameBloc>().add(
+    //               SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
+    //         },
+    //         child: Text(
+    //           context.translateKey('gameScreenPlayAgain'),
+    //           style: TextStyle(color: Theme.of(context).primaryColor),
+    //         ),
+    //       ),
+    //     );
   }
 }

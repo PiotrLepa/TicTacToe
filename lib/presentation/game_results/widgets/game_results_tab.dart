@@ -6,7 +6,7 @@ class GameResultTab extends StatelessWidget {
 
   const GameResultTab({
     Key? key,
-    this.text,
+    required this.text,
   }) : super(key: key);
 
   @override

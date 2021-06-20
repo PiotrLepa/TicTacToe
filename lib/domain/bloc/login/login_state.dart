@@ -18,7 +18,7 @@ class LoginState with _$LoginState {
   }) = Loading;
 
   const factory LoginState.error(
-    RawKeyString? errorMessage, {
+    RawKeyString errorMessage, {
     RawKeyString? emailErrorKey,
     RawKeyString? passwordErrorKey,
   }) = Error;

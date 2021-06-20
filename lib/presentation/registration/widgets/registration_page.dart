@@ -5,6 +5,7 @@ import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/app_field_form.dart';
 import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
@@ -70,9 +71,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
         });
       },
       showSuccessFlushbar: (mappedState) {
-        getIt.get<FlushbarHelper>().showSuccess(
-              message:
-                  context.translateKey('registrationScreenRegistrationSuccess'),
+        getIt.get<FlushbarHelper>().showSuccess2(
+              message: Strings.registrationScreenRegistrationSuccess,
             );
         setState(() {
           _isLoading = false;

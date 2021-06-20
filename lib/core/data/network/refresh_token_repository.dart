@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
+import 'package:tictactoe/core/common/serialization/serializable.dart';
 import 'package:tictactoe/core/data/network/network_error_handler.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request_model.dart';
@@ -16,16 +17,16 @@ class RefreshTokenRepository {
   ) =>
       _service.refreshAccessToken(requestData).handleNetworkError();
 
-  Future retryRequest(RequestOptions requestData) {
-    final request = _service.createRequest(
+  Future<dynamic> retryRequest(RequestOptions requestData) {
+    final request = _service.createRequest<dynamic>(
       requestData.method,
       requestData.path,
-      data: requestData.data,
-      queryParameters: requestData.queryParameters,
-      headers: requestData.headers,
+      data: requestData.data != null ? requestData.data as Serializable : null,
+      params: requestData.queryParameters.cast(),
+      headers: requestData.headers.cast(),
       contentType: requestData.contentType,
       secured: true,
     );
-    return request.then((value) => value.data).handleNetworkError();
+    return request.then<dynamic>((value) => value.data).handleNetworkError();
   }
 }

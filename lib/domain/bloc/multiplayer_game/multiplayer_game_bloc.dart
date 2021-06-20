@@ -26,10 +26,10 @@ class MultiplayerGameBloc
   final MultiplayerGameRepository _gameRepository;
   final GameStatusCombiner _gameStatusCombiner;
 
-  int _gameId;
-  MultiplayerGameResponse _gameResponse;
-  MultiplayerPlayerType _playerType;
-  StreamSubscription _gameSubscription;
+  late int _gameId;
+  late MultiplayerGameResponse _gameResponse;
+  late MultiplayerPlayerType _playerType;
+  StreamSubscription? _gameSubscription;
 
   MultiplayerGameBloc(
     this._gameRepository,
@@ -49,7 +49,7 @@ class MultiplayerGameBloc
   }
 
   @override
-  Future<Function> close() {
+  Future<void> close() {
     _gameSubscription?.cancel();
     return super.close();
   }
@@ -64,7 +64,7 @@ class MultiplayerGameBloc
 
     if (event.fromNotification) {
       // make sure STOMP client has enough time to connect with server socket
-      await Future.delayed(const Duration(seconds: 2));
+      await Future<void>.delayed(const Duration(seconds: 2));
       yield* _joinToGame(event.gameId);
     } else {
       yield const MultiplayerGameState.renderWaitingForOpponent();

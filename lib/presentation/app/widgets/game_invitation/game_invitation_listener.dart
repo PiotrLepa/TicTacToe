@@ -20,7 +20,7 @@ class GameInvitationListener extends StatefulWidget {
 
 class _GameInvitationListenerState extends State<GameInvitationListener> {
   final _itemFaderKey = GlobalKey<ItemFaderState>();
-  GameInvitation _gameData;
+  GameInvitation? _gameData;
 
   @override
   Widget build(BuildContext context) {

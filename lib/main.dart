@@ -11,7 +11,7 @@ import 'core/domain/bloc/error_logger_bloc_observer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await configureInjection(Env.dev);
+  await configureInjection();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   Bloc.observer = getIt<ErrorLoggerBlocObserver>();
   runApp(App());

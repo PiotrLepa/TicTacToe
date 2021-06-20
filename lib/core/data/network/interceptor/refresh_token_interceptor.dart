@@ -18,28 +18,36 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
   );
 
   @override
-  Future onError(DioError err) async {
+  void onError(DioError err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode != 401) {
-      return err;
+      super.onError(err, handler);
+    } else {
+      // TODO check
+      final request = err.response?.requestOptions;
+      if (request != null) {
+        _refreshTokenAndRetry(request).then(
+          (dynamic retriedResponseData) {
+            final response = Response(
+              requestOptions: request,
+              data: retriedResponseData,
+            );
+            return Future.value(response);
+          },
+        );
+      }
+      super.onError(err, handler);
     }
-    return _refreshTokenAndRetry(err.response.request)
-        .then((retriedResponseData) {
-      final response = Response(
-        data: retriedResponseData,
-      );
-      return Future.value(response);
-    });
   }
 
-  Future _refreshTokenAndRetry(RequestOptions request) async =>
-      _refreshAccessToken().then((tokens) {
+  Future<dynamic> _refreshTokenAndRetry(RequestOptions request) async =>
+      _refreshAccessToken().then<dynamic>((tokens) {
         _oauthTokensStorage.saveTokens(
           tokens.accessToken,
           tokens.refreshToken,
         );
         return _refreshTokenRepository.retryRequest(request);
-      }).catchError(
-          (error) => Future.error(const InternalException.sessionExpired()));
+      }).catchError((dynamic error) =>
+          Future<dynamic>.error(const InternalException.sessionExpired()));
 
   Future<LoginResponseModel> _refreshAccessToken() async {
     final refreshToken = await _oauthTokensStorage.refreshToken;
