@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
@@ -22,8 +23,20 @@ class LobbyScreen extends StatelessWidget {
             state.maybeMap(
               error: (mappedState) {
                 getIt.get<FlushbarHelper>().showError(
-                  message: mappedState.message,
+                      message: mappedState.message,
                     );
+              },
+              navigateToGame: (mappedState) {
+                final response = mappedState.response;
+                context.router.push(
+                  MultiplayerGameScreenRoute(
+                    gameId: response.gameId,
+                    socketDestination: response.socketDestination,
+                    playerMark: response.yourMark,
+                    playerType: response.playerType,
+                    fromNotification: false,
+                  ),
+                );
               },
               orElse: () {},
             );

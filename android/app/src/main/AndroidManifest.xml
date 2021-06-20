@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-            android:name=".Application"
             android:label="Tic Tac Toe"
             android:icon="@mipmap/ic_launcher">
         <activity

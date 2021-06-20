@@ -23,28 +23,16 @@ class AppFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formColor = Theme.of(context).primaryColor;
-    return Theme(
-      data: Theme.of(context).copyWith(
-        accentColor: formColor,
-        textSelectionTheme: TextSelectionThemeData(
-          cursorColor: formColor,
-          selectionColor: formColor,
-          selectionHandleColor: formColor,
-        ),
+    return TextFormField(
+      controller: controller,
+      keyboardType: type,
+      maxLength: maxLength,
+      decoration: InputDecoration(
+        labelText: labelText,
+        errorText: _getValidationText(context),
+        border: const OutlineInputBorder(),
       ),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: type,
-        cursorColor: formColor,
-        maxLength: maxLength,
-        decoration: InputDecoration(
-          labelText: labelText,
-          errorText: _getValidationText(context),
-          border: const OutlineInputBorder(),
-        ),
-        obscureText: obscureText,
-      ),
+      obscureText: obscureText,
     );
   }
 

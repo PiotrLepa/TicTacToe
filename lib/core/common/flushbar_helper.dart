@@ -51,7 +51,7 @@ class FlushbarHelper {
     required Color backgroundColor,
     required Widget icon,
     required TextButton mainButton,
-    Duration duration = const Duration(seconds: 3),
+    Duration? duration = const Duration(seconds: 3),
     bool isDismissible = true,
   }) =>
       _showFlushbar(

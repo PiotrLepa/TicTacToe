@@ -59,9 +59,9 @@ class _GameResultsState extends State<GameResults>
               return _refreshCompleter.future;
             },
             child: BlocConsumer<GameResultsBloc, GameResultsState>(
-              listener: respondForState,
+              listener: _respondForState,
               buildWhen: (oldState, newState) => newState is! AdditionalLoading,
-              builder: buildForState,
+              builder: _buildForState,
             ),
           );
         },
@@ -69,7 +69,7 @@ class _GameResultsState extends State<GameResults>
     );
   }
 
-  void respondForState(BuildContext context, GameResultsState state) {
+  void _respondForState(BuildContext context, GameResultsState state) {
     state.maybeMap(
       loading: (mappedState) {
         _refreshIndicatorKey.currentState?.show();
@@ -89,7 +89,7 @@ class _GameResultsState extends State<GameResults>
     );
   }
 
-  Widget buildForState(BuildContext context, GameResultsState state) {
+  Widget _buildForState(BuildContext context, GameResultsState state) {
     return state.maybeMap(
       renderGameResults: (mappedState) {
         return GameResultList(

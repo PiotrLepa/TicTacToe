@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
@@ -24,17 +25,13 @@ class _LoginPageState extends State<LoginPage> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: BlocConsumer<LoginBloc, LoginState>(
-        listener: (context, state) {
-          _respondForState(state);
-        },
-        builder: (context, state) {
-          return _buildFieldsAndButton(state);
-        },
+        listener: _respondForState,
+        builder: _buildFieldsAndButton,
       ),
     );
   }
 
-  void _respondForState(LoginState state) {
+  void _respondForState(BuildContext context, LoginState state) {
     state.maybeMap(
       loading: (mappedState) {
         setState(() {
@@ -49,11 +46,17 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
         });
       },
+      navigateToHome: (_) {
+        context.router.pushAndPopUntil(
+          const HomeScreenRoute(),
+          predicate: (route) => false,
+        );
+      },
       orElse: () {},
     );
   }
 
-  Column _buildFieldsAndButton(LoginState state) {
+  Column _buildFieldsAndButton(BuildContext context, LoginState state) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[

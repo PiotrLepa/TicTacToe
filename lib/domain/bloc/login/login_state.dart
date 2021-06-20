@@ -22,4 +22,9 @@ class LoginState with _$LoginState {
     PlainLocalizedString? emailError,
     PlainLocalizedString? passwordError,
   }) = Error;
+
+  const factory LoginState.navigateToHome({
+    PlainLocalizedString? emailError,
+    PlainLocalizedString? passwordError,
+  }) = NavigateToHome;
 }

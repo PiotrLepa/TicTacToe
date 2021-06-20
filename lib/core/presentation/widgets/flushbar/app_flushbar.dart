@@ -13,7 +13,7 @@ class AppFlushbar extends Flushbar<void> {
     Widget? icon,
     TextButton? mainButton,
     FlushbarPosition flushbarPosition = FlushbarPosition.BOTTOM,
-    Duration duration = const Duration(seconds: 3),
+    Duration? duration = const Duration(seconds: 3),
     bool isDismissible = true,
     List<BoxShadow>? boxShadows,
   }) : super(

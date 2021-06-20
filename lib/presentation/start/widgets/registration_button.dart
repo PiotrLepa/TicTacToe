@@ -8,7 +8,7 @@ import 'package:tictactoe/domain/bloc/start_page/start_bloc.dart';
 class RegistrationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
+    return TextButton(
       onPressed: () => context
           .read<StartBloc>()
           .add(const StartEvent.onRegistrationClicked()),

@@ -24,4 +24,10 @@ class SinglePlayerGameState with _$SinglePlayerGameState {
 
   const factory SinglePlayerGameState.moveError(PlainLocalizedString message) =
       MoveError;
+
+  const factory SinglePlayerGameState.pop() = Pop;
+
+  const factory SinglePlayerGameState.navigateToGame(
+    DifficultyLevel difficultyLevel,
+  ) = NavigateToGame;
 }

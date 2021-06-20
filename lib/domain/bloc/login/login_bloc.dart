@@ -22,10 +22,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Validator _validator;
   final FirebaseMessaging _firebaseMessaging;
 
-  LoginBloc(this._loginRepository,
-      this._oauthTokensStorage,
-      this._validator,
-      this._firebaseMessaging,) : super(const LoginState.nothing());
+  LoginBloc(
+    this._loginRepository,
+    this._oauthTokensStorage,
+    this._validator,
+    this._firebaseMessaging,
+  ) : super(const LoginState.nothing());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -70,21 +72,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             response.accessToken,
             response.refreshToken,
           );
-          _navigateToHome();
+          yield const LoginState.navigateToHome();
         },
         error: (errorMessage) async* {
           yield LoginState.error(errorMessage);
         },
       );
     }
-  }
-
-  void _navigateToHome() {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-    //   Routes.homeScreen,
-    //   (route) => false,
-    // );
   }
 
   Future<String?> _getDeviceToken() async {

@@ -18,9 +18,11 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   final UserRepository _userRepository;
   final Validator _validator;
 
-  LobbyBloc(this._multiplayerGameRepository,
-      this._userRepository,
-      this._validator,) : super(const LobbyState.loading());
+  LobbyBloc(
+    this._multiplayerGameRepository,
+    this._userRepository,
+    this._validator,
+  ) : super(const LobbyState.loading());
 
   @override
   Stream<LobbyState> mapEventToState(LobbyEvent event) async* {
@@ -69,23 +71,12 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
         },
         success: (response) async* {
           yield const LobbyState.createGameSuccess();
-          _pushGameScreen(response);
+          yield LobbyState.navigateToGame(response);
         },
         error: (errorMessage) async* {
           yield LobbyState.createGameError(errorMessage);
         },
       );
     }
-  }
-
-  void _pushGameScreen(MultiplayerGameCreatedResponse response) {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
-    //   gameId: response.gameId,
-    //   socketDestination: response.socketDestination,
-    //   playerMark: response.yourMark,
-    //   playerType: response.playerType,
-    //   fromNotification: false,
-    // );
   }
 }

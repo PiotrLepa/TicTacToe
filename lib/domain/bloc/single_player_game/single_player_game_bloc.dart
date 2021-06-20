@@ -18,15 +18,20 @@ part 'single_player_game_event.dart';
 part 'single_player_game_state.dart';
 
 @injectable
-class SinglePlayerGameBloc extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
+class SinglePlayerGameBloc
+    extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
   final SinglePlayerGameRepository _gameRepository;
 
   late SinglePlayerGameResponse _gameResponse;
 
-  SinglePlayerGameBloc(this._gameRepository,) : super(const SinglePlayerGameState.nothing());
+  SinglePlayerGameBloc(
+    this._gameRepository,
+  ) : super(const SinglePlayerGameState.nothing());
 
   @override
-  Stream<SinglePlayerGameState> mapEventToState(SinglePlayerGameEvent event,) async* {
+  Stream<SinglePlayerGameState> mapEventToState(
+    SinglePlayerGameEvent event,
+  ) async* {
     yield* event.map(
       createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
@@ -35,9 +40,8 @@ class SinglePlayerGameBloc extends Bloc<SinglePlayerGameEvent, SinglePlayerGameS
   }
 
   Stream<SinglePlayerGameState> _onCreateGame(CreateGame event) async* {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pop();
-    _pushGameScreen(event.difficultyLevel);
+    yield const SinglePlayerGameState.pop();
+    yield SinglePlayerGameState.navigateToGame(event.difficultyLevel);
     yield* _createGame(event.difficultyLevel);
   }
 
@@ -49,7 +53,8 @@ class SinglePlayerGameBloc extends Bloc<SinglePlayerGameEvent, SinglePlayerGameS
     yield* _createGame(event.difficultyLevel);
   }
 
-  Stream<SinglePlayerGameState> _createGame(DifficultyLevel difficultyLevel) async* {
+  Stream<SinglePlayerGameState> _createGame(
+      DifficultyLevel difficultyLevel) async* {
     final request = fetch(_gameRepository.createGame(difficultyLevel));
     await for (final state in request) {
       yield* state.when(
@@ -110,11 +115,4 @@ class SinglePlayerGameBloc extends Bloc<SinglePlayerGameEvent, SinglePlayerGameS
 
   bool _isFieldEmpty(KtList<GameMove> moves, int fieldIndex) =>
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
-
-  void _pushGameScreen(DifficultyLevel difficultyLevel) {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushSinglePlayerGameScreen(
-    //   difficultyLevel: difficultyLevel,
-    // );
-  }
 }

@@ -1,13 +1,17 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class ThemeProvider {
   final bool isDark;
 
-  Color get primaryColor => const Color(0xFFF6CD61);
+  MaterialColor get colorSwatch => Colors.amber;
 
-  Color get primaryColorLight => const Color(0xFFFFEBA1);
+  Color get primaryColor => colorSwatch.shade500;
 
-  Color get primaryColorDark => const Color(0xFFC09C31);
+  Color get primaryColorLight => colorSwatch.shade100;
+
+  Color get primaryColorDark => colorSwatch.shade700;
 
   Color get accentColor => const Color(0xFF667EEA);
 
@@ -31,6 +35,7 @@ class ThemeProvider {
 
   ThemeData getThemeData() {
     return ThemeData(
+      primarySwatch: colorSwatch,
       primaryColor: primaryColor,
       primaryColorLight: primaryColorLight,
       primaryColorDark: primaryColorDark,
@@ -45,6 +50,7 @@ class ThemeProvider {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(primaryColor),
           padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
@@ -53,13 +59,18 @@ class ThemeProvider {
           ),
         ),
       ),
+      textSelectionTheme: TextSelectionThemeData(
+        cursorColor: primaryColor,
+        selectionColor: primaryColorLight,
+        selectionHandleColor: primaryColor,
+      ),
       appBarTheme: AppBarTheme(
         brightness: isDark ? Brightness.dark : Brightness.light,
         iconTheme: IconThemeData(
           color: textColor,
         ),
         textTheme: TextTheme(
-          title: TextStyle(
+          headline6: TextStyle(
             fontSize: 22,
             fontWeight: FontWeight.bold,
             color: textColor,

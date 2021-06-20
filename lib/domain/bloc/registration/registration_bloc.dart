@@ -16,11 +16,15 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   final RegistrationRepository _registrationRepository;
   final Validator _validator;
 
-  RegistrationBloc(this._registrationRepository,
-      this._validator,) : super(const RegistrationState.nothing());
+  RegistrationBloc(
+    this._registrationRepository,
+    this._validator,
+  ) : super(const RegistrationState.nothing());
 
   @override
-  Stream<RegistrationState> mapEventToState(RegistrationEvent event,) async* {
+  Stream<RegistrationState> mapEventToState(
+    RegistrationEvent event,
+  ) async* {
     if (event is Register) {
       yield* _mapRegisterEvent(event);
     }
@@ -31,7 +35,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final usernameValidation = _validator.validateUsername(event.username);
     final passwordValidation = _validator.validatePassword(event.password);
     final repeatedPasswordValidation =
-    _validator.validatePassword(event.repeatedPassword);
+        _validator.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,
@@ -61,17 +65,12 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
         },
         success: (response) async* {
           yield const RegistrationState.showSuccessFlushbar();
-          _navigateToLogin();
+          yield const RegistrationState.navigateToLogin();
         },
         error: (errorMessage) async* {
           yield RegistrationState.error(errorMessage);
         },
       );
     }
-  }
-
-  void _navigateToLogin() {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushNamed(Routes.loginScreen);
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/registration/registration_bloc.dart';
@@ -56,7 +57,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   void _respondForState(RegistrationState state) {
     state.maybeMap(
-      loading: (mappedState) {
+      loading: (_) {
         setState(() {
           _isLoading = true;
         });
@@ -69,13 +70,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
           _isLoading = false;
         });
       },
-      showSuccessFlushbar: (mappedState) {
+      showSuccessFlushbar: (_) {
         getIt.get<FlushbarHelper>().showSuccess(
               message: Strings.registrationScreenRegistrationSuccess,
             );
         setState(() {
           _isLoading = false;
         });
+      },
+      navigateToLogin: (_) {
+        context.router.push(const LoginScreenRoute());
       },
       orElse: () {},
     );
@@ -131,13 +135,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
   void _registerUser() {
     FocusScope.of(context).unfocus();
     context.read<RegistrationBloc>().add(
-      RegistrationEvent.register(
-        username: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
-        repeatedPassword: _repeatedPasswordController.text,
-      ),
-    );
+          RegistrationEvent.register(
+            username: _usernameController.text,
+            email: _emailController.text,
+            password: _passwordController.text,
+            repeatedPassword: _repeatedPasswordController.text,
+          ),
+        );
   }
 
   @override

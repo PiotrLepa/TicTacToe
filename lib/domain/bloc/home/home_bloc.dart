@@ -19,40 +19,39 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Strings.pageSettings,
   ];
 
-  HomeBloc(this._oauthTokensStorage,) : super(
-    HomeState.updatePage(
-      pageTitle: _pageTitles[0],
-      index: 0,
-    ),
-  );
+  HomeBloc(
+    this._oauthTokensStorage,
+  ) : super(
+          HomeState.updatePage(
+            pageTitle: _pageTitles[0],
+            index: 0,
+          ),
+        );
 
   @override
-  Stream<HomeState> mapEventToState(HomeEvent event,) async* {
+  Stream<HomeState> mapEventToState(
+    HomeEvent event,
+  ) async* {
     yield* event.map(
       appStarted: _mapAppStartedEvent,
       onBottomNavigationTapped: _mapOnBottomNavigationTappedEvent,
     );
   }
 
-  Stream<HomeState> _mapAppStartedEvent(AppStarted event,) async* {
+  Stream<HomeState> _mapAppStartedEvent(
+    AppStarted event,
+  ) async* {
     final accessToken = await _oauthTokensStorage.accessToken;
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
     if (accessToken == null || refreshToken == null) {
-      _navigateToLogin();
+      yield const HomeState.navigateToLogin();
     }
   }
 
-  void _navigateToLogin() {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-    //   Routes.startScreen,
-    //   (route) => false,
-    // );
-  }
-
   Stream<HomeState> _mapOnBottomNavigationTappedEvent(
-      OnBottomNavigationTapped event,) async* {
+    OnBottomNavigationTapped event,
+  ) async* {
     yield HomeState.updatePage(
       pageTitle: _pageTitles[event.index],
       index: event.index,

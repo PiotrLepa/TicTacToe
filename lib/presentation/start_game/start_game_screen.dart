@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/util/app_modal_bottom_sheet.dart';
 import 'package:tictactoe/presentation/common/widgets/app_button.dart';
@@ -28,7 +29,7 @@ class StartGameScreen extends StatelessWidget {
             const SizedBox(height: 30),
             AppButton(
               text: context.translate(Strings.multiplayerGameScreenTitle),
-              onPressed: () => _pushLobbyScreen(),
+              onPressed: () => _pushLobbyScreen(context),
             ),
           ],
         ),
@@ -36,8 +37,7 @@ class StartGameScreen extends StatelessWidget {
     );
   }
 
-  void _pushLobbyScreen() {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushLobbyScreen();
+  void _pushLobbyScreen(BuildContext context) {
+    context.router.push(const LobbyScreenRoute());
   }
 }

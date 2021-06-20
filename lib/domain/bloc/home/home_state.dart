@@ -6,4 +6,6 @@ class HomeState with _$HomeState {
     required PlainLocalizedString pageTitle,
     required int index,
   }) = UpdatePage;
+
+  const factory HomeState.navigateToLogin() = NavigateToLogin;
 }

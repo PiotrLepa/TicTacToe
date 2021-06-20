@@ -15,7 +15,7 @@ class AppButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 55,
-      child: RaisedButton(
+      child: ElevatedButton(
         onPressed: onPressed,
         child: Text(text),
       ),

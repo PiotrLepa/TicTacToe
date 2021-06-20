@@ -16,7 +16,7 @@ class GameInvitationButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             onDeclinePressed();
           },
@@ -29,7 +29,7 @@ class GameInvitationButtons extends StatelessWidget {
             ),
           ),
         ),
-        FlatButton(
+        TextButton(
           onPressed: () {
             onPlayPressed();
           },

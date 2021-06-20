@@ -17,5 +17,7 @@ class RegistrationState with _$RegistrationState {
 
   const factory RegistrationState.showSuccessFlushbar() = ShowSuccessFlushbar;
 
+  const factory RegistrationState.navigateToLogin() = NavigateToLogin;
+
   const factory RegistrationState.error(PlainLocalizedString message) = Error;
 }

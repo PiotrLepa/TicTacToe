@@ -23,14 +23,12 @@ class StartBloc extends Bloc<StartEvent, StartState> {
   Stream<StartState> _onRegistrationClicked(
     OnRegistrationClicked event,
   ) async* {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushRegistrationScreen();
+    yield const StartState.navigateToRegistration();
   }
 
   Stream<StartState> _onLoginClicked(
     OnLoginClicked event,
   ) async* {
-    // TODO
-    // ExtendedNavigator.ofRouter<Router>().pushLoginScreen();
+    yield const StartState.navigateToLogin();
   }
 }

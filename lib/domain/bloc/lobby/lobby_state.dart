@@ -16,6 +16,10 @@ class LobbyState with _$LobbyState {
 
   const factory LobbyState.createGameSuccess() = CreateGameSuccess;
 
+  const factory LobbyState.navigateToGame(
+    MultiplayerGameCreatedResponse response,
+  ) = NavigateToGame;
+
   const factory LobbyState.error(
     PlainLocalizedString message,
   ) = Error;
