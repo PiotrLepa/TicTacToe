@@ -3,7 +3,6 @@ import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/error_flushbar.dart';
@@ -20,38 +19,12 @@ class FlushbarHelper {
     _currentFlushbar = null;
   }
 
-  Future<void> showError2({
-    required PlainLocalizedString message,
-    PlainLocalizedString? title,
-  }) =>
-      _showFlushbar(
-        flushbar: ErrorFlushbar(
-          context: _context,
-          title: title,
-          message: message,
-          onDismiss: _onFlushbarDismiss,
-        ),
-      );
-
   Future<void> showError({
-    required RawKeyString message,
-    RawKeyString? title,
-  }) =>
-      _showFlushbar(
-        flushbar: ErrorFlushbar(
-          context: _context,
-          title: title,
-          message: message,
-          onDismiss: _onFlushbarDismiss,
-        ),
-      );
-
-  Future<void> showSuccess2({
     required PlainLocalizedString message,
     PlainLocalizedString? title,
   }) =>
       _showFlushbar(
-        flushbar: SuccessFlushbar(
+        flushbar: ErrorFlushbar(
           context: _context,
           title: title,
           message: message,
@@ -60,8 +33,8 @@ class FlushbarHelper {
       );
 
   Future<void> showSuccess({
-    required RawKeyString message,
-    RawKeyString? title,
+    required PlainLocalizedString message,
+    PlainLocalizedString? title,
   }) =>
       _showFlushbar(
         flushbar: SuccessFlushbar(

@@ -80,7 +80,7 @@ class NetworkErrorHandler {
     //   (route) => false,
     // );
     // getIt<FlushbarHelper>().showError(
-    //   message: KeyString('errorSessionExpired'),
+    //   message: Strings.errorSessionExpired,
     // );
   }
 }

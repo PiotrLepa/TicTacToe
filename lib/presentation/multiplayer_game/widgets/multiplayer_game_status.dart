@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/entity/multiplayer_game_combined_status.dart';
 
 class GameStatus extends StatelessWidget {
@@ -28,19 +28,20 @@ class GameStatus extends StatelessWidget {
   String _getTextForStatus(BuildContext context) {
     switch (status) {
       case MultiplayerGameCombinedStatus.waitingForOpponentToConnect:
-        return context.translateKey('multiplayerGameStatusWaitingForOpponent');
+        return context
+            .translate(Strings.multiplayerGameStatusWaitingForOpponent);
       case MultiplayerGameCombinedStatus.yourTurn:
-        return context.translateKey('multiplayerGameStatusYourTurn');
+        return context.translate(Strings.multiplayerGameStatusYourTurn);
       case MultiplayerGameCombinedStatus.opponentTurn:
-        return context.translateKey('multiplayerGameStatusOpponentTurn');
+        return context.translate(Strings.multiplayerGameStatusOpponentTurn);
       case MultiplayerGameCombinedStatus.won:
-        return context.translateKey('gameScreenStatusWon');
+        return context.translate(Strings.gameScreenStatusWon);
       case MultiplayerGameCombinedStatus.lost:
-        return context.translateKey('gameScreenStatusLost');
+        return context.translate(Strings.gameScreenStatusLost);
       case MultiplayerGameCombinedStatus.draw:
-        return context.translateKey('gameScreenStatusDraw');
+        return context.translate(Strings.gameScreenStatusDraw);
       case MultiplayerGameCombinedStatus.opponentLeftGame:
-        return context.translateKey('multiplayerGameStatusOpponentLeftGame');
+        return context.translate(Strings.multiplayerGameStatusOpponentLeftGame);
     }
   }
 }

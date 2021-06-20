@@ -19,8 +19,9 @@ class SinglePlayerGameState with _$SinglePlayerGameState {
 
   const factory SinglePlayerGameState.draw() = Draw;
 
-  const factory SinglePlayerGameState.error(RawKeyString errorMessage) = Error;
+  const factory SinglePlayerGameState.error(PlainLocalizedString message) =
+      Error;
 
-  const factory SinglePlayerGameState.moveError(RawKeyString errorMessage) =
+  const factory SinglePlayerGameState.moveError(PlainLocalizedString message) =
       MoveError;
 }

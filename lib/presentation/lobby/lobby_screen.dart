@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
 import 'package:tictactoe/presentation/lobby/widgets/lobby_page.dart';
@@ -15,14 +15,14 @@ class LobbyScreen extends StatelessWidget {
           getIt<LobbyBloc>()..add(const LobbyEvent.screenStarted()),
       child: Scaffold(
         appBar: AppBar(
-          title: Text(context.translateKey('lobbyAppBarTitle')),
+          title: Text(context.translate(Strings.lobbyAppBarTitle)),
         ),
         body: BlocConsumer<LobbyBloc, LobbyState>(
           listener: (context, state) {
             state.maybeMap(
               error: (mappedState) {
                 getIt.get<FlushbarHelper>().showError(
-                      message: mappedState.errorMessage,
+                  message: mappedState.message,
                     );
               },
               orElse: () {},
@@ -45,7 +45,7 @@ class LobbyScreen extends StatelessWidget {
               error: (mappedState) {
                 return Center(
                   child: Text(
-                    context.translate(mappedState.errorMessage),
+                    context.translate(mappedState.message),
                   ),
                 );
               },

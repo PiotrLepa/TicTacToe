@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/entity/multiplayer_game_combined_status.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/multiplayer_game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
@@ -39,7 +39,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.translateKey('multiplayerGameScreenTitle')),
+        title: Text(context.translate(Strings.multiplayerGameScreenTitle)),
       ),
       body: BlocProvider<MultiplayerGameBloc>(
         create: (context) => getIt.get<MultiplayerGameBloc>()
@@ -110,15 +110,15 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
             break;
           case MultiplayerGameCombinedStatus.won:
             _showRestartGameFlushBar(
-                context, context.translateKey('gameScreenStatusWon'));
+                context, context.translate(Strings.gameScreenStatusWon));
             break;
           case MultiplayerGameCombinedStatus.lost:
             _showRestartGameFlushBar(
-                context, context.translateKey('gameScreenStatusLost'));
+                context, context.translate(Strings.gameScreenStatusLost));
             break;
           case MultiplayerGameCombinedStatus.draw:
             _showRestartGameFlushBar(
-                context, context.translateKey('gameScreenStatusDraw'));
+                context, context.translate(Strings.gameScreenStatusDraw));
             break;
           case MultiplayerGameCombinedStatus.opponentLeftGame:
             break;
@@ -126,7 +126,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       },
       moveError: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: mappedState.errorMessage,
+          message: mappedState.message,
             );
         setState(() {
           _isFieldLoadingVisible = false;
@@ -134,7 +134,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: mappedState.errorMessage,
+          message: mappedState.message,
             );
       },
       orElse: () {},
@@ -148,7 +148,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
     // TODO
     // getIt.get<FlushbarHelper>().show(
     //   title: message,
-    //   message: context.translateKey('gameScreenPlayAgainQuestion'),
+    //   message: context.translate(Strings.gameScreenPlayAgainQuestion),
     //   isDismissible: false,
     //   infinityDuration: true,
     //   icon: const Icon(
@@ -163,7 +163,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
     //               .add(MultiplayerGameEvent.restartGame());
     //         },
     //         child: Text(
-    //           context.translateKey('gameScreenPlayAgain'),
+    //           context.translate(Strings.gameScreenPlayAgain),
     //           style: TextStyle(color: Theme.of(context).primaryColor),
     //         ),
     //       ),

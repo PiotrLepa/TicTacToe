@@ -1,8 +1,9 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
@@ -13,33 +14,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final OauthTokensStorage _oauthTokensStorage;
 
   static final _pageTitles = [
-    KeyString('pageStartGame'),
-    KeyString('pageGameResults'),
-    KeyString('pageSettings'),
+    Strings.pageStartGame,
+    Strings.pageGameResults,
+    Strings.pageSettings,
   ];
 
-  HomeBloc(
-    this._oauthTokensStorage,
-  ) : super(
-          HomeState.updatePage(
-            pageTitle: _pageTitles[0],
-            index: 0,
-          ),
-        );
+  HomeBloc(this._oauthTokensStorage,) : super(
+    HomeState.updatePage(
+      pageTitle: _pageTitles[0],
+      index: 0,
+    ),
+  );
 
   @override
-  Stream<HomeState> mapEventToState(
-    HomeEvent event,
-  ) async* {
+  Stream<HomeState> mapEventToState(HomeEvent event,) async* {
     yield* event.map(
       appStarted: _mapAppStartedEvent,
       onBottomNavigationTapped: _mapOnBottomNavigationTappedEvent,
     );
   }
 
-  Stream<HomeState> _mapAppStartedEvent(
-    AppStarted event,
-  ) async* {
+  Stream<HomeState> _mapAppStartedEvent(AppStarted event,) async* {
     final accessToken = await _oauthTokensStorage.accessToken;
     final refreshToken = await _oauthTokensStorage.refreshToken;
 
@@ -57,8 +52,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapOnBottomNavigationTappedEvent(
-    OnBottomNavigationTapped event,
-  ) async* {
+      OnBottomNavigationTapped event,) async* {
     yield HomeState.updatePage(
       pageTitle: _pageTitles[event.index],
       index: event.index,

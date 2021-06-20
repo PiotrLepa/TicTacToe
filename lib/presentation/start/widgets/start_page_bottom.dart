@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/presentation/start/widgets/half_circle_shape_painter.dart';
 import 'package:tictactoe/presentation/start/widgets/registration_button.dart';
 
@@ -14,7 +14,7 @@ class StartPageBottom extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Text(
-            context.translateKey('startScreenTitle'),
+            context.translate(Strings.startScreenTitle),
             style: const TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w900,

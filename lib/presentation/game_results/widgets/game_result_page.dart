@@ -5,8 +5,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/game_results/game_results_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/scrollable_widget.dart';
 import 'package:tictactoe/presentation/game_results/game_result_type.dart';
@@ -82,7 +82,7 @@ class _GameResultsState extends State<GameResults>
         _refreshCompleter.complete();
         _refreshCompleter = Completer();
         getIt.get<FlushbarHelper>().showError(
-              message: mappedState.errorMessage,
+          message: mappedState.message,
             );
       },
       orElse: () {},
@@ -106,7 +106,7 @@ class _GameResultsState extends State<GameResults>
         return ScrollableWidget(
           child: Center(
             child: Text(
-              context.translate(mappedState.errorMessage),
+              context.translate(mappedState.message),
             ),
           ),
         );

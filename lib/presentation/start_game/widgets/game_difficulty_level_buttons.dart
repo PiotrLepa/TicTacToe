@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
 class GameDifficultyLevelButtons extends StatelessWidget {
   final titles = [
-    KeyString('difficultyLevelEasy'),
-    KeyString('difficultyLevelMedium'),
-    KeyString('difficultyLevelHard'),
+    Strings.difficultyLevelEasy,
+    Strings.difficultyLevelMedium,
+    Strings.difficultyLevelHard,
   ];
   final colors = const [
     Color(0xFFFF7670),

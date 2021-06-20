@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_status/game_status.dart';
 
@@ -17,7 +17,7 @@ class GameResultItemWinner extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          context.translateKey('gameResultsWinnerLabel'),
+          context.translate(Strings.gameResultsWinnerLabel),
           style: TextStyle(
             fontSize: 18,
             color: ThemeProvider.of(context).textColor,
@@ -40,11 +40,11 @@ class GameResultItemWinner extends StatelessWidget {
       case GameStatus.onGoing:
         throw Exception('On going game in game results');
       case GameStatus.playerWon:
-        return context.translateKey('gameResultsWinnerPlayer');
+        return context.translate(Strings.gameResultsWinnerPlayer);
       case GameStatus.computerWon:
-        return context.translateKey('gameResultsWinnerComputer');
+        return context.translate(Strings.gameResultsWinnerComputer);
       case GameStatus.draw:
-        return context.translateKey('gameResultsWinnerDraw');
+        return context.translate(Strings.gameResultsWinnerDraw);
     }
   }
 }

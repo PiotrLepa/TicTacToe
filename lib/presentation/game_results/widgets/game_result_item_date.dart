@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/date_time/date_time_formatter.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 
 class GameResultItemDate extends StatelessWidget {
@@ -19,7 +19,7 @@ class GameResultItemDate extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          context.translateKey('gameResultsGameTime'),
+          context.translate(Strings.gameResultsGameTime),
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,

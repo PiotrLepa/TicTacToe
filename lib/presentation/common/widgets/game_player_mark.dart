@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
 
@@ -17,7 +17,7 @@ class GamePlayerMark extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          context.translateKey('gameScreenPlayerMark'),
+          context.translate(Strings.gameScreenPlayerMark),
           style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,

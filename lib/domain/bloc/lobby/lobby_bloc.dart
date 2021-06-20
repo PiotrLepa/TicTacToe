@@ -1,7 +1,7 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/multiplayer_game_created_response/multiplayer_game_created_response.dart';
@@ -18,11 +18,9 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   final UserRepository _userRepository;
   final Validator _validator;
 
-  LobbyBloc(
-    this._multiplayerGameRepository,
-    this._userRepository,
-    this._validator,
-  ) : super(const LobbyState.loading());
+  LobbyBloc(this._multiplayerGameRepository,
+      this._userRepository,
+      this._validator,) : super(const LobbyState.loading());
 
   @override
   Stream<LobbyState> mapEventToState(LobbyEvent event) async* {
@@ -55,7 +53,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     final codeValidation = _validator.validateOpponentCode(event.opponentCode);
     if (codeValidation != null) {
       yield LobbyState.renderOpponentCodeInputError(
-        errorKey: codeValidation,
+        message: codeValidation,
       );
     } else {
       yield* _createMultiplayerGame(event.opponentCode);

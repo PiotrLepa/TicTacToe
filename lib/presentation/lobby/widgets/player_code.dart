@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/presentation/common/widgets/app_separator.dart';
 
 class PlayerCode extends StatelessWidget {
@@ -16,7 +16,7 @@ class PlayerCode extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(
-          context.translateKey('lobbyPlayerCodeLabel'),
+          context.translate(Strings.lobbyPlayerCodeLabel),
           style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,

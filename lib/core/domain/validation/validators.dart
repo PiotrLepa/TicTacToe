@@ -1,46 +1,47 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 
 @lazySingleton
 class Validator {
   static final emailRegex = RegExp(
       r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 
-  RawKeyString? validateUsername(String value) {
+  PlainLocalizedString? validateUsername(String value) {
     if (value.isEmpty) {
-      return KeyString('emptyFieldError');
+      return Strings.emptyFieldError;
     } else if (value.length < 3) {
-      return KeyString('usernameTooShortError');
+      return Strings.usernameTooShortError;
     } else {
       return null;
     }
   }
 
-  RawKeyString? validateEmail(String value) {
+  PlainLocalizedString? validateEmail(String value) {
     if (value.isEmpty) {
-      return KeyString('emptyFieldError');
+      return Strings.emptyFieldError;
     } else if (!emailRegex.hasMatch(value)) {
-      return KeyString('invalidEmailError');
+      return Strings.invalidEmailError;
     } else {
       return null;
     }
   }
 
-  RawKeyString? validatePassword(String value) {
+  PlainLocalizedString? validatePassword(String value) {
     if (value.isEmpty) {
-      return KeyString('emptyFieldError');
+      return Strings.emptyFieldError;
     } else if (value.length < 6) {
-      return KeyString('passwordTooShortError');
+      return Strings.passwordTooShortError;
     } else {
       return null;
     }
   }
 
-  RawKeyString? validateOpponentCode(String value) {
+  PlainLocalizedString? validateOpponentCode(String value) {
     if (value.isEmpty) {
-      return KeyString('emptyFieldError');
+      return Strings.emptyFieldError;
     } else if (value.length != 8) {
-      return KeyString('opponentCodeLengthError');
+      return Strings.opponentCodeLengthError;
     } else {
       return null;
     }

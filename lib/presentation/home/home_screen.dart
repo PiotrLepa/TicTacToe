@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/presentation/game_results/game_results_screen.dart';
 import 'package:tictactoe/presentation/start_game/start_game_screen.dart';
@@ -39,19 +39,18 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) =>
-      [
+  List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) => [
         BottomNavigationBarItem(
           icon: const Icon(Icons.gamepad),
-          title: Text(context.translateKey('pageStartGame')),
+          title: Text(context.translate(Strings.pageStartGame)),
         ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.note),
-          title: Text(context.translateKey('pageGameResults')),
+          title: Text(context.translate(Strings.pageGameResults)),
         ),
 //        BottomNavigationBarItem(
 //          icon: Icon(Icons.settings),
-//          title: Text(context.translateKey('pageSettings')), // TODO
+//          title: Text(context.translate(Strings.pageSettings)), // TODO
 //        ),
       ];
 }

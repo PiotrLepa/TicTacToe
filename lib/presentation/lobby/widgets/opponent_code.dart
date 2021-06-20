@@ -1,14 +1,14 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/app_field_form.dart';
 import 'package:tictactoe/presentation/common/widgets/app_separator.dart';
 import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
 
 class OpponentCode extends StatefulWidget {
-  final RawKeyString? inputError;
+  final PlainLocalizedString? inputError;
   final bool isLoading;
 
   const OpponentCode({
@@ -30,7 +30,7 @@ class _OpponentCodeState extends State<OpponentCode> {
       children: <Widget>[
         AppFormField(
           controller: _opponentCodeController,
-          labelText: context.translateKey('lobbyOpponentCodeInputLabel'),
+          labelText: context.translate(Strings.lobbyOpponentCodeInputLabel),
           type: TextInputType.number,
           maxLength: 8,
           errorText: widget.inputError,
@@ -43,8 +43,9 @@ class _OpponentCodeState extends State<OpponentCode> {
                 .read<LobbyBloc>()
                 .add(LobbyEvent.startGamePressed(_opponentCodeController.text));
           },
-          text: context.translateKey('lobbyStartGameButtonLabel'),
-          loadingText: context.translateKey('lobbyStartGameButtonLoadingLabel'),
+          text: context.translate(Strings.lobbyStartGameButtonLabel),
+          loadingText:
+              context.translate(Strings.lobbyStartGameButtonLoadingLabel),
           isLoading: widget.isLoading,
         ),
       ],

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/core/injection/injection.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/bloc/login/login_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/app_field_form.dart';
 import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
@@ -60,20 +60,20 @@ class _LoginPageState extends State<LoginPage> {
         AppFormField(
           controller: _emailController,
           type: TextInputType.emailAddress,
-          errorText: state.emailErrorKey,
-          labelText: context.translateKey('fieldEmailHint'),
+          errorText: state.emailError,
+          labelText: context.translate(Strings.fieldEmailHint),
         ),
         const SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
-          errorText: state.passwordErrorKey,
+          errorText: state.passwordError,
           obscureText: true,
-          labelText: context.translateKey('fieldPasswordHint'),
+          labelText: context.translate(Strings.fieldPasswordHint),
         ),
         const SizedBox(height: 40),
         ProgressButton(
-          text: context.translateKey('loginScreenLoginButton'),
-          loadingText: context.translateKey('loginScreenLoadingButton'),
+          text: context.translate(Strings.loginScreenLoginButton),
+          loadingText: context.translate(Strings.loginScreenLoadingButton),
           isLoading: _isLoading,
           onPressed: () => _loginUser(state),
         ),

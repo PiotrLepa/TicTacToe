@@ -56,7 +56,7 @@ class _LobbyPageState extends State<LobbyPage> {
         return state.maybeMap(
           renderPage: (mappedState) => const OpponentCode(),
           renderOpponentCodeInputError: (mappedState) => OpponentCode(
-            inputError: mappedState.errorKey,
+            inputError: mappedState.message,
           ),
           createGameLoading: (mappedState) => const OpponentCode(
             isLoading: true,
@@ -64,7 +64,7 @@ class _LobbyPageState extends State<LobbyPage> {
           createGameSuccess: (mappedState) => const OpponentCode(),
           createGameError: (mappedState) {
             getIt<FlushbarHelper>().showError(
-              message: mappedState.errorMessage,
+              message: mappedState.message,
             );
             return const OpponentCode();
           },

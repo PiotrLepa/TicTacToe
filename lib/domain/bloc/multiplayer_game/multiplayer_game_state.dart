@@ -16,8 +16,9 @@ class MultiplayerGameState with _$MultiplayerGameState {
 
   const factory MultiplayerGameState.opponentLeftGame() = OpponentLeftGame;
 
-  const factory MultiplayerGameState.error(RawKeyString errorMessage) = Error;
+  const factory MultiplayerGameState.error(PlainLocalizedString message) =
+      Error;
 
-  const factory MultiplayerGameState.moveError(RawKeyString errorMessage) =
+  const factory MultiplayerGameState.moveError(PlainLocalizedString message) =
       MoveError;
 }

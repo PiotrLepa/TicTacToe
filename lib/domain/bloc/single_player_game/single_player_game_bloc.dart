@@ -1,10 +1,10 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
@@ -18,20 +18,15 @@ part 'single_player_game_event.dart';
 part 'single_player_game_state.dart';
 
 @injectable
-class SinglePlayerGameBloc
-    extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
+class SinglePlayerGameBloc extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
   final SinglePlayerGameRepository _gameRepository;
 
   late SinglePlayerGameResponse _gameResponse;
 
-  SinglePlayerGameBloc(
-    this._gameRepository,
-  ) : super(const SinglePlayerGameState.nothing());
+  SinglePlayerGameBloc(this._gameRepository,) : super(const SinglePlayerGameState.nothing());
 
   @override
-  Stream<SinglePlayerGameState> mapEventToState(
-    SinglePlayerGameEvent event,
-  ) async* {
+  Stream<SinglePlayerGameState> mapEventToState(SinglePlayerGameEvent event,) async* {
     yield* event.map(
       createGame: _onCreateGame,
       onFieldTapped: _onFieldTapped,
@@ -54,8 +49,7 @@ class SinglePlayerGameBloc
     yield* _createGame(event.difficultyLevel);
   }
 
-  Stream<SinglePlayerGameState> _createGame(
-      DifficultyLevel difficultyLevel) async* {
+  Stream<SinglePlayerGameState> _createGame(DifficultyLevel difficultyLevel) async* {
     final request = fetch(_gameRepository.createGame(difficultyLevel));
     await for (final state in request) {
       yield* state.when(
@@ -69,8 +63,8 @@ class SinglePlayerGameBloc
             moves: response.moves,
           );
         },
-        error: (errorMessage) async* {
-          yield SinglePlayerGameState.error(errorMessage);
+        error: (message) async* {
+          yield SinglePlayerGameState.error(message);
         },
       );
     }

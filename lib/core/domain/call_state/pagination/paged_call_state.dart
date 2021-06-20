@@ -1,5 +1,5 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 
 part 'paged_call_state.freezed.dart';
 
@@ -9,7 +9,7 @@ class PagedCallState<T> with _$PagedCallState<T> {
 
   const factory PagedCallState.initialSuccess(T result) = InitialSuccess<T>;
 
-  const factory PagedCallState.initialError(RawKeyString errorMessage) =
+  const factory PagedCallState.initialError(PlainLocalizedString errorMessage) =
       InitialError<T>;
 
   const factory PagedCallState.additionalProgress() = AdditionalProgress<T>;
@@ -17,6 +17,6 @@ class PagedCallState<T> with _$PagedCallState<T> {
   const factory PagedCallState.additionalSuccess(T result) =
       AdditionalSuccess<T>;
 
-  const factory PagedCallState.additionalError(RawKeyString errorMessage) =
-      AdditionalError<T>;
+  const factory PagedCallState.additionalError(
+      PlainLocalizedString errorMessage) = AdditionalError<T>;
 }

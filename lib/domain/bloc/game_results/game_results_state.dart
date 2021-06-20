@@ -11,5 +11,5 @@ class GameResultsState with _$GameResultsState {
     required bool hasReachedEnd,
   }) = RenderGameResults;
 
-  const factory GameResultsState.error(RawKeyString errorMessage) = Error;
+  const factory GameResultsState.error(PlainLocalizedString message) = Error;
 }

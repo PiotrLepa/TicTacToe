@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/entity/multiplayer_game_combined_status.dart';
 import 'package:tictactoe/domain/bloc/multiplayer_game/utils/game_status_helper.dart';
@@ -122,9 +120,9 @@ class MultiplayerGameBloc
         progress: () async* {
           yield const MultiplayerGameState.moveLoading();
         },
-        success: (response) async* {},
-        error: (errorMessage) async* {
-          yield MultiplayerGameState.moveError(errorMessage);
+        success: (_) async* {},
+        error: (message) async* {
+          yield MultiplayerGameState.moveError(message);
         },
       );
     }
@@ -143,8 +141,8 @@ class MultiplayerGameBloc
     await for (final state in request) {
       yield* state.when(
         progress: () async* {},
-        success: (response) async* {},
-        error: (errorMessage) async* {},
+        success: (_) async* {},
+        error: (_) async* {},
       );
     }
   }
@@ -164,8 +162,8 @@ class MultiplayerGameBloc
         success: (response) async* {
           _gameId = response.gameId;
         },
-        error: (errorMessage) async* {
-          yield MultiplayerGameState.error(errorMessage);
+        error: (message) async* {
+          yield MultiplayerGameState.error(message);
         },
       );
     }

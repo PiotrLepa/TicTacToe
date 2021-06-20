@@ -3,23 +3,23 @@ part of 'login_bloc.dart';
 @freezed
 class LoginState with _$LoginState {
   const factory LoginState.nothing({
-    RawKeyString? emailErrorKey,
-    RawKeyString? passwordErrorKey,
+    PlainLocalizedString? emailError,
+    PlainLocalizedString? passwordError,
   }) = Nothing;
 
   const factory LoginState.renderInputsErrors({
-    RawKeyString? emailErrorKey,
-    RawKeyString? passwordErrorKey,
+    PlainLocalizedString? emailError,
+    PlainLocalizedString? passwordError,
   }) = RenderInputsErrors;
 
   const factory LoginState.loading({
-    RawKeyString? emailErrorKey,
-    RawKeyString? passwordErrorKey,
+    PlainLocalizedString? emailError,
+    PlainLocalizedString? passwordError,
   }) = Loading;
 
   const factory LoginState.error(
-    RawKeyString errorMessage, {
-    RawKeyString? emailErrorKey,
-    RawKeyString? passwordErrorKey,
+    PlainLocalizedString errorMessage, {
+    PlainLocalizedString? emailError,
+    PlainLocalizedString? passwordError,
   }) = Error;
 }

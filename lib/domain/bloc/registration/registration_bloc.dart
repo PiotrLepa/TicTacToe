@@ -1,7 +1,7 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/registration_request/registration_request.dart';
@@ -16,15 +16,11 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   final RegistrationRepository _registrationRepository;
   final Validator _validator;
 
-  RegistrationBloc(
-    this._registrationRepository,
-    this._validator,
-  ) : super(const RegistrationState.nothing());
+  RegistrationBloc(this._registrationRepository,
+      this._validator,) : super(const RegistrationState.nothing());
 
   @override
-  Stream<RegistrationState> mapEventToState(
-    RegistrationEvent event,
-  ) async* {
+  Stream<RegistrationState> mapEventToState(RegistrationEvent event,) async* {
     if (event is Register) {
       yield* _mapRegisterEvent(event);
     }
@@ -35,7 +31,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final usernameValidation = _validator.validateUsername(event.username);
     final passwordValidation = _validator.validatePassword(event.password);
     final repeatedPasswordValidation =
-        _validator.validatePassword(event.repeatedPassword);
+    _validator.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,

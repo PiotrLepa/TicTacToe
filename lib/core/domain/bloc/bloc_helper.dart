@@ -1,5 +1,4 @@
 import 'package:tictactoe/core/common/logger/logger.dart';
-import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 import 'package:tictactoe/core/domain/call_state/call_state.dart';
 import 'package:tictactoe/core/domain/call_state/pagination/paged_call_state.dart';
 import 'package:tictactoe/core/domain/error/error_translator.dart';
@@ -12,7 +11,7 @@ Stream<CallState<T>> fetch<T>(
     yield const CallState.progress();
     final result = await call;
     yield CallState.success(result);
-  } on ApiException catch (e) {
+  } on Exception catch (e) {
     final errorMessage = getIt.get<ErrorTranslator>().translate(e);
     yield CallState.error(errorMessage);
   } catch (e, s) {
@@ -36,7 +35,7 @@ Stream<PagedCallState<T>> pagedFetch<T>({
     } else {
       yield PagedCallState.additionalSuccess(result);
     }
-  } on ApiException catch (e) {
+  } on Exception catch (e) {
     final errorMessage = getIt.get<ErrorTranslator>().translate(e);
     if (page == 0) {
       yield PagedCallState.initialError(errorMessage);

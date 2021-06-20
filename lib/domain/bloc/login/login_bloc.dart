@@ -1,12 +1,13 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/domain/entity/login_request/login_request.dart';
 import 'package:tictactoe/domain/repository/login_repository.dart';
 
@@ -21,12 +22,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final Validator _validator;
   final FirebaseMessaging _firebaseMessaging;
 
-  LoginBloc(
-    this._loginRepository,
-    this._oauthTokensStorage,
-    this._validator,
-    this._firebaseMessaging,
-  ) : super(const LoginState.nothing());
+  LoginBloc(this._loginRepository,
+      this._oauthTokensStorage,
+      this._validator,
+      this._firebaseMessaging,) : super(const LoginState.nothing());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -40,8 +39,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     final passwordValidation = _validator.validatePassword(event.password);
     if (emailValidation != null || passwordValidation != null) {
       yield LoginState.renderInputsErrors(
-        emailErrorKey: emailValidation,
-        passwordErrorKey: passwordValidation,
+        emailError: emailValidation,
+        passwordError: passwordValidation,
       );
     } else {
       yield* _login(event.email, event.password);
@@ -51,7 +50,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Stream<LoginState> _login(String email, String password) async* {
     final deviceToken = await _getDeviceToken();
     if (deviceToken == null) {
-      yield LoginState.error(KeyString('apiErrorUnknown'));
+      yield const LoginState.error(Strings.apiErrorUnknown);
       return;
     }
     final entity = LoginRequest(

@@ -1,12 +1,12 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/extension/build_context_extension.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 
 class AppFormField extends StatelessWidget {
   final String labelText;
   final TextEditingController? controller;
-  final RawKeyString? errorText;
+  final PlainLocalizedString? errorText;
   final TextInputType? type;
   final int? maxLength;
   final bool obscureText;

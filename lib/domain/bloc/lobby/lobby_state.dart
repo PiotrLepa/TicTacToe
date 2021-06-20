@@ -9,7 +9,7 @@ class LobbyState with _$LobbyState {
   }) = RenderPage;
 
   const factory LobbyState.renderOpponentCodeInputError({
-    required RawKeyString errorKey,
+    required PlainLocalizedString message,
   }) = RenderOpponentCodeInputError;
 
   const factory LobbyState.createGameLoading() = CreateGameLoading;
@@ -17,10 +17,10 @@ class LobbyState with _$LobbyState {
   const factory LobbyState.createGameSuccess() = CreateGameSuccess;
 
   const factory LobbyState.error(
-    RawKeyString errorMessage,
+    PlainLocalizedString message,
   ) = Error;
 
   const factory LobbyState.createGameError(
-    RawKeyString errorMessage,
+    PlainLocalizedString message,
   ) = CreateGameError;
 }
