@@ -9,7 +9,7 @@ class GameResultItem extends StatelessWidget {
 
   const GameResultItem({
     Key? key,
-    this.data,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -21,11 +21,11 @@ class GameResultItem extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          Icon(
+          const Icon(
             Icons.computer,
             size: 40,
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: GameResultItemWinner(
               gameStatus: data.status,

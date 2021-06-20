@@ -6,7 +6,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:kt_dart/collection.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/domain/entity/common/game_mark/game_mark.dart';
@@ -16,7 +15,9 @@ import 'package:tictactoe/domain/entity/single_player_game_response/single_playe
 import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
 part 'single_player_game_bloc.freezed.dart';
+
 part 'single_player_game_event.dart';
+
 part 'single_player_game_state.dart';
 
 @injectable
@@ -26,10 +27,9 @@ class SinglePlayerGameBloc
 
   SinglePlayerGameResponse _gameResponse;
 
-  SinglePlayerGameBloc(this._gameRepository);
-
-  @override
-  SinglePlayerGameState get initialState => SinglePlayerGameState.nothing();
+  SinglePlayerGameBloc(
+    this._gameRepository,
+  ) : super(const SinglePlayerGameState.nothing());
 
   @override
   Stream<SinglePlayerGameState> mapEventToState(

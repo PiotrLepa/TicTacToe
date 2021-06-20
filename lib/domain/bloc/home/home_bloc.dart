@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 
 part 'home_bloc.freezed.dart';
@@ -14,19 +13,20 @@ part 'home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final OauthTokensStorage _oauthTokensStorage;
 
-  final pageTitles = [
+  static final _pageTitles = [
     KeyString("pageStartGame"),
     KeyString("pageGameResults"),
     KeyString("pageSettings"),
   ];
 
-  HomeBloc(this._oauthTokensStorage);
-
-  @override
-  HomeState get initialState => HomeState.updatePage(
-        pageTitle: pageTitles[0],
-        index: 0,
-      );
+  HomeBloc(
+    this._oauthTokensStorage,
+  ) : super(
+          HomeState.updatePage(
+            pageTitle: _pageTitles[0],
+            index: 0,
+          ),
+        );
 
   @override
   Stream<HomeState> mapEventToState(
@@ -57,9 +57,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapOnBottomNavigationTappedEvent(
-      OnBottomNavigationTapped event,) async* {
+    OnBottomNavigationTapped event,
+  ) async* {
     yield HomeState.updatePage(
-      pageTitle: pageTitles[event.index],
+      pageTitle: _pageTitles[event.index],
       index: event.index,
     );
   }

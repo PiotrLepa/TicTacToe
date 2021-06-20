@@ -7,9 +7,7 @@ import 'package:tictactoe/domain/entity/game_invitation/game_invitation.dart';
 import 'package:tictactoe/domain/repository/game_invitation_repository.dart';
 
 part 'game_invitation_bloc.freezed.dart';
-
 part 'game_invitation_event.dart';
-
 part 'game_invitation_state.dart';
 
 @injectable
@@ -19,10 +17,7 @@ class GameInvitationBloc
 
   GameInvitationBloc(
     this._gameInvitationRepository,
-  );
-
-  @override
-  GameInvitationState get initialState => GameInvitationState.nothing();
+  ) : super(GameInvitationState.nothing());
 
   @override
   Stream<GameInvitationState> mapEventToState(

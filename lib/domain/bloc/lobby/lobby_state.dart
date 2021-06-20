@@ -1,7 +1,7 @@
 part of 'lobby_bloc.dart';
 
 @freezed
-abstract class LobbyState with _$LobbyState {
+class LobbyState with _$LobbyState {
   const factory LobbyState.loading() = Loading;
 
   const factory LobbyState.renderPage({

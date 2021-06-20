@@ -5,10 +5,10 @@ import 'package:tictactoe/core/extension/build_context_extension.dart';
 
 class AppFormField extends StatelessWidget {
   final String labelText;
-  final TextEditingController controller;
-  final RawKeyString errorText;
-  final TextInputType type;
-  final int maxLength;
+  final TextEditingController? controller;
+  final RawKeyString? errorText;
+  final TextInputType? type;
+  final int? maxLength;
   final bool obscureText;
 
   const AppFormField({
@@ -27,8 +27,11 @@ class AppFormField extends StatelessWidget {
     return Theme(
       data: Theme.of(context).copyWith(
         accentColor: formColor,
-        textSelectionHandleColor: formColor,
-        textSelectionColor: formColor,
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: formColor,
+          selectionColor: formColor,
+          selectionHandleColor: formColor,
+        ),
       ),
       child: TextFormField(
         controller: controller,
@@ -38,16 +41,16 @@ class AppFormField extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           errorText: _getValidationText(context),
-          border: OutlineInputBorder(),
+          border: const OutlineInputBorder(),
         ),
         obscureText: obscureText,
       ),
     );
   }
 
-  String _getValidationText(BuildContext context) {
+  String? _getValidationText(BuildContext context) {
     if (errorText != null) {
-      return context.translate(errorText);
+      return context.translate(errorText!);
     } else {
       return null;
     }

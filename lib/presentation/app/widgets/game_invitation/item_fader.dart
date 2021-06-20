@@ -5,7 +5,7 @@ class ItemFader extends StatefulWidget {
 
   const ItemFader({
     Key? key,
-    this.child,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -14,15 +14,15 @@ class ItemFader extends StatefulWidget {
 
 class ItemFaderState extends State<ItemFader>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _animation;
+  late AnimationController _controller;
+  late Animation<double> _animation;
   bool _isVisible = false;
 
   @override
   void initState() {
     _controller = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 600),
+      duration: const Duration(milliseconds: 600),
     );
     _animation = CurvedAnimation(
       parent: _controller,
@@ -41,19 +41,19 @@ class ItemFaderState extends State<ItemFader>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
-      child: widget.child,
       builder: (context, child) {
         return Transform.translate(
-          offset: Offset(0, 50 * _animation.value),
+          offset: Offset(0, _animation.value * 50.0),
           child: Visibility(
-              visible: _isVisible,
-              child: Opacity(
-                opacity: _animation.value,
-                child: child,
-              ), h
+            visible: _isVisible,
+            child: Opacity(
+              opacity: _animation.value,
+              child: child,
+            ),
           ),
         );
       },
+      child: widget.child,
     );
   }
 

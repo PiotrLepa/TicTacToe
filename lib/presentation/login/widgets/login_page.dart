@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
   void _loginUser(LoginState state) {
     if (state is Loading) return;
     FocusScope.of(context).unfocus();
-    context.bloc<LoginBloc>().add(
+    context.read<LoginBloc>().add(
           LoginEvent.login(
             email: _emailController.text,
             password: _passwordController.text,

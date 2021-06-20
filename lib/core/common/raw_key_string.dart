@@ -18,5 +18,5 @@ class KeyString extends RawKeyString {
 
   @override
   String get(Map<String, String> localizedStrings) =>
-      localizedStrings[keyString];
+      localizedStrings[keyString]!;
 }

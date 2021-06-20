@@ -19,7 +19,7 @@ class RegistrationButton extends StatelessWidget {
         ),
       ),
       onPressed: () =>
-          context.bloc<StartBloc>().add(StartEvent.onRegistrationClicked()),
+          context.read<StartBloc>().add(StartEvent.onRegistrationClicked()),
     );
   }
 }

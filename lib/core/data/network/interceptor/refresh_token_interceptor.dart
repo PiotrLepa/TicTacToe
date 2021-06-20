@@ -39,12 +39,12 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
         );
         return _refreshTokenRepository.retryRequest(request);
       }).catchError(
-          (error) => Future.error(InternalException.sessionExpired()));
+          (error) => Future.error(const InternalException.sessionExpired()));
 
   Future<LoginResponseModel> _refreshAccessToken() async {
     final refreshToken = await _oauthTokensStorage.refreshToken;
     if (refreshToken == null) {
-      return Future.error(InternalException.sessionExpired());
+      return Future.error(const InternalException.sessionExpired());
     }
     final request = RefreshTokenRequestModel(
       refreshToken: refreshToken,

@@ -81,7 +81,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
           moves: mappedState.moves,
           isLoadingVisible: _isFieldLoadingVisible,
           onFieldTapped: (index) => context
-              .bloc<MultiplayerGameBloc>()
+              .read<MultiplayerGameBloc>()
               .add(MultiplayerGameEvent.onFieldTapped(index)),
         );
       },
@@ -156,7 +156,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
             onPressed: () {
               getIt.get<FlushbarHelper>().dismiss();
               context
-                  .bloc<MultiplayerGameBloc>()
+                  .read<MultiplayerGameBloc>()
                   .add(MultiplayerGameEvent.restartGame());
             },
             child: Text(

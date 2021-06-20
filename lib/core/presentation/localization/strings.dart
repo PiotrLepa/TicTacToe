@@ -6,6 +6,10 @@ import 'package:auto_localized/annotations.dart';
       languageCode: 'pl',
       translationsFilePath: 'lang/pl.json',
     ),
+    AutoLocalizedLocale(
+      languageCode: 'en',
+      translationsFilePath: 'lang/en.json',
+    ),
   ],
 )
 class $Strings {}

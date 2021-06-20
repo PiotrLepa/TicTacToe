@@ -10,9 +10,9 @@ class OauthTokensStorage {
 
   OauthTokensStorage(this._prefs);
 
-  Future<String> get accessToken async => _prefs.getString(_accessTokenKey);
+  Future<String?> get accessToken async => _prefs.getString(_accessTokenKey);
 
-  Future<String> get refreshToken async => _prefs.getString(_refreshTokenKey);
+  Future<String?> get refreshToken async => _prefs.getString(_refreshTokenKey);
 
   void saveTokens(
     String accessToken,
@@ -24,6 +24,6 @@ class OauthTokensStorage {
   }
 
   void clearTokens() {
-    _prefs..setString(_accessTokenKey, null)..setString(_refreshTokenKey, null);
+    _prefs..remove(_accessTokenKey)..remove(_refreshTokenKey);
   }
 }

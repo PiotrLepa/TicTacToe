@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/reqistration_request/registration_request.dart';
@@ -21,10 +20,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
   RegistrationBloc(
     this._registrationRepository,
     this._validator,
-  );
-
-  @override
-  RegistrationState get initialState => RegistrationState.nothing();
+  ) : super(const RegistrationState.nothing());
 
   @override
   Stream<RegistrationState> mapEventToState(
@@ -40,7 +36,7 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     final usernameValidation = _validator.validateUsername(event.username);
     final passwordValidation = _validator.validatePassword(event.password);
     final repeatedPasswordValidation =
-    _validator.validatePassword(event.repeatedPassword);
+        _validator.validatePassword(event.repeatedPassword);
     yield RegistrationState.renderInputsErrors(
       usernameError: usernameValidation,
       emailError: emailValidation,
@@ -66,10 +62,10 @@ class RegistrationBloc extends Bloc<RegistrationEvent, RegistrationState> {
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield RegistrationState.loading();
+          yield const RegistrationState.loading();
         },
         success: (response) async* {
-          yield RegistrationState.showSuccessFlushbar();
+          yield const RegistrationState.showSuccessFlushbar();
           _navigateToLogin();
         },
         error: (errorMessage) async* {

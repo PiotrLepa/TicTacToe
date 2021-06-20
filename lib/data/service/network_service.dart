@@ -26,7 +26,7 @@ class NetworkService extends BaseNetworkService {
     LoginRequestModel request,
   ) =>
       post(
-        "/oauth/token",
+        '/oauth/token',
         data: request,
         contentType: Headers.formUrlEncodedContentType,
         headers: {authorizationHeader: basicKey},
@@ -36,12 +36,12 @@ class NetworkService extends BaseNetworkService {
     RegistrationRequestModel request,
   ) =>
       post(
-        "/user/register",
+        '/user/register',
         data: request,
       );
 
   Future<UserProfileResponseModel> getUserProfile() => get(
-        "/user/profile",
+    '/user/profile',
         secured: true,
       );
 
@@ -49,9 +49,9 @@ class NetworkService extends BaseNetworkService {
     DifficultyLevelModel difficultyLevel,
   ) =>
       post(
-        "/single-player/create",
+        '/single-player/create',
         params: {
-          "difficulty_level": enumToString(difficultyLevel),
+          'difficulty_level': enumToString(difficultyLevel),
         },
         secured: true,
       );
@@ -61,7 +61,7 @@ class NetworkService extends BaseNetworkService {
     int fieldIndex,
   ) =>
       put(
-        "/single-player/$gameId/move/$fieldIndex",
+        '/single-player/$gameId/move/$fieldIndex',
         secured: true,
       );
 
@@ -69,9 +69,9 @@ class NetworkService extends BaseNetworkService {
     String opponentCode,
   ) =>
       post(
-        "/multiplayer/create",
+        '/multiplayer/create',
         params: {
-          "opponent_code": opponentCode,
+          'opponent_code': opponentCode,
         },
         secured: true,
       );
@@ -80,9 +80,9 @@ class NetworkService extends BaseNetworkService {
     int gameId,
   ) =>
       put(
-        "/multiplayer/join",
+        '/multiplayer/join',
         params: {
-          "game_id": gameId,
+          'game_id': gameId.toString(),
         },
         secured: true,
       );
@@ -92,7 +92,7 @@ class NetworkService extends BaseNetworkService {
     int fieldIndex,
   ) =>
       put(
-        "/multiplayer/$gameId/move/$fieldIndex",
+        '/multiplayer/$gameId/move/$fieldIndex',
         secured: true,
       );
 
@@ -100,7 +100,7 @@ class NetworkService extends BaseNetworkService {
     int gameId,
   ) =>
       put(
-        "/multiplayer/$gameId/restart",
+        '/multiplayer/$gameId/restart',
         secured: true,
       );
 
@@ -108,10 +108,10 @@ class NetworkService extends BaseNetworkService {
     int page,
   ) =>
       get(
-        "/game-result/single-player/user",
+        '/game-result/single-player/user',
         params: {
-          "page": page,
-          "size": pagination_elements_per_page,
+          'page': page.toString(),
+          'size': pagination_elements_per_page.toString(),
         },
         secured: true,
       );
@@ -120,10 +120,10 @@ class NetworkService extends BaseNetworkService {
     int page,
   ) =>
       get(
-        "/game-result/single-player/all",
+        '/game-result/single-player/all',
         params: {
-          "page": page,
-          "size": pagination_elements_per_page,
+          'page': page.toString(),
+          'size': pagination_elements_per_page.toString(),
         },
         secured: true,
       );

@@ -36,14 +36,12 @@ class MultiplayerGameBloc
   MultiplayerGameBloc(
     this._gameRepository,
     this._gameStatusCombiner,
-  );
-
-  @override
-  MultiplayerGameState get initialState => MultiplayerGameState.loading();
+  ) : super(const MultiplayerGameState.loading());
 
   @override
   Stream<MultiplayerGameState> mapEventToState(
-      MultiplayerGameEvent event,) async* {
+    MultiplayerGameEvent event,
+  ) async* {
     yield* event.map(
       screenStarted: _mapOnScreenStartedEvent,
       onFieldTapped: _mapOnFieldTappedEvent,
@@ -59,7 +57,8 @@ class MultiplayerGameBloc
   }
 
   Stream<MultiplayerGameState> _mapOnScreenStartedEvent(
-      ScreenStarted event,) async* {
+    ScreenStarted event,
+  ) async* {
     _gameId = event.gameId;
     _playerType = event.playerType;
     _gameSubscription = _getGameEvents(event.socketDestination)
@@ -90,7 +89,8 @@ class MultiplayerGameBloc
   }
 
   Stream<MultiplayerGameState> _mapOnFieldTappedEvent(
-      OnFieldTapped event,) async* {
+    OnFieldTapped event,
+  ) async* {
     if (_gameResponse.status != MultiplayerGameStatus.onGoing ||
         _gameResponse.currentTurn != _playerType ||
         !_isFieldEmpty(_gameResponse.moves, event.index)) {
@@ -100,20 +100,24 @@ class MultiplayerGameBloc
   }
 
   Stream<MultiplayerGameState> _mapOnRestartGameEvent(
-      RestartGame event,) async* {
+    RestartGame event,
+  ) async* {
     yield* _restartGame(_gameId);
   }
 
   Stream<MultiplayerGameEvent> _getGameEvents(
-      String socketDestination,) async* {
+    String socketDestination,
+  ) async* {
     yield* _gameRepository.getGameData(socketDestination).map((game) {
       _gameResponse = game;
       return MultiplayerGameEvent.onNewGameState(game);
     });
   }
 
-  Stream<MultiplayerGameState> _setMove(int gameId,
-      int fieldIndex,) async* {
+  Stream<MultiplayerGameState> _setMove(
+    int gameId,
+    int fieldIndex,
+  ) async* {
     final request = fetch(_gameRepository.setMove(gameId, fieldIndex));
     await for (final state in request) {
       yield* state.when(
@@ -128,11 +132,15 @@ class MultiplayerGameBloc
     }
   }
 
-  bool _isFieldEmpty(KtList<GameMove> moves,
-      int fieldIndex,) =>
+  bool _isFieldEmpty(
+    KtList<GameMove> moves,
+    int fieldIndex,
+  ) =>
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
-  Stream<MultiplayerGameState> _joinToGame(int gameId,) async* {
+  Stream<MultiplayerGameState> _joinToGame(
+    int gameId,
+  ) async* {
     final request = fetch(_gameRepository.joinToGame(gameId));
     await for (final state in request) {
       yield* state.when(

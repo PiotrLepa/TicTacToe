@@ -10,11 +10,11 @@ class LanguageInterceptor extends InterceptorsWrapper {
   LanguageInterceptor(this._localeProvider);
 
   @override
-  Future onRequest(RequestOptions options) {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final headers = options.headers;
     headers[accept_language_header] =
         _localeProvider.currentLocale.languageCode;
 
-    return super.onRequest(options);
+    super.onRequest(options, handler);
   }
 }

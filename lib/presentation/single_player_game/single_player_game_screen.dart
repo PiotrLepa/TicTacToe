@@ -53,7 +53,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
           moves: mappedState.moves,
           isLoadingVisible: _isFieldLoadingVisible,
           onFieldTapped: (index) => context
-              .bloc<SinglePlayerGameBloc>()
+              .read<SinglePlayerGameBloc>()
               .add(SinglePlayerGameEvent.onFieldTapped(index))),
       orElse: () => Container(),
     );
@@ -119,8 +119,8 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       mainButton: FlatButton(
         onPressed: () {
           getIt.get<FlushbarHelper>().dismiss();
-          context.bloc<SinglePlayerGameBloc>().add(
-              SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
+          context.read<SinglePlayerGameBloc>().add(
+                  SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
         },
         child: Text(
           context.translateKey('gameScreenPlayAgain'),

@@ -43,7 +43,7 @@ class GameDifficultyLevelButtons extends StatelessWidget {
           return Align(
             alignment: Alignment.center,
             child: GestureDetector(
-              onTap: () => context.bloc<SinglePlayerGameBloc>().add(
+              onTap: () => context.read<SinglePlayerGameBloc>().add(
                   SinglePlayerGameEvent.createGame(difficultyLevels[index])),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 32),

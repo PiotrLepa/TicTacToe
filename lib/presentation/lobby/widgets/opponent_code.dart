@@ -39,7 +39,7 @@ class _OpponentCodeState extends State<OpponentCode> {
           onPressed: () {
             FocusScope.of(context).unfocus();
             context
-                .bloc<LobbyBloc>()
+                .read<LobbyBloc>()
                 .add(LobbyEvent.startGamePressed(_opponentCodeController.text));
           },
           text: context.translateKey('lobbyStartGameButtonLabel'),

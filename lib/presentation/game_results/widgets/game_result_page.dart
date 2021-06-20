@@ -17,7 +17,7 @@ class GameResults extends StatefulWidget {
 
   const GameResults({
     Key? key,
-    this.type,
+    required this.type,
   }) : super(key: key);
 
   @override
@@ -32,13 +32,13 @@ class _GameResultsState extends State<GameResults>
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-  Completer<void> _refreshCompleter;
+  late Completer<void> _refreshCompleter;
 
   @override
   void initState() {
     super.initState();
     _refreshCompleter = Completer<void>();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
+    SchedulerBinding.instance?.addPostFrameCallback((_) {
       _refreshIndicatorKey.currentState?.show();
     });
   }
@@ -54,7 +54,7 @@ class _GameResultsState extends State<GameResults>
             key: _refreshIndicatorKey,
             onRefresh: () {
               context
-                  .bloc<GameResultsBloc>()
+                  .read<GameResultsBloc>()
                   .add(GameResultsEvent.onRefreshSwiped(widget.type));
               return _refreshCompleter.future;
             },
@@ -72,14 +72,14 @@ class _GameResultsState extends State<GameResults>
   void respondForState(BuildContext context, GameResultsState state) {
     state.maybeMap(
       loading: (mappedState) {
-        _refreshIndicatorKey.currentState.show();
+        _refreshIndicatorKey.currentState?.show();
       },
       renderGameResults: (mappedState) {
-        _refreshCompleter?.complete();
+        _refreshCompleter.complete();
         _refreshCompleter = Completer();
       },
       error: (mappedState) {
-        _refreshCompleter?.complete();
+        _refreshCompleter.complete();
         _refreshCompleter = Completer();
         getIt.get<FlushbarHelper>().showError(
               message: mappedState.errorMessage,
@@ -97,7 +97,7 @@ class _GameResultsState extends State<GameResults>
           hasReachedEnd: mappedState.hasReachedEnd,
           loadMoreItemsCallback: () {
             context
-                .bloc<GameResultsBloc>()
+                .read<GameResultsBloc>()
                 .add(GameResultsEvent.loadMoreItems(widget.type));
           },
         );

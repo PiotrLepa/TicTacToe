@@ -47,13 +47,13 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
               key: _itemFaderKey,
               child: SafeArea(
                 child: GameInvitationWidget(
-                  body: _gameData?.body ?? "",
+                  body: _gameData?.body ?? '',
                   onPlayPressed: () {
-                    _itemFaderKey.currentState.hide();
+                    _itemFaderKey.currentState?.hide();
                     _pushGameScreen();
                   },
                   onDeclinePressed: () {
-                    _itemFaderKey.currentState.hide();
+                    _itemFaderKey.currentState?.hide();
                   },
                 ),
               ),

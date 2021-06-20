@@ -7,9 +7,9 @@ class PagedListView<T> extends StatefulWidget {
   final KtList<T> data;
   final bool hasReachedEnd;
   final VoidCallback loadMoreItemsCallback;
-  final ScrollPhysics physics;
+  final ScrollPhysics? physics;
   final Widget Function(BuildContext, T, int) itemBuilder;
-  final Widget Function(BuildContext, int) separatorBuilder;
+  final Widget Function(BuildContext, int)? separatorBuilder;
 
   PagedListView({
     Key? key,
@@ -42,7 +42,7 @@ class _PagedListViewState extends State<PagedListView> {
       itemCount: calculateListItemCount(),
       itemBuilder: (context, index) {
         if (index >= data.size) {
-          return Center(
+          return const Center(
             child: LoadingIndicator(),
           );
         } else {

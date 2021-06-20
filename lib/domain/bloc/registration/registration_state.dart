@@ -1,16 +1,16 @@
 part of 'registration_bloc.dart';
 
 @freezed
-abstract class RegistrationState with _$RegistrationState {
+class RegistrationState with _$RegistrationState {
   const factory RegistrationState.nothing() = Nothing;
 
   const factory RegistrationState.clearInputsErrors() = ClearInputsErrors;
 
   const factory RegistrationState.renderInputsErrors({
-    RawKeyString usernameError,
-    RawKeyString emailError,
-    RawKeyString passwordError,
-    RawKeyString repeatedPasswordError,
+    RawKeyString? usernameError,
+    RawKeyString? emailError,
+    RawKeyString? passwordError,
+    RawKeyString? repeatedPasswordError,
   }) = RenderInputsErrors;
 
   const factory RegistrationState.loading() = Loading;

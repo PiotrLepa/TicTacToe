@@ -18,7 +18,7 @@ class RefreshTokenNetworkService extends BaseNetworkService {
     RefreshTokenRequestModel request,
   ) =>
       post(
-        "/oauth/token",
+        '/oauth/token',
         data: request,
         contentType: Headers.formUrlEncodedContentType,
         headers: {authorizationHeader: basicKey},

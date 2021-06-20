@@ -17,7 +17,7 @@ class GameBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       crossAxisCount: 3,
       children: _buildBoard(context),
@@ -55,13 +55,13 @@ class GameBoard extends StatelessWidget {
   String _getFieldText(int index) {
     final mark = _getFieldMark(index);
     if (mark == null) {
-      return "";
+      return '';
     }
     switch (mark) {
       case GameMark.x:
-        return "X";
+        return 'X';
       case GameMark.o:
-        return "O";
+        return 'O';
     }
   }
 
@@ -79,7 +79,7 @@ class GameBoard extends StatelessWidget {
     }
   }
 
-  GameMark _getFieldMark(int index) {
+  GameMark? _getFieldMark(int index) {
     final movesForIndex = moves.filter((move) => move.fieldIndex == index);
     return movesForIndex.isNotEmpty() ? movesForIndex.first().mark : null;
   }

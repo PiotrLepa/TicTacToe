@@ -5,35 +5,35 @@ import 'package:tictactoe/core/common/logger/logger.dart';
 @lazySingleton
 class LoggerInterceptor extends InterceptorsWrapper {
   @override
-  Future onRequest(RequestOptions options) {
-    logger.d("Request\n\n"
-        "${options.method} ${options.uri}\n\n"
-        "Headers: ${prettyJson(options.headers)}\n\n"
-        "Json: ${prettyJson(options.data)}");
-    return super.onRequest(options);
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    logger.d('Request\n\n'
+        '${options.method} ${options.uri}\n\n'
+        'Headers: ${prettyJson(options.headers)}\n\n'
+        "${options.data != null ? 'Json: ${prettyJson(options.data)}' : ''}");
+    super.onRequest(options, handler);
   }
 
   @override
-  Future onResponse(Response response) {
-    logger.d("Response\n\n"
-        "${response.statusCode} ${response.request.method} ${response.request.uri}\n\n"
-        "Json: ${prettyJson(response.data)}");
-    return super.onResponse(response);
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    logger.d('Response\n\n'
+        '${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.uri}\n\n'
+        'Json: ${prettyJson(response.data)}');
+    super.onResponse(response, handler);
   }
 
   @override
-  Future onError(DioError err) {
+  void onError(DioError err, ErrorInterceptorHandler handler) {
     final response = err.response;
     if (response != null) {
-      logger.d("Network error\n\n"
-          "${response.statusCode} ${response.request.method} ${response.request.uri}\n\n"
-          "Error: ${err.toString()}\n\n"
-          "Json: ${prettyJson(response.data)}");
+      logger.d('Network error\n\n'
+          '${response.statusCode} ${response.requestOptions.method} ${response.requestOptions.uri}\n\n'
+          'Error: ${err.toString()}\n\n'
+          'Json: ${prettyJson(response.data)}');
     } else {
-      logger.d("Network error\n\n"
-          "Response: null\n\n"
-          "Error: ${err.toString()}\n\n");
+      logger.d('Network error\n\n'
+          'Response: null\n\n'
+          'Error: ${err.toString()}\n\n');
     }
-    return super.onError(err);
+    super.onError(err, handler);
   }
 }

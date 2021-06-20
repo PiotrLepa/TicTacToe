@@ -15,6 +15,8 @@ class ThemeProvider {
 
   Color get textColor => isDark ? Colors.white : Colors.black87;
 
+  Color get textColorInverted => isDark ? Colors.black87 : Colors.white;
+
   Color get markXColor => Color(0xFFFE8A71);
 
   Color get markOColor => Color(0xFF0E9AA7);

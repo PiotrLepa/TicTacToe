@@ -10,7 +10,8 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
   BearerTokenInterceptor(this._oauthTokensStorage);
 
   @override
-  Future onRequest(RequestOptions options) async {
+  Future<void> onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final accessToken = await _oauthTokensStorage.accessToken;
     final headers = options.headers;
 
@@ -19,7 +20,7 @@ class BearerTokenInterceptor extends InterceptorsWrapper {
     }
     _removeInternalSecuredHeader(headers);
 
-    return super.onRequest(options);
+    super.onRequest(options, handler);
   }
 
   static bool _isRequestSecure(Map<String, dynamic> headers) =>

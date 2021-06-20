@@ -28,13 +28,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     this._oauthTokensStorage,
     this._validator,
     this._firebaseMessaging,
-  );
-
-  @override
-  LoginState get initialState => LoginState.nothing(
-        emailErrorKey: null,
-        passwordErrorKey: null,
-      );
+  ) : super(
+          LoginState.nothing(
+            emailErrorKey: null,
+            passwordErrorKey: null,
+          ),
+        );
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -91,7 +90,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   void _navigateToHome() {
     ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
       Routes.homeScreen,
-          (route) => false,
+      (route) => false,
     );
   }
 

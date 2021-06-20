@@ -132,14 +132,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   void _registerUser() {
     FocusScope.of(context).unfocus();
-    context.bloc<RegistrationBloc>().add(
-      RegistrationEvent.register(
-        username: _usernameController.text,
-        email: _emailController.text,
-        password: _passwordController.text,
-        repeatedPassword: _repeatedPasswordController.text,
-      ),
-    );
+    context.read<RegistrationBloc>().add(
+          RegistrationEvent.register(
+            username: _usernameController.text,
+            email: _emailController.text,
+            password: _passwordController.text,
+            repeatedPassword: _repeatedPasswordController.text,
+          ),
+        );
   }
 
   @override

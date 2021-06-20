@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/data/network/network_error_handler.dart';
 import 'package:tictactoe/data/model/login_response/login_response_model.dart';
 import 'package:tictactoe/data/model/refresh_token_request/refresh_token_request_model.dart';
 import 'package:tictactoe/data/service/refresh_token_network_service.dart';

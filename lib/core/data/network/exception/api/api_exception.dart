@@ -15,22 +15,22 @@ class ApiException with _$ApiException implements Exception {
   ]) = Timeout;
 
   const factory ApiException.badRequest(
-    int code,
+    int code, [
     String? printableMessage,
-  ) = BadRequest;
+  ]) = BadRequest;
 
   const factory ApiException.unauthorized(
-    int code,
+    int code, [
     String? printableMessage,
-  ) = Unauthorized;
+  ]) = Unauthorized;
 
   const factory ApiException.internalServerError(
-    int code,
+    int code, [
     String? printableMessage,
-  ) = InternalServerError;
+  ]) = InternalServerError;
 
-  const factory ApiException.unknownError(
+  const factory ApiException.unknownError([
     int? code,
     String? printableMessage,
-  ) = UnknownError;
+  ]) = UnknownError;
 }

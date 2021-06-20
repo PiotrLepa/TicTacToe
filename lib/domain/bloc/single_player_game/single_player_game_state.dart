@@ -1,7 +1,7 @@
 part of 'single_player_game_bloc.dart';
 
 @freezed
-abstract class SinglePlayerGameState with _$SinglePlayerGameState {
+class SinglePlayerGameState with _$SinglePlayerGameState {
   const factory SinglePlayerGameState.nothing() = Nothing;
 
   const factory SinglePlayerGameState.loading() = Loading;

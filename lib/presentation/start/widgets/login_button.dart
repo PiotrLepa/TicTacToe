@@ -20,7 +20,7 @@ class LoginButton extends StatelessWidget {
         ),
       ),
       onPressed: () =>
-          context.bloc<StartBloc>().add(StartEvent.onLoginClicked()),
+          context.read<StartBloc>().add(StartEvent.onLoginClicked()),
     );
   }
 }

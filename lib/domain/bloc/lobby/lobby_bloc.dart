@@ -24,10 +24,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     this._multiplayerGameRepository,
     this._userRepository,
     this._validator,
-  );
-
-  @override
-  LobbyState get initialState => LobbyState.loading();
+  ) : super(LobbyState.loading());
 
   @override
   Stream<LobbyState> mapEventToState(LobbyEvent event) async* {
@@ -42,7 +39,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     await for (final requestState in request) {
       yield* requestState.when(
         progress: () async* {
-          yield LobbyState.loading();
+          yield const LobbyState.loading();
         },
         success: (response) async* {
           yield LobbyState.renderPage(

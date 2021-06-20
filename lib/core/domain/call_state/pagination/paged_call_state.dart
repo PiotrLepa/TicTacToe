@@ -1,12 +1,10 @@
-library paged_call_state;
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 
 part 'paged_call_state.freezed.dart';
 
 @freezed
-abstract class PagedCallState<T> with _$PagedCallState<T> {
+class PagedCallState<T> with _$PagedCallState<T> {
   const factory PagedCallState.initialProgress() = InitialProgress<T>;
 
   const factory PagedCallState.initialSuccess(T result) = InitialSuccess<T>;

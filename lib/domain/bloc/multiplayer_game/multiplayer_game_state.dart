@@ -1,7 +1,7 @@
 part of 'multiplayer_game_bloc.dart';
 
 @freezed
-abstract class MultiplayerGameState with _$MultiplayerGameState {
+class MultiplayerGameState with _$MultiplayerGameState {
   const factory MultiplayerGameState.loading() = Loading;
 
   const factory MultiplayerGameState.moveLoading() = MoveLoading;

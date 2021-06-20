@@ -21,10 +21,9 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     with PaginationHandler<SinglePlayerGameResultResponse> {
   final GameResultRepository _gameResultRepository;
 
-  GameResultsBloc(this._gameResultRepository);
-
-  @override
-  GameResultsState get initialState => GameResultsState.loading();
+  GameResultsBloc(
+    this._gameResultRepository,
+  ) : super(GameResultsState.loading());
 
   @override
   Stream<GameResultsState> mapEventToState(
@@ -59,7 +58,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
     await for (final state in fetchResult) {
       yield* state.maybeWhen(
         initialProgress: () async* {
-          yield GameResultsState.loading();
+          yield const GameResultsState.loading();
         },
         initialSuccess: (response) async* {
           yield* _renderGameResults(response);
@@ -68,7 +67,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
           yield GameResultsState.error(errorMessage);
         },
         additionalProgress: () async* {
-          yield GameResultsState.additionalLoading();
+          yield const GameResultsState.additionalLoading();
         },
         additionalSuccess: (response) async* {
           yield* _renderGameResults(response);
@@ -80,8 +79,8 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
   }
 
   // ignore: missing_return
-  Future<SinglePlayerGameResultPagedResponse> _getFetchCall(int page,
-      GameResultType type) {
+  Future<SinglePlayerGameResultPagedResponse> _getFetchCall(
+      int page, GameResultType type) {
     switch (type) {
       case GameResultType.all:
         return _gameResultRepository.getAllGameResults(page);
@@ -91,7 +90,8 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
   }
 
   Stream<GameResultsState> _renderGameResults(
-      SinglePlayerGameResultPagedResponse response,) async* {
+    SinglePlayerGameResultPagedResponse response,
+  ) async* {
     onPageFetched(
       page: response.pageNumber,
       hasReachedEnd: response.lastPage,
@@ -104,5 +104,6 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
   }
 
   Stream<GameResultsState> _mapGameResultTappedEvent(
-      GameResultTapped event,) async* {}
+    GameResultTapped event,
+  ) async* {}
 }

@@ -1,10 +1,6 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:tictactoe/core/common/flushbar_helper.dart';
 import 'package:tictactoe/core/common/logger/logger.dart';
-import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 import 'package:tictactoe/core/data/network/exception/internal/internal_exception.dart';
@@ -13,61 +9,64 @@ import 'package:tictactoe/core/injection/injection.dart';
 @lazySingleton
 class NetworkErrorHandler {
   Future<T> handleError<T>(dynamic error, StackTrace stackTrace) async {
-    logger.e("NetworkErrorHandler", error, stackTrace);
+    logger.e('NetworkErrorHandler', error, stackTrace);
     if (error is DioError) {
       final apiException = _mapError(error);
       return Future.error(apiException);
     } else {
-      return Future.error(ApiException.unknownError(-1, null));
+      return Future.error(const ApiException.unknownError());
     }
   }
 
   ApiException _mapError(DioError dioError) {
-    final error = dioError.error;
+    final dynamic error = dioError.error;
     if (error is InternalException) {
       if (error is SessionExpired) {
         handleExpiredSession();
       }
       return error.map(
-        noConnection: (mappedState) => ApiException.noConnection(-1, null),
-        sessionExpired: (mappedState) => ApiException.unauthorized(401, null),
+        noConnection: (mappedState) => const ApiException.noConnection(),
+        sessionExpired: (mappedState) => const ApiException.unauthorized(401),
       );
     }
     final response = dioError.response;
     final statusCode = response?.statusCode;
     try {
-      final data = response.data;
+      final data = response!.data as Map<String, dynamic>; // TODO check cast
       convertModelCodePropertyToInt(data);
-      var errorResponse = ErrorResponse.fromJson(data);
+      final errorResponse = ErrorResponse.fromJson(data);
       final exception = _mapToApiException(statusCode, errorResponse);
       return exception;
+      // ignore: avoid_catching_errors
     } on TypeError catch (e) {
       logger.e(e);
-      return ApiException.unknownError(statusCode, null);
+      return ApiException.unknownError(statusCode);
     } catch (e) {
       logger.e(e);
-      return ApiException.unknownError(statusCode, null);
+      return ApiException.unknownError(statusCode);
     }
   }
 
-  dynamic convertModelCodePropertyToInt(data) {
-    final code = data["code"];
+  dynamic convertModelCodePropertyToInt(Map<String, dynamic> data) {
+    // TODO better way?
+    final dynamic code = data['code'];
     if (code is String) {
-      data["code"] = int.parse(data["code"]);
+      data['code'] = int.parse(data['code'] as String);
     }
   }
 
-  ApiException _mapToApiException(int statusCode, ErrorResponse errorResponse) {
+  ApiException _mapToApiException(
+      int? statusCode, ErrorResponse errorResponse) {
     switch (statusCode) {
       case 400:
         return ApiException.badRequest(
-            statusCode, errorResponse.printableMessage);
+            statusCode!, errorResponse.printableMessage);
       case 401:
         return ApiException.unauthorized(
-            statusCode, errorResponse.printableMessage);
+            statusCode!, errorResponse.printableMessage);
       case 500:
         return ApiException.internalServerError(
-            statusCode, errorResponse.printableMessage);
+            statusCode!, errorResponse.printableMessage);
       default:
         return ApiException.unknownError(
             statusCode, errorResponse.printableMessage);
@@ -75,19 +74,22 @@ class NetworkErrorHandler {
   }
 
   void handleExpiredSession() {
-    ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-      Routes.startScreen,
-      (route) => false,
-    );
-    getIt<FlushbarHelper>().showError(
-      message: KeyString('errorSessionExpired'),
-    );
+    // TODO handle session expiration
+    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+    //   Routes.startScreen,
+    //   (route) => false,
+    // );
+    // getIt<FlushbarHelper>().showError(
+    //   message: KeyString('errorSessionExpired'),
+    // );
   }
 }
 
-extension FutureExtension<T> on Future<T> {
-  Future<T> handleNetworkError<T>() {
+extension NetworkErrorHandlerFutureExtension<T> on Future<T> {
+  Future<T> handleNetworkError() {
     final errorHandler = getIt<NetworkErrorHandler>();
-    return catchError((e, s) => errorHandler.handleError<T>(e, s)) as Future<T>;
+    return catchError(
+      (dynamic e, StackTrace s) => errorHandler.handleError<T>(e, s),
+    );
   }
 }

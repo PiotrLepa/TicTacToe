@@ -1,7 +1,7 @@
 part of 'game_results_bloc.dart';
 
 @freezed
-abstract class GameResultsState with _$GameResultsState {
+class GameResultsState with _$GameResultsState {
   const factory GameResultsState.loading() = Loading;
 
   const factory GameResultsState.additionalLoading() = AdditionalLoading;

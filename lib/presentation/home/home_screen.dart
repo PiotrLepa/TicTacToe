@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             currentIndex: state.index,
             selectedItemColor: Theme.of(context).primaryColor,
             onTap: (index) => context
-                .bloc<HomeBloc>()
+                .read<HomeBloc>()
                 .add(HomeEvent.onBottomNavigationTapped(index)),
           ),
         );
