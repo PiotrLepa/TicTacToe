@@ -7,10 +7,11 @@ typedef JsonFactory<T> = T Function(Map<String, dynamic> json);
 
 @lazySingleton
 class ModelDecoder {
+  // TODO return T instead of dynamic
   dynamic decode<T>(dynamic data) {
     // TODO better way to check if T is void?
     if (T.toString() == 'void') {
-      return;
+      return data as T;
     } else if (data is Iterable) {
       return _decodeList<T>(data.toKtList());
     } else if (data is Map) {

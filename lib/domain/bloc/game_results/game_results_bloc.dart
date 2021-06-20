@@ -23,7 +23,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
 
   GameResultsBloc(
     this._gameResultRepository,
-  ) : super(GameResultsState.loading());
+  ) : super(const GameResultsState.loading());
 
   @override
   Stream<GameResultsState> mapEventToState(
@@ -56,7 +56,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
       call: _getFetchCall(page, type),
     );
     await for (final state in fetchResult) {
-      yield* state.maybeWhen(
+      yield* state.when(
         initialProgress: () async* {
           yield const GameResultsState.loading();
         },
@@ -72,8 +72,7 @@ class GameResultsBloc extends Bloc<GameResultsEvent, GameResultsState>
         additionalSuccess: (response) async* {
           yield* _renderGameResults(response);
         },
-        // ignore: missing_return
-        orElse: () {},
+        additionalError: (message) async* {},
       );
     }
   }

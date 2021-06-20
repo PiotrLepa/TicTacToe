@@ -18,13 +18,13 @@ class GamePlayerMark extends StatelessWidget {
       children: <Widget>[
         Text(
           context.translateKey('gameScreenPlayerMark'),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          playerMark == GameMark.x ? "X" : "O",
+          playerMark == GameMark.x ? 'X' : 'O',
           style: TextStyle(
             fontSize: 84,
             fontWeight: FontWeight.bold,

@@ -70,7 +70,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
 
   Widget _buildForState(MultiplayerGameState state, BuildContext context) {
     return state.maybeMap(
-      loading: (mappedState) => Center(child: LoadingIndicator()),
+      loading: (mappedState) => const Center(child: LoadingIndicator()),
       renderWaitingForOpponent: (mappedState) =>
           Center(child: WaitingForOpponent()),
       renderGame: (mappedState) {
@@ -134,36 +134,39 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
       },
       orElse: () {},
     );
   }
 
-  Future<void> _showRestartGameFlushBar(BuildContext context,
-      String message,) async {
-    getIt.get<FlushbarHelper>().show(
-      title: message,
-      message: context.translateKey('gameScreenPlayAgainQuestion'),
-      isDismissible: false,
-      infinityDuration: true,
-      icon: Icon(
-        Icons.videogame_asset,
-        color: Colors.white,
-      ),
-      mainButton: FlatButton(
-            onPressed: () {
-              getIt.get<FlushbarHelper>().dismiss();
-              context
-                  .read<MultiplayerGameBloc>()
-                  .add(MultiplayerGameEvent.restartGame());
-            },
-            child: Text(
-              context.translateKey('gameScreenPlayAgain'),
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            ),
-          ),
-        );
+  Future<void> _showRestartGameFlushBar(
+    BuildContext context,
+    String message,
+  ) async {
+    // TODO
+    // getIt.get<FlushbarHelper>().show(
+    //   title: message,
+    //   message: context.translateKey('gameScreenPlayAgainQuestion'),
+    //   isDismissible: false,
+    //   infinityDuration: true,
+    //   icon: const Icon(
+    //     Icons.videogame_asset,
+    //     color: Colors.white,
+    //   ),
+    //   mainButton: FlatButton(
+    //         onPressed: () {
+    //           getIt.get<FlushbarHelper>().dismiss();
+    //           context
+    //               .read<MultiplayerGameBloc>()
+    //               .add(MultiplayerGameEvent.restartGame());
+    //         },
+    //         child: Text(
+    //           context.translateKey('gameScreenPlayAgain'),
+    //           style: TextStyle(color: Theme.of(context).primaryColor),
+    //         ),
+    //       ),
+    //     );
   }
 }

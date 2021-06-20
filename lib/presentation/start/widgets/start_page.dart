@@ -7,28 +7,26 @@ import 'package:tictactoe/presentation/start/widgets/start_page_bottom.dart';
 class StartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: 100,
+    return Column(
+      children: <Widget>[
+        const SizedBox(
+          height: 100,
+        ),
+        Flexible(
+          flex: 2,
+          child: FractionallySizedBox(
+            widthFactor: 0.8,
+            child: SvgPicture.asset('assets/login_image.svg'),
           ),
-          Flexible(
-            flex: 2,
-            child: FractionallySizedBox(
-              widthFactor: 0.8,
-              child: SvgPicture.asset('assets/login_image.svg'),
-            ),
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          Flexible(
-            flex: 3,
-            child: StartPageBottom(),
-          )
-        ],
-      ),
+        ),
+        const SizedBox(
+          height: 100,
+        ),
+        Flexible(
+          flex: 3,
+          child: StartPageBottom(),
+        )
+      ],
     );
   }
 }

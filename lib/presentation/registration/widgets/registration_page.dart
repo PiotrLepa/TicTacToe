@@ -32,20 +32,18 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
-              condition: (previous, current) =>
+              buildWhen: (previous, current) =>
                   current is Nothing ||
                   current is RenderInputsErrors ||
                   current is ClearInputsErrors,
               builder: (context, state) {
                 return state.maybeMap(
-                  renderInputsErrors: (mappedState) =>
-                      _buildFieldsAndButton(
-                        usernameError: mappedState.usernameError,
-                        emailError: mappedState.emailError,
-                        passwordError: mappedState.passwordError,
-                        repeatedPasswordError: mappedState
-                            .repeatedPasswordError,
-                      ),
+                  renderInputsErrors: (mappedState) => _buildFieldsAndButton(
+                    usernameError: mappedState.usernameError,
+                    emailError: mappedState.emailError,
+                    passwordError: mappedState.passwordError,
+                    repeatedPasswordError: mappedState.repeatedPasswordError,
+                  ),
                   orElse: () => _buildFieldsAndButton(),
                 );
               },
@@ -65,17 +63,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
         setState(() {
           _isLoading = false;
         });
       },
       showSuccessFlushbar: (mappedState) {
         getIt.get<FlushbarHelper>().showSuccess(
-          message:
-          context.translateKey('registrationScreenRegistrationSuccess'),
-        );
+              message:
+                  context.translateKey('registrationScreenRegistrationSuccess'),
+            );
         setState(() {
           _isLoading = false;
         });
@@ -85,10 +83,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   Widget _buildFieldsAndButton({
-    RawKeyString usernameError,
-    RawKeyString emailError,
-    RawKeyString passwordError,
-    RawKeyString repeatedPasswordError,
+    RawKeyString? usernameError,
+    RawKeyString? emailError,
+    RawKeyString? passwordError,
+    RawKeyString? repeatedPasswordError,
   }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -98,28 +96,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
           errorText: usernameError,
           labelText: context.translateKey('fieldUsernameHint'),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         AppFormField(
           controller: _emailController,
           type: TextInputType.emailAddress,
           errorText: emailError,
           labelText: context.translateKey('fieldEmailHint'),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
           errorText: passwordError,
           obscureText: true,
           labelText: context.translateKey('fieldPasswordHint'),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         AppFormField(
           controller: _repeatedPasswordController,
           errorText: repeatedPasswordError,
           obscureText: true,
           labelText: context.translateKey('fieldRepeatPasswordHint'),
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         ProgressButton(
           text: context.translateKey('registrationScreenButton'),
           loadingText: context.translateKey('registrationScreenLoadingButton'),

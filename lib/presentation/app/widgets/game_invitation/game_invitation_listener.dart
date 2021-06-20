@@ -1,7 +1,5 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
 import 'package:tictactoe/domain/entity/game_invitation/game_invitation.dart';
 import 'package:tictactoe/presentation/app/widgets/game_invitation/bouncing_widget.dart';
@@ -33,7 +31,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
             setState(() {
               _gameData = mappedState.data;
             });
-            _itemFaderKey.currentState.show();
+            _itemFaderKey.currentState?.show();
           },
           orElse: () {},
         );
@@ -42,7 +40,7 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
         children: <Widget>[
           widget.child,
           BouncingWidget(
-            duration: Duration(milliseconds: 1000),
+            duration: const Duration(milliseconds: 1000),
             child: ItemFader(
               key: _itemFaderKey,
               child: SafeArea(
@@ -65,12 +63,13 @@ class _GameInvitationListenerState extends State<GameInvitationListener> {
   }
 
   void _pushGameScreen() {
-    ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
-      gameId: _gameData.gameId,
-      socketDestination: _gameData.socketDestination,
-      playerMark: _gameData.yourMark,
-      playerType: _gameData.playerType,
-      fromNotification: true,
-    );
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
+    //   gameId: _gameData.gameId,
+    //   socketDestination: _gameData.socketDestination,
+    //   playerMark: _gameData.yourMark,
+    //   playerType: _gameData.playerType,
+    //   fromNotification: true,
+    // );
   }
 }

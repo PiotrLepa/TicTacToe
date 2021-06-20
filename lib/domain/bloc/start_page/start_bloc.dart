@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -24,12 +23,14 @@ class StartBloc extends Bloc<StartEvent, StartState> {
   Stream<StartState> _onRegistrationClicked(
     OnRegistrationClicked event,
   ) async* {
-    ExtendedNavigator.ofRouter<Router>().pushRegistrationScreen();
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushRegistrationScreen();
   }
 
   Stream<StartState> _onLoginClicked(
     OnLoginClicked event,
   ) async* {
-    ExtendedNavigator.ofRouter<Router>().pushLoginScreen();
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushLoginScreen();
   }
 }

@@ -10,7 +10,7 @@ class GameResultsTabBar extends StatelessWidget {
       labelColor: Theme.of(context).accentColor,
       unselectedLabelColor: Colors.white,
       indicatorSize: TabBarIndicatorSize.label,
-      indicator: BoxDecoration(
+      indicator: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(12),
           topRight: Radius.circular(12),

@@ -17,7 +17,7 @@ class GameInvitationBloc
 
   GameInvitationBloc(
     this._gameInvitationRepository,
-  ) : super(GameInvitationState.nothing());
+  ) : super(const GameInvitationState.nothing());
 
   @override
   Stream<GameInvitationState> mapEventToState(

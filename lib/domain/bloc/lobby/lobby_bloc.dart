@@ -1,9 +1,7 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
 import 'package:tictactoe/core/domain/validation/validators.dart';
 import 'package:tictactoe/domain/entity/multiplayer_game_created_response/multiplayer_game_created_response.dart';
@@ -24,7 +22,7 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     this._multiplayerGameRepository,
     this._userRepository,
     this._validator,
-  ) : super(LobbyState.loading());
+  ) : super(const LobbyState.loading());
 
   @override
   Stream<LobbyState> mapEventToState(LobbyEvent event) async* {
@@ -69,10 +67,10 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
     await for (final requestState in request) {
       yield* requestState.when(
         progress: () async* {
-          yield LobbyState.createGameLoading();
+          yield const LobbyState.createGameLoading();
         },
         success: (response) async* {
-          yield LobbyState.createGameSuccess();
+          yield const LobbyState.createGameSuccess();
           _pushGameScreen(response);
         },
         error: (errorMessage) async* {
@@ -83,12 +81,13 @@ class LobbyBloc extends Bloc<LobbyEvent, LobbyState> {
   }
 
   void _pushGameScreen(MultiplayerGameCreatedResponse response) {
-    ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
-      gameId: response.gameId,
-      socketDestination: response.socketDestination,
-      playerMark: response.yourMark,
-      playerType: response.playerType,
-      fromNotification: false,
-    );
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushMultiplayerGameScreen(
+    //   gameId: response.gameId,
+    //   socketDestination: response.socketDestination,
+    //   playerMark: response.yourMark,
+    //   playerType: response.playerType,
+    //   fromNotification: false,
+    // );
   }
 }

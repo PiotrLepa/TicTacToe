@@ -22,11 +22,11 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider<GameInvitationBloc>(
           create: (context) => getIt.get<GameInvitationBloc>()
-            ..add(GameInvitationEvent.screenStarted()),
+            ..add(const GameInvitationEvent.screenStarted()),
         ),
         BlocProvider<HomeBloc>(
           create: (context) =>
-          getIt.get<HomeBloc>()..add(HomeEvent.appStarted()),
+              getIt.get<HomeBloc>()..add(const HomeEvent.appStarted()),
         ),
         BlocProvider<SinglePlayerGameBloc>(
           create: (context) => getIt.get<SinglePlayerGameBloc>(),

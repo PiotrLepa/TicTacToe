@@ -5,7 +5,7 @@ import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
 import 'package:tictactoe/presentation/common/widgets/app_separator.dart';
 import 'package:tictactoe/presentation/lobby/widgets/opponent_code.dart';
-import 'package:tictactoe/presentation/lobby/widgets/palyer_code.dart';
+import 'package:tictactoe/presentation/lobby/widgets/player_code.dart';
 
 class LobbyPage extends StatefulWidget {
   @override
@@ -33,7 +33,7 @@ class _LobbyPageState extends State<LobbyPage> {
 
   Widget _buildPlayerCode(BuildContext context) {
     return BlocBuilder<LobbyBloc, LobbyState>(
-      condition: (oldState, newState) => newState is RenderPage,
+      buildWhen: (oldState, newState) => newState is RenderPage,
       builder: (context, state) {
         return state.maybeMap(
           renderPage: (mappedState) =>
@@ -46,7 +46,7 @@ class _LobbyPageState extends State<LobbyPage> {
 
   Widget _buildOpponentCode(BuildContext context) {
     return BlocBuilder<LobbyBloc, LobbyState>(
-      condition: (oldState, newState) =>
+      buildWhen: (oldState, newState) =>
           newState is RenderPage ||
           newState is RenderOpponentCodeInputError ||
           newState is CreateGameLoading ||
@@ -54,19 +54,19 @@ class _LobbyPageState extends State<LobbyPage> {
           newState is CreateGameError,
       builder: (context, state) {
         return state.maybeMap(
-          renderPage: (mappedState) => OpponentCode(),
+          renderPage: (mappedState) => const OpponentCode(),
           renderOpponentCodeInputError: (mappedState) => OpponentCode(
             inputError: mappedState.errorKey,
           ),
-          createGameLoading: (mappedState) => OpponentCode(
+          createGameLoading: (mappedState) => const OpponentCode(
             isLoading: true,
           ),
-          createGameSuccess: (mappedState) => OpponentCode(),
+          createGameSuccess: (mappedState) => const OpponentCode(),
           createGameError: (mappedState) {
             getIt<FlushbarHelper>().showError(
               message: mappedState.errorMessage,
             );
-            return OpponentCode();
+            return const OpponentCode();
           },
           orElse: () => Container(),
         );

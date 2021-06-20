@@ -10,6 +10,8 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       color: Colors.white,
+      onPressed: () =>
+          context.read<StartBloc>().add(const StartEvent.onLoginClicked()),
       child: Text(
         context.translateKey('startScreenLoginButton'),
         textAlign: TextAlign.center,
@@ -19,8 +21,6 @@ class LoginButton extends StatelessWidget {
           color: ThemeProvider.of(context).textColorLight,
         ),
       ),
-      onPressed: () =>
-          context.read<StartBloc>().add(StartEvent.onLoginClicked()),
     );
   }
 }

@@ -17,8 +17,8 @@ class BouncingWidget extends StatefulWidget {
 
 class _BouncingWidgetState extends State<BouncingWidget>
     with SingleTickerProviderStateMixin {
-  AnimationController _controller;
-  Animation _animation;
+  late AnimationController _controller;
+  late CurvedAnimation _animation;
 
   @override
   void initState() {
@@ -55,13 +55,13 @@ class _BouncingWidgetState extends State<BouncingWidget>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _animation,
-      child: widget.child,
       builder: (context, child) {
         return Transform.scale(
           scale: 1 - (0.04 * _animation.value),
           child: child,
         );
       },
+      child: widget.child,
     );
   }
 }

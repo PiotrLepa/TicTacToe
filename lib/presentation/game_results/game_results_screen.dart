@@ -14,7 +14,7 @@ class GameResultsScreen extends StatelessWidget {
             color: Theme.of(context).primaryColor,
             child: GameResultsTabBar(),
           ),
-          Expanded(
+          const Expanded(
             child: TabBarView(
               children: <Widget>[
                 GameResults(

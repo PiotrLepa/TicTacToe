@@ -7,11 +7,11 @@ import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level
 
 class GameDifficultyLevelButtons extends StatelessWidget {
   final titles = [
-    KeyString("difficultyLevelEasy"),
-    KeyString("difficultyLevelMedium"),
-    KeyString("difficultyLevelHard"),
+    KeyString('difficultyLevelEasy'),
+    KeyString('difficultyLevelMedium'),
+    KeyString('difficultyLevelHard'),
   ];
-  final colors = [
+  final colors = const [
     Color(0xFFFF7670),
     Color(0xFFEE4035),
     Color(0xFFB4000C),
@@ -28,7 +28,7 @@ class GameDifficultyLevelButtons extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: ListView.separated(
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: titles.length,
         separatorBuilder: (context, index) {
           return Padding(
@@ -41,12 +41,11 @@ class GameDifficultyLevelButtons extends StatelessWidget {
         },
         itemBuilder: (context, index) {
           return Align(
-            alignment: Alignment.center,
             child: GestureDetector(
               onTap: () => context.read<SinglePlayerGameBloc>().add(
                   SinglePlayerGameEvent.createGame(difficultyLevels[index])),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 32),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Text(
                   context.translate(titles[index]),
                   style: TextStyle(

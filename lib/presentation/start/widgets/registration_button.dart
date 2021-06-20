@@ -9,6 +9,9 @@ class RegistrationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlatButton(
+      onPressed: () => context
+          .read<StartBloc>()
+          .add(const StartEvent.onRegistrationClicked()),
       child: Text(
         context.translateKey('startScreenRegistrationButton'),
         textAlign: TextAlign.center,
@@ -18,8 +21,6 @@ class RegistrationButton extends StatelessWidget {
           color: ThemeProvider.of(context).textColorLight,
         ),
       ),
-      onPressed: () =>
-          context.read<StartBloc>().add(StartEvent.onRegistrationClicked()),
     );
   }
 }

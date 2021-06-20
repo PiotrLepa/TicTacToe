@@ -23,25 +23,23 @@ class SinglePlayerGamePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            GamePlayerMark(playerMark: playerMark),
-            Opacity(
-              opacity: isLoadingVisible ? 1 : 0,
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: LoadingIndicator(),
-              ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          GamePlayerMark(playerMark: playerMark),
+          Opacity(
+            opacity: isLoadingVisible ? 1 : 0,
+            child: const SizedBox(
+              width: 50,
+              height: 50,
+              child: LoadingIndicator(),
             ),
-            GameBoard(
-              moves: moves,
-              onFieldTapped: onFieldTapped,
-            ),
-          ],
-        ),
+          ),
+          GameBoard(
+            moves: moves,
+            onFieldTapped: onFieldTapped,
+          ),
+        ],
       ),
     );
   }

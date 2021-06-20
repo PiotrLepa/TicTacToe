@@ -42,11 +42,11 @@ class HomeScreen extends StatelessWidget {
   List<BottomNavigationBarItem> buildBottomNavItems(BuildContext context) =>
       [
         BottomNavigationBarItem(
-          icon: Icon(Icons.gamepad),
+          icon: const Icon(Icons.gamepad),
           title: Text(context.translateKey('pageStartGame')),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.note),
+          icon: const Icon(Icons.note),
           title: Text(context.translateKey('pageGameResults')),
         ),
 //        BottomNavigationBarItem(

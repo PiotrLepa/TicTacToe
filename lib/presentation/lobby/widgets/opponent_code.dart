@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
 import 'package:tictactoe/core/extension/build_context_extension.dart';
 import 'package:tictactoe/domain/bloc/lobby/lobby_bloc.dart';
@@ -7,8 +8,8 @@ import 'package:tictactoe/presentation/common/widgets/app_separator.dart';
 import 'package:tictactoe/presentation/common/widgets/progress_button.dart';
 
 class OpponentCode extends StatefulWidget {
-  final RawKeyString inputError;
-  final isLoading;
+  final RawKeyString? inputError;
+  final bool isLoading;
 
   const OpponentCode({
     Key? key,
@@ -34,7 +35,7 @@ class _OpponentCodeState extends State<OpponentCode> {
           maxLength: 8,
           errorText: widget.inputError,
         ),
-        AppSeparator.vertical(height: 16),
+        const AppSeparator.vertical(height: 16),
         ProgressButton(
           onPressed: () {
             FocusScope.of(context).unfocus();

@@ -12,15 +12,15 @@ class AppSeparator extends StatelessWidget {
 
   const AppSeparator.vertical({
     Key? key,
-    required double height,
+    required this.height,
   })  : width = 0,
-        height = height;
+        super(key: key);
 
   const AppSeparator.horizontal({
     Key? key,
-    required double width,
-  })  : width = width,
-        height = 0;
+    required this.width,
+  })  : height = 0,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {

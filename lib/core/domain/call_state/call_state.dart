@@ -7,7 +7,7 @@ part 'call_state.freezed.dart';
 class CallState<T> with _$CallState<T> {
   const factory CallState.progress() = Progress<T>;
 
-  const factory CallState.success(T? result) = Success<T>;
+  const factory CallState.success(T result) = Success<T>;
 
   const factory CallState.error(RawKeyString errorMessage) = Error<T>;
 }

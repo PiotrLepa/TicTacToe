@@ -9,14 +9,14 @@ Stream<CallState<T>> fetch<T>(
   Future<T> call,
 ) async* {
   try {
-    yield CallState.progress();
+    yield const CallState.progress();
     final result = await call;
     yield CallState.success(result);
   } on ApiException catch (e) {
     final errorMessage = getIt.get<ErrorTranslator>().translate(e);
     yield CallState.error(errorMessage);
   } catch (e, s) {
-    logger.e("bloc helper fetch", e, s);
+    logger.e('bloc helper fetch', e, s);
   }
 }
 
@@ -26,9 +26,9 @@ Stream<PagedCallState<T>> pagedFetch<T>({
 }) async* {
   try {
     if (page == 0) {
-      yield PagedCallState.initialProgress();
+      yield const PagedCallState.initialProgress();
     } else {
-      yield PagedCallState.additionalProgress();
+      yield const PagedCallState.additionalProgress();
     }
     final result = await call;
     if (page == 0) {
@@ -44,6 +44,6 @@ Stream<PagedCallState<T>> pagedFetch<T>({
       yield PagedCallState.additionalError(errorMessage);
     }
   } catch (e, s) {
-    logger.e("bloc helper fetch", e, s);
+    logger.e('bloc helper fetch', e, s);
   }
 }

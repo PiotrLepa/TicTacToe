@@ -11,7 +11,8 @@ class LobbyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<LobbyBloc>(
-      create: (context) => getIt<LobbyBloc>()..add(LobbyEvent.screenStarted()),
+      create: (context) =>
+          getIt<LobbyBloc>()..add(const LobbyEvent.screenStarted()),
       child: Scaffold(
         appBar: AppBar(
           title: Text(context.translateKey('lobbyAppBarTitle')),
@@ -34,7 +35,7 @@ class LobbyScreen extends StatelessWidget {
           builder: (context, state) {
             return state.maybeMap(
               loading: (mappedState) {
-                return Center(
+                return const Center(
                   child: LoadingIndicator(),
                 );
               },

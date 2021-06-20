@@ -2,7 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/data/network/network_error_handler.dart';
 import 'package:tictactoe/data/mapper/model/registration_request_model_mapper.dart';
 import 'package:tictactoe/data/service/network_service.dart';
-import 'package:tictactoe/domain/entity/reqistration_request/registration_request.dart';
+import 'package:tictactoe/domain/entity/registration_request/registration_request.dart';
 import 'package:tictactoe/domain/repository/registration_repository.dart';
 
 @LazySingleton(as: RegistrationRepository)

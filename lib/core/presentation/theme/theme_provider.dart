@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 class ThemeProvider {
   final bool isDark;
 
-  Color get primaryColor => Color(0xFFF6CD61);
+  Color get primaryColor => const Color(0xFFF6CD61);
 
-  Color get primaryColorLight => Color(0xFFFFEBA1);
+  Color get primaryColorLight => const Color(0xFFFFEBA1);
 
-  Color get primaryColorDark => Color(0xFFC09C31);
+  Color get primaryColorDark => const Color(0xFFC09C31);
 
-  Color get accentColor => Color(0xFF667EEA);
+  Color get accentColor => const Color(0xFF667EEA);
 
   Color get textColorLight => Colors.grey;
 
@@ -17,17 +17,17 @@ class ThemeProvider {
 
   Color get textColorInverted => isDark ? Colors.black87 : Colors.white;
 
-  Color get markXColor => Color(0xFFFE8A71);
+  Color get markXColor => const Color(0xFFFE8A71);
 
-  Color get markOColor => Color(0xFF0E9AA7);
+  Color get markOColor => const Color(0xFF0E9AA7);
+
+  ThemeProvider({required this.isDark});
 
   factory ThemeProvider.of(BuildContext context) {
     return ThemeProvider(
       isDark: MediaQuery.of(context).platformBrightness == Brightness.dark,
     );
   }
-
-  ThemeProvider({required this.isDark});
 
   ThemeData getThemeData() {
     return ThemeData(
@@ -37,7 +37,7 @@ class ThemeProvider {
       accentColor: accentColor,
       fontFamily: 'Lato',
       brightness: isDark ? Brightness.dark : Brightness.light,
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         button: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,

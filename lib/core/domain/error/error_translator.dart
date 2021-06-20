@@ -6,15 +6,15 @@ import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 class ErrorTranslator {
   RawKeyString translate(ApiException exception) {
     if (exception.printableMessage != null) {
-      return RawString(exception.printableMessage);
+      return RawString(exception.printableMessage!);
     }
     final keyString = exception.map(
-      noConnection: (mappedState) => "apiErrorNoConnection",
-      badRequest: (mappedState) => "apiErrorBadRequest",
-      unauthorized: (mappedState) => "apiErrorUnauthorized",
-      notFound: (mappedState) => "apiErrorNotFound",
-      internalServerError: (mappedState) => "apiErrorInternalServerError",
-      unknownError: (mappedState) => "apiErrorUnknown",
+      noConnection: (mappedState) => 'apiErrorNoConnection',
+      timeout: (mappedState) => 'apiErrorTimeout',
+      badRequest: (mappedState) => 'apiErrorBadRequest',
+      unauthorized: (mappedState) => 'apiErrorUnauthorized',
+      internalServerError: (mappedState) => 'apiErrorInternalServerError',
+      unknownError: (mappedState) => 'apiErrorUnknown',
     );
     return KeyString(keyString);
   }

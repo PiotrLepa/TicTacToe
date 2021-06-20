@@ -24,10 +24,10 @@ class GameInvitationWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                   color: Colors.grey[700],
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                     Radius.circular(12),
                   ),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Color(0x44FFFFFF),
                       offset: Offset(0, 3),
@@ -36,14 +36,14 @@ class GameInvitationWidget extends StatelessWidget {
                   ]),
               child: Column(
                 children: <Widget>[
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   GameInvitationTitle(title: body),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   GameInvitationButtons(
                     onPlayPressed: onPlayPressed,
                     onDeclinePressed: onDeclinePressed,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                 ],
               ),
             ),

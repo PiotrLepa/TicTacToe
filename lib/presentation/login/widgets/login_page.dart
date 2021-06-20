@@ -63,14 +63,14 @@ class _LoginPageState extends State<LoginPage> {
           errorText: state.emailErrorKey,
           labelText: context.translateKey('fieldEmailHint'),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         AppFormField(
           controller: _passwordController,
           errorText: state.passwordErrorKey,
           obscureText: true,
           labelText: context.translateKey('fieldPasswordHint'),
         ),
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         ProgressButton(
           text: context.translateKey('loginScreenLoginButton'),
           loadingText: context.translateKey('loginScreenLoadingButton'),

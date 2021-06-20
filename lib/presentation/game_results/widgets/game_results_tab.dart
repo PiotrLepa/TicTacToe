@@ -13,10 +13,9 @@ class GameResultTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Tab(
       child: Align(
-        alignment: Alignment.center,
         child: Text(
           text,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),

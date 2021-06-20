@@ -5,7 +5,7 @@ class ScrollableWidget extends StatelessWidget {
 
   const ScrollableWidget({
     Key? key,
-    this.child,
+    required this.child,
   }) : super(key: key);
 
   @override
@@ -13,7 +13,7 @@ class ScrollableWidget extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: constraints.maxHeight,

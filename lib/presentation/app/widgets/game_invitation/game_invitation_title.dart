@@ -13,7 +13,7 @@ class GameInvitationTitle extends StatelessWidget {
     return Text(
       title,
       textAlign: TextAlign.center,
-      style: TextStyle(
+      style: const TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 24,
         color: Colors.white,

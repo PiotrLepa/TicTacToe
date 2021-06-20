@@ -19,10 +19,10 @@ class GameResultList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PagedListView(
+    return PagedListView<SinglePlayerGameResultResponse>(
       data: data,
       hasReachedEnd: hasReachedEnd,
-      physics: AlwaysScrollableScrollPhysics(),
+      physics: const AlwaysScrollableScrollPhysics(),
       itemBuilder: (context, itemData, index) {
         return GameResultItem(data: itemData);
       },

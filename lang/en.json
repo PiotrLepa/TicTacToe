@@ -2,7 +2,7 @@
   "apiErrorNoConnection": "No internet connection",
   "apiErrorBadRequest": "Unknown error",
   "apiErrorUnauthorized": "Lack of access",
-  "apiErrorNotFound": "Not found",
+  "apiErrorTimeout": "Server is not responding",
   "apiErrorInternalServerError": "Internal server error",
   "apiErrorUnknown": "Unknown error",
   "errorSessionExpired": "Session has expired. Log in again",

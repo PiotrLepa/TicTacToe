@@ -1,10 +1,8 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/raw_key_string.dart';
-import 'package:tictactoe/core/common/router/router.gr.dart';
 import 'package:tictactoe/core/common/storage/oauth_tokens_storage.dart';
 import 'package:tictactoe/core/data/network/network_constant.dart';
 import 'package:tictactoe/core/domain/bloc/bloc_helper.dart';
@@ -28,12 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     this._oauthTokensStorage,
     this._validator,
     this._firebaseMessaging,
-  ) : super(
-          LoginState.nothing(
-            emailErrorKey: null,
-            passwordErrorKey: null,
-          ),
-        );
+  ) : super(const LoginState.nothing());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
@@ -71,7 +64,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield LoginState.loading();
+          yield const LoginState.loading();
         },
         success: (response) async* {
           _oauthTokensStorage.saveTokens(
@@ -88,15 +81,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   void _navigateToHome() {
-    ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-      Routes.homeScreen,
-      (route) => false,
-    );
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+    //   Routes.homeScreen,
+    //   (route) => false,
+    // );
   }
 
-  Future<String> _getDeviceToken() async {
+  Future<String?> _getDeviceToken() async {
     return _firebaseMessaging
         .getToken()
-        .catchError((error) => Future.value(null));
+        .catchError((dynamic _) => Future.value(null));
   }
 }

@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,9 +14,7 @@ import 'package:tictactoe/domain/entity/single_player_game_response/single_playe
 import 'package:tictactoe/domain/repository/single_player_game_repository.dart';
 
 part 'single_player_game_bloc.freezed.dart';
-
 part 'single_player_game_event.dart';
-
 part 'single_player_game_state.dart';
 
 @injectable
@@ -25,7 +22,7 @@ class SinglePlayerGameBloc
     extends Bloc<SinglePlayerGameEvent, SinglePlayerGameState> {
   final SinglePlayerGameRepository _gameRepository;
 
-  SinglePlayerGameResponse _gameResponse;
+  late SinglePlayerGameResponse _gameResponse;
 
   SinglePlayerGameBloc(
     this._gameRepository,
@@ -43,7 +40,8 @@ class SinglePlayerGameBloc
   }
 
   Stream<SinglePlayerGameState> _onCreateGame(CreateGame event) async* {
-    ExtendedNavigator.ofRouter<Router>().pop();
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pop();
     _pushGameScreen(event.difficultyLevel);
     yield* _createGame(event.difficultyLevel);
   }
@@ -62,7 +60,7 @@ class SinglePlayerGameBloc
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield SinglePlayerGameState.loading();
+          yield const SinglePlayerGameState.loading();
         },
         success: (response) async* {
           _gameResponse = response;
@@ -87,7 +85,7 @@ class SinglePlayerGameBloc
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield SinglePlayerGameState.moveLoading();
+          yield const SinglePlayerGameState.moveLoading();
         },
         success: (response) async* {
           _gameResponse = response;
@@ -99,13 +97,13 @@ class SinglePlayerGameBloc
             case GameStatus.onGoing:
               break;
             case GameStatus.playerWon:
-              yield SinglePlayerGameState.playerWon();
+              yield const SinglePlayerGameState.playerWon();
               break;
             case GameStatus.computerWon:
-              yield SinglePlayerGameState.computerWon();
+              yield const SinglePlayerGameState.computerWon();
               break;
             case GameStatus.draw:
-              yield SinglePlayerGameState.draw();
+              yield const SinglePlayerGameState.draw();
               break;
           }
         },
@@ -120,8 +118,9 @@ class SinglePlayerGameBloc
       moves.filter((move) => move.fieldIndex == fieldIndex).isEmpty();
 
   void _pushGameScreen(DifficultyLevel difficultyLevel) {
-    ExtendedNavigator.ofRouter<Router>().pushSinglePlayerGameScreen(
-      difficultyLevel: difficultyLevel,
-    );
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushSinglePlayerGameScreen(
+    //   difficultyLevel: difficultyLevel,
+    // );
   }
 }

@@ -99,7 +99,7 @@ abstract class BaseNetworkService {
           queryParameters: params,
           options: Options(
             method: method,
-            headers: _addSecuredHeader(headers ?? {}, secured),
+            headers: _addSecuredHeader(headers ?? <String, dynamic>{}, secured),
             contentType: contentType,
           ));
 

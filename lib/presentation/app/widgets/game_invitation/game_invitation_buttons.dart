@@ -17,6 +17,9 @@ class GameInvitationButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         FlatButton(
+          onPressed: () {
+            onDeclinePressed();
+          },
           child: Text(
             context.translateKey('gameInvitationDeclineButton'),
             style: TextStyle(
@@ -25,24 +28,19 @@ class GameInvitationButtons extends StatelessWidget {
               color: Theme.of(context).accentColor,
             ),
           ),
-          onPressed: () {
-            onDeclinePressed();
-          },
         ),
         FlatButton(
+          onPressed: () {
+            onPlayPressed();
+          },
           child: Text(
             context.translateKey('gameInvitationPlayButton'),
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
-              color: Theme
-                  .of(context)
-                  .primaryColor,
+              color: Theme.of(context).primaryColor,
             ),
           ),
-          onPressed: () {
-            onPlayPressed();
-          },
         )
       ],
     );

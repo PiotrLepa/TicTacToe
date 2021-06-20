@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -14,9 +13,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final OauthTokensStorage _oauthTokensStorage;
 
   static final _pageTitles = [
-    KeyString("pageStartGame"),
-    KeyString("pageGameResults"),
-    KeyString("pageSettings"),
+    KeyString('pageStartGame'),
+    KeyString('pageGameResults'),
+    KeyString('pageSettings'),
   ];
 
   HomeBloc(
@@ -50,10 +49,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void _navigateToLogin() {
-    ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-      Routes.startScreen,
-      (route) => false,
-    );
+    // TODO
+    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
+    //   Routes.startScreen,
+    //   (route) => false,
+    // );
   }
 
   Stream<HomeState> _mapOnBottomNavigationTappedEvent(

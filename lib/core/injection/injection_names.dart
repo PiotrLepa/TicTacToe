@@ -1,2 +1,2 @@
-const defaultNetworkClient = "defaultNetworkClient";
-const refreshTokenNetworkClient = "refreshTokenNetworkClient";
+const defaultNetworkClient = 'defaultNetworkClient';
+const refreshTokenNetworkClient = 'refreshTokenNetworkClient';

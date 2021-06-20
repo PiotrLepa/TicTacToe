@@ -17,12 +17,12 @@ class PlayerCode extends StatelessWidget {
       children: <Widget>[
         Text(
           context.translateKey('lobbyPlayerCodeLabel'),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
           ),
         ),
-        AppSeparator.vertical(height: 12),
+        const AppSeparator.vertical(height: 12),
         Text(
           playerCode,
           style: TextStyle(

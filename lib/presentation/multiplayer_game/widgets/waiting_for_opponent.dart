@@ -12,8 +12,8 @@ class WaitingForOpponent extends StatelessWidget {
         AppSeparator.vertical(
           height: MediaQuery.of(context).size.height / 4,
         ),
-        LoadingIndicator(size: 60),
-        AppSeparator.vertical(height: 32),
+        const LoadingIndicator(size: 60),
+        const AppSeparator.vertical(height: 32),
         Text(
           context.translateKey('multiplayerGameWaitingForOpponent'),
           textAlign: TextAlign.center,

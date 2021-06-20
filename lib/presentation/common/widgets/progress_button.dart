@@ -36,8 +36,8 @@ class ProgressButton extends StatelessWidget {
   List<Widget> _buildLoadingWidgets() {
     return [
       _buildText(),
-      SizedBox(width: 20),
-      SizedBox(
+      const SizedBox(width: 20),
+      const SizedBox(
         height: 20,
         width: 20,
         child: CircularProgressIndicator(
@@ -50,7 +50,7 @@ class ProgressButton extends StatelessWidget {
   Text _buildText() {
     return Text(
       isLoading ? loadingText : text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
       ),
     );

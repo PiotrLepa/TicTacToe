@@ -6,5 +6,5 @@ const securedHeaderKey = 'secured';
 const bearerPrefix = 'Bearer';
 const oauthGrantTypePassword = 'password';
 const oauthGrantTypeRefreshToken = 'refresh_token';
-const accept_language_header = 'accept-language';
-const pagination_elements_per_page = 10;
+const languageHeader = 'accept-language';
+const paginationElementsPerPage = 10;

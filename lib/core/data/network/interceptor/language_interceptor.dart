@@ -12,8 +12,7 @@ class LanguageInterceptor extends InterceptorsWrapper {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final headers = options.headers;
-    headers[accept_language_header] =
-        _localeProvider.currentLocale.languageCode;
+    headers[languageHeader] = _localeProvider.currentLocale.languageCode;
 
     super.onRequest(options, handler);
   }

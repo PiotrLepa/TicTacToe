@@ -11,7 +11,7 @@ import 'package:tictactoe/data/model/multiplayer_game_response/multiplayer_game_
 
 @lazySingleton
 class StompService {
-  static final _multiplayerSocket = webSocketUrl + "/multiplayer-socket";
+  static final _multiplayerSocket = '$webSocketUrl/multiplayer-socket';
   final ModelDecoder _modelDecoder;
 
   StompService(
@@ -26,7 +26,7 @@ class StompService {
       client.subscribe(
         destination: '/game-status/$socketDestination',
         callback: (frame) {
-          logger.d("game status: " + frame.body);
+          logger.d('game status: ' + frame.body);
           final model = _modelDecoder
               .decode<MultiplayerGameResponseModel>(jsonDecode(frame.body));
           _controller.add(model);
@@ -53,7 +53,7 @@ class StompService {
   void _pingPeriodicallyToSocket(StompClient client) {
     // client loses connection after 1 minute of inactivity
     // so we need to periodically send ping to web socket to keep it alive
-    Timer.periodic(Duration(seconds: 30), (timer) {
+    Timer.periodic(const Duration(seconds: 30), (timer) {
       client.send(
         destination: _multiplayerSocket,
         body: 'Ping $_multiplayerSocket',

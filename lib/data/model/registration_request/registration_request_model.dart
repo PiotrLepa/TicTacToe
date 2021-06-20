@@ -18,5 +18,6 @@ class RegistrationRequestModel
   factory RegistrationRequestModel.fromJson(Map<String, dynamic> json) =>
       _$RegistrationRequestModelFromJson(json);
 
+  @override
   Map<String, dynamic> toJson();
 }

@@ -17,9 +17,7 @@ import 'package:tictactoe/domain/entity/multiplayer_game_response/multiplayer_ga
 import 'package:tictactoe/domain/repository/multiplayer_game_repository.dart';
 
 part 'multiplayer_game_bloc.freezed.dart';
-
 part 'multiplayer_game_event.dart';
-
 part 'multiplayer_game_state.dart';
 
 @injectable
@@ -66,10 +64,10 @@ class MultiplayerGameBloc
 
     if (event.fromNotification) {
       // make sure STOMP client has enough time to connect with server socket
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 2));
       yield* _joinToGame(event.gameId);
     } else {
-      yield MultiplayerGameState.renderWaitingForOpponent();
+      yield const MultiplayerGameState.renderWaitingForOpponent();
     }
   }
 
@@ -122,7 +120,7 @@ class MultiplayerGameBloc
     await for (final state in request) {
       yield* state.when(
         progress: () async* {
-          yield MultiplayerGameState.moveLoading();
+          yield const MultiplayerGameState.moveLoading();
         },
         success: (response) async* {},
         error: (errorMessage) async* {

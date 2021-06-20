@@ -45,7 +45,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
 
   Widget _buildForState(SinglePlayerGameState state, BuildContext context) {
     return state.maybeMap(
-      loading: (mappedState) => Center(
+      loading: (mappedState) => const Center(
         child: LoadingIndicator(),
       ),
       renderGame: (mappedState) => SinglePlayerGamePage(
@@ -91,16 +91,16 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       },
       moveError: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
         setState(() {
           _isFieldLoadingVisible = false;
         });
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-          message: mappedState.errorMessage,
-        );
+              message: mappedState.errorMessage,
+            );
       },
       orElse: () {},
     );
@@ -108,27 +108,25 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
 
   Future<void> _showRestartGameFlushBar(String message) async {
     getIt.get<FlushbarHelper>().show(
-      title: message,
-      message: context.translateKey('gameScreenPlayAgainQuestion'),
-      isDismissible: false,
-      infinityDuration: true,
-      icon: Icon(
-        Icons.videogame_asset,
-        color: Colors.white,
-      ),
-      mainButton: FlatButton(
-        onPressed: () {
-          getIt.get<FlushbarHelper>().dismiss();
-          context.read<SinglePlayerGameBloc>().add(
+          title: message,
+          message: context.translateKey('gameScreenPlayAgainQuestion'),
+          isDismissible: false,
+          infinityDuration: true,
+          icon: const Icon(
+            Icons.videogame_asset,
+            color: Colors.white,
+          ),
+          mainButton: FlatButton(
+            onPressed: () {
+              getIt.get<FlushbarHelper>().dismiss();
+              context.read<SinglePlayerGameBloc>().add(
                   SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
-        },
-        child: Text(
-          context.translateKey('gameScreenPlayAgain'),
-          style: TextStyle(color: Theme
-              .of(context)
-              .primaryColor),
-        ),
-      ),
-    );
+            },
+            child: Text(
+              context.translateKey('gameScreenPlayAgain'),
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        );
   }
 }

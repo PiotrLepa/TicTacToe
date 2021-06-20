@@ -2,7 +2,7 @@
   "apiErrorNoConnection": "Brak połączenia z internetem",
   "apiErrorBadRequest": "Nieznany błąd",
   "apiErrorUnauthorized": "Brak dostępu",
-  "apiErrorNotFound": "Nie znaleziono",
+  "apiErrorTimeout": "Serwer nie odpowiada",
   "apiErrorInternalServerError": "Wewnętrzny błąd serwera",
   "apiErrorUnknown": "Nieznany błąd",
   "errorSessionExpired": "Sesja wygasła. Zaloguj sie ponownie",
