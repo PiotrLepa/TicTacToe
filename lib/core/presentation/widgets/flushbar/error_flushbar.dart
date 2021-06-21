@@ -1,5 +1,4 @@
 import 'package:auto_localized/auto_localized.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/widgets/flushbar/app_flushbar.dart';

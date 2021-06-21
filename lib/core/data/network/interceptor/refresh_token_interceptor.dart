@@ -19,6 +19,12 @@ class RefreshTokenInterceptor extends InterceptorsWrapper {
 
   @override
   void onError(DioError err, ErrorInterceptorHandler handler) {
+    return handler.reject(
+      DioError(
+        requestOptions: err.requestOptions,
+        error: const InternalException.sessionExpired(),
+      ),
+    );
     if (err.response?.statusCode != 401) {
       super.onError(err, handler);
     } else {

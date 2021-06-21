@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/presentation/common/widgets/app_separator.dart';

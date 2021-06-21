@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tictactoe/core/common/router/app_router.gr.dart';
+import 'package:tictactoe/core/common/locale_provider.dart';
 import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart';
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
+import 'package:tictactoe/domain/bloc/session/session_bloc.dart';
 
-import '../../core/common/locale_provider.dart';
+import 'widgets/session_listener.dart';
 
 class App extends StatelessWidget {
   final _localeProvider = getIt<LocaleProvider>();
@@ -19,6 +20,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<SessionBloc>(
+          lazy: false,
+          create: (context) => getIt.get<SessionBloc>(),
+        ),
         BlocProvider<GameInvitationBloc>(
           create: (context) => getIt.get<GameInvitationBloc>()
             ..add(const GameInvitationEvent.screenStarted()),
@@ -37,7 +42,7 @@ class App extends StatelessWidget {
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
         builder: (context, child) {
           _localeProvider.init(context);
-          return child!;
+          return SessionListener(child: child!);
         },
       ),
     );

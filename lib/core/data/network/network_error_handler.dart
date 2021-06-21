@@ -4,10 +4,15 @@ import 'package:tictactoe/core/common/logger/logger.dart';
 import 'package:tictactoe/core/data/model/error/error_response.dart';
 import 'package:tictactoe/core/data/network/exception/api/api_exception.dart';
 import 'package:tictactoe/core/data/network/exception/internal/internal_exception.dart';
+import 'package:tictactoe/core/data/network/session_expiration_handler.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 
 @lazySingleton
 class NetworkErrorHandler {
+  final SessionExpirationHandler _sessionExpirationHandler;
+
+  NetworkErrorHandler(this._sessionExpirationHandler);
+
   Future<T> handleError<T>(dynamic error, StackTrace stackTrace) async {
     logger.e('NetworkErrorHandler', error, stackTrace);
     if (error is DioError) {
@@ -21,12 +26,12 @@ class NetworkErrorHandler {
   ApiException _mapError(DioError dioError) {
     final dynamic error = dioError.error;
     if (error is InternalException) {
-      if (error is SessionExpired) {
-        handleExpiredSession();
-      }
       return error.map(
         noConnection: (mappedState) => const ApiException.noConnection(),
-        sessionExpired: (mappedState) => const ApiException.unauthorized(401),
+        sessionExpired: (mappedState) {
+          _sessionExpirationHandler.sessionExpired();
+          return const ApiException.unauthorized(401);
+        },
       );
     }
     final response = dioError.response;
@@ -55,8 +60,7 @@ class NetworkErrorHandler {
     }
   }
 
-  ApiException _mapToApiException(
-      int? statusCode, ErrorResponse errorResponse) {
+  ApiException _mapToApiException(int? statusCode, ErrorResponse errorResponse) {
     switch (statusCode) {
       case 400:
         return ApiException.badRequest(
@@ -71,17 +75,6 @@ class NetworkErrorHandler {
         return ApiException.unknownError(
             statusCode, errorResponse.printableMessage);
     }
-  }
-
-  void handleExpiredSession() {
-    // TODO handle session expiration
-    // ExtendedNavigator.ofRouter<Router>().pushNamedAndRemoveUntil(
-    //   Routes.startScreen,
-    //   (route) => false,
-    // );
-    // getIt<FlushbarHelper>().showError(
-    //   message: Strings.errorSessionExpired,
-    // );
   }
 }
 

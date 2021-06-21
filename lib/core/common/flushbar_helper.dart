@@ -1,5 +1,4 @@
 import 'package:auto_localized/auto_localized.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tictactoe/core/common/router/routing.dart';

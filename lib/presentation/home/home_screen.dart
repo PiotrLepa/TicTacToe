@@ -26,10 +26,7 @@ class HomeScreen extends StatelessWidget {
   void _respondForState(BuildContext context, HomeState state) {
     state.maybeMap(
       navigateToLogin: (_) {
-        context.router.pushAndPopUntil(
-          const LoginScreenRoute(),
-          predicate: (route) => false,
-        );
+        context.router.replaceAll([const LoginScreenRoute()]);
       },
       orElse: () {},
     );
