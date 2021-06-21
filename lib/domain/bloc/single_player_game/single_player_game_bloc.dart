@@ -40,8 +40,6 @@ class SinglePlayerGameBloc
   }
 
   Stream<SinglePlayerGameState> _onCreateGame(CreateGame event) async* {
-    yield const SinglePlayerGameState.pop();
-    yield SinglePlayerGameState.navigateToGame(event.difficultyLevel);
     yield* _createGame(event.difficultyLevel);
   }
 
@@ -54,7 +52,8 @@ class SinglePlayerGameBloc
   }
 
   Stream<SinglePlayerGameState> _createGame(
-      DifficultyLevel difficultyLevel) async* {
+    DifficultyLevel difficultyLevel,
+  ) async* {
     final request = fetch(_gameRepository.createGame(difficultyLevel));
     await for (final state in request) {
       yield* state.when(

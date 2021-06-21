@@ -29,10 +29,10 @@ class PagedListView<T> extends StatefulWidget {
   }
 
   @override
-  _PagedListViewState createState() => _PagedListViewState();
+  _PagedListViewState createState() => _PagedListViewState<T>();
 }
 
-class _PagedListViewState extends State<PagedListView> {
+class _PagedListViewState<T> extends State<PagedListView<T>> {
   @override
   Widget build(BuildContext context) {
     final data = widget.data;

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
-import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 
 class GameDifficultyLevelButtons extends StatelessWidget {
@@ -20,6 +18,13 @@ class GameDifficultyLevelButtons extends StatelessWidget {
     DifficultyLevel.medium,
     DifficultyLevel.hard,
   ];
+
+  final void Function(DifficultyLevel)? onTap;
+
+  GameDifficultyLevelButtons({
+    Key? key,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +46,7 @@ class GameDifficultyLevelButtons extends StatelessWidget {
         itemBuilder: (context, index) {
           return Align(
             child: GestureDetector(
-              onTap: () => context.read<SinglePlayerGameBloc>().add(
-                  SinglePlayerGameEvent.createGame(difficultyLevels[index])),
+              onTap: () => onTap?.call(difficultyLevels[index]),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: Text(

@@ -16,8 +16,8 @@ abstract class BaseNetworkService {
   Future<T> get<T>(
     String path, {
     Serializable? data,
-    Map<String, String>? params,
-    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? headers,
     String? contentType,
     bool secured = false,
   }) =>
@@ -34,8 +34,8 @@ abstract class BaseNetworkService {
   Future<KtList<T>> getList<T>(
     String path, {
     Serializable? data,
-    Map<String, String>? params,
-    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? headers,
     String? contentType,
     bool secured = false,
   }) =>
@@ -52,8 +52,8 @@ abstract class BaseNetworkService {
   Future<T> post<T>(
     String path, {
     Serializable? data,
-    Map<String, String>? params,
-    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? headers,
     String? contentType,
     bool secured = false,
   }) =>
@@ -70,8 +70,8 @@ abstract class BaseNetworkService {
   Future<T> put<T>(
     String path, {
     Serializable? data,
-    Map<String, String>? params,
-    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? headers,
     String? contentType,
     bool secured = false,
   }) =>
@@ -89,8 +89,8 @@ abstract class BaseNetworkService {
     String method,
     String path, {
     Serializable? data,
-    Map<String, String>? params,
-    Map<String, String>? headers,
+    Map<String, dynamic>? params,
+    Map<String, dynamic>? headers,
     String? contentType,
     bool secured = false,
   }) async =>
@@ -104,7 +104,9 @@ abstract class BaseNetworkService {
           ));
 
   Map<String, dynamic> _addSecuredHeader(
-      Map<String, dynamic> headers, bool secured) {
+    Map<String, dynamic> headers,
+    bool secured,
+  ) {
     headers[securedHeaderKey] = secured;
     return headers;
   }

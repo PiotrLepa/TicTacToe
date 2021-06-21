@@ -32,7 +32,8 @@ class _LobbyPageState extends State<LobbyPage> {
   }
 
   Widget _buildPlayerCode(BuildContext context) {
-    return BlocBuilder<LobbyBloc, LobbyState>(
+    return BlocConsumer<LobbyBloc, LobbyState>(
+      listener: _respondForState,
       buildWhen: (oldState, newState) => newState is RenderPage,
       builder: (context, state) {
         return state.maybeMap(
@@ -62,15 +63,21 @@ class _LobbyPageState extends State<LobbyPage> {
             isLoading: true,
           ),
           createGameSuccess: (mappedState) => const OpponentCode(),
-          createGameError: (mappedState) {
-            getIt<FlushbarHelper>().showError(
-              message: mappedState.message,
-            );
-            return const OpponentCode();
-          },
+          createGameError: (mappedState) => const OpponentCode(),
           orElse: () => Container(),
         );
       },
+    );
+  }
+
+  void _respondForState(BuildContext context, LobbyState state) {
+    state.maybeMap(
+      createGameError: (mappedState) {
+        getIt<FlushbarHelper>().showError(
+          message: mappedState.message,
+        );
+      },
+      orElse: () {},
     );
   }
 }

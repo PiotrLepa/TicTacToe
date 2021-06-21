@@ -14,23 +14,11 @@ class SuccessFlushbar extends AppFlushbar {
     required VoidCallback onDismiss,
     PlainLocalizedString? title,
   }) : super(
-    key: key,
-    title: Text(
-      context.translate(title ?? Strings.successFlushbarTitle),
-      style: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 16,
-        color: ThemeProvider.of(context).textColorInverted,
-      ),
-    ),
-    message: Text(
-      message.get(context),
-      style: TextStyle(
-        fontSize: 14,
-        color: ThemeProvider.of(context).textColorInverted,
-      ),
-    ),
-    backgroundColor: ThemeProvider.of(context).accentColor,
-    onDismiss: onDismiss,
-  );
+          key: key,
+          context: context,
+          title: title ?? Strings.successFlushbarTitle,
+          message: message,
+          backgroundColor: ThemeProvider.of(context).accentColor,
+          onDismiss: onDismiss,
+        );
 }

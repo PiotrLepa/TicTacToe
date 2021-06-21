@@ -1,3 +1,4 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,7 +57,7 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
               _respondForState(context, state);
             },
             buildWhen: (oldState, newState) =>
-                newState is Loading ||
+            newState is Loading ||
                 newState is RenderGame ||
                 newState is RenderWaitingForOpponent,
             builder: (context, state) {
@@ -89,10 +90,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
     );
   }
 
-  void _respondForState(
-    BuildContext context,
-    MultiplayerGameState state,
-  ) {
+  void _respondForState(BuildContext context,
+      MultiplayerGameState state,) {
     state.maybeMap(
       moveLoading: (mappedState) {
         setState(() {
@@ -109,16 +108,13 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
           case MultiplayerGameCombinedStatus.opponentTurn:
             break;
           case MultiplayerGameCombinedStatus.won:
-            _showRestartGameFlushBar(
-                context, context.translate(Strings.gameScreenStatusWon));
+            _showRestartGameFlushBar(context, Strings.gameScreenStatusWon);
             break;
           case MultiplayerGameCombinedStatus.lost:
-            _showRestartGameFlushBar(
-                context, context.translate(Strings.gameScreenStatusLost));
+            _showRestartGameFlushBar(context, Strings.gameScreenStatusLost);
             break;
           case MultiplayerGameCombinedStatus.draw:
-            _showRestartGameFlushBar(
-                context, context.translate(Strings.gameScreenStatusDraw));
+            _showRestartGameFlushBar(context, Strings.gameScreenStatusDraw);
             break;
           case MultiplayerGameCombinedStatus.opponentLeftGame:
             break;
@@ -143,30 +139,29 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
 
   Future<void> _showRestartGameFlushBar(
     BuildContext context,
-    String message,
+    PlainLocalizedString message,
   ) async {
-    // TODO
-    // getIt.get<FlushbarHelper>().show(
-    //   title: message,
-    //   message: context.translate(Strings.gameScreenPlayAgainQuestion),
-    //   isDismissible: false,
-    //   infinityDuration: true,
-    //   icon: const Icon(
-    //     Icons.videogame_asset,
-    //     color: Colors.white,
-    //   ),
-    //   mainButton: FlatButton(
-    //         onPressed: () {
-    //           getIt.get<FlushbarHelper>().dismiss();
-    //           context
-    //               .read<MultiplayerGameBloc>()
-    //               .add(MultiplayerGameEvent.restartGame());
-    //         },
-    //         child: Text(
-    //           context.translate(Strings.gameScreenPlayAgain),
-    //           style: TextStyle(color: Theme.of(context).primaryColor),
-    //         ),
-    //       ),
-    //     );
+    getIt.get<FlushbarHelper>().show(
+          title: message,
+          message: Strings.gameScreenPlayAgainQuestion,
+          isDismissible: false,
+          duration: null,
+          icon: const Icon(
+            Icons.videogame_asset,
+            color: Colors.white,
+          ),
+          mainButton: TextButton(
+            onPressed: () {
+              getIt.get<FlushbarHelper>().dismiss();
+              context
+                  .read<MultiplayerGameBloc>()
+                  .add(const MultiplayerGameEvent.restartGame());
+            },
+            child: Text(
+              context.translate(Strings.gameScreenPlayAgain),
+              style: TextStyle(color: Theme.of(context).primaryColor),
+            ),
+          ),
+        );
   }
 }

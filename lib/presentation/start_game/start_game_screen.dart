@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
 import 'package:tictactoe/core/presentation/util/app_modal_bottom_sheet.dart';
+import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/presentation/common/widgets/app_button.dart';
 import 'package:tictactoe/presentation/start_game/widgets/game_difficulty_level_buttons.dart';
 
@@ -22,7 +23,12 @@ class StartGameScreen extends StatelessWidget {
               onPressed: () {
                 showAppModalBottomSheet<void>(
                   context: context,
-                  builder: (context) => GameDifficultyLevelButtons(),
+                  builder: (context) => GameDifficultyLevelButtons(
+                    onTap: (difficultyLevel) {
+                      context.router.pop(); // close modal bottom sheet
+                      _navigateToSinglePlayerGame(context, difficultyLevel);
+                    },
+                  ),
                 );
               },
             ),
@@ -33,6 +39,17 @@ class StartGameScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _navigateToSinglePlayerGame(
+    BuildContext context,
+    DifficultyLevel difficultyLevel,
+  ) {
+    context.router.push(
+      SinglePlayerGameScreenRoute(
+        difficultyLevel: difficultyLevel,
       ),
     );
   }

@@ -1,13 +1,17 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:tictactoe/core/presentation/localization/strings.al.dart';
+import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 
 // ignore: must_be_immutable
 class AppFlushbar extends Flushbar<void> {
   AppFlushbar({
     Key? key,
-    required Widget title,
-    required Widget message,
+    required BuildContext context,
+    required PlainLocalizedString title,
+    required PlainLocalizedString message,
     required VoidCallback onDismiss,
     Color? backgroundColor,
     Widget? icon,
@@ -17,9 +21,22 @@ class AppFlushbar extends Flushbar<void> {
     bool isDismissible = true,
     List<BoxShadow>? boxShadows,
   }) : super(
-    key: key,
-          titleText: title,
-          messageText: message,
+          key: key,
+          titleText: Text(
+            context.translate(title),
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 16,
+              color: ThemeProvider.of(context).textColorInverted,
+            ),
+          ),
+          messageText: Text(
+            message.get(context),
+            style: TextStyle(
+              fontSize: 14,
+              color: ThemeProvider.of(context).textColorInverted,
+            ),
+          ),
           isDismissible: isDismissible,
           icon: icon,
           shouldIconPulse: false,

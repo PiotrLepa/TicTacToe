@@ -29,7 +29,7 @@ class NetworkService extends BaseNetworkService {
         '/oauth/token',
         data: request,
         contentType: Headers.formUrlEncodedContentType,
-        headers: {authorizationHeader: basicKey},
+        headers: <String, dynamic>{authorizationHeader: basicKey},
       );
 
   Future<void> register(
@@ -50,7 +50,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       post(
         '/single-player/create',
-        params: {
+        params: <String, dynamic>{
           'difficulty_level': enumToString(difficultyLevel),
         },
         secured: true,
@@ -70,7 +70,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       post(
         '/multiplayer/create',
-        params: {
+        params: <String, dynamic>{
           'opponent_code': opponentCode,
         },
         secured: true,
@@ -81,7 +81,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       put(
         '/multiplayer/join',
-        params: {
+        params: <String, dynamic>{
           'game_id': gameId.toString(),
         },
         secured: true,
@@ -109,7 +109,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       get(
         '/game-result/single-player/user',
-        params: {
+        params: <String, dynamic>{
           'page': page.toString(),
           'size': paginationElementsPerPage.toString(),
         },
@@ -121,7 +121,7 @@ class NetworkService extends BaseNetworkService {
   ) =>
       get(
         '/game-result/single-player/all',
-        params: {
+        params: <String, dynamic>{
           'page': page.toString(),
           'size': paginationElementsPerPage.toString(),
         },

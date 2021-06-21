@@ -22,8 +22,8 @@ class RefreshTokenRepository {
       requestData.method,
       requestData.path,
       data: requestData.data != null ? requestData.data as Serializable : null,
-      params: requestData.queryParameters.cast(),
-      headers: requestData.headers.cast(),
+      params: requestData.queryParameters,
+      headers: requestData.headers,
       contentType: requestData.contentType,
       secured: true,
     );

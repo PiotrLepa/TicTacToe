@@ -21,6 +21,6 @@ class RefreshTokenNetworkService extends BaseNetworkService {
         '/oauth/token',
         data: request,
         contentType: Headers.formUrlEncodedContentType,
-        headers: {authorizationHeader: basicKey},
+        headers: <String, dynamic>{authorizationHeader: basicKey},
       );
 }

@@ -1,11 +1,10 @@
+import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tictactoe/core/common/flushbar_helper.dart';
-import 'package:tictactoe/core/common/router/routing.dart';
 import 'package:tictactoe/core/injection/injection.dart';
 import 'package:tictactoe/core/presentation/localization/strings.al.dart';
-import 'package:tictactoe/core/presentation/theme/theme_provider.dart';
 import 'package:tictactoe/domain/bloc/single_player_game/single_player_game_bloc.dart';
 import 'package:tictactoe/domain/entity/common/difficulty_level/difficulty_level.dart';
 import 'package:tictactoe/presentation/common/widgets/loading_indicator.dart';
@@ -28,17 +27,21 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(context.translate(Strings.singlePlayerGameScreenTitle)),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: BlocConsumer<SinglePlayerGameBloc, SinglePlayerGameState>(
-          listener: _respondForState,
-          buildWhen: (_, newState) =>
-              newState is Loading || newState is RenderGame,
-          builder: _buildForState,
+    return BlocProvider<SinglePlayerGameBloc>(
+      create: (context) => getIt.get<SinglePlayerGameBloc>()
+        ..add(SinglePlayerGameEvent.createGame(widget.difficultyLevel)),
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(context.translate(Strings.singlePlayerGameScreenTitle)),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(12),
+          child: BlocConsumer<SinglePlayerGameBloc, SinglePlayerGameState>(
+            listener: _respondForState,
+            buildWhen: (_, newState) =>
+                newState is Loading || newState is RenderGame,
+            builder: _buildForState,
+          ),
         ),
       ),
     );
@@ -78,7 +81,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
         });
         _showRestartGameFlushBar(
           context,
-          context.translate(Strings.gameScreenStatusWon),
+          Strings.gameScreenStatusWon,
         );
       },
       computerWon: (mappedState) {
@@ -87,7 +90,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
         });
         _showRestartGameFlushBar(
           context,
-          context.translate(Strings.gameScreenStatusLost),
+          Strings.gameScreenStatusLost,
         );
       },
       draw: (mappedState) {
@@ -96,7 +99,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
         });
         _showRestartGameFlushBar(
           context,
-          context.translate(Strings.gameScreenStatusDraw),
+          Strings.gameScreenStatusDraw,
         );
       },
       moveError: (mappedState) {
@@ -109,17 +112,7 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
       },
       error: (mappedState) {
         getIt.get<FlushbarHelper>().showError(
-              message: mappedState.message,
-            );
-      },
-      pop: (_) {
-        context.router.pop();
-      },
-      navigateToGame: (mappedState) {
-        context.router.push(
-          SinglePlayerGameScreenRoute(
-            difficultyLevel: mappedState.difficultyLevel,
-          ),
+          message: mappedState.message,
         );
       },
       orElse: () {},
@@ -128,14 +121,13 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
 
   Future<void> _showRestartGameFlushBar(
     BuildContext context,
-    String message,
+    PlainLocalizedString message,
   ) async {
     getIt.get<FlushbarHelper>().show(
-          title: Text(message),
-          message: Text(context.translate(Strings.gameScreenPlayAgainQuestion)),
+          title: message,
+          message: Strings.gameScreenPlayAgainQuestion,
           isDismissible: false,
           duration: null,
-          backgroundColor: ThemeProvider.of(context).primaryColor,
           icon: const Icon(
             Icons.videogame_asset,
             color: Colors.white,
@@ -145,12 +137,12 @@ class _SinglePlayerGameScreenState extends State<SinglePlayerGameScreen> {
               getIt.get<FlushbarHelper>().dismiss();
               context.read<SinglePlayerGameBloc>().add(
                   SinglePlayerGameEvent.restartGame(widget.difficultyLevel));
-            },
-            child: Text(
-              context.translate(Strings.gameScreenPlayAgain),
-              style: TextStyle(color: Theme.of(context).primaryColor),
-            ),
-          ),
-        );
+        },
+        child: Text(
+          context.translate(Strings.gameScreenPlayAgain),
+          style: TextStyle(color: Theme.of(context).primaryColor),
+        ),
+      ),
+    );
   }
 }

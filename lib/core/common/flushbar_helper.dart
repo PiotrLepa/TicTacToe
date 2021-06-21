@@ -1,4 +1,3 @@
-import 'package:another_flushbar/flushbar_route.dart' as flushbar_route;
 import 'package:auto_localized/auto_localized.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,8 @@ class FlushbarHelper {
 
   AppFlushbar? _currentFlushbar;
 
-  void dismiss() {
-    _currentFlushbar?.dismiss();
+  Future<void> dismiss() async {
+    await _currentFlushbar?.dismiss();
     _currentFlushbar = null;
   }
 
@@ -46,16 +45,17 @@ class FlushbarHelper {
       );
 
   Future<void> show({
-    required Widget title,
-    required Widget message,
-    required Color backgroundColor,
-    required Widget icon,
-    required TextButton mainButton,
+    required PlainLocalizedString title,
+    required PlainLocalizedString message,
+    Widget? icon,
+    TextButton? mainButton,
+    Color? backgroundColor,
     Duration? duration = const Duration(seconds: 3),
     bool isDismissible = true,
   }) =>
       _showFlushbar(
         flushbar: AppFlushbar(
+          context: _context,
           title: title,
           message: message,
           backgroundColor: backgroundColor,
@@ -72,12 +72,13 @@ class FlushbarHelper {
   }) async {
     _currentFlushbar?.dismiss();
     _currentFlushbar = flushbar;
-    return navigatorKey.currentState?.push<void>(
-      flushbar_route.showFlushbar<void>(
-        context: _context,
-        flushbar: flushbar,
-      ),
-    );
+    return flushbar.show(_context);
+    // return navigatorKey.currentState?.push<void>(
+    //   flushbar_route.showFlushbar<void>(
+    //     context: _context,
+    //     flushbar: flushbar,
+    //   ),
+    // );
   }
 
   void _onFlushbarDismiss() {
