@@ -33,10 +33,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: BlocBuilder<RegistrationBloc, RegistrationState>(
-              buildWhen: (previous, current) =>
-              current is Nothing ||
-                  current is RenderInputsErrors ||
-                  current is ClearInputsErrors,
+              buildWhen: (_, newState) =>
+                  newState is Nothing ||
+                  newState is RenderInputsErrors ||
+                  newState is ClearInputsErrors,
               builder: (context, state) {
                 return state.maybeMap(
                   renderInputsErrors: (mappedState) => _buildFieldsAndButton(

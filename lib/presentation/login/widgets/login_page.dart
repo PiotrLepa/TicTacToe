@@ -46,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       },
       navigateToHome: (_) {
-        context.router.replaceAll([const HomeScreenRoute()]);
+        context.router.replaceAll([const AuthParentScreenRoute()]);
       },
       orElse: () {},
     );

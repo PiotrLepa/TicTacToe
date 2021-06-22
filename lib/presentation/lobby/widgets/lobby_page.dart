@@ -34,7 +34,7 @@ class _LobbyPageState extends State<LobbyPage> {
   Widget _buildPlayerCode(BuildContext context) {
     return BlocConsumer<LobbyBloc, LobbyState>(
       listener: _respondForState,
-      buildWhen: (oldState, newState) => newState is RenderPage,
+      buildWhen: (_, newState) => newState is RenderPage,
       builder: (context, state) {
         return state.maybeMap(
           renderPage: (mappedState) =>
@@ -47,7 +47,7 @@ class _LobbyPageState extends State<LobbyPage> {
 
   Widget _buildOpponentCode(BuildContext context) {
     return BlocBuilder<LobbyBloc, LobbyState>(
-      buildWhen: (oldState, newState) =>
+      buildWhen: (_, newState) =>
           newState is RenderPage ||
           newState is RenderOpponentCodeInputError ||
           newState is CreateGameLoading ||

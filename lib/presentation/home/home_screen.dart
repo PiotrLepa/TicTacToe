@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: _respondForState,
-      buildWhen: (oldState, newState) => newState is UpdatePage,
+      buildWhen: (_, newState) => newState is UpdatePage,
       builder: _buildForState,
     );
   }

@@ -10,8 +10,6 @@ import 'package:tictactoe/domain/bloc/game_invitation/game_invitation_bloc.dart'
 import 'package:tictactoe/domain/bloc/home/home_bloc.dart';
 import 'package:tictactoe/domain/bloc/session/session_bloc.dart';
 
-import 'widgets/session_listener.dart';
-
 class App extends StatelessWidget {
   final _localeProvider = getIt<LocaleProvider>();
   final _appRouter = AppRouter(navigatorKey);
@@ -42,7 +40,7 @@ class App extends StatelessWidget {
         darkTheme: ThemeProvider(isDark: true).getThemeData(),
         builder: (context, child) {
           _localeProvider.init(context);
-          return SessionListener(child: child!);
+          return child!;
         },
       ),
     );

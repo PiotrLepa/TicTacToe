@@ -60,7 +60,7 @@ class _GameResultsState extends State<GameResults>
             },
             child: BlocConsumer<GameResultsBloc, GameResultsState>(
               listener: _respondForState,
-              buildWhen: (oldState, newState) => newState is! AdditionalLoading,
+              buildWhen: (_, newState) => newState is! AdditionalLoading,
               builder: _buildForState,
             ),
           );

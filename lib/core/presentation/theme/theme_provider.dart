@@ -59,6 +59,16 @@ class ThemeProvider {
           ),
         ),
       ),
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all(const EdgeInsets.all(12)),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+          ),
+        ),
+      ),
       textSelectionTheme: TextSelectionThemeData(
         cursorColor: primaryColor,
         selectionColor: primaryColorLight,

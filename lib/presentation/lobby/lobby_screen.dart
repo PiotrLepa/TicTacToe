@@ -41,7 +41,7 @@ class LobbyScreen extends StatelessWidget {
               orElse: () {},
             );
           },
-          buildWhen: (oldState, newState) =>
+          buildWhen: (_, newState) =>
               newState is Loading ||
               newState is Error ||
               newState is RenderPage,

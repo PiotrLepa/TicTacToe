@@ -55,8 +55,8 @@ class _MultiplayerGameScreenState extends State<MultiplayerGameScreen> {
             listener: (context, state) {
               _respondForState(context, state);
             },
-            buildWhen: (oldState, newState) =>
-            newState is Loading ||
+            buildWhen: (_, newState) =>
+                newState is Loading ||
                 newState is RenderGame ||
                 newState is RenderWaitingForOpponent,
             builder: (context, state) {
