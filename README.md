@@ -7,3 +7,5 @@ The user also has the option to play with a friend after entering their player c
 ### Used technologies
 - Mobile application - Flutter
 - Backend - Spring, Kotlin
+
+![image_1](https://i.imgur.com/Ga89xs8.png)
